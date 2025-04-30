@@ -6,9 +6,11 @@
 #include "encouder.h"
 
 
-
-#define ERROR_YAW   0.11
+//这是yaw角度飘逸问题，计算其一分钟的误差然后转换为20ms的
+#define ERROR_YAW   0.11			
 float Yaw=0;
+
+
 
 //所有的计算之类的都会在这个里面
 //20ms计算一次
