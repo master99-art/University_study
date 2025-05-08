@@ -35,7 +35,7 @@ void Steer_Ctrl(int16_t frontAngleSet,int16_t *motorFrontSteer);
 void Set_Pwm(int16_t motorLeft,int16_t motorRight,int16_t motorFrontSteer);
 
 u8 Turn_Off(int16_t voltage);
-int myabs(int a);
+int16_t myabs(int16_t a);
 #endif
 
 

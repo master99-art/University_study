@@ -10,6 +10,8 @@
 #include "usart.h"
 #include <stm32f10x_tim.h>
 #include "Cla.h"
+#include "timer.h"
+
 
 
 
@@ -19,6 +21,8 @@ int main (void)
 	MY_NVIC_PriorityGroupConfig(2);
 	//LED,,
 	
+	
+
 	
 	//电机舵机初始化
 	PWM_Init();
@@ -30,7 +34,7 @@ int main (void)
 	OLED_Init();
 
 	//MPU初始化
-	MPU6050_Init();
+	MPU_Init();
 	
 	//串口初始化
 	
@@ -41,37 +45,41 @@ int main (void)
 	USART3_Init();
 	USART4_Init();
 	
+	//定时器初始化
+	Timer_Init();
 	
-	int yaw=0;
 	//不停的向上位机发送数据
 	u8 tik=0;
 	int speed=0;
-	int16_t a=0;
+	int16_t a=1111;
 	while(1)
 	{
-		speed = Get_Speed_right();
-		
-		OLED_ShowSignedNum(1,1,speed,5);
-		OLED_ShowString(2,1,"mm/s");
-		Delay_ms(20);
+//		speed = Get_Speed_right();
+//		
+//		OLED_ShowSignedNum(1,1,speed,5);
+//		OLED_ShowString(2,1,"mm/s");
+//		Delay_ms(20);
 		//PWM_R(100);
 //		yaw = Get_Yaw(yaw);
 //		OLED_ShowSignedNum(1,1,yaw,5);
 //		Delay_ms(1);
 		
 		
-//		if(tik==0)
-//		{
-//			usartSendData(USART2,(short)pid_Task_Letf.speedNow,(short)pid_Task_Right.speedNow,(short)frontAngleSet,0);
-//			tik++;
-//		}
-//		else
-//		{
-//			tik++;
-//			if(tik==60)tik=0;
-//		}
-//			
 		
+		//OLED_ShowSignedNum(2,1,(int16_t)pitch,5);
+		if(tik==0)
+		{
+			//yaw扩大了50倍
+			usartSendData(USART2,(short)pid_Task_Letf.speedNow,(short)pid_Task_Right.speedNow,(short)yaw*50,0);
+			tik++;
+		}
+		else
+		{
+			tik++;
+			if(tik==60)tik=0;
+		}
+			
+
 
 
 	}

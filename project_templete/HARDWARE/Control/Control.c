@@ -4,11 +4,22 @@
 #include "Control.h"
 #include "motor.h"
 #include "encouder.h"
-
+#include "oled.h"
 
 //这是yaw角度飘逸问题，计算其一分钟的误差然后转换为20ms的
 #define ERROR_YAW   0.11			
-float Yaw=0;
+
+
+float AX ;
+float AY ;
+float AZ ;
+
+float GX ;
+float GY ;
+float GZ ;
+float yaw;
+float roll;
+float pitch;
 
 
 
@@ -16,12 +27,11 @@ float Yaw=0;
 //20ms计算一次
 void TIM2_IRQHandler(void)
 {
-
+	u8 a=1;
 	//获取Yaw
-	Yaw=Get_Yaw(Yaw);
-	//mpu累计误差
-	Yaw+=ERROR_YAW;
-
+	MPU_Get_Data(&AX,&AY,&AZ,&GX,&GY,&GZ);
+	MPU_Cla(&AX, &AY, &AZ, &GX, &GY, &GZ, &yaw, &roll ,&pitch);		
+	OLED_ShowSignedNum(1,1,(int16_t)yaw,5);
 	//获取速度   AND 		正负号
 	leftSpeedNow  = Get_Speed_left();
 	rightSpeedNow = Get_Speed_right();
@@ -35,7 +45,7 @@ void TIM2_IRQHandler(void)
 	Steer_Ctrl(frontAngleSet,&motorFrontSteer);
 	Set_Pwm(motorLeft,motorRight,motorFrontSteer);
 	
-
+	//电量
 	
 	
 	

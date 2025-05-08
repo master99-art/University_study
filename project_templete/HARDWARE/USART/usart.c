@@ -34,18 +34,7 @@ void USART1_Init(void)
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;		//字长，选择8位
 	USART_Init(USART1, &USART_InitStructure);				//将结构体变量交给USART_Init，配置USART1
 	
-	/*中断输出配置*/
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);			//开启串口接收数据的中断
-	
 
-	
-	/*NVIC配置*/
-	NVIC_InitTypeDef NVIC_InitStructure;					//定义结构体变量
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;		//选择配置NVIC的USART1线
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//指定NVIC线路使能
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;		//指定NVIC线路的抢占优先级为1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		//指定NVIC线路的响应优先级为1
-	NVIC_Init(&NVIC_InitStructure);							//将结构体变量交给NVIC_Init，配置NVIC外设
 	
 	/*USART使能*/
 	USART_Cmd(USART1, ENABLE);								//使能USART1，串口开始运行
@@ -92,6 +81,7 @@ void USART1_Printf(char *format, ...)
 void USART2_Init(void)
 {
 	/*开启时钟*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);	//开启USART1的时钟
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);	//开启GPIOA的时钟
 	
@@ -148,6 +138,7 @@ void USART2_Init(void)
 void USART3_Init(void)
 {
 	/*开启时钟*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);	//开启USART1的时钟
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);	//开启GPIOA的时钟
 	
@@ -210,12 +201,12 @@ void USART4_Init(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);					//将PA9引脚初始化为复用推挽输出
+	GPIO_Init(GPIOC, &GPIO_InitStructure);					//将PA9引脚初始化为复用推挽输出
 	
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOD, &GPIO_InitStructure);					//将PA10引脚初始化为上拉输入
+	GPIO_Init(GPIOC, &GPIO_InitStructure);					//将PA10引脚初始化为上拉输入
 	
 	
 

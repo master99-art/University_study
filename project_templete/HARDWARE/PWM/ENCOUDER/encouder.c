@@ -124,30 +124,40 @@ int16_t Encoder_Get_R(void)
 轮子半径								：65/2	mm
 周长 									：65*PI	mm
 
-//轮子1
-轮子转一圈输出的脉冲数	：520
-一个脉冲走的距离				：0.0003925 = 65*PI/520*0.001	m
-分辨率									：0.019625 m/s = 0.0003925 /（20*0.001） 
+//轮子 左
+轮子转一圈输出的脉冲数	：1560 1569 1568	average 1566											
+一个脉冲走的距离				：0.000130398 = 65 * PI / 1566 * 0.001	m
+分辨率									：0.0065199 m/s = 0.000130398 /（20*0.001） 
 
+//轮子 右
+轮子转一圈输出的脉冲数	：1543 1577 1560 	average 1560									
+一个脉冲走的距离				：0.000130899 = 65 * PI / 1560 * 0.001	m
+分辨率									：0.0065449 m/s = 0.0003925 /（20*0.001） 
+
+之后我就只需要找到脉冲值然后乘以分辨率就得到实际速度了
 单位时间								：20ms
 
 速度公式								：脉冲数*速度分辨率
 
+
 ****************************************************************/
+
+//返回带有正确符号的speed
 int16_t Get_Speed_left(void)
 {
 	int16_t temp_speed=0;
 	
 	//		mm/s
-	temp_speed = TIM_GetCounter(TIM3) * 0.019625 * 1000;
+	temp_speed = TIM_GetCounter(TIM3) * 0.0065199 * 1000;
 	TIM_SetCounter(TIM3, 0);
 	return Get_Motor_Dir_left(temp_speed);	
 }
 int16_t Get_Speed_right(void)
 {
+	
 	int16_t temp_speed=0;
 	//		mm/s
-	temp_speed = (int16_t)TIM_GetCounter(TIM8) * 0.019625 * 1000;
+	temp_speed = (int16_t)TIM_GetCounter(TIM8) * 0.0065449 * 1000;
 	TIM_SetCounter(TIM8, 0);
 	return Get_Motor_Dir_right(temp_speed);
 }

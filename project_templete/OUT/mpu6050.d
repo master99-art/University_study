@@ -1,4 +1,5 @@
 ..\out\mpu6050.o: ..\HARDWARE\MPU6050\mpu6050.c
+..\out\mpu6050.o: ..\HARDWARE\MPU6050\mpu6050.h
 ..\out\mpu6050.o: ..\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 ..\out\mpu6050.o: ..\CMSIS\CM3\CoreSupport\core_cm3.h
 ..\out\mpu6050.o: D:\develop\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -28,6 +29,6 @@
 ..\out\mpu6050.o: ..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 ..\out\mpu6050.o: ..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 ..\out\mpu6050.o: ..\STM32F10x_StdPeriph_Driver\inc\misc.h
-..\out\mpu6050.o: ..\HARDWARE\MPU6050\MPU6050_Reg.h
-..\out\mpu6050.o: ..\HARDWARE\MPU6050\mpu6050.h
+..\out\mpu6050.o: ..\HARDWARE\MPU6050\mpu6050_reg.h
 ..\out\mpu6050.o: D:\develop\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+..\out\mpu6050.o: ..\SYSTEM\Delay.h

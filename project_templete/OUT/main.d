@@ -40,3 +40,4 @@
 ..\out\main.o: ..\HARDWARE\USART\usart.h
 ..\out\main.o: D:\develop\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\out\main.o: ..\HARDWARE\Cla\Cla.h
+..\out\main.o: ..\HARDWARE\TIMER\timer.h

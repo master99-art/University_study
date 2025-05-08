@@ -40,6 +40,8 @@ void PWM_Init(void)
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;            //重复计数器，高级定时器才会用到
 	TIM_TimeBaseInit(TIM5, &TIM_TimeBaseInitStructure);             //将结构体变量交给TIM_TimeBaseInit，配置TIM2的时基单元
 	
+	////////////////?????????
+	
 	/*输出比较初始化*/ 
 	TIM_OCInitTypeDef TIM_OCInitStructure;							//定义结构体变量
 	TIM_OCStructInit(&TIM_OCInitStructure);                         //结构体初始化，若结构体没有完整赋值
@@ -94,6 +96,8 @@ void PWM_Init(void)
 	TIM_TimeBaseInitStructure1.TIM_RepetitionCounter = 0;            //重复计数器，高级定时器才会用到
 	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseInitStructure1);             //将结构体变量交给TIM_TimeBaseInit，配置TIM2的时基单元
 	
+	
+	////////////////?????????
 	/*输出比较初始化*/ 
 	TIM_OCInitTypeDef TIM_OCInitStructure1;							//定义结构体变量
 	TIM_OCStructInit(&TIM_OCInitStructure1);                         //结构体初始化，若结构体没有完整赋值

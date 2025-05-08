@@ -15,7 +15,7 @@ void Motor_Init(void)
 	GPIO_InitStructure1.GPIO_Speed = GPIO_Speed_50MHz;		//GPIO速度，赋值为50MHz
 	
 	GPIO_Init(GPIOE, &GPIO_InitStructure1);	
-
+	GPIO_SetBits(GPIOE, GPIO_Pin_6);
 
 	//L
 	GPIO_SetBits(GPIOE, GPIO_Pin_2);
@@ -156,7 +156,7 @@ void Set_Pwm(int16_t motorLeft,int16_t motorRight,int16_t motorFrontSteer)
 入口参数：int
 返回  值：unsigned int
 **************************************************************************/
-int myabs(int a)
+int16_t myabs(int16_t a)
 { 		   
 	int temp;
 	if(a<0)  
