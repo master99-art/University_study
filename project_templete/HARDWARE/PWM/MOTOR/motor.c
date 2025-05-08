@@ -156,7 +156,7 @@ void Set_Pwm(int16_t motorLeft,int16_t motorRight,int16_t motorFrontSteer)
 入口参数：int
 返回  值：unsigned int
 **************************************************************************/
-int16_t myabs(int16_t a)
+int myabs(int a)
 { 		   
 	int temp;
 	if(a<0)  
