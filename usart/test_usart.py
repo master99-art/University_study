@@ -15,15 +15,34 @@ def serial_init():
         print('Open Failed!')
 
 
+"""
+包头 55 aa
+包尾 0d 0a
+
+发送端：
+"""
 
 
+
+
+
+
+'''
+发送left_speed, right_speed, angle
+以short类型发送
+13个字节
+数据包格式：55 aa 00 00 00 00 00 00 00 00 0d 0a
+两个包头    一个长度    三个short   一个校验    一个flag    两个包尾
+'''
 # 这是发送数据包
-def serial_out(x, y, z, color):
-    # struct.pack 应该是把这四个float值都结算为十六进制的值然后排列成包
-    bytesdata = struct.pack('<4f', float(x), float(y), float(z), float(color))
+def serial_out(left_speed, right_speed, angle,Flag):
+    # 左轮速度，右轮速度，角度，语音标志位
+
+    bytesdata = struct.pack('<3h', int(left_speed), int(right_speed), int(angle))
 
     # 这里就是合体，打包成一个数据包
-    combined = b'\xFF' + bytesdata + b'\xFe'
+    combined = b'\x55' + b'\xaa'+ b'\x07' + bytesdata + Flag + b'\x00' +b'\x0d'+ b'\x0a'
+
 
     # 这里就是发送数据包 
     write_len = ser.write(combined)
@@ -33,28 +52,34 @@ def serial_out(x, y, z, color):
 
 
 # 这是接收数据
-def serial_in(length):
-    data = ser.read(length)
-    return data
-
-# ----读取串口数据-----------------------------------
-try:
-    # ???
-    count = serial.inWaiting()
-    if count > 0:
-        # 初始化数据
-        Read_buffer = []
-        # 接收数据至缓存区
-        Read_buffer=serial.read(16)         # 我们需要读取的是40个寄存器数据，即40个字节
-        # Read_data()						# 前面两行可以注释，换成后面这个函数
-        # 将 16 个字节解析为 4 个 float
+# length：接收数据长度
+def serial_in():
+    # ----读取串口数据-----------------------------------
     try:
-        floats = struct.unpack('<4f', Read_buffer)  # '<4f' 表示小端序的 4 个 float
-        print("解析后的 float 数值:", floats)
-    except struct.error as e:
-        print("解析失败:", e)
-except KeyboardInterrupt:
-     if serial != None:
-         print("close serial port")
-         serial.close()
+        # ???
+        count = ser.inWaiting()
+        if count > 0:
+            # 初始化数据
+            Read_buffer = []
+            # 接收数据至缓存区
+            Read_buffer=serial.read(13)         # 读取 13 个字节        # 左轮速度，右轮速度，角度，语音标志位
 
+            if len(Read_buffer) != 13:
+                print("数据包长度错误")
+                return -1
+            else:
+                if Read_buffer[0] != 0x55 or Read_buffer[1] != 0xaa or Read_buffer[11] != 0x0d or Read_buffer[12] != 0x0a:
+                    print("数据包头尾错误")
+                    return -1
+                else:
+                    # 0~12
+                    # 0,1包头   2长度   3~8数据     9flag   10校验位      11,12包尾 9
+                    speed_angel = struct.unpack('<3h', Read_buffer[3:9])
+                    Flag = Read_buffer[9:10]
+
+                    return speed_angel
+                    # 这里是将数据包解析成左轮速度，右轮速度，角度，语音标志位
+    except KeyboardInterrupt:
+        if serial != None:
+            print("close serial port")
+            serial.close()
