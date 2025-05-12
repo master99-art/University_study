@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 import serial
-import serial.tools.list_ports
+
 import struct
 
 
