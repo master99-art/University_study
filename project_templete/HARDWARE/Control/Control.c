@@ -33,12 +33,12 @@ void TIM2_IRQHandler(void)
 	MPU_Cla(&AX, &AY, &AZ, &GX, &GY, &GZ, &yaw, &roll ,&pitch);		
 	yaw = yaw - ERROR_YAW;
 	//获取速度   AND 		正负号
-	leftSpeedNow  = Get_Speed_left();
+	leftSpeedNow  = TIM_GetCounter(TIM3);
 	rightSpeedNow = Get_Speed_right();
 	pid_Task_Letf.speedNow  = leftSpeedNow  ;
 	pid_Task_Right.speedNow = rightSpeedNow ;
-//	pid_Task_Letf.speedSet  = 100 ;
-//	pid_Task_Right.speedSet = 100 ;
+	pid_Task_Letf.speedSet  = 100 ;
+	pid_Task_Right.speedSet = 100 ;
 //	
 //	//pid运算	//设置舵机角度
 //	Pid_Ctrl( &motorLeft,&motorRight);

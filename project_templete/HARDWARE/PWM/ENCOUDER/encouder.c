@@ -54,11 +54,7 @@ void Encouder_Init(void)
 	TIM_ICInit(TIM3, &TIM_ICInitStructure1);						
 	
 
-	TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
-																	
-																
-					
-
+	TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);							
 	TIM_Cmd(TIM3, ENABLE);		
 	
 	
@@ -79,16 +75,15 @@ void Encouder_Init(void)
 	TIM_TimeBaseInit(TIM8, &TIM_TimeBaseInitStructure2);             //���ṹ���������TIM_TimeBaseInit������TIM3��ʱ����Ԫ
 	
 	
-	TIM_ICInitTypeDef TIM_ICInitStructure2;							//����ṹ�����
-	TIM_ICStructInit(&TIM_ICInitStructure2);							//�ṹ���ʼ�������ṹ��û��������ֵ
-																	//�����ִ�д˺��������ṹ�����г�Ա����һ��Ĭ��ֵ
-																	//����ṹ���ֵ��ȷ��������
-	TIM_ICInitStructure2.TIM_Channel = TIM_Channel_1;				//ѡ�����ö�ʱ��ͨ��1
-	TIM_ICInitStructure2.TIM_ICFilter = 0xF;							//�����˲������������Թ����źŶ���
-	TIM_ICInit(TIM8, &TIM_ICInitStructure2);							//���ṹ���������TIM_ICInit������TIM3�����벶��ͨ��
-	TIM_ICInitStructure2.TIM_Channel = TIM_Channel_2;				//ѡ�����ö�ʱ��ͨ��2
-	TIM_ICInitStructure2.TIM_ICFilter = 0xF;							//�����˲������������Թ����źŶ���
-	TIM_ICInit(TIM8, &TIM_ICInitStructure2);							//���ṹ���������TIM_ICInit������TIM3�����벶��ͨ��
+	TIM_ICInitTypeDef TIM_ICInitStructure2;							
+	TIM_ICStructInit(&TIM_ICInitStructure2);
+	
+	TIM_ICInitStructure2.TIM_Channel = TIM_Channel_1;				
+	TIM_ICInitStructure2.TIM_ICFilter = 0xF;							
+	TIM_ICInit(TIM8, &TIM_ICInitStructure2);							
+	TIM_ICInitStructure2.TIM_Channel = TIM_Channel_2;			
+	TIM_ICInitStructure2.TIM_ICFilter = 0xF;							
+	TIM_ICInit(TIM8, &TIM_ICInitStructure2);							
 	
 	/*�������ӿ�����*/
 	TIM_EncoderInterfaceConfig(TIM8, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
