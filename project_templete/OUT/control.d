@@ -34,3 +34,4 @@
 ..\out\control.o: ..\HARDWARE\PWM\MOTOR\motor.h
 ..\out\control.o: ..\HARDWARE\PWM\ENCOUDER\encouder.h
 ..\out\control.o: ..\HARDWARE\OLED\oled.h
+..\out\control.o: ..\HARDWARE\PWM\PWM\pwm.h

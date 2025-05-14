@@ -26,6 +26,7 @@ int main (void)
 	
 	//电机舵机初始化
 	PWM_Init();
+	Motor_Init();
 	
 	//编码器初始化
 	Encouder_Init();
@@ -36,38 +37,25 @@ int main (void)
 	//MPU初始化
 	MPU_Init();
 	
-	//串口初始化
+
 	
 	//语音播报初始化
 	USART1_Init();
-
 	USART2_Init();
 	USART3_Init();
 	USART4_Init();
+	
 	
 	//定时器初始化
 	Timer_Init();
 	
 	//不停的向上位机发送数据
 	u8 tik=0;
-	int speed=0;
-	int16_t a=1111;
 	while(1)
 	{
-//		speed = Get_Speed_right();
-//		
-//		OLED_ShowSignedNum(1,1,speed,5);
-//		OLED_ShowString(2,1,"mm/s");
-//		Delay_ms(20);
-		//PWM_R(100);
-//		yaw = Get_Yaw(yaw);
-//		OLED_ShowSignedNum(1,1,yaw,5);
-//		Delay_ms(1);
-		
-		
-		
-		//OLED_ShowSignedNum(2,1,(int16_t)pitch,5);
-		if(tik==0)
+		Servo_SetAngle(140);
+
+		if(tik == 0)
 		{
 			//yaw扩大了50倍
 			usartSendData(USART2,(short)pid_Task_Letf.speedNow,(short)pid_Task_Right.speedNow,(short)yaw*50,0);

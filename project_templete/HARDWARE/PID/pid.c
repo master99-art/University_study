@@ -27,7 +27,7 @@ void PID_Init(void)
 	pid_Task_Right.Kp = 1024 * 4.0;
  	pid_Task_Right.Ki = 1024 * 0;	//不使用积分
 	pid_Task_Right.Kd = 1024 * 20.0; 
-	pid_Task_Right.Ur = 1024 * 4000;
+	pid_Task_Right.Ur = 1024 * 4000;//限幅
 	pid_Task_Right.Adjust   = 0;
 	pid_Task_Right.En       = 1;
 	pid_Task_Right.speedSet = 0;

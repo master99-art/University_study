@@ -29,13 +29,13 @@ void PWM_Init(void)
 																	//受外设控制的引脚，均需要配置为复用模式
 	
 	/*配置时钟源*/
-	TIM_InternalClockConfig(TIM5);		//选择TIM2为内部时钟，若不调用此函数，TIM默认也为内部时钟
+	//TIM_InternalClockConfig(TIM5);		//选择TIM2为内部时钟，若不调用此函数，TIM默认也为内部时钟
 	
 	/*时基单元初始化*/
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;				//定义结构体变量
 	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;     //时钟分频，选择不分频，此参数用于配置滤波器时钟，不影响时基单元功能
 	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //计数器模式，选择向上计数
-	TIM_TimeBaseInitStructure.TIM_Period = 100 - 1;                 //计数周期，即ARR的值
+	TIM_TimeBaseInitStructure.TIM_Period = 5000 - 1;                 //计数周期，即ARR的值
 	TIM_TimeBaseInitStructure.TIM_Prescaler = 36 - 1;               //预分频器，即PSC的值
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;            //重复计数器，高级定时器才会用到
 	TIM_TimeBaseInit(TIM5, &TIM_TimeBaseInitStructure);             //将结构体变量交给TIM_TimeBaseInit，配置TIM2的时基单元
@@ -44,7 +44,7 @@ void PWM_Init(void)
 	
 	/*输出比较初始化*/ 
 	TIM_OCInitTypeDef TIM_OCInitStructure;							//定义结构体变量
-	TIM_OCStructInit(&TIM_OCInitStructure);                         //结构体初始化，若结构体没有完整赋值
+                       
 	                                                                //则最好执行此函数，给结构体所有成员都赋一个默认值
 	                                                                //避免结构体初值不确定的问题
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;               //输出比较模式，选择PWM模式1

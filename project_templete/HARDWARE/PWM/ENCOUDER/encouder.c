@@ -97,24 +97,7 @@ void Encouder_Init(void)
 	TIM_Cmd(TIM8, ENABLE);			//ʹ��TIM3����ʱ����ʼ����	
 }
 
-int16_t Encoder_Get_L(void)
-{
 
-	int16_t Temp;
-	Temp = TIM_GetCounter(TIM3);
-	TIM_SetCounter(TIM3, 0);
-	
-	return Temp;
-}
-
-int16_t Encoder_Get_R(void)
-{
-	
-	int16_t Temp;
-	Temp = TIM_GetCounter(TIM8);
-	TIM_SetCounter(TIM8, 0);
-	return Temp;
-}
 
 
 /***************************************************************
@@ -149,7 +132,7 @@ int16_t Get_Speed_left(void)
 	
 	//		mm/s
 	temp_speed = TIM_GetCounter(TIM3) * 0.0065199 * 1000;
-	TIM_SetCounter(TIM3, 0);
+	//TIM_SetCounter(TIM3, 0);
 	return Get_Motor_Dir_left(temp_speed);	
 }
 int16_t Get_Speed_right(void)
