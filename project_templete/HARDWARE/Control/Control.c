@@ -33,12 +33,12 @@ void TIM2_IRQHandler(void)
 	MPU_Cla(&AX, &AY, &AZ, &GX, &GY, &GZ, &yaw, &roll ,&pitch);		
 	yaw = yaw - ERROR_YAW;
 	//获取速度   AND 		正负号
-	leftSpeedNow  = TIM_GetCounter(TIM3);
+	leftSpeedNow  = Get_Speed_left();
 	rightSpeedNow = Get_Speed_right();
 	pid_Task_Letf.speedNow  = leftSpeedNow  ;
 	pid_Task_Right.speedNow = rightSpeedNow ;
-	pid_Task_Letf.speedSet  = 100 ;
-	pid_Task_Right.speedSet = 100 ;
+	pid_Task_Letf.speedSet  = leftSpeedSet  ;
+	pid_Task_Right.speedSet = rightSpeedSet ;
 //	
 //	//pid运算	//设置舵机角度
 //	Pid_Ctrl( &motorLeft,&motorRight);
@@ -46,8 +46,8 @@ void TIM2_IRQHandler(void)
 //	Set_Pwm(motorLeft,motorRight,motorFrontSteer);
 	
 	//OLED显示实时速度
-	OLED_ShowSignedNum(1,1,pid_Task_Letf.speedNow,5);
-	OLED_ShowSignedNum(2,1,pid_Task_Right.speedNow,5);
+	OLED_ShowSignedNum(1,1,leftSpeedNow ,5);
+	OLED_ShowSignedNum(2,1,rightSpeedNow,5);
 	OLED_ShowString(1,8,"mm/s");
 	OLED_ShowString(2,8,"mm/s");
 	OLED_ShowString(3,1,"Yaw=");

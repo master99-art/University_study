@@ -25,7 +25,6 @@
 "..\out\stm32f10x_tim.o"
 "..\out\stm32f10x_usart.o"
 "..\out\stm32f10x_wwdg.o"
-"..\out\encouder.o"
 "..\out\core_cm3.o"
 "..\out\system_stm32f10x.o"
 "..\out\delay.o"
@@ -38,6 +37,7 @@
 "..\out\oled.o"
 "..\out\mpu6050.o"
 "..\out\control.o"
+"..\out\encouder.o"
 --library_type=microlib --strict --scatter "..\OUT\project.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

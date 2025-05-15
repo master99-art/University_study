@@ -529,11 +529,6 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>encouder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\PWM\ENCOUDER\encouder.c</FilePath>
-            </File>
-            <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\CMSIS\CM3\CoreSupport\core_cm3.c</FilePath>
@@ -602,6 +597,11 @@
               <FileName>Control.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\Control\Control.c</FilePath>
+            </File>
+            <File>
+              <FileName>encouder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\PWM\ENCOUDER\encouder.c</FilePath>
             </File>
           </Files>
         </Group>
