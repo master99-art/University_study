@@ -1,9 +1,17 @@
 #include "data_cal.h"
 #include "math.h"
+#include "motor.h"
 #include <stdio.h>
+#include <string.h>
 
-unsigned char sendCtrlFlag =0;
-unsigned char receCtrlFlag =0;
+
+float AngleSet[7]={0};
+
+/*
+
+有六个轴，一个夹爪，12+1=13字节
+*/
+
 
 /*--------------------------------发送协议-----------------------------------
 //----------------55 aa size 00 00 00 00 00 crc8 0d 0a----------------------
@@ -38,21 +46,21 @@ union sendData
 	short d;
 	//共用同一个指针，然后把short转换为了一个u8 的数组
 	unsigned char data[2];
-}leftVelNow,rightVelNow,angleNow;
+}joint11,joint21,joint31,joint41,joint51,joint61;
 
 //左右轮速控制速度、舵机共用体
 union receiveData
 {
 	short d;
 	unsigned char data[2];
-}leftVelSet,rightVelSet,frontSteerAngleSet;
+}joint1Set,joint2Set,joint3Set,joint4Set,joint5Set,joint6Set;
 
 /**************************************************************************
 函数功能：通过串口中断服务函数，获取上位机发送的左右轮控制速度、舵机、预留控制标志位，分别存入参数中
 入口参数：左轮轮速控制地址、右轮轮速控制地址、舵机转向角度地址、预留控制标志位
 返回  值：无特殊意义
 **************************************************************************/
-int usartReceiveOneData(UART_HandleTypeDef huart,int16_t *p_leftSpeedSet,int16_t *p_rightSpeedSet,int16_t *p_frontSteerAngleSet,unsigned char *p_crtlFlag)
+int usartReceiveOneData(u8 *receiveBuff)
 {
 	unsigned char USART_Receiver              = 0;          //接收数据
 	static unsigned char checkSum             = 0;					//？
@@ -63,8 +71,8 @@ int usartReceiveOneData(UART_HandleTypeDef huart,int16_t *p_leftSpeedSet,int16_t
 	static short dataLength                   = 0;
 
  
-	HAL_UART_Receive(&huart,&USART_Receiver,1,0);
-	// printf("%c",USART_Receiver);
+	
+
 	//接收消息头
 	if(Start_Flag == START)
 	{
@@ -105,13 +113,9 @@ int usartReceiveOneData(UART_HandleTypeDef huart,int16_t *p_leftSpeedSet,int16_t
 				break;
 			case 2://接收校验值信息
 				receiveBuff[3 + dataLength] = USART_Receiver; //buf[10]
-//				checkSum = getCrc8(receiveBuff, 3 + dataLength);
-//				  // 检查信息校验值
-//				if (checkSum != receiveBuff[3 + dataLength]) 
-//				{
-//					printf("Received data check sum error!");
-//					return 0;
-//				}
+				checkSum = getCrc8(receiveBuff, 3 + dataLength);
+				  // 检查信息校验值
+				if (checkSum != receiveBuff[3 + dataLength])return 0;
 				USARTBufferIndex++;
 				break;
 				
@@ -125,22 +129,28 @@ int usartReceiveOneData(UART_HandleTypeDef huart,int16_t *p_leftSpeedSet,int16_t
 				{
 					//数据0a     buf[12] 无需判断
 
-					//进行速度赋值操作					
+					//进行角度赋值操作					
 					for(k = 0; k < 2; k++)
 					{
-						leftVelSet.data[k]         = receiveBuff[k + 3]; //buf[3]  buf[4]
-						rightVelSet.data[k]        = receiveBuff[k + 5]; //buf[5]  buf[6]
-						frontSteerAngleSet.data[k] = receiveBuff[k + 7]; //buf[7]  buf[8]
+						joint1Set.data[k] = receiveBuff[k + 3 ]; 
+						joint2Set.data[k] = receiveBuff[k + 5 ]; 
+						joint3Set.data[k] = receiveBuff[k + 7 ]; 
+						joint4Set.data[k] = receiveBuff[k + 9 ]; 
+						joint5Set.data[k] = receiveBuff[k + 11]; 
+						joint6Set.data[k] = receiveBuff[k + 13]; 		
+						
+						
 					}				
 					
-					//速度赋值操作
-					*p_leftSpeedSet       = (int16_t)leftVelSet.d;
-					*p_rightSpeedSet      = (int16_t)rightVelSet.d;
-					*p_frontSteerAngleSet = (int16_t)frontSteerAngleSet.d;
 
-					//ctrlFlag
-					*p_crtlFlag = receiveBuff[9];                //buf[9]
-					
+   
+					AngleSet[0] = ((float)joint1Set.d / 1000.0);
+					AngleSet[1] = ((float)joint2Set.d / 1000.0);
+					AngleSet[2] = ((float)joint3Set.d / 1000.0);
+					AngleSet[3] = ((float)joint4Set.d / 1000.0);
+					AngleSet[4] = ((float)joint5Set.d / 1000.0);
+					AngleSet[5] = ((float)joint6Set.d / 1000.0);
+					AngleSet[6] =  (float)receiveBuff[15]      ;
 					//-----------------------------------------------------------------
 					//完成一个数据包的接收，相关变量清零，等待下一字节数据
 					USARTBufferIndex   = 0;
@@ -163,39 +173,52 @@ int usartReceiveOneData(UART_HandleTypeDef huart,int16_t *p_leftSpeedSet,int16_t
 入口参数：实时左轮轮速、实时右轮轮速、实时角度、控制信号（如果没有角度也可以不发）
 返回  值：无
 **************************************************************************/
-void usartSendData(UART_HandleTypeDef huart,short leftVel, short rightVel,short angle,unsigned char ctrlFlag)
+void usartSendData(UART_HandleTypeDef* huart)
 {
 	// 协议数据缓存数组
 	unsigned char buf[13] = {0};
 	int i, length = 0;
 
 	// 计算左右轮期望速度
-	leftVelNow.d  = leftVel;
-	rightVelNow.d = rightVel;
-	angleNow.d    = angle;
+	joint11.d = joint1.now_angle/radio[0];
+	joint21.d = joint2.now_angle/radio[1];
+	joint31.d = joint3.now_angle/radio[2];
+	joint41.d = joint4.now_angle/radio[3];
+	joint51.d = joint5.now_angle/radio[4];
+	joint61.d = joint6.now_angle/radio[5];
+	
+	
+	
 	
 	// 设置消息头
 	for(i = 0; i < 2; i++)
 		buf[i] = header[i];                      // buf[0] buf[1] 
 	
-	// 设置机器人左右轮速度、角度
-	length = 7;
+
+	length = 13;
 	buf[2] = length;                             // buf[2]
 	for(i = 0; i < 2; i++)
 	{
-		buf[i + 3] = leftVelNow.data[i];         // buf[3] buf[4]
-		buf[i + 5] = rightVelNow.data[i];        // buf[5] buf[6]
-		buf[i + 7] = angleNow.data[i];           // buf[7] buf[8]
+		buf[i + 3]  =  joint11.data[i];      // buf[3]  buf[4]
+		buf[i + 5]  =  joint21.data[i];      // buf[5]  buf[6]
+		buf[i + 7]  =  joint31.data[i];      // buf[7]  buf[8]
+		buf[i + 9]  =  joint41.data[i];      // buf[9]  buf[10]
+		buf[i + 11] =  joint51.data[i];      // buf[11] buf[12]
+		buf[i + 13] =  joint61.data[i];      // buf[13] buf[14]
+		
 	}
+	buf[i + 7] =         // buf[7] buf[8]
 	// 预留控制指令
-	buf[3 + length - 1] = ctrlFlag;              // buf[9]
+	buf[3 + length - 1] = (u8)hand.action;              // buf[9]
 	
 	// 设置校验值、消息尾
 	buf[3 + length] = getCrc8(buf, 3 + length);  // buf[10]
 	buf[3 + length + 1] = ender[0];              // buf[11]
 	buf[3 + length + 2] = ender[1];              // buf[12]
 	
-	//发送字符串数据
+
+
+	HAL_UART_Transmit(huart, (uint8_t*)buf, 19, 100);
 	
 }
 /**************************************************************************

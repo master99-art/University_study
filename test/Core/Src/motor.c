@@ -1,12 +1,12 @@
 #include "motor.h"
 #include "package.h"
-#define per_step 0.45
+
 
 /*
 the motor is 1/4 ,need 800 per 360 angle 
 step 		is 0.45 angle    0.00785375 rad
 speed 	is 15 	angle/s
-change 	to 33 	step/s
+change_speed 	to 33 	step/s
 
 the radio of stepper motor
 joint1 		7:1
@@ -18,36 +18,15 @@ joint5,6	6:1
 joint7 or hand 
 */
 
-
-#define Angle2Step 			0.00785375
-
-
-struct joint{
-	float 	tar_angle;
-	float 	now_angle;
-	float 	count_step;
-	enum{
-		Forward=1,
-		Reverse=0
-	}dir;
-	enum{
-		Reset=1,
-		Unreset=0
-	}isreset;
-}joint1,joint2,joint3,joint4,joint5,joint6;
+float radio[6]={7,6,0,4.5,6,6};
+struct joint joint1,joint2,joint3,joint4,joint5,joint6;
+struct hand hand;
 
 
-struct hand{
-	enum{
-		ON=1,
-		OFF=0
-	}action;
-	enum{
-		Islimit=1,
-		Unlimit=0
-	}limit;
-	float angle;
-}hand;
+
+
+
+
 	
 
 void Motor_Init(void)
@@ -99,6 +78,7 @@ void Motor_Init(void)
 //我现在只知道机器臂角度值，然后我想知道步进电机值的时候我只需要乘以减速比就可以了
 /*
 function:计算所需要的步长，设置方向，
+
 //enter paramter : angle of robotic arm and action of hand
 //rad
 */
@@ -107,6 +87,8 @@ int* motor_cal(float* tar_all_angle)
 	float radio[6]={7,6,0,4.5,6,6};
 	float tar_angle[6]={0};
 	unsigned char end_action;
+	
+	//电机角度
 	for(uint8_t i=0;i<6;i++)
 	{
 		//is angle before radio ,is the factly angle of stepper motor
@@ -135,12 +117,12 @@ int* motor_cal(float* tar_all_angle)
 		else joint6.dir = Forward;
 	
 	
-	static int step[6]={0};
+	static int step[7]={0};
 	for(uint8_t i=0;i<6;i++)
 	{
-		step[i]=(int)(error_angle[i]/Angle2Step);
+		step[i]=(int)((int)error_angle[i]/Angle2Step);
 	}
-	
+	step[6]=(int)end_action;
 	joint1.now_angle = tar_angle[0];
 	joint2.now_angle = tar_angle[1];
 	joint3.now_angle = tar_angle[2];
@@ -171,12 +153,12 @@ u8 Reset_joint(void)
 	//矫正角度为0
 	
 	//方向全部为正
-	Dir_Set(DIR1_GPIO_Port,DIR1_Pin,joint1.dir);
-	Dir_Set(DIR2_GPIO_Port,DIR2_Pin,joint2.dir);
-	Dir_Set(DIR3_GPIO_Port,DIR3_Pin,joint3.dir);
-	Dir_Set(DIR4_GPIO_Port,DIR4_Pin,joint4.dir);
-	Dir_Set(DIR5_GPIO_Port,DIR5_Pin,joint5.dir);
-	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,joint6.dir);
+	Dir_Set(DIR1_GPIO_Port,DIR1_Pin,(GPIO_PinState)joint1.dir);
+	Dir_Set(DIR2_GPIO_Port,DIR2_Pin,(GPIO_PinState)joint2.dir);
+	Dir_Set(DIR3_GPIO_Port,DIR3_Pin,(GPIO_PinState)joint3.dir);
+	Dir_Set(DIR4_GPIO_Port,DIR4_Pin,(GPIO_PinState)joint4.dir);
+	Dir_Set(DIR5_GPIO_Port,DIR5_Pin,(GPIO_PinState)joint5.dir);
+	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,(GPIO_PinState)joint6.dir);
 	
 	int step=1;
 	while(1)
@@ -279,17 +261,18 @@ u8 Reset_joint(void)
 		}
 	}
 	*/
+	return OK;
 }
 
 //方向驱动
 void Motor_Dir(void)
 {
-	Dir_Set(joint1_GPIO_Port,joint1_Pin,joint1.dir);
-	Dir_Set(joint2_GPIO_Port,joint2_Pin,joint2.dir);
-	Dir_Set(joint3_GPIO_Port,joint3_Pin,joint3.dir);
-	Dir_Set(joint4_GPIO_Port,joint4_Pin,joint4.dir);
-	Dir_Set(joint5_GPIO_Port,joint5_Pin,joint5.dir);
-	Dir_Set(joint6_GPIO_Port,joint6_Pin,joint6.dir);
+	Dir_Set(joint1_GPIO_Port,joint1_Pin,(GPIO_PinState)joint1.dir);
+	Dir_Set(joint2_GPIO_Port,joint2_Pin,(GPIO_PinState)joint2.dir);
+	Dir_Set(joint3_GPIO_Port,joint3_Pin,(GPIO_PinState)joint3.dir);
+	Dir_Set(joint4_GPIO_Port,joint4_Pin,(GPIO_PinState)joint4.dir);
+	Dir_Set(joint5_GPIO_Port,joint5_Pin,(GPIO_PinState)joint5.dir);
+	Dir_Set(joint6_GPIO_Port,joint6_Pin,(GPIO_PinState)joint6.dir);
 }
 
 //电机驱动，没有考虑方向
@@ -301,12 +284,22 @@ u8 Motor_Move(int* step)
 	Motor_Action(joint4_GPIO_Port,joint4_Pin,step[3]);
 	Motor_Action(joint5_GPIO_Port,joint5_Pin,step[4]);
 	Motor_Action(joint6_GPIO_Port,joint6_Pin,step[5]);
+	if(hand.action == ON)
+	{
+		//夹取
+	}
+	else if(hand.action != OFF)
+	{
+		//放手
+	}
+	return OK;
 }
 
 //方向底层
 u8 Dir_Set(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Dir)
 {
 	HAL_GPIO_WritePin(GPIOx, GPIO_Pin,Dir);
+	return OK;
 }
 //电机驱动的底层，没有考虑方向
 u8 Motor_Action(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin,int Step)
@@ -318,30 +311,7 @@ u8 Motor_Action(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin,int Step)
 		LOW(GPIOx,GPIO_Pin);
 		HAL_Delay(10);		
 	}
+	return OK;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	

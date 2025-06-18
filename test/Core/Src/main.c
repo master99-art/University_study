@@ -25,12 +25,18 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "package.h"
+#include "motor.h"
+#include "data_cal.h"
+#include "oled.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+enum ACTION{
+  STOP=0,
+	MOVE
+};
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -46,17 +52,24 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int* step;
+u8 Rec_Data[19]={0};
+enum ACTION Flag=STOP;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	usartReceiveOneData(Rec_Data); 
+	Flag=MOVE;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
 
 /* USER CODE END 0 */
 
@@ -94,19 +107,67 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+	Motor_Init();
+	Reset_joint();
+	OLED_Init();
+	HAL_UART_Receive_IT(&huart1,Rec_Data,19);
   /* USER CODE END 2 */
-
+	
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
+		if(Flag == MOVE)
+		{
+			//AngleSet是机械臂角度
+			step = motor_cal(AngleSet);
+			Motor_Dir();
+			Motor_Move(step);			
+		}
+		usartSendData(&huart1);
+		
 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
+
+//中断一次发一次？
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
   * @brief System Clock Configuration

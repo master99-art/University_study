@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -102,8 +102,12 @@ void Error_Handler(void);
 #define LED2_Pin GPIO_PIN_0
 #define LED2_GPIO_Port GPIOE
 
-/* USER CODE BEGIN Private defines */
 
+
+/* USER CODE BEGIN Private defines */
+#define Angle2Step 			0.00785375
+#define OK		1
+#define NO		0
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
