@@ -1,5 +1,6 @@
 #ifndef __DATA_CAL_H__
 #define __DATA_CAL_H__
+
 #include "main.h"
 
 extern unsigned char sendCtrlFlag;
@@ -16,3 +17,4 @@ extern void usartSendData(UART_HandleTypeDef huart,short leftVel, short rightVel
 unsigned char getCrc8(unsigned char *ptr, unsigned short len); 
 
 #endif /* __TIM_H__ */
+
