@@ -1,50 +1,43 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Build STM",
-			"type": "process",
-			"command": "${command:stm32-for-vscode.build}",
-			"options": {
-				"cwd": "${workspaceRoot}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": [
-				"$gcc"
-			]
-		},
-		{
-			"label": "Build Clean STM",
-			"type": "process",
-			"command": "${command:stm32-for-vscode.cleanBuild}",
-			"options": {
-				"cwd": "${workspaceRoot}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": [
-				"$gcc"
-			]
-		},
-		{
-			"label": "Flash STM",
-			"type": "process",
-			"command": "${command:stm32-for-vscode.flash}",
-			"options": {
-				"cwd": "${workspaceRoot}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": [
-				"$gcc"
-			]
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build task",
+            "type": "shell",
+            "command": "mingw32-make -j24",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "download dap",
+            "type": "shell",
+            "command": "mingw32-make -j24 ; mingw32-make download_dap",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "download stlink",
+            "type": "shell",
+            "command": "mingw32-make -j24 ; mingw32-make download_stlink",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "download jlink",
+            "type": "shell",
+            "command": "mingw32-make -j24 ; mingw32-make download_jlink",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
 }
