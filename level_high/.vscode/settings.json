@@ -5,11 +5,13 @@
     "stm32-for-vscode.makePath": "c:\\Users\\guoch\\AppData\\Roaming\\Code\\User\\globalStorage\\bmd.stm32-for-vscode\\@xpack-dev-tools\\windows-build-tools\\4.4.1-3.1\\.content\\bin\\make.EXE",
     //引用的
     "files.associations": {
+        "*.py": "python",
         "stm32f4xx_hal_conf.h": "c",
         "gpio.h": "c",
         "main.h": "c",
         "stm32f4xx.h": "c",
-        "stm32f4xx_it.h": "c"
+        "stm32f4xx_it.h": "c",
+        "motor.h": "c"
     },
     //默认终端？    
     "terminal.integrated.profiles.windows": {

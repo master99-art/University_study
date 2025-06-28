@@ -25,12 +25,19 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "package.h"
+#include "motor.h"
+#include "data_cal.h"
+#include "oled.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+enum ACTION
+{
+  STOP = 0,
+  MOVE
+};
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -47,32 +54,23 @@
 
 /* USER CODE BEGIN PV */
 
+u8 Rec_Data[19] = {0};
+enum ACTION Flag = STOP;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  usartReceiveOneData(Rec_Data);
+  Flag = MOVE;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void for_delay_us(uint32_t nus)
-{
-  uint32_t Delay = nus * 168 / 4;
-  do
-  {
-    __NOP();
-  } while (Delay--);
-}
-void Motor3(void)
-{
-  HAL_GPIO_TogglePin(joint3_GPIO_Port, joint3_Pin);
-}
-void Motor2(void)
-{
-  HAL_GPIO_TogglePin(joint2_GPIO_Port, joint2_Pin);
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -109,22 +107,36 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  Motor_Init();
+  /*这里是机械臂寻找复位
+  ，还有oled的初始化，但是不知道为什么，这里oled初始化会出错，*/
+  //  Reset_joint();
+  // OLED_Init();
+  HAL_UART_Receive_IT(&huart1, Rec_Data, 19);
+  int step[6];
 
+  float angle[7] = {0, PI * 2, 0, 0, 0, 0, 0};
   /* USER CODE END 2 */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    // if(Flag == MOVE)
+    // {
+
+    // 	step = motor_cal(AngleSet);
+    // 	Motor_Dir();
+    // 	Motor_Move(step);
+    // }
+    // usartSendData(&huart1);
+    // HIGH(joint2_GPIO_Port, joint2_Pin);
+    motor_cal(angle, step);
+    Motor_Dir();
+    Motor_Move(step);
+    HAL_Delay(2000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-    /*:经测试：最好将速度保持在50us一个step以下
-    Motor3();
-    Motor2();
-    for_delay_us(50);
-     */
   }
   /* USER CODE END 3 */
 }

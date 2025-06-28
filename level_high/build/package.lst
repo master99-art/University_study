@@ -1,0 +1,213 @@
+ARM GAS  D:\software\msy64\tmp\ccgyI5gw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"package.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/package.c"
+  20              		.section	.text.Read_KEY,"ax",%progbits
+  21              		.align	1
+  22              		.global	Read_KEY
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Read_KEY:
+  28              	.LVL0:
+  29              	.LFB134:
+   1:Core/Src/package.c **** #include "package.h"
+   2:Core/Src/package.c **** #include "motor.h"
+   3:Core/Src/package.c **** 
+   4:Core/Src/package.c **** 
+   5:Core/Src/package.c **** 
+   6:Core/Src/package.c **** GPIO_PinState Read_KEY(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+   7:Core/Src/package.c **** {
+  30              		.loc 1 7 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 7 1 is_stmt 0 view .LVU1
+  35 0000 08B5     		push	{r3, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 3, -8
+  39              		.cfi_offset 14, -4
+   8:Core/Src/package.c **** 	return HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
+  40              		.loc 1 8 2 is_stmt 1 view .LVU2
+  41              		.loc 1 8 9 is_stmt 0 view .LVU3
+  42 0002 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  43              	.LVL1:
+   9:Core/Src/package.c **** }
+  44              		.loc 1 9 1 view .LVU4
+  45 0006 08BD     		pop	{r3, pc}
+  46              		.cfi_endproc
+  47              	.LFE134:
+  49              		.section	.text.HIGH,"ax",%progbits
+  50              		.align	1
+ARM GAS  D:\software\msy64\tmp\ccgyI5gw.s 			page 2
+
+
+  51              		.global	HIGH
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	HIGH:
+  57              	.LVL2:
+  58              	.LFB135:
+  10:Core/Src/package.c **** 
+  11:Core/Src/package.c **** 
+  12:Core/Src/package.c **** 
+  13:Core/Src/package.c **** void HIGH(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+  14:Core/Src/package.c **** {
+  59              		.loc 1 14 1 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		.loc 1 14 1 is_stmt 0 view .LVU6
+  64 0000 08B5     		push	{r3, lr}
+  65              	.LCFI1:
+  66              		.cfi_def_cfa_offset 8
+  67              		.cfi_offset 3, -8
+  68              		.cfi_offset 14, -4
+  15:Core/Src/package.c **** 	HAL_GPIO_WritePin(GPIOx,GPIO_Pin,GPIO_PIN_SET);
+  69              		.loc 1 15 2 is_stmt 1 view .LVU7
+  70 0002 0122     		movs	r2, #1
+  71 0004 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  72              	.LVL3:
+  16:Core/Src/package.c **** }
+  73              		.loc 1 16 1 is_stmt 0 view .LVU8
+  74 0008 08BD     		pop	{r3, pc}
+  75              		.cfi_endproc
+  76              	.LFE135:
+  78              		.section	.text.LOW,"ax",%progbits
+  79              		.align	1
+  80              		.global	LOW
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  85              	LOW:
+  86              	.LVL4:
+  87              	.LFB136:
+  17:Core/Src/package.c **** 
+  18:Core/Src/package.c **** void LOW(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+  19:Core/Src/package.c **** {
+  88              		.loc 1 19 1 is_stmt 1 view -0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		.loc 1 19 1 is_stmt 0 view .LVU10
+  93 0000 08B5     		push	{r3, lr}
+  94              	.LCFI2:
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 3, -8
+  97              		.cfi_offset 14, -4
+  20:Core/Src/package.c **** 	HAL_GPIO_WritePin(GPIOx,GPIO_Pin,GPIO_PIN_RESET);
+  98              		.loc 1 20 2 is_stmt 1 view .LVU11
+  99 0002 0022     		movs	r2, #0
+ARM GAS  D:\software\msy64\tmp\ccgyI5gw.s 			page 3
+
+
+ 100 0004 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 101              	.LVL5:
+  21:Core/Src/package.c **** }
+ 102              		.loc 1 21 1 is_stmt 0 view .LVU12
+ 103 0008 08BD     		pop	{r3, pc}
+ 104              		.cfi_endproc
+ 105              	.LFE136:
+ 107              		.section	.text.for_delay_us,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	for_delay_us
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 114              	for_delay_us:
+ 115              	.LVL6:
+ 116              	.LFB137:
+  22:Core/Src/package.c **** 
+  23:Core/Src/package.c **** 
+  24:Core/Src/package.c **** /*
+  25:Core/Src/package.c **** for循环实现延时us
+  26:Core/Src/package.c **** */
+  27:Core/Src/package.c **** void for_delay_us(uint32_t nus)
+  28:Core/Src/package.c **** {
+ 117              		.loc 1 28 1 is_stmt 1 view -0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              		@ link register save eliminated.
+  29:Core/Src/package.c ****  uint32_t Delay = nus * 168/4;
+ 122              		.loc 1 29 2 view .LVU14
+ 123              		.loc 1 29 23 is_stmt 0 view .LVU15
+ 124 0000 A823     		movs	r3, #168
+ 125 0002 03FB00F0 		mul	r0, r3, r0
+ 126              	.LVL7:
+ 127              		.loc 1 29 11 view .LVU16
+ 128 0006 8008     		lsrs	r0, r0, #2
+ 129              	.LVL8:
+ 130              	.L8:
+  30:Core/Src/package.c ****  do
+ 131              		.loc 1 30 2 is_stmt 1 view .LVU17
+  31:Core/Src/package.c ****  {
+  32:Core/Src/package.c ****   __NOP();
+ 132              		.loc 1 32 3 view .LVU18
+ 133              		.syntax unified
+ 134              	@ 32 "Core/Src/package.c" 1
+ 135 0008 00BF     		nop
+ 136              	@ 0 "" 2
+  33:Core/Src/package.c ****  }
+  34:Core/Src/package.c ****  while (Delay --);
+ 137              		.loc 1 34 9 discriminator 1 view .LVU19
+ 138              		.thumb
+ 139              		.syntax unified
+ 140 000a 0346     		mov	r3, r0
+ 141              		.loc 1 34 15 is_stmt 0 discriminator 1 view .LVU20
+ 142 000c 0138     		subs	r0, r0, #1
+ 143              	.LVL9:
+ 144              		.loc 1 34 9 discriminator 1 view .LVU21
+ARM GAS  D:\software\msy64\tmp\ccgyI5gw.s 			page 4
+
+
+ 145 000e 002B     		cmp	r3, #0
+ 146 0010 FAD1     		bne	.L8
+  35:Core/Src/package.c **** }...
+ 147              		.loc 1 35 1 view .LVU22
+ 148 0012 7047     		bx	lr
+ 149              		.cfi_endproc
+ 150              	.LFE137:
+ 152              		.text
+ 153              	.Letext0:
+ 154              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 155              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 156              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 157              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ARM GAS  D:\software\msy64\tmp\ccgyI5gw.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 package.c
+D:\software\msy64\tmp\ccgyI5gw.s:21     .text.Read_KEY:00000000 $t
+D:\software\msy64\tmp\ccgyI5gw.s:27     .text.Read_KEY:00000000 Read_KEY
+D:\software\msy64\tmp\ccgyI5gw.s:50     .text.HIGH:00000000 $t
+D:\software\msy64\tmp\ccgyI5gw.s:56     .text.HIGH:00000000 HIGH
+D:\software\msy64\tmp\ccgyI5gw.s:79     .text.LOW:00000000 $t
+D:\software\msy64\tmp\ccgyI5gw.s:85     .text.LOW:00000000 LOW
+D:\software\msy64\tmp\ccgyI5gw.s:108    .text.for_delay_us:00000000 $t
+D:\software\msy64\tmp\ccgyI5gw.s:114    .text.for_delay_us:00000000 for_delay_us
+
+UNDEFINED SYMBOLS
+HAL_GPIO_ReadPin
+HAL_GPIO_WritePin

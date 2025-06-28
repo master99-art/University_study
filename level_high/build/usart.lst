@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -19,15 +19,15 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.MX_USART1_UART_Init,"ax",%progbits
-  20              		.align	1
-  21              		.global	MX_USART1_UART_Init
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  26              	MX_USART1_UART_Init:
-  27              	.LFB134:
-  28              		.file 1 "Core/Src/usart.c"
+  19              		.file 1 "Core/Src/usart.c"
+  20              		.section	.text.MX_USART1_UART_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	MX_USART1_UART_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	MX_USART1_UART_Init:
+  28              	.LFB134:
    1:Core/Src/usart.c **** /* USER CODE BEGIN Header */
    2:Core/Src/usart.c **** /**
    3:Core/Src/usart.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   28:Core/Src/usart.c **** UART_HandleTypeDef huart2;
   29:Core/Src/usart.c **** 
   30:Core/Src/usart.c **** /* USART1 init function */
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 2
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 2
 
 
   31:Core/Src/usart.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   64              		.loc 1 49 3 is_stmt 1 view .LVU15
   65              		.loc 1 49 28 is_stmt 0 view .LVU16
   66 001c C361     		str	r3, [r0, #28]
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 3
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 3
 
 
   50:Core/Src/usart.c ****   if (HAL_UART_Init(&huart1) != HAL_OK)
@@ -126,7 +126,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   68              		.loc 1 50 7 is_stmt 0 view .LVU18
   69 001e FFF7FEFF 		bl	HAL_UART_Init
   70              	.LVL0:
-  71              		.loc 1 50 6 view .LVU19
+  71              		.loc 1 50 6 discriminator 1 view .LVU19
   72 0022 00B9     		cbnz	r0, .L4
   73              	.L1:
   51:Core/Src/usart.c ****   {
@@ -149,7 +149,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   82              	.L6:
   83              		.align	2
   84              	.L5:
-  85 002c 00000000 		.word	.LANCHOR0
+  85 002c 00000000 		.word	huart1
   86 0030 00100140 		.word	1073811456
   87              		.cfi_endproc
   88              	.LFE134:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   64:Core/Src/usart.c ****   /* USER CODE BEGIN USART2_Init 0 */
   65:Core/Src/usart.c **** 
   66:Core/Src/usart.c ****   /* USER CODE END USART2_Init 0 */
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 4
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 4
 
 
   67:Core/Src/usart.c **** 
@@ -227,7 +227,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  138              		.loc 1 79 7 is_stmt 0 view .LVU41
  139 001e FFF7FEFF 		bl	HAL_UART_Init
  140              	.LVL2:
- 141              		.loc 1 79 6 view .LVU42
+ 141              		.loc 1 79 6 discriminator 1 view .LVU42
  142 0022 00B9     		cbnz	r0, .L10
  143              	.L7:
   80:Core/Src/usart.c ****   {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
   85:Core/Src/usart.c ****   /* USER CODE END USART2_Init 2 */
   86:Core/Src/usart.c **** 
   87:Core/Src/usart.c **** }
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 5
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 5
 
 
  144              		.loc 1 87 1 view .LVU43
@@ -253,7 +253,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  152              	.L12:
  153              		.align	2
  154              	.L11:
- 155 002c 00000000 		.word	.LANCHOR1
+ 155 002c 00000000 		.word	huart2
  156 0030 00440040 		.word	1073759232
  157              		.cfi_endproc
  158              	.LFE135:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  193 0010 0368     		ldr	r3, [r0]
  194              		.loc 1 93 5 view .LVU52
  195 0012 2F4A     		ldr	r2, .L19
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 6
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 6
 
 
  196 0014 9342     		cmp	r3, r2
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  139:Core/Src/usart.c **** 
  140:Core/Src/usart.c ****     /* USART2 interrupt Init */
  141:Core/Src/usart.c ****     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 7
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 7
 
 
  142:Core/Src/usart.c ****     HAL_NVIC_EnableIRQ(USART2_IRQn);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  243 0044 1B6B     		ldr	r3, [r3, #48]
  244 0046 03F00103 		and	r3, r3, #1
  245 004a 0293     		str	r3, [sp, #8]
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 8
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 8
 
 
  101:Core/Src/usart.c ****     /**USART1 GPIO Configuration
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  285              	.LVL11:
  286              	.L18:
  126:Core/Src/usart.c **** 
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 9
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 9
 
 
  287              		.loc 1 126 5 view .LVU81
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  326              		.loc 1 134 26 is_stmt 0 view .LVU96
  327 00aa 0223     		movs	r3, #2
  328 00ac 0693     		str	r3, [sp, #24]
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 10
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 10
 
 
  135:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  376              	.LFB137:
  148:Core/Src/usart.c **** 
  149:Core/Src/usart.c **** void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 11
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 11
 
 
  150:Core/Src/usart.c **** {
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  180:Core/Src/usart.c ****     /**USART2 GPIO Configuration
  181:Core/Src/usart.c ****     PA2     ------> USART2_TX
  182:Core/Src/usart.c ****     PA3     ------> USART2_RX
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 12
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 12
 
 
  183:Core/Src/usart.c ****     */
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  437 0044 2620     		movs	r0, #38
  438 0046 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
  439              	.LVL25:
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 13
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 13
 
 
  440              		.loc 1 192 1 is_stmt 0 view .LVU123
@@ -732,58 +732,56 @@ ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 1
  448              		.cfi_endproc
  449              	.LFE137:
  451              		.global	huart2
- 452              		.global	huart1
- 453              		.section	.bss.huart1,"aw",%nobits
- 454              		.align	2
- 455              		.set	.LANCHOR0,. + 0
- 458              	huart1:
- 459 0000 00000000 		.space	72
- 459      00000000 
- 459      00000000 
- 459      00000000 
- 459      00000000 
- 460              		.section	.bss.huart2,"aw",%nobits
- 461              		.align	2
- 462              		.set	.LANCHOR1,. + 0
- 465              	huart2:
- 466 0000 00000000 		.space	72
- 466      00000000 
- 466      00000000 
- 466      00000000 
- 466      00000000 
- 467              		.text
- 468              	.Letext0:
- 469              		.file 2 "d:\\software\\stm32-for-vscode-tool\\gcc-arm-none-eabi-10.3-2021.10\\arm-none-eabi\\inclu
- 470              		.file 3 "d:\\software\\stm32-for-vscode-tool\\gcc-arm-none-eabi-10.3-2021.10\\arm-none-eabi\\inclu
- 471              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 472              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 473              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 474              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 475              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 476              		.file 9 "Core/Inc/usart.h"
- 477              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
- 478              		.file 11 "Core/Inc/main.h"
-ARM GAS  C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s 			page 14
+ 452              		.section	.bss.huart2,"aw",%nobits
+ 453              		.align	2
+ 456              	huart2:
+ 457 0000 00000000 		.space	72
+ 457      00000000 
+ 457      00000000 
+ 457      00000000 
+ 457      00000000 
+ 458              		.global	huart1
+ 459              		.section	.bss.huart1,"aw",%nobits
+ 460              		.align	2
+ 463              	huart1:
+ 464 0000 00000000 		.space	72
+ 464      00000000 
+ 464      00000000 
+ 464      00000000 
+ 464      00000000 
+ 465              		.text
+ 466              	.Letext0:
+ 467              		.file 2 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 468              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 469              		.file 4 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 470              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 471              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 472              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 473              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 474              		.file 9 "Core/Inc/usart.h"
+ 475              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
+ 476              		.file 11 "Core/Inc/main.h"
+ARM GAS  D:\software\msy64\tmp\ccIpNiIT.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usart.c
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:20     .text.MX_USART1_UART_Init:00000000 $t
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:26     .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:85     .text.MX_USART1_UART_Init:0000002c $d
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:91     .text.MX_USART2_UART_Init:00000000 $t
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:97     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:155    .text.MX_USART2_UART_Init:0000002c $d
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:161    .text.HAL_UART_MspInit:00000000 $t
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:167    .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:360    .text.HAL_UART_MspInit:000000d0 $d
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:368    .text.HAL_UART_MspDeInit:00000000 $t
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:374    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:445    .text.HAL_UART_MspDeInit:0000004c $d
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:465    .bss.huart2:00000000 huart2
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:458    .bss.huart1:00000000 huart1
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:454    .bss.huart1:00000000 $d
-C:\Users\guoch\AppData\Local\Temp\ccF2TGnT.s:461    .bss.huart2:00000000 $d
+D:\software\msy64\tmp\ccIpNiIT.s:21     .text.MX_USART1_UART_Init:00000000 $t
+D:\software\msy64\tmp\ccIpNiIT.s:27     .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
+D:\software\msy64\tmp\ccIpNiIT.s:85     .text.MX_USART1_UART_Init:0000002c $d
+D:\software\msy64\tmp\ccIpNiIT.s:463    .bss.huart1:00000000 huart1
+D:\software\msy64\tmp\ccIpNiIT.s:91     .text.MX_USART2_UART_Init:00000000 $t
+D:\software\msy64\tmp\ccIpNiIT.s:97     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+D:\software\msy64\tmp\ccIpNiIT.s:155    .text.MX_USART2_UART_Init:0000002c $d
+D:\software\msy64\tmp\ccIpNiIT.s:456    .bss.huart2:00000000 huart2
+D:\software\msy64\tmp\ccIpNiIT.s:161    .text.HAL_UART_MspInit:00000000 $t
+D:\software\msy64\tmp\ccIpNiIT.s:167    .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+D:\software\msy64\tmp\ccIpNiIT.s:360    .text.HAL_UART_MspInit:000000d0 $d
+D:\software\msy64\tmp\ccIpNiIT.s:368    .text.HAL_UART_MspDeInit:00000000 $t
+D:\software\msy64\tmp\ccIpNiIT.s:374    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+D:\software\msy64\tmp\ccIpNiIT.s:445    .text.HAL_UART_MspDeInit:0000004c $d
+D:\software\msy64\tmp\ccIpNiIT.s:453    .bss.huart2:00000000 $d
+D:\software\msy64\tmp\ccIpNiIT.s:460    .bss.huart1:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init
