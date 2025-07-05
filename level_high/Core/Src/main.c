@@ -158,7 +158,6 @@ int main(void)
     // 	Motor_Move(step);
     // }
     // usartSendData(&huart1);
-
     if (tem == 0)
     {
       for (int i = 0; i < 32000; i++)
