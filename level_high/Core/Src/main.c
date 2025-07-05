@@ -181,24 +181,9 @@ int main(void)
 
     // }
 
-    // //test   main
-    // if (tem == 0)
-    // {
-    //   motor_cal(angle, step);
 
-    //   Motor_Move(step);
-    //   tem++;
-    // }
 
-    // if (!tem)
-    // {
-    //   for (int i = 0; i < 800 * 54 ; i++)
-    //   {
-    //     function();
-    //     for_delay_us(50);
-    //   }
-    //   tem = 1;
-    // }
+
 
     /* USER CODE END WHILE */
 
