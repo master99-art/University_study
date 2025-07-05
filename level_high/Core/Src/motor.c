@@ -88,6 +88,7 @@ void Motor_Init(void)
 	joint6.ulimit=0;
 	joint6.hlimit=0;
 
+
 	
 }
 
