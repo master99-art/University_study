@@ -1,269 +1,246 @@
-   #include "data_cal.h"
+#include "data_cal.h"
 #include "math.h"
 #include "motor.h"
 #include <stdio.h>
 #include <string.h>
+#include "main.h"
 
-
-float AngleSet[7]={0};
+float AngleSet[7] = {0};
 
 /*
-
-ÓĞÁù¸öÖá£¬Ò»¸ö¼Ğ×¦£¬12+1=13×Ö½Ú
+æœ‰13ä¸ªæ•°æ®
+è¿˜éœ€è¦ä¸¤ä¸ªåŒ…å¤´ä¸¤ä¸ªåŒ…å°¾ä¸€ä¸ªæ•°æ®é•¿åº¦ä½ä¸€ä¸ªæ ¡éªŒä½
+æœ‰å…­ä¸ªè½´ï¼Œä¸€ä¸ªå¤¹çˆªï¼Œ12+1=13å­—èŠ‚
+//æ€»å…±å°±æ˜¯19ä¸ªå­—èŠ‚ï¼Œæˆ‘æ”¶å‘éƒ½éœ€è¦19ä¸ªå­—èŠ‚
 */
 
-
-/*--------------------------------·¢ËÍĞ­Òé-----------------------------------
+/*--------------------------------å‘é€åè®®-----------------------------------
 //----------------55 aa size 00 00 00 00 00 crc8 0d 0a----------------------
 //----------------55 aa size 00 00 00 00 00 0d 0a----------------------
-//Êı¾İÍ·55aa + Êı¾İ×Ö½ÚÊısize + Êı¾İ£¨ÀûÓÃ¹²ÓÃÌå£© + Ğ£Ñécrc8 + Êı¾İÎ²0d0a
-//×¢Òâ£ºÕâÀïÊı¾İÖĞÔ¤ÁôÁËÒ»¸ö×Ö½ÚµÄ¿ØÖÆÎ»£¬ÆäËûµÄ¿ÉÒÔ×ÔĞĞÀ©Õ¹£¬¸ü¸ÄsizeºÍÊı¾İ
+//æ•°æ®å¤´55aa + æ•°æ®å­—èŠ‚æ•°size + æ•°æ®ï¼ˆåˆ©ç”¨å…±ç”¨ä½“ï¼‰ + æ ¡éªŒcrc8 + æ•°æ®å°¾0d0a
+//æ³¨æ„ï¼šè¿™é‡Œæ•°æ®ä¸­é¢„ç•™äº†ä¸€ä¸ªå­—èŠ‚çš„æ§åˆ¶ä½ï¼Œå…¶ä»–çš„å¯ä»¥è‡ªè¡Œæ‰©å±•ï¼Œæ›´æ”¹sizeå’Œæ•°æ®
 --------------------------------------------------------------------------*/
 
-/*--------------------------------½ÓÊÕĞ­Òé-----------------------------------
+/*--------------------------------æ¥æ”¶åè®®-----------------------------------
 //----------------55 aa size 00 00 00 00 00 00 00 crc8 0d 0a----------------
-//Êı¾İÍ·55aa + Êı¾İ×Ö½ÚÊısize + Êı¾İ£¨ÀûÓÃ¹²ÓÃÌå£© + Ğ£Ñécrc8 + Êı¾İÎ²0d0a
-//×¢Òâ£ºÕâÀïÊı¾İÖĞÔ¤ÁôÁËÒ»¸ö×Ö½ÚµÄ¿ØÖÆÎ»£¬ÆäËûµÄ¿ÉÒÔ×ÔĞĞÀ©Õ¹£¬¸ü¸ÄsizeºÍÊı¾İ
+//æ•°æ®å¤´55aa + æ•°æ®å­—èŠ‚æ•°size + æ•°æ®ï¼ˆåˆ©ç”¨å…±ç”¨ä½“ï¼‰ + æ ¡éªŒcrc8 + æ•°æ®å°¾0d0a
+//æ³¨æ„ï¼šè¿™é‡Œæ•°æ®ä¸­é¢„ç•™äº†ä¸€ä¸ªå­—èŠ‚çš„æ§åˆ¶ä½ï¼Œå…¶ä»–çš„å¯ä»¥è‡ªè¡Œæ‰©å±•ï¼Œæ›´æ”¹sizeå’Œæ•°æ®
 --------------------------------------------------------------------------*/
-
 
 /**************************************************************************
-Í¨ĞÅµÄ·¢ËÍº¯ÊıºÍ½ÓÊÕº¯Êı±ØĞëµÄÒ»Ğ©³£Á¿¡¢±äÁ¿¡¢¹²ÓÃÌå¶ÔÏó
+é€šä¿¡çš„å‘é€å‡½æ•°å’Œæ¥æ”¶å‡½æ•°å¿…é¡»çš„ä¸€äº›å¸¸é‡ã€å˜é‡ã€å…±ç”¨ä½“å¯¹è±¡
 **************************************************************************/
 
-//Êı¾İ½ÓÊÕÔİ´æÇø
-unsigned char  receiveBuff[16] = {0};         
-//Í¨ĞÅĞ­Òé³£Á¿
-const unsigned char header[2]  = {0x55, 0xaa};
-const unsigned char ender[2]   = {0x0d, 0x0a};
+// æ•°æ®æ¥æ”¶æš‚å­˜åŒº
+unsigned char receiveBuff[16] = {0};
+// é€šä¿¡åè®®å¸¸é‡
+const unsigned char header[2] = {0x55, 0xaa};
+const unsigned char ender[2] = {0x0d, 0x0a};
 
-
-/*******************Ê¹ÓÃÁªºÏÌå¿ÉÒÔ¿ìËÙµÄ×ª»»Êı¾İÀàĞÍ***************************/
-//·¢ËÍÊı¾İ£¨×óÂÖËÙ¡¢ÓÒÂÖËÙ¡¢½Ç¶È£©¹²ÓÃÌå£¨-32767 - +32768£©
+/*******************ä½¿ç”¨è”åˆä½“å¯ä»¥å¿«é€Ÿçš„è½¬æ¢æ•°æ®ç±»å‹***************************/
+// å‘é€æ•°æ®ï¼ˆå·¦è½®é€Ÿã€å³è½®é€Ÿã€è§’åº¦ï¼‰å…±ç”¨ä½“ï¼ˆ-32767 - +32768ï¼‰
 union sendData
 {
-	//ÕâÀï´«ÈëdÎªÊı×Ö
+	// è¿™é‡Œä¼ å…¥dä¸ºæ•°å­—
 	short d;
-	//¹²ÓÃÍ¬Ò»¸öÖ¸Õë£¬È»ºó°Ñshort×ª»»ÎªÁËÒ»¸öu8 µÄÊı×é
+	// å…±ç”¨åŒä¸€ä¸ªæŒ‡é’ˆï¼Œç„¶åæŠŠshortè½¬æ¢ä¸ºäº†ä¸€ä¸ªu8 çš„æ•°ç»„
 	unsigned char data[2];
-}joint11,joint21,joint31,joint41,joint51,joint61;
+} joint11, joint21, joint31, joint41, joint51, joint61;
 
-//×óÓÒÂÖËÙ¿ØÖÆËÙ¶È¡¢¶æ»ú¹²ÓÃÌå
+// å·¦å³è½®é€Ÿæ§åˆ¶é€Ÿåº¦ã€èˆµæœºå…±ç”¨ä½“
 union receiveData
 {
 	short d;
 	unsigned char data[2];
-}joint1Set,joint2Set,joint3Set,joint4Set,joint5Set,joint6Set;
+} joint1Set, joint2Set, joint3Set, joint4Set, joint5Set, joint6Set;
 
 /**************************************************************************
-º¯Êı¹¦ÄÜ£ºÍ¨¹ı´®¿ÚÖĞ¶Ï·şÎñº¯Êı£¬»ñÈ¡ÉÏÎ»»ú·¢ËÍµÄ×óÓÒÂÖ¿ØÖÆËÙ¶È¡¢¶æ»ú¡¢Ô¤Áô¿ØÖÆ±êÖ¾Î»£¬·Ö±ğ´æÈë²ÎÊıÖĞ
-Èë¿Ú²ÎÊı£º×óÂÖÂÖËÙ¿ØÖÆµØÖ·¡¢ÓÒÂÖÂÖËÙ¿ØÖÆµØÖ·¡¢¶æ»ú×ªÏò½Ç¶ÈµØÖ·¡¢Ô¤Áô¿ØÖÆ±êÖ¾Î»
-·µ»Ø  Öµ£ºÎŞÌØÊâÒâÒå
+å‡½æ•°åŠŸèƒ½ï¼šé€šè¿‡ä¸²å£ä¸­æ–­æœåŠ¡å‡½æ•°,è·å–ç›®æ ‡å…³èŠ‚è§’åº¦ï¼Œå¤¹çˆªæ ‡å¿—ä½ï¼Œä¼ å…¥å‚æ•°ä¸­
+å…¥å£å‚æ•°ï¼šå·¦è½®è½®é€Ÿæ§åˆ¶åœ°å€ã€å³è½®è½®é€Ÿæ§åˆ¶åœ°å€ã€èˆµæœºè½¬å‘è§’åº¦åœ°å€ã€é¢„ç•™æ§åˆ¶æ ‡å¿—ä½
+è¿”å›  å€¼ï¼šæ— ç‰¹æ®Šæ„ä¹‰
 **************************************************************************/
-int usartReceiveOneData(u8 *receiveBuff)
+int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
 {
-	unsigned char USART_Receiver              = 0;          //½ÓÊÕÊı¾İ
-	static unsigned char checkSum             = 0;					//£¿
-	static unsigned char USARTBufferIndex     = 0;					//´®¿ÚË÷Òı
-	static short j=0,k=0;
-	static unsigned char USARTReceiverFront   = 0;
-	static unsigned char Start_Flag           = START;      //Ò»Ö¡Êı¾İ´«ËÍ¿ªÊ¼±êÖ¾Î»
-	static short dataLength                   = 0;
 
- 
-	
+	unsigned char USART_Receiver = 0;		   // æ¥æ”¶æ•°æ®
+	static unsigned char checkSum = 0;		   // ï¼Ÿ
+	static unsigned char USARTBufferIndex = 0; // ä¸²å£ç´¢å¼•
+	static short j = 0, k = 0;
+	static unsigned char USARTReceiverFront = 0;
+	static unsigned char Start_Flag = START; // ä¸€å¸§æ•°æ®ä¼ é€å¼€å§‹æ ‡å¿—ä½
+	static short dataLength = 0;
+	dataLength = sizeof(receiveBuff) - 6;
+	USART_Receiver = receiveBuff[1];
+	USARTReceiverFront = receiveBuff[0];
 
-	//½ÓÊÕÏûÏ¢Í·
-	if(Start_Flag == START)
+	// æ¥æ”¶æ¶ˆæ¯å¤´
+	if (Start_Flag == START)
 	{
-		if(USART_Receiver == 0xaa)                //buf[1]
-		{  
-			if(USARTReceiverFront == 0x55)        //Êı¾İÍ·Á½Î» //buf[0]
+		if (USART_Receiver == 0xaa) // buf[1]
+		{
+			if (USARTReceiverFront == 0x55) // æ•°æ®å¤´ä¸¤ä½ //buf[0]
 			{
-				Start_Flag = !START;              //ÊÕµ½Êı¾İÍ·£¬¿ªÊ¼½ÓÊÕÊı¾İ
-				//printf("header ok\n");
-				receiveBuff[0]=header[0];         //buf[0]
-				receiveBuff[1]=header[1];         //buf[1]
-				USARTBufferIndex = 0;             //»º³åÇø³õÊ¼»¯
-				checkSum = 0x00;				  //Ğ£ÑéºÍ³õÊ¼»¯
+				Start_Flag = !START; // æ”¶åˆ°æ•°æ®å¤´ï¼Œå¼€å§‹æ¥æ”¶æ•°æ®
+				// printf("header ok\n");
+				receiveBuff[0] = header[0]; // buf[0]
+				receiveBuff[1] = header[1]; // buf[1]
+				USARTBufferIndex = 0;		// ç¼“å†²åŒºåˆå§‹åŒ–
+				checkSum = 0x00;			// æ ¡éªŒå’Œåˆå§‹åŒ–
 			}
 		}
-		else 
+		else
 		{
-			USARTReceiverFront = USART_Receiver;  
+			USARTReceiverFront = USART_Receiver;
 		}
 	}
 	else
-  { 
-		switch(USARTBufferIndex)
+	{
+		switch (USARTBufferIndex)
 		{
-			case 0://½ÓÊÕ×óÓÒÂÖËÙ¶ÈÊı¾İµÄ³¤¶È
-				receiveBuff[2] = USART_Receiver;
-				dataLength     = receiveBuff[2];            //buf[2]
+		case 0: // æ¥æ”¶å·¦å³è½®é€Ÿåº¦æ•°æ®çš„é•¿åº¦
+			receiveBuff[2] = USART_Receiver;
+			dataLength = receiveBuff[2]; // buf[2]
+			USARTBufferIndex++;
+			break;
+		case 1:									 // æ¥æ”¶æ‰€æœ‰æ•°æ®ï¼Œå¹¶èµ‹å€¼å¤„ç†
+			receiveBuff[j + 3] = USART_Receiver; // buf[3] - buf[9]
+			j++;
+			if (j >= dataLength)
+			{
+				j = 0;
 				USARTBufferIndex++;
-				break;
-			case 1://½ÓÊÕËùÓĞÊı¾İ£¬²¢¸³Öµ´¦Àí 
-				receiveBuff[j + 3] = USART_Receiver;        //buf[3] - buf[9]					
-				j++;
-				if(j >= dataLength)                         
-				{
-					j = 0;
-					USARTBufferIndex++;
-				}
-				break;
-			case 2://½ÓÊÕĞ£ÑéÖµĞÅÏ¢
-				receiveBuff[3 + dataLength] = USART_Receiver; //buf[10]
-				checkSum = getCrc8(receiveBuff, 3 + dataLength);
-				  // ¼ì²éĞÅÏ¢Ğ£ÑéÖµ
-				if (checkSum != receiveBuff[3 + dataLength])return 0;
-				USARTBufferIndex++;
-				break;
-				
-			case 3://½ÓÊÕĞÅÏ¢Î²
-				if(k==0)
-				{
-					//Êı¾İ0d     buf[11]  ÎŞĞèÅĞ¶Ï
-					k++;
-				}
-				else if (k==1)
-				{
-					//Êı¾İ0a     buf[12] ÎŞĞèÅĞ¶Ï
+			}
+			break;
+		case 2: // æ¥æ”¶æ ¡éªŒå€¼ä¿¡æ¯
+			receiveBuff[3 + dataLength] = USART_Receiver;
+			checkSum = getCrc8(receiveBuff, 3 + dataLength);
+			// æ£€æŸ¥ä¿¡æ¯æ ¡éªŒå€¼
+			if (checkSum != receiveBuff[3 + dataLength])
+				return 0;
+			USARTBufferIndex++;
+			break;
 
-					//½øĞĞ½Ç¶È¸³Öµ²Ù×÷					
-					for(k = 0; k < 2; k++)
-					{
-						joint1Set.data[k] = receiveBuff[k + 3 ]; 
-						joint2Set.data[k] = receiveBuff[k + 5 ]; 
-						joint3Set.data[k] = receiveBuff[k + 7 ]; 
-						joint4Set.data[k] = receiveBuff[k + 9 ]; 
-						joint5Set.data[k] = receiveBuff[k + 11]; 
-						joint6Set.data[k] = receiveBuff[k + 13]; 		
-						
-						
-					}				
-					
+		case 3: // æ¥æ”¶ä¿¡æ¯å°¾
+			if (k == 0)
+			{
+				// æ•°æ®0d     buf[11]  æ— éœ€åˆ¤æ–­
+				k++;
+			}
+			else if (k == 1)
+			{
+				// æ•°æ®0a     buf[12] æ— éœ€åˆ¤æ–­
 
-   
-					AngleSet[0] = ((float)joint1Set.d / 1000.0);
-					AngleSet[1] = ((float)joint2Set.d / 1000.0);
-					AngleSet[2] = ((float)joint3Set.d / 1000.0);
-					AngleSet[3] = ((float)joint4Set.d / 1000.0);
-					AngleSet[4] = ((float)joint5Set.d / 1000.0);
-					AngleSet[5] = ((float)joint6Set.d / 1000.0);
-					AngleSet[6] =  (float)receiveBuff[15]      ;
-					//-----------------------------------------------------------------
-					//Íê³ÉÒ»¸öÊı¾İ°üµÄ½ÓÊÕ£¬Ïà¹Ø±äÁ¿ÇåÁã£¬µÈ´ıÏÂÒ»×Ö½ÚÊı¾İ
-					USARTBufferIndex   = 0;
-					USARTReceiverFront = 0;
-					Start_Flag         = START;
-					checkSum           = 0;
-					dataLength         = 0;
-					j = 0;
-					k = 0;
-					//-----------------------------------------------------------------					
+				// è¿›è¡Œè§’åº¦èµ‹å€¼æ“ä½œ
+				for (k = 0; k < 2; k++)
+				{
+					joint1Set.data[k] = receiveBuff[k + 3];
+					joint2Set.data[k] = receiveBuff[k + 5];
+					joint3Set.data[k] = receiveBuff[k + 7];
+					joint4Set.data[k] = receiveBuff[k + 9];
+					joint5Set.data[k] = receiveBuff[k + 11];
+					joint6Set.data[k] = receiveBuff[k + 13];
 				}
-				break;
-			 default:break;
-		}		
+
+				AngleSet[0] = ((float)joint1Set.d / 1000.0);
+				AngleSet[1] = ((float)joint2Set.d / 1000.0);
+				AngleSet[2] = ((float)joint3Set.d / 1000.0);
+				AngleSet[3] = ((float)joint4Set.d / 1000.0);
+				AngleSet[4] = ((float)joint5Set.d / 1000.0);
+				AngleSet[5] = ((float)joint6Set.d / 1000.0);
+				AngleSet[6] = (float)receiveBuff[15];
+				//-----------------------------------------------------------------
+				// å®Œæˆä¸€ä¸ªæ•°æ®åŒ…çš„æ¥æ”¶ï¼Œç›¸å…³å˜é‡æ¸…é›¶ï¼Œç­‰å¾…ä¸‹ä¸€å­—èŠ‚æ•°æ®
+				USARTBufferIndex = 0;
+				USARTReceiverFront = 0;
+				Start_Flag = START;
+				checkSum = 0;
+				dataLength = 0;
+				j = 0;
+				k = 0;
+				//-----------------------------------------------------------------
+			}
+			break;
+		default:
+			break;
+		}
 	}
 	return 0;
 }
 /**************************************************************************
-º¯Êı¹¦ÄÜ£º½«×óÓÒÂÖËÙºÍ½Ç¶ÈÊı¾İ¡¢¿ØÖÆĞÅºÅ½øĞĞ´ò°ü£¬Í¨¹ı´®¿Ú·¢ËÍ¸øLinux
-Èë¿Ú²ÎÊı£ºÊµÊ±×óÂÖÂÖËÙ¡¢ÊµÊ±ÓÒÂÖÂÖËÙ¡¢ÊµÊ±½Ç¶È¡¢¿ØÖÆĞÅºÅ£¨Èç¹ûÃ»ÓĞ½Ç¶ÈÒ²¿ÉÒÔ²»·¢£©
-·µ»Ø  Öµ£ºÎŞ
+
 **************************************************************************/
-void usartSendData(UART_HandleTypeDef* huart)
+void usartSendData(UART_HandleTypeDef *huart)
 {
-	// Ğ­ÒéÊı¾İ»º´æÊı×é
+	// åè®®æ•°æ®ç¼“å­˜æ•°ç»„
 	unsigned char buf[13] = {0};
 	int i, length = 0;
-
-	// ¼ÆËã×óÓÒÂÖÆÚÍûËÙ¶È
-	joint11.d = joint1.now_angle/radio[0];
-	joint21.d = joint2.now_angle/radio[1];
-	joint31.d = joint3.now_angle/radio[2];
-	joint41.d = joint4.now_angle/radio[3];
-	joint51.d = joint5.now_angle/radio[4];
-	joint61.d = joint6.now_angle/radio[5];
-	
-	
-	
-	
-	// ÉèÖÃÏûÏ¢Í·
-	for(i = 0; i < 2; i++)
-		buf[i] = header[i];                      // buf[0] buf[1] 
-	
-
 	length = 13;
-	buf[2] = length;                             // buf[2]
-	for(i = 0; i < 2; i++)
+	// è®¡ç®—jointè§’åº¦
+	joint11.d = (short)(joint1.now_angle / radio[0] * 1000);
+	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
+	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
+	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
+	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
+	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
+
+	// joint11.d = (short)(12341);
+	// joint21.d = (short)(124);
+	// joint31.d = (short)(324);
+	// joint41.d = (short)(54);
+	// joint51.d = (short)(243);
+	// joint61.d = (short)(568);
+
+	// è®¾ç½®æ¶ˆæ¯å¤´
+	for (i = 0; i < 2; i++)
+		buf[i] = header[i]; // buf[0] buf[1]
+
+	buf[2] = length; // buf[2]
+	for (i = 0; i < 2; i++)
 	{
-		buf[i + 3]  =  joint11.data[i];      // buf[3]  buf[4]
-		buf[i + 5]  =  joint21.data[i];      // buf[5]  buf[6]
-		buf[i + 7]  =  joint31.data[i];      // buf[7]  buf[8]
-		buf[i + 9]  =  joint41.data[i];      // buf[9]  buf[10]
-		buf[i + 11] =  joint51.data[i];      // buf[11] buf[12]
-		buf[i + 13] =  joint61.data[i];      // buf[13] buf[14]
-		
+		buf[i + 3] = joint11.data[i];  // buf[3]  buf[4]
+		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
+		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
+		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
+		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
+		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
 	}
-	buf[i + 7] =         // buf[7] buf[8]
-	// Ô¤Áô¿ØÖÆÖ¸Áî
-	buf[3 + length - 1] = (u8)hand.action;              // buf[9]
-	
-	// ÉèÖÃĞ£ÑéÖµ¡¢ÏûÏ¢Î²
-	buf[3 + length] = getCrc8(buf, 3 + length);  // buf[10]
-	buf[3 + length + 1] = ender[0];              // buf[11]
-	buf[3 + length + 2] = ender[1];              // buf[12]
-	
+	// buf[i + 7] = 					   // buf[7] buf[8]// é¢„ç•™æ§åˆ¶æŒ‡ä»¤
+	buf[3 + length - 1] = (u8)hand.action; // å¤¹çˆª
 
+	// è®¾ç½®æ ¡éªŒå€¼ã€æ¶ˆæ¯å°¾
+	buf[3 + length] = getCrc8(buf, 3 + length); // buf[10]
+	buf[3 + length + 1] = ender[0];				// buf[11]
+	buf[3 + length + 2] = ender[1];				// buf[12]
 
-	HAL_UART_Transmit(huart, (uint8_t*)buf, 19, 100);
-	
+	HAL_UART_Transmit(huart, (uint8_t *)buf, 19, 100);
 }
 /**************************************************************************
-º¯Êı¹¦ÄÜ£º·¢ËÍÖ¸¶¨´óĞ¡µÄ×Ö·ûÊı×é£¬±»usartSendDataº¯Êıµ÷ÓÃ
-Èë¿Ú²ÎÊı£ºÊı×éµØÖ·¡¢Êı×é´óĞ¡
-·µ»Ø  Öµ£ºÎŞ
+å‡½æ•°åŠŸèƒ½ï¼šå‘é€æŒ‡å®šå¤§å°çš„å­—ç¬¦æ•°ç»„ï¼Œè¢«usartSendDataå‡½æ•°è°ƒç”¨
+å…¥å£å‚æ•°ï¼šæ•°ç»„åœ°å€ã€æ•°ç»„å¤§å°
+è¿”å›  å€¼ï¼šæ— 
 **************************************************************************/
 
 /**************************************************************************
-º¯Êı¹¦ÄÜ£º¼ÆËã°ËÎ»Ñ­»·ÈßÓàĞ£Ñé£¬±»usartSendDataºÍusartReceiveOneDataº¯Êıµ÷ÓÃ
-Èë¿Ú²ÎÊı£ºÊı×éµØÖ·¡¢Êı×é´óĞ¡
-·µ»Ø  Öµ£ºÎŞ
+å‡½æ•°åŠŸèƒ½ï¼šè®¡ç®—å…«ä½å¾ªç¯å†—ä½™æ ¡éªŒï¼Œè¢«usartSendDataå’ŒusartReceiveOneDataå‡½æ•°è°ƒç”¨
+å…¥å£å‚æ•°ï¼šæ•°ç»„åœ°å€ã€æ•°ç»„å¤§å°
+è¿”å›  å€¼ï¼šæ— 
 **************************************************************************/
 unsigned char getCrc8(unsigned char *ptr, unsigned short len)
 {
 	unsigned char crc;
 	unsigned char i;
 	crc = 0;
-	while(len--)
+	while (len--)
 	{
 		crc ^= *ptr++;
-		for(i = 0; i < 8; i++)
+		for (i = 0; i < 8; i++)
 		{
-			if(crc&0x01)
-                crc=(crc>>1)^0x8C;
-			else 
-                crc >>= 1;
+			if (crc & 0x01)
+				crc = (crc >> 1) ^ 0x8C;
+			else
+				crc >>= 1;
 		}
 	}
 	return crc;
 }
 /**********************************END***************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -11,7 +11,10 @@
         "main.h": "c",
         "stm32f4xx.h": "c",
         "stm32f4xx_it.h": "c",
-        "motor.h": "c"
+        "motor.h": "c",
+        "oled_font.h": "c",
+        "data_cal.h": "c",
+        "package.h": "c"
     },
     //默认终端？    
     "terminal.integrated.profiles.windows": {

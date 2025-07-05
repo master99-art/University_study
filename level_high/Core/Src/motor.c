@@ -8,7 +8,7 @@ speed 	is 15 	angle/s
 change_speed 	to 33 	step/s
 
 the radio of stepper motor
-joint1 		7:1
+joint1 		54:1
 joint2		6:1
 joint3 		??
 joint4		4.5:1
@@ -69,19 +69,39 @@ void Motor_Init(void)
 	hand.action = OFF;
 	hand.limit = Unlimit;
 	hand.angle = 0;
+
+	joint1.ulimit = -3.14;
+	joint1.hlimit = 3.14;
+
+	joint2.ulimit=0;
+	joint2.hlimit=0;
+
+	joint3.ulimit=0;
+	joint3.hlimit=0;
+
+	joint4.ulimit=0;
+	joint4.hlimit=0;
+
+	joint5.ulimit=0;
+	joint5.hlimit=0;
+
+	joint6.ulimit=0;
+	joint6.hlimit=0;
+
+	
 }
 
-// ������ֻ֪�������۽Ƕ�ֵ��Ȼ������֪���������ֵ��ʱ����ֻ��Ҫ���Լ��ٱȾͿ�����
+//
 /*
-function:��������Ҫ�Ĳ��������÷���
+function:
 
 //enter paramter : angle of robotic arm and action of hand
 //rad
 */
-void motor_cal(float *tar_all_angle,int *step)
+void motor_cal(float *tar_all_angle, int *step)
 {
-	// float radio[6] = {7, 6, 0, 4.5, 6, 6};
-	float radio[6] = {1, 1, 1, 1, 1, 1};
+	float radio[6] = {54, 6, 0, 4.5, 54, 6};
+	// float radio[6] = {1, 1, 1, 1, 1, 1};
 	float tar_angle[6] = {0};
 	unsigned char end_action;
 
@@ -124,7 +144,6 @@ void motor_cal(float *tar_all_angle,int *step)
 	else
 		joint6.dir = Forward;
 
-
 	for (uint8_t i = 0; i < 6; i++)
 	{
 		step[i] = (int)(error_angle[i] * 127.3239566);
@@ -136,7 +155,6 @@ void motor_cal(float *tar_all_angle,int *step)
 	joint4.now_angle = tar_angle[3];
 	joint5.now_angle = tar_angle[4];
 	joint6.now_angle = tar_angle[5];
-
 }
 
 /*
@@ -280,12 +298,12 @@ void Motor_Dir(void)
 // 上层运动控制
 u8 Motor_Move(int *step)
 {
-	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step+0));
-	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step+1));
-	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step+2));
-	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step+3));
-	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step+4));
-	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step+5));
+	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
+	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
+	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
+	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
+	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
+	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
 	if (hand.action == ON)
 	{
 		// 打开夹爪
@@ -308,10 +326,8 @@ u8 Motor_Action(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, int Step)
 {
 	for (int i = 0; i < Step; i++)
 	{
-		HIGH(GPIOx, GPIO_Pin);
-		for_delay_us(200);
-		LOW(GPIOx, GPIO_Pin);
-		for_delay_us(200);
+		Toggle(GPIOx, GPIO_Pin);
+		for_delay_us(100);
 	}
 	return OK;
 }

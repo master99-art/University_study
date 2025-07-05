@@ -19,6 +19,8 @@ struct joint
 		Reset = 1,
 		Unreset = 0
 	} isreset;
+	float ulimit;
+	float hlimit;
 };
 
 struct hand

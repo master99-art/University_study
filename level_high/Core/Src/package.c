@@ -9,7 +9,10 @@ GPIO_PinState Read_KEY(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 }
 
 
-
+void Toggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+	HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
+}
 void HIGH(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
 	HAL_GPIO_WritePin(GPIOx,GPIO_Pin,GPIO_PIN_SET);

@@ -56,6 +56,10 @@ enum ACTION
 
 u8 Rec_Data[19] = {0};
 enum ACTION Flag = STOP;
+u8 test_data[3];
+u8 test_flag = 0;
+int count = 0;
+int tem = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,8 +67,16 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  usartReceiveOneData(Rec_Data);
-  Flag = MOVE;
+  if (huart == &huart1)
+  {
+    test_flag = 1;
+    HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
+  }
+  // Flag = MOVE;
+}
+void function(void)
+{
+  HAL_GPIO_TogglePin(joint5_GPIO_Port, joint5_Pin);
 }
 /* USER CODE END PFP */
 
@@ -110,30 +122,84 @@ int main(void)
   Motor_Init();
   /*这里是机械臂寻找复位
   ，还有oled的初始化，但是不知道为什么，这里oled初始化会出错，*/
+  // OLED_Init();  // OLED初始
+  // OLED_Clear(); // 清屏
   //  Reset_joint();
-  // OLED_Init();
-  HAL_UART_Receive_IT(&huart1, Rec_Data, 19);
+
+  // HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
+  HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
   int step[6];
 
-  float angle[7] = {0, PI * 2, 0, 0, 0, 0, 0};
+  // OLED_ShowNum(1, 1, 123456789, 9, 16, 0);
+  float angle[7] = {0, 0, 0, 0, PI * 2, 0, 0};
+
+  HAL_Delay(2000);
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     // if(Flag == MOVE)
     // {
+    // if (test_flag == 1)
+    // {
+    //   tem++;
+    //   // HAL_UART_Transmit(&huart1, test_data, 3, 0xf);
 
+    //   // OLED_ShowNum(8, 1, tem, 6, 16, 0);
+    //   test_flag = 0;
+    // }
+    // usartSendData(&huart1);
+    // HAL_Delay(500);
+    // OLED_ShowString(16, 1, test_data, sizeof(test_data), 0);
     // 	step = motor_cal(AngleSet);
     // 	Motor_Dir();
     // 	Motor_Move(step);
     // }
     // usartSendData(&huart1);
-    // HIGH(joint2_GPIO_Port, joint2_Pin);
-    motor_cal(angle, step);
-    Motor_Dir();
-    Motor_Move(step);
-    HAL_Delay(2000);
+
+    if (tem == 0)
+    {
+      for (int i = 0; i < 32000; i++)
+      {
+        function();
+        for_delay_us(100);
+      }
+      tem = 1;
+    }
+    // test step whole circle
+    //  if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
+    //  {
+    //    tem = 1;
+    //  }
+    //  if (tem == 0)
+    //  {
+    //    function();
+    //    count++;
+    //    for_delay_us(100);
+
+    // }
+
+    // //test   main
+    // if (tem == 0)
+    // {
+    //   motor_cal(angle, step);
+
+    //   Motor_Move(step);
+    //   tem++;
+    // }
+
+    // if (!tem)
+    // {
+    //   for (int i = 0; i < 800 * 54 ; i++)
+    //   {
+    //     function();
+    //     for_delay_us(50);
+    //   }
+    //   tem = 1;
+    // }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
