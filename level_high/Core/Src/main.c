@@ -167,6 +167,7 @@ int main(void)
         for_delay_us(100);
       }
       tem = 1;
+      
     }
     // test step whole circle
     //  if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
