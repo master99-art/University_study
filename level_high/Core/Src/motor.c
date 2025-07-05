@@ -89,7 +89,7 @@ void Motor_Init(void)
 	joint6.hlimit=0;
 
 
-	
+
 }
 
 //
@@ -105,6 +105,33 @@ void motor_cal(float *tar_all_angle, int *step)
 	// float radio[6] = {1, 1, 1, 1, 1, 1};
 	float tar_angle[6] = {0};
 	unsigned char end_action;
+
+	//////////限位
+	if (tar_all_angle[0] < joint1.ulimit || tar_all_angle[0] > joint1.hlimit)
+	{
+		tar_all_angle[0] = joint1.now_angle;
+	}
+	if (tar_all_angle[1] < joint2.ulimit || tar_all_angle[1] > joint2.hlimit)
+	{
+		tar_all_angle[1] = joint2.now_angle;
+	}
+	if (tar_all_angle[2] < joint3.ulimit || tar_all_angle[2] > joint3.hlimit)
+	{
+		tar_all_angle[2] = joint3.now_angle;
+	}
+	if (tar_all_angle[3] < joint4.ulimit || tar_all_angle[3] > joint4.hlimit)
+	{
+		tar_all_angle[3] = joint4.now_angle;
+	}
+	if (tar_all_angle[4] < joint5.ulimit || tar_all_angle[4] > joint5.hlimit)
+	{
+		tar_all_angle[4] = joint5.now_angle;
+	}
+	if (tar_all_angle[5] < joint6.ulimit || tar_all_angle[5] > joint6.hlimit)
+	{
+		tar_all_angle[5] = joint6.now_angle;
+	}
+	
 
 	for (uint8_t i = 0; i < 6; i++)
 	{
