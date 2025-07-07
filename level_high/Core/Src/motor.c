@@ -9,15 +9,16 @@ change_speed 	to 33 	step/s
 
 the radio of stepper motor
 joint1 		54:1
-joint2		6:1
-joint3 		??
-joint4		4.5:1
-joint5,6	6:1
+joint2		39.125:1
+joint3 		40.0625
+joint4		35.9375:1
+joint5		35.25:1
+joint6		9.625:1
 
 joint7 or hand
 */
 
-float radio[6] = {7, 6, 0, 4.5, 6, 6};
+float radio[6] = {54, 39.125, 40.0625, 35.9375, 35.25, 9.625};
 struct joint joint1, joint2, joint3, joint4, joint5, joint6;
 struct hand hand;
 
@@ -27,7 +28,7 @@ void Motor_Init(void)
 	joint1.tar_angle = 0;
 	joint1.now_angle = 0;
 	joint1.count_step = 0;
-	joint1.dir = Forward;
+	joint1.dir = Reverse;
 	joint1.isreset = Unreset;
 
 	joint2.name = 2;
@@ -41,21 +42,21 @@ void Motor_Init(void)
 	joint3.tar_angle = 0;
 	joint3.now_angle = 0;
 	joint3.count_step = 0;
-	joint3.dir = Forward;
+	joint3.dir = Reverse;
 	joint3.isreset = Unreset;
 
 	joint4.name = 4;
 	joint4.tar_angle = 0;
 	joint4.now_angle = 0;
 	joint4.count_step = 0;
-	joint4.dir = Forward;
+	joint4.dir = Reverse;
 	joint4.isreset = Unreset;
 
 	joint5.name = 5;
 	joint5.tar_angle = 0;
 	joint5.now_angle = 0;
 	joint5.count_step = 0;
-	joint5.dir = Forward;
+	joint5.dir = Reverse;
 	joint5.isreset = Unreset;
 
 	joint6.name = 6;
@@ -73,23 +74,20 @@ void Motor_Init(void)
 	joint1.ulimit = -3.14;
 	joint1.hlimit = 3.14;
 
-	joint2.ulimit=0;
-	joint2.hlimit=0;
+	joint2.ulimit = 0;
+	joint2.hlimit = 0;
 
-	joint3.ulimit=0;
-	joint3.hlimit=0;
+	joint3.ulimit = 0;
+	joint3.hlimit = 0;
 
-	joint4.ulimit=0;
-	joint4.hlimit=0;
+	joint4.ulimit = 0;
+	joint4.hlimit = 0;
 
-	joint5.ulimit=0;
-	joint5.hlimit=0;
+	joint5.ulimit = 0;
+	joint5.hlimit = 0;
 
-	joint6.ulimit=0;
-	joint6.hlimit=0;
-
-
-
+	joint6.ulimit = 0;
+	joint6.hlimit = 0;
 }
 
 //
@@ -102,7 +100,7 @@ function:
 void motor_cal(float *tar_all_angle, int *step)
 {
 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
-	// float radio[6] = {1, 1, 1, 1, 1, 1};
+
 	float tar_angle[6] = {0};
 	unsigned char end_action;
 
@@ -131,7 +129,6 @@ void motor_cal(float *tar_all_angle, int *step)
 	{
 		tar_all_angle[5] = joint6.now_angle;
 	}
-	
 
 	for (uint8_t i = 0; i < 6; i++)
 	{
@@ -209,89 +206,94 @@ u8 Reset_joint(void)
 	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
 
 	int step = 1;
+
 	while (1)
 	{
+
 		Motor_Action(joint1_GPIO_Port, joint1_Pin, step);
 		if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
-			{
-				joint1.isreset = Reset;
-				break;
-			}
+
+			joint1.isreset = Reset;
+			break;
 		}
 	}
+	joint1.dir = Forward;
+	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
+	Motor_Action(joint1_GPIO_Port, joint1_Pin, 16900);
 
 	while (1)
 	{
 		Motor_Action(joint2_GPIO_Port, joint2_Pin, step);
 		if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
-			{
-				joint2.isreset = Reset;
-				break;
-			}
+			joint2.isreset = Reset;
+			break;
 		}
 	}
+	joint2.dir = Reverse;
+	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+	Motor_Action(joint2_GPIO_Port, joint2_Pin, 3400);
+
 
 	while (1)
 	{
 		Motor_Action(joint3_GPIO_Port, joint3_Pin, step);
 		if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
-			{
-				joint3.isreset = Reset;
-				break;
-			}
+
+			joint3.isreset = Reset;
+			break;
 		}
 	}
+
+	joint3.dir = Forward;
+	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+	Motor_Action(joint3_GPIO_Port, joint3_Pin, 800);
 
 	while (1)
 	{
 		Motor_Action(joint4_GPIO_Port, joint4_Pin, step);
 		if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
-			{
-				joint4.isreset = Reset;
-				break;
-			}
+			joint4.isreset = Reset;
+			break;
 		}
 	}
+	joint4.dir = Forward;
+	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+	Motor_Action(joint4_GPIO_Port, joint4_Pin, 10275);
+
+
 
 	while (1)
 	{
 		Motor_Action(joint5_GPIO_Port, joint5_Pin, step);
 		if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
-			{
+
 				joint5.isreset = Reset;
 				break;
-			}
+
 		}
 	}
+	joint5.dir = Forward;
+	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+	Motor_Action(joint5_GPIO_Port, joint5_Pin, 2300);
 
 	while (1)
 	{
 		Motor_Action(joint6_GPIO_Port, joint6_Pin, step);
 		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
 		{
-			HAL_Delay(20);
-			if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
-			{
-				joint6.isreset = Reset;
-				break;
-			}
+			joint6.isreset = Reset;
+			break;
 		}
 	}
+	joint6.dir=Reverse;
+	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,(GPIO_PinState)joint6.dir);
+	Motor_Action(joint6_GPIO_Port, joint6_Pin, 1650);
+
 	/*
 	@this is a servo debug ,so we should know how to control the servo
 
@@ -346,7 +348,29 @@ u8 Motor_Move(int *step)
 // 底层方向函数
 u8 Dir_Set(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState Dir)
 {
-	HAL_GPIO_WritePin(GPIOx, GPIO_Pin, Dir);
+	if ((GPIOx == DIR1_GPIO_Port && GPIO_Pin == DIR1_Pin) ||
+		(GPIOx == DIR5_GPIO_Port && GPIO_Pin == DIR5_Pin) ||
+		(GPIOx == DIR6_GPIO_Port && GPIO_Pin == DIR6_Pin))
+	{
+		if (Dir == Forward)
+			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+		else if (Dir == Reverse)
+			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+	}
+	else if ((GPIOx == DIR2_GPIO_Port && GPIO_Pin == DIR2_Pin) ||
+			 (GPIOx == DIR3_GPIO_Port && GPIO_Pin == DIR3_Pin) ||
+			 (GPIOx == DIR4_GPIO_Port && GPIO_Pin == DIR4_Pin))
+	{
+		if (Dir == Forward)
+			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+		else if (Dir == Reverse)
+			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+	}
+	else
+	{
+		return ERROR; // 错误的引脚
+	}
+
 	return OK;
 }
 // 底层函数运动函数
@@ -355,7 +379,7 @@ u8 Motor_Action(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, int Step)
 	for (int i = 0; i < Step; i++)
 	{
 		Toggle(GPIOx, GPIO_Pin);
-		for_delay_us(100);
+		for_delay_us(300);
 	}
 	return OK;
 }

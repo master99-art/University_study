@@ -47,23 +47,26 @@ void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, joint5_Pin|joint6_Pin|joint2_Pin|joint3_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, joint1_Pin|LED2_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOD, joint4_Pin|DIR6_Pin|DIR5_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, joint4_Pin|DIR6_Pin|DIR5_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(joint1_GPIO_Port, joint1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, DIR1_Pin|DIR2_Pin|DIR3_Pin|DIR4_Pin
                           |LED1_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : joint5_Pin joint6_Pin joint2_Pin joint3_Pin */
   GPIO_InitStruct.Pin = joint5_Pin|joint6_Pin|joint2_Pin|joint3_Pin;
@@ -72,13 +75,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : joint1_Pin */
-  GPIO_InitStruct.Pin = joint1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
-  HAL_GPIO_Init(joint1_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pin : joint4_Pin */
   GPIO_InitStruct.Pin = joint4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -86,11 +82,26 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
   HAL_GPIO_Init(joint4_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : K_hand_Pin */
-  GPIO_InitStruct.Pin = K_hand_Pin;
+  /*Configure GPIO pins : K1_Pin K2_Pin K3_Pin K4_Pin
+                           K5_Pin PG14 */
+  GPIO_InitStruct.Pin = K1_Pin|K2_Pin|K3_Pin|K4_Pin
+                          |K5_Pin|GPIO_PIN_14;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(K_hand_GPIO_Port, &GPIO_InitStruct);
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : joint1_Pin */
+  GPIO_InitStruct.Pin = joint1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(joint1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : K_hand_Pin K6_Pin */
+  GPIO_InitStruct.Pin = K_hand_Pin|K6_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DIR6_Pin DIR5_Pin */
   GPIO_InitStruct.Pin = DIR6_Pin|DIR5_Pin;
@@ -98,20 +109,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : K6_Pin */
-  GPIO_InitStruct.Pin = K6_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(K6_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : K5_Pin K4_Pin K3_Pin K2_Pin
-                           K1_Pin PG14 */
-  GPIO_InitStruct.Pin = K5_Pin|K4_Pin|K3_Pin|K2_Pin
-                          |K1_Pin|GPIO_PIN_14;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DIR1_Pin DIR2_Pin DIR3_Pin DIR4_Pin
                            LED1_Pin */

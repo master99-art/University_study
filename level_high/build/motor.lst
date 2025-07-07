@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 1
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -39,1719 +39,2132 @@ ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 1
    9:Core/Src/motor.c **** 
   10:Core/Src/motor.c **** the radio of stepper motor
   11:Core/Src/motor.c **** joint1 		54:1
-  12:Core/Src/motor.c **** joint2		6:1
-  13:Core/Src/motor.c **** joint3 		??
-  14:Core/Src/motor.c **** joint4		4.5:1
-  15:Core/Src/motor.c **** joint5,6	6:1
-  16:Core/Src/motor.c **** 
-  17:Core/Src/motor.c **** joint7 or hand
-  18:Core/Src/motor.c **** */
-  19:Core/Src/motor.c **** 
-  20:Core/Src/motor.c **** float radio[6] = {7, 6, 0, 4.5, 6, 6};
-  21:Core/Src/motor.c **** struct joint joint1, joint2, joint3, joint4, joint5, joint6;
-  22:Core/Src/motor.c **** struct hand hand;
-  23:Core/Src/motor.c **** 
-  24:Core/Src/motor.c **** void Motor_Init(void)
-  25:Core/Src/motor.c **** {
-  29              		.loc 1 25 1 view -0
+  12:Core/Src/motor.c **** joint2		39.125:1
+  13:Core/Src/motor.c **** joint3 		40.0625
+  14:Core/Src/motor.c **** joint4		35.9375:1
+  15:Core/Src/motor.c **** joint5		35.25:1
+  16:Core/Src/motor.c **** joint6		9.625:1
+  17:Core/Src/motor.c **** 
+  18:Core/Src/motor.c **** joint7 or hand
+  19:Core/Src/motor.c **** */
+  20:Core/Src/motor.c **** 
+  21:Core/Src/motor.c **** float radio[6] = {54, 39.125, 40.0625, 35.9375, 35.25, 9.625};
+  22:Core/Src/motor.c **** struct joint joint1, joint2, joint3, joint4, joint5, joint6;
+  23:Core/Src/motor.c **** struct hand hand;
+  24:Core/Src/motor.c **** 
+  25:Core/Src/motor.c **** void Motor_Init(void)
+  26:Core/Src/motor.c **** {
+  29              		.loc 1 26 1 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              		@ link register save eliminated.
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 2
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 2
 
 
-  26:Core/Src/motor.c **** 	joint1.name = 1;
-  34              		.loc 1 26 2 view .LVU1
-  35              		.loc 1 26 14 is_stmt 0 view .LVU2
-  36 0000 2148     		ldr	r0, .L2
-  37 0002 0121     		movs	r1, #1
-  38 0004 0170     		strb	r1, [r0]
-  27:Core/Src/motor.c **** 	joint1.tar_angle = 0;
-  39              		.loc 1 27 2 is_stmt 1 view .LVU3
-  40              		.loc 1 27 19 is_stmt 0 view .LVU4
-  41 0006 0023     		movs	r3, #0
-  42 0008 4360     		str	r3, [r0, #4]	@ float
-  28:Core/Src/motor.c **** 	joint1.now_angle = 0;
-  43              		.loc 1 28 2 is_stmt 1 view .LVU5
-  44              		.loc 1 28 19 is_stmt 0 view .LVU6
-  45 000a 8360     		str	r3, [r0, #8]	@ float
-  29:Core/Src/motor.c **** 	joint1.count_step = 0;
-  46              		.loc 1 29 2 is_stmt 1 view .LVU7
-  47              		.loc 1 29 20 is_stmt 0 view .LVU8
-  48 000c C360     		str	r3, [r0, #12]	@ float
-  30:Core/Src/motor.c **** 	joint1.dir = Forward;
-  49              		.loc 1 30 2 is_stmt 1 view .LVU9
-  50              		.loc 1 30 13 is_stmt 0 view .LVU10
-  51 000e 0174     		strb	r1, [r0, #16]
-  31:Core/Src/motor.c **** 	joint1.isreset = Unreset;
-  52              		.loc 1 31 2 is_stmt 1 view .LVU11
-  53              		.loc 1 31 17 is_stmt 0 view .LVU12
-  54 0010 0022     		movs	r2, #0
-  55 0012 4274     		strb	r2, [r0, #17]
-  32:Core/Src/motor.c **** 
-  33:Core/Src/motor.c **** 	joint2.name = 2;
-  56              		.loc 1 33 2 is_stmt 1 view .LVU13
-  57              		.loc 1 33 14 is_stmt 0 view .LVU14
-  58 0014 1D48     		ldr	r0, .L2+4
-  59 0016 4FF0020C 		mov	ip, #2
-  60 001a 80F800C0 		strb	ip, [r0]
-  34:Core/Src/motor.c **** 	joint2.tar_angle = 0;
-  61              		.loc 1 34 2 is_stmt 1 view .LVU15
-  62              		.loc 1 34 19 is_stmt 0 view .LVU16
-  63 001e 4360     		str	r3, [r0, #4]	@ float
-  35:Core/Src/motor.c **** 	joint2.now_angle = 0;
-  64              		.loc 1 35 2 is_stmt 1 view .LVU17
-  65              		.loc 1 35 19 is_stmt 0 view .LVU18
-  66 0020 8360     		str	r3, [r0, #8]	@ float
-  36:Core/Src/motor.c **** 	joint2.count_step = 0;
-  67              		.loc 1 36 2 is_stmt 1 view .LVU19
-  68              		.loc 1 36 20 is_stmt 0 view .LVU20
-  69 0022 C360     		str	r3, [r0, #12]	@ float
-  37:Core/Src/motor.c **** 	joint2.dir = Forward;
-  70              		.loc 1 37 2 is_stmt 1 view .LVU21
-  71              		.loc 1 37 13 is_stmt 0 view .LVU22
-  72 0024 0174     		strb	r1, [r0, #16]
-  38:Core/Src/motor.c **** 	joint2.isreset = Unreset;
-  73              		.loc 1 38 2 is_stmt 1 view .LVU23
-  74              		.loc 1 38 17 is_stmt 0 view .LVU24
-  75 0026 4274     		strb	r2, [r0, #17]
-  39:Core/Src/motor.c **** 
-  40:Core/Src/motor.c **** 	joint3.name = 3;
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 3
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  27:Core/Src/motor.c **** 	joint1.name = 1;
+  41              		.loc 1 27 2 view .LVU1
+  42              		.loc 1 27 14 is_stmt 0 view .LVU2
+  43 0002 294F     		ldr	r7, .L3
+  44 0004 4FF0010C 		mov	ip, #1
+  45 0008 87F800C0 		strb	ip, [r7]
+  28:Core/Src/motor.c **** 	joint1.tar_angle = 0;
+  46              		.loc 1 28 2 is_stmt 1 view .LVU3
+  47              		.loc 1 28 19 is_stmt 0 view .LVU4
+  48 000c 0023     		movs	r3, #0
+  49 000e 7B60     		str	r3, [r7, #4]	@ float
+  29:Core/Src/motor.c **** 	joint1.now_angle = 0;
+  50              		.loc 1 29 2 is_stmt 1 view .LVU5
+  51              		.loc 1 29 19 is_stmt 0 view .LVU6
+  52 0010 BB60     		str	r3, [r7, #8]	@ float
+  30:Core/Src/motor.c **** 	joint1.count_step = 0;
+  53              		.loc 1 30 2 is_stmt 1 view .LVU7
+  54              		.loc 1 30 20 is_stmt 0 view .LVU8
+  55 0012 FB60     		str	r3, [r7, #12]	@ float
+  31:Core/Src/motor.c **** 	joint1.dir = Reverse;
+  56              		.loc 1 31 2 is_stmt 1 view .LVU9
+  57              		.loc 1 31 13 is_stmt 0 view .LVU10
+  58 0014 0022     		movs	r2, #0
+  59 0016 3A74     		strb	r2, [r7, #16]
+  32:Core/Src/motor.c **** 	joint1.isreset = Unreset;
+  60              		.loc 1 32 2 is_stmt 1 view .LVU11
+  61              		.loc 1 32 17 is_stmt 0 view .LVU12
+  62 0018 7A74     		strb	r2, [r7, #17]
+  33:Core/Src/motor.c **** 
+  34:Core/Src/motor.c **** 	joint2.name = 2;
+  63              		.loc 1 34 2 is_stmt 1 view .LVU13
+  64              		.loc 1 34 14 is_stmt 0 view .LVU14
+  65 001a 244E     		ldr	r6, .L3+4
+  66 001c 0221     		movs	r1, #2
+  67 001e 3170     		strb	r1, [r6]
+  35:Core/Src/motor.c **** 	joint2.tar_angle = 0;
+  68              		.loc 1 35 2 is_stmt 1 view .LVU15
+  69              		.loc 1 35 19 is_stmt 0 view .LVU16
+  70 0020 7360     		str	r3, [r6, #4]	@ float
+  36:Core/Src/motor.c **** 	joint2.now_angle = 0;
+  71              		.loc 1 36 2 is_stmt 1 view .LVU17
+  72              		.loc 1 36 19 is_stmt 0 view .LVU18
+  73 0022 B360     		str	r3, [r6, #8]	@ float
+  37:Core/Src/motor.c **** 	joint2.count_step = 0;
+  74              		.loc 1 37 2 is_stmt 1 view .LVU19
+  75              		.loc 1 37 20 is_stmt 0 view .LVU20
+  76 0024 F360     		str	r3, [r6, #12]	@ float
+  38:Core/Src/motor.c **** 	joint2.dir = Forward;
+  77              		.loc 1 38 2 is_stmt 1 view .LVU21
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 3
 
 
-  76              		.loc 1 40 2 is_stmt 1 view .LVU25
-  77              		.loc 1 40 14 is_stmt 0 view .LVU26
-  78 0028 1948     		ldr	r0, .L2+8
-  79 002a 4FF0030C 		mov	ip, #3
-  80 002e 80F800C0 		strb	ip, [r0]
-  41:Core/Src/motor.c **** 	joint3.tar_angle = 0;
-  81              		.loc 1 41 2 is_stmt 1 view .LVU27
-  82              		.loc 1 41 19 is_stmt 0 view .LVU28
-  83 0032 4360     		str	r3, [r0, #4]	@ float
-  42:Core/Src/motor.c **** 	joint3.now_angle = 0;
-  84              		.loc 1 42 2 is_stmt 1 view .LVU29
-  85              		.loc 1 42 19 is_stmt 0 view .LVU30
-  86 0034 8360     		str	r3, [r0, #8]	@ float
-  43:Core/Src/motor.c **** 	joint3.count_step = 0;
-  87              		.loc 1 43 2 is_stmt 1 view .LVU31
-  88              		.loc 1 43 20 is_stmt 0 view .LVU32
-  89 0036 C360     		str	r3, [r0, #12]	@ float
-  44:Core/Src/motor.c **** 	joint3.dir = Forward;
-  90              		.loc 1 44 2 is_stmt 1 view .LVU33
-  91              		.loc 1 44 13 is_stmt 0 view .LVU34
-  92 0038 0174     		strb	r1, [r0, #16]
-  45:Core/Src/motor.c **** 	joint3.isreset = Unreset;
-  93              		.loc 1 45 2 is_stmt 1 view .LVU35
-  94              		.loc 1 45 17 is_stmt 0 view .LVU36
-  95 003a 4274     		strb	r2, [r0, #17]
-  46:Core/Src/motor.c **** 
-  47:Core/Src/motor.c **** 	joint4.name = 4;
-  96              		.loc 1 47 2 is_stmt 1 view .LVU37
-  97              		.loc 1 47 14 is_stmt 0 view .LVU38
-  98 003c 1548     		ldr	r0, .L2+12
-  99 003e 4FF0040C 		mov	ip, #4
- 100 0042 80F800C0 		strb	ip, [r0]
-  48:Core/Src/motor.c **** 	joint4.tar_angle = 0;
- 101              		.loc 1 48 2 is_stmt 1 view .LVU39
- 102              		.loc 1 48 19 is_stmt 0 view .LVU40
- 103 0046 4360     		str	r3, [r0, #4]	@ float
-  49:Core/Src/motor.c **** 	joint4.now_angle = 0;
- 104              		.loc 1 49 2 is_stmt 1 view .LVU41
- 105              		.loc 1 49 19 is_stmt 0 view .LVU42
- 106 0048 8360     		str	r3, [r0, #8]	@ float
-  50:Core/Src/motor.c **** 	joint4.count_step = 0;
- 107              		.loc 1 50 2 is_stmt 1 view .LVU43
- 108              		.loc 1 50 20 is_stmt 0 view .LVU44
- 109 004a C360     		str	r3, [r0, #12]	@ float
-  51:Core/Src/motor.c **** 	joint4.dir = Forward;
- 110              		.loc 1 51 2 is_stmt 1 view .LVU45
- 111              		.loc 1 51 13 is_stmt 0 view .LVU46
- 112 004c 0174     		strb	r1, [r0, #16]
-  52:Core/Src/motor.c **** 	joint4.isreset = Unreset;
- 113              		.loc 1 52 2 is_stmt 1 view .LVU47
- 114              		.loc 1 52 17 is_stmt 0 view .LVU48
- 115 004e 4274     		strb	r2, [r0, #17]
-  53:Core/Src/motor.c **** 
-  54:Core/Src/motor.c **** 	joint5.name = 5;
- 116              		.loc 1 54 2 is_stmt 1 view .LVU49
- 117              		.loc 1 54 14 is_stmt 0 view .LVU50
- 118 0050 1148     		ldr	r0, .L2+16
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 4
+  78              		.loc 1 38 13 is_stmt 0 view .LVU22
+  79 0026 86F810C0 		strb	ip, [r6, #16]
+  39:Core/Src/motor.c **** 	joint2.isreset = Unreset;
+  80              		.loc 1 39 2 is_stmt 1 view .LVU23
+  81              		.loc 1 39 17 is_stmt 0 view .LVU24
+  82 002a 7274     		strb	r2, [r6, #17]
+  40:Core/Src/motor.c **** 
+  41:Core/Src/motor.c **** 	joint3.name = 3;
+  83              		.loc 1 41 2 is_stmt 1 view .LVU25
+  84              		.loc 1 41 14 is_stmt 0 view .LVU26
+  85 002c 204D     		ldr	r5, .L3+8
+  86 002e 0321     		movs	r1, #3
+  87 0030 2970     		strb	r1, [r5]
+  42:Core/Src/motor.c **** 	joint3.tar_angle = 0;
+  88              		.loc 1 42 2 is_stmt 1 view .LVU27
+  89              		.loc 1 42 19 is_stmt 0 view .LVU28
+  90 0032 6B60     		str	r3, [r5, #4]	@ float
+  43:Core/Src/motor.c **** 	joint3.now_angle = 0;
+  91              		.loc 1 43 2 is_stmt 1 view .LVU29
+  92              		.loc 1 43 19 is_stmt 0 view .LVU30
+  93 0034 AB60     		str	r3, [r5, #8]	@ float
+  44:Core/Src/motor.c **** 	joint3.count_step = 0;
+  94              		.loc 1 44 2 is_stmt 1 view .LVU31
+  95              		.loc 1 44 20 is_stmt 0 view .LVU32
+  96 0036 EB60     		str	r3, [r5, #12]	@ float
+  45:Core/Src/motor.c **** 	joint3.dir = Reverse;
+  97              		.loc 1 45 2 is_stmt 1 view .LVU33
+  98              		.loc 1 45 13 is_stmt 0 view .LVU34
+  99 0038 2A74     		strb	r2, [r5, #16]
+  46:Core/Src/motor.c **** 	joint3.isreset = Unreset;
+ 100              		.loc 1 46 2 is_stmt 1 view .LVU35
+ 101              		.loc 1 46 17 is_stmt 0 view .LVU36
+ 102 003a 6A74     		strb	r2, [r5, #17]
+  47:Core/Src/motor.c **** 
+  48:Core/Src/motor.c **** 	joint4.name = 4;
+ 103              		.loc 1 48 2 is_stmt 1 view .LVU37
+ 104              		.loc 1 48 14 is_stmt 0 view .LVU38
+ 105 003c 1D4C     		ldr	r4, .L3+12
+ 106 003e 0421     		movs	r1, #4
+ 107 0040 2170     		strb	r1, [r4]
+  49:Core/Src/motor.c **** 	joint4.tar_angle = 0;
+ 108              		.loc 1 49 2 is_stmt 1 view .LVU39
+ 109              		.loc 1 49 19 is_stmt 0 view .LVU40
+ 110 0042 6360     		str	r3, [r4, #4]	@ float
+  50:Core/Src/motor.c **** 	joint4.now_angle = 0;
+ 111              		.loc 1 50 2 is_stmt 1 view .LVU41
+ 112              		.loc 1 50 19 is_stmt 0 view .LVU42
+ 113 0044 A360     		str	r3, [r4, #8]	@ float
+  51:Core/Src/motor.c **** 	joint4.count_step = 0;
+ 114              		.loc 1 51 2 is_stmt 1 view .LVU43
+ 115              		.loc 1 51 20 is_stmt 0 view .LVU44
+ 116 0046 E360     		str	r3, [r4, #12]	@ float
+  52:Core/Src/motor.c **** 	joint4.dir = Reverse;
+ 117              		.loc 1 52 2 is_stmt 1 view .LVU45
+ 118              		.loc 1 52 13 is_stmt 0 view .LVU46
+ 119 0048 2274     		strb	r2, [r4, #16]
+  53:Core/Src/motor.c **** 	joint4.isreset = Unreset;
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 4
 
 
- 119 0052 4FF0050C 		mov	ip, #5
- 120 0056 80F800C0 		strb	ip, [r0]
-  55:Core/Src/motor.c **** 	joint5.tar_angle = 0;
- 121              		.loc 1 55 2 is_stmt 1 view .LVU51
- 122              		.loc 1 55 19 is_stmt 0 view .LVU52
- 123 005a 4360     		str	r3, [r0, #4]	@ float
-  56:Core/Src/motor.c **** 	joint5.now_angle = 0;
- 124              		.loc 1 56 2 is_stmt 1 view .LVU53
- 125              		.loc 1 56 19 is_stmt 0 view .LVU54
- 126 005c 8360     		str	r3, [r0, #8]	@ float
-  57:Core/Src/motor.c **** 	joint5.count_step = 0;
- 127              		.loc 1 57 2 is_stmt 1 view .LVU55
- 128              		.loc 1 57 20 is_stmt 0 view .LVU56
- 129 005e C360     		str	r3, [r0, #12]	@ float
-  58:Core/Src/motor.c **** 	joint5.dir = Forward;
- 130              		.loc 1 58 2 is_stmt 1 view .LVU57
- 131              		.loc 1 58 13 is_stmt 0 view .LVU58
- 132 0060 0174     		strb	r1, [r0, #16]
-  59:Core/Src/motor.c **** 	joint5.isreset = Unreset;
- 133              		.loc 1 59 2 is_stmt 1 view .LVU59
- 134              		.loc 1 59 17 is_stmt 0 view .LVU60
- 135 0062 4274     		strb	r2, [r0, #17]
-  60:Core/Src/motor.c **** 
-  61:Core/Src/motor.c **** 	joint6.name = 6;
- 136              		.loc 1 61 2 is_stmt 1 view .LVU61
- 137              		.loc 1 61 14 is_stmt 0 view .LVU62
- 138 0064 0D48     		ldr	r0, .L2+20
- 139 0066 4FF0060C 		mov	ip, #6
- 140 006a 80F800C0 		strb	ip, [r0]
-  62:Core/Src/motor.c **** 	joint6.tar_angle = 0;
- 141              		.loc 1 62 2 is_stmt 1 view .LVU63
- 142              		.loc 1 62 19 is_stmt 0 view .LVU64
- 143 006e 4360     		str	r3, [r0, #4]	@ float
-  63:Core/Src/motor.c **** 	joint6.now_angle = 0;
- 144              		.loc 1 63 2 is_stmt 1 view .LVU65
- 145              		.loc 1 63 19 is_stmt 0 view .LVU66
- 146 0070 8360     		str	r3, [r0, #8]	@ float
-  64:Core/Src/motor.c **** 	joint6.count_step = 0;
- 147              		.loc 1 64 2 is_stmt 1 view .LVU67
- 148              		.loc 1 64 20 is_stmt 0 view .LVU68
- 149 0072 C360     		str	r3, [r0, #12]	@ float
-  65:Core/Src/motor.c **** 	joint6.dir = Forward;
- 150              		.loc 1 65 2 is_stmt 1 view .LVU69
- 151              		.loc 1 65 13 is_stmt 0 view .LVU70
- 152 0074 0174     		strb	r1, [r0, #16]
-  66:Core/Src/motor.c **** 	joint6.isreset = Unreset;
- 153              		.loc 1 66 2 is_stmt 1 view .LVU71
- 154              		.loc 1 66 17 is_stmt 0 view .LVU72
- 155 0076 4274     		strb	r2, [r0, #17]
-  67:Core/Src/motor.c **** 
-  68:Core/Src/motor.c **** 	hand.name = 7;
- 156              		.loc 1 68 2 is_stmt 1 view .LVU73
- 157              		.loc 1 68 12 is_stmt 0 view .LVU74
- 158 0078 0949     		ldr	r1, .L2+24
- 159 007a 0720     		movs	r0, #7
- 160 007c 0870     		strb	r0, [r1]
-  69:Core/Src/motor.c **** 	hand.action = OFF;
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 5
+ 120              		.loc 1 53 2 is_stmt 1 view .LVU47
+ 121              		.loc 1 53 17 is_stmt 0 view .LVU48
+ 122 004a 6274     		strb	r2, [r4, #17]
+  54:Core/Src/motor.c **** 
+  55:Core/Src/motor.c **** 	joint5.name = 5;
+ 123              		.loc 1 55 2 is_stmt 1 view .LVU49
+ 124              		.loc 1 55 14 is_stmt 0 view .LVU50
+ 125 004c 1A48     		ldr	r0, .L3+16
+ 126 004e 0521     		movs	r1, #5
+ 127 0050 0170     		strb	r1, [r0]
+  56:Core/Src/motor.c **** 	joint5.tar_angle = 0;
+ 128              		.loc 1 56 2 is_stmt 1 view .LVU51
+ 129              		.loc 1 56 19 is_stmt 0 view .LVU52
+ 130 0052 4360     		str	r3, [r0, #4]	@ float
+  57:Core/Src/motor.c **** 	joint5.now_angle = 0;
+ 131              		.loc 1 57 2 is_stmt 1 view .LVU53
+ 132              		.loc 1 57 19 is_stmt 0 view .LVU54
+ 133 0054 8360     		str	r3, [r0, #8]	@ float
+  58:Core/Src/motor.c **** 	joint5.count_step = 0;
+ 134              		.loc 1 58 2 is_stmt 1 view .LVU55
+ 135              		.loc 1 58 20 is_stmt 0 view .LVU56
+ 136 0056 C360     		str	r3, [r0, #12]	@ float
+  59:Core/Src/motor.c **** 	joint5.dir = Reverse;
+ 137              		.loc 1 59 2 is_stmt 1 view .LVU57
+ 138              		.loc 1 59 13 is_stmt 0 view .LVU58
+ 139 0058 0274     		strb	r2, [r0, #16]
+  60:Core/Src/motor.c **** 	joint5.isreset = Unreset;
+ 140              		.loc 1 60 2 is_stmt 1 view .LVU59
+ 141              		.loc 1 60 17 is_stmt 0 view .LVU60
+ 142 005a 4274     		strb	r2, [r0, #17]
+  61:Core/Src/motor.c **** 
+  62:Core/Src/motor.c **** 	joint6.name = 6;
+ 143              		.loc 1 62 2 is_stmt 1 view .LVU61
+ 144              		.loc 1 62 14 is_stmt 0 view .LVU62
+ 145 005c 1749     		ldr	r1, .L3+20
+ 146 005e 4FF0060E 		mov	lr, #6
+ 147 0062 81F800E0 		strb	lr, [r1]
+  63:Core/Src/motor.c **** 	joint6.tar_angle = 0;
+ 148              		.loc 1 63 2 is_stmt 1 view .LVU63
+ 149              		.loc 1 63 19 is_stmt 0 view .LVU64
+ 150 0066 4B60     		str	r3, [r1, #4]	@ float
+  64:Core/Src/motor.c **** 	joint6.now_angle = 0;
+ 151              		.loc 1 64 2 is_stmt 1 view .LVU65
+ 152              		.loc 1 64 19 is_stmt 0 view .LVU66
+ 153 0068 8B60     		str	r3, [r1, #8]	@ float
+  65:Core/Src/motor.c **** 	joint6.count_step = 0;
+ 154              		.loc 1 65 2 is_stmt 1 view .LVU67
+ 155              		.loc 1 65 20 is_stmt 0 view .LVU68
+ 156 006a CB60     		str	r3, [r1, #12]	@ float
+  66:Core/Src/motor.c **** 	joint6.dir = Forward;
+ 157              		.loc 1 66 2 is_stmt 1 view .LVU69
+ 158              		.loc 1 66 13 is_stmt 0 view .LVU70
+ 159 006c 81F810C0 		strb	ip, [r1, #16]
+  67:Core/Src/motor.c **** 	joint6.isreset = Unreset;
+ 160              		.loc 1 67 2 is_stmt 1 view .LVU71
+ 161              		.loc 1 67 17 is_stmt 0 view .LVU72
+ 162 0070 4A74     		strb	r2, [r1, #17]
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 5
 
 
- 161              		.loc 1 69 2 is_stmt 1 view .LVU75
- 162              		.loc 1 69 14 is_stmt 0 view .LVU76
- 163 007e 4A70     		strb	r2, [r1, #1]
-  70:Core/Src/motor.c **** 	hand.limit = Unlimit;
- 164              		.loc 1 70 2 is_stmt 1 view .LVU77
- 165              		.loc 1 70 13 is_stmt 0 view .LVU78
- 166 0080 8A70     		strb	r2, [r1, #2]
-  71:Core/Src/motor.c **** 	hand.angle = 0;
- 167              		.loc 1 71 2 is_stmt 1 view .LVU79
- 168              		.loc 1 71 13 is_stmt 0 view .LVU80
- 169 0082 4B60     		str	r3, [r1, #4]	@ float
-  72:Core/Src/motor.c **** }
- 170              		.loc 1 72 1 view .LVU81
- 171 0084 7047     		bx	lr
- 172              	.L3:
- 173 0086 00BF     		.align	2
- 174              	.L2:
- 175 0088 00000000 		.word	joint1
- 176 008c 00000000 		.word	joint2
- 177 0090 00000000 		.word	joint3
- 178 0094 00000000 		.word	joint4
- 179 0098 00000000 		.word	joint5
- 180 009c 00000000 		.word	joint6
- 181 00a0 00000000 		.word	hand
- 182              		.cfi_endproc
- 183              	.LFE134:
- 185              		.global	__aeabi_f2d
- 186              		.global	__aeabi_dmul
- 187              		.global	__aeabi_d2iz
- 188              		.section	.text.motor_cal,"ax",%progbits
- 189              		.align	1
- 190              		.global	motor_cal
- 191              		.syntax unified
- 192              		.thumb
- 193              		.thumb_func
- 195              	motor_cal:
- 196              	.LVL0:
- 197              	.LFB135:
+  68:Core/Src/motor.c **** 
+  69:Core/Src/motor.c **** 	hand.name = 7;
+ 163              		.loc 1 69 2 is_stmt 1 view .LVU73
+ 164              		.loc 1 69 12 is_stmt 0 view .LVU74
+ 165 0072 DFF854C0 		ldr	ip, .L3+32
+ 166 0076 4FF0070E 		mov	lr, #7
+ 167 007a 8CF800E0 		strb	lr, [ip]
+  70:Core/Src/motor.c **** 	hand.action = OFF;
+ 168              		.loc 1 70 2 is_stmt 1 view .LVU75
+ 169              		.loc 1 70 14 is_stmt 0 view .LVU76
+ 170 007e 8CF80120 		strb	r2, [ip, #1]
+  71:Core/Src/motor.c **** 	hand.limit = Unlimit;
+ 171              		.loc 1 71 2 is_stmt 1 view .LVU77
+ 172              		.loc 1 71 13 is_stmt 0 view .LVU78
+ 173 0082 8CF80220 		strb	r2, [ip, #2]
+  72:Core/Src/motor.c **** 	hand.angle = 0;
+ 174              		.loc 1 72 2 is_stmt 1 view .LVU79
+ 175              		.loc 1 72 13 is_stmt 0 view .LVU80
+ 176 0086 CCF80430 		str	r3, [ip, #4]	@ float
   73:Core/Src/motor.c **** 
-  74:Core/Src/motor.c **** //
-  75:Core/Src/motor.c **** /*
-  76:Core/Src/motor.c **** function:
-  77:Core/Src/motor.c **** 
-  78:Core/Src/motor.c **** //enter paramter : angle of robotic arm and action of hand
-  79:Core/Src/motor.c **** //rad
-  80:Core/Src/motor.c **** */
-  81:Core/Src/motor.c **** void motor_cal(float *tar_all_angle, int *step)
-  82:Core/Src/motor.c **** {
- 198              		.loc 1 82 1 is_stmt 1 view -0
- 199              		.cfi_startproc
- 200              		@ args = 0, pretend = 0, frame = 80
- 201              		@ frame_needed = 0, uses_anonymous_args = 0
- 202              		.loc 1 82 1 is_stmt 0 view .LVU83
- 203 0000 70B5     		push	{r4, r5, r6, lr}
- 204              	.LCFI0:
- 205              		.cfi_def_cfa_offset 16
- 206              		.cfi_offset 4, -16
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 6
+  74:Core/Src/motor.c **** 	joint1.ulimit = -3.14;
+ 177              		.loc 1 74 2 is_stmt 1 view .LVU81
+ 178              		.loc 1 74 16 is_stmt 0 view .LVU82
+ 179 008a 0D4A     		ldr	r2, .L3+24
+ 180 008c 7A61     		str	r2, [r7, #20]	@ float
+  75:Core/Src/motor.c **** 	joint1.hlimit = 3.14;
+ 181              		.loc 1 75 2 is_stmt 1 view .LVU83
+ 182              		.loc 1 75 16 is_stmt 0 view .LVU84
+ 183 008e 0D4A     		ldr	r2, .L3+28
+ 184 0090 BA61     		str	r2, [r7, #24]	@ float
+  76:Core/Src/motor.c **** 
+  77:Core/Src/motor.c **** 	joint2.ulimit = 0;
+ 185              		.loc 1 77 2 is_stmt 1 view .LVU85
+ 186              		.loc 1 77 16 is_stmt 0 view .LVU86
+ 187 0092 7361     		str	r3, [r6, #20]	@ float
+  78:Core/Src/motor.c **** 	joint2.hlimit = 0;
+ 188              		.loc 1 78 2 is_stmt 1 view .LVU87
+ 189              		.loc 1 78 16 is_stmt 0 view .LVU88
+ 190 0094 B361     		str	r3, [r6, #24]	@ float
+  79:Core/Src/motor.c **** 
+  80:Core/Src/motor.c **** 	joint3.ulimit = 0;
+ 191              		.loc 1 80 2 is_stmt 1 view .LVU89
+ 192              		.loc 1 80 16 is_stmt 0 view .LVU90
+ 193 0096 6B61     		str	r3, [r5, #20]	@ float
+  81:Core/Src/motor.c **** 	joint3.hlimit = 0;
+ 194              		.loc 1 81 2 is_stmt 1 view .LVU91
+ 195              		.loc 1 81 16 is_stmt 0 view .LVU92
+ 196 0098 AB61     		str	r3, [r5, #24]	@ float
+  82:Core/Src/motor.c **** 
+  83:Core/Src/motor.c **** 	joint4.ulimit = 0;
+ 197              		.loc 1 83 2 is_stmt 1 view .LVU93
+ 198              		.loc 1 83 16 is_stmt 0 view .LVU94
+ 199 009a 6361     		str	r3, [r4, #20]	@ float
+  84:Core/Src/motor.c **** 	joint4.hlimit = 0;
+ 200              		.loc 1 84 2 is_stmt 1 view .LVU95
+ 201              		.loc 1 84 16 is_stmt 0 view .LVU96
+ 202 009c A361     		str	r3, [r4, #24]	@ float
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 6
 
 
- 207              		.cfi_offset 5, -12
- 208              		.cfi_offset 6, -8
- 209              		.cfi_offset 14, -4
- 210 0002 2DED068B 		vpush.64	{d8, d9, d10}
- 211              	.LCFI1:
- 212              		.cfi_def_cfa_offset 40
- 213              		.cfi_offset 80, -40
- 214              		.cfi_offset 81, -36
- 215              		.cfi_offset 82, -32
- 216              		.cfi_offset 83, -28
- 217              		.cfi_offset 84, -24
- 218              		.cfi_offset 85, -20
- 219 0006 94B0     		sub	sp, sp, #80
- 220              	.LCFI2:
- 221              		.cfi_def_cfa_offset 120
- 222 0008 0446     		mov	r4, r0
- 223 000a 0D46     		mov	r5, r1
-  83:Core/Src/motor.c **** 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
- 224              		.loc 1 83 2 is_stmt 1 view .LVU84
- 225              		.loc 1 83 8 is_stmt 0 view .LVU85
- 226 000c 0DF1380C 		add	ip, sp, #56
- 227 0010 6F4E     		ldr	r6, .L46+8
- 228 0012 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
- 229              	.LVL1:
- 230              		.loc 1 83 8 view .LVU86
- 231 0014 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
- 232 0018 96E80300 		ldm	r6, {r0, r1}
- 233 001c 8CE80300 		stm	ip, {r0, r1}
-  84:Core/Src/motor.c **** 	// float radio[6] = {1, 1, 1, 1, 1, 1};
-  85:Core/Src/motor.c **** 	float tar_angle[6] = {0};
- 234              		.loc 1 85 2 is_stmt 1 view .LVU87
- 235              		.loc 1 85 8 is_stmt 0 view .LVU88
- 236 0020 0023     		movs	r3, #0
- 237 0022 0893     		str	r3, [sp, #32]
- 238 0024 0993     		str	r3, [sp, #36]
- 239 0026 0A93     		str	r3, [sp, #40]
- 240 0028 0B93     		str	r3, [sp, #44]
- 241 002a 0C93     		str	r3, [sp, #48]
- 242 002c 0D93     		str	r3, [sp, #52]
-  86:Core/Src/motor.c **** 	unsigned char end_action;
- 243              		.loc 1 86 2 is_stmt 1 view .LVU89
-  87:Core/Src/motor.c **** 
-  88:Core/Src/motor.c **** 	for (uint8_t i = 0; i < 6; i++)
- 244              		.loc 1 88 2 view .LVU90
- 245              	.LBB2:
- 246              		.loc 1 88 7 view .LVU91
- 247              	.LVL2:
- 248              		.loc 1 88 2 is_stmt 0 view .LVU92
- 249 002e 0EE0     		b	.L5
- 250              	.LVL3:
- 251              	.L6:
-  89:Core/Src/motor.c **** 	{
-  90:Core/Src/motor.c **** 		// is angle before radio ,is the factly angle of stepper motor
-  91:Core/Src/motor.c **** 		tar_angle[i] = tar_all_angle[i] * radio[i];
- 252              		.loc 1 91 3 is_stmt 1 view .LVU93
- 253              		.loc 1 91 31 is_stmt 0 view .LVU94
- 254 0030 04EB8302 		add	r2, r4, r3, lsl #2
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 7
+  85:Core/Src/motor.c **** 
+  86:Core/Src/motor.c **** 	joint5.ulimit = 0;
+ 203              		.loc 1 86 2 is_stmt 1 view .LVU97
+ 204              		.loc 1 86 16 is_stmt 0 view .LVU98
+ 205 009e 4361     		str	r3, [r0, #20]	@ float
+  87:Core/Src/motor.c **** 	joint5.hlimit = 0;
+ 206              		.loc 1 87 2 is_stmt 1 view .LVU99
+ 207              		.loc 1 87 16 is_stmt 0 view .LVU100
+ 208 00a0 8361     		str	r3, [r0, #24]	@ float
+  88:Core/Src/motor.c **** 
+  89:Core/Src/motor.c **** 	joint6.ulimit = 0;
+ 209              		.loc 1 89 2 is_stmt 1 view .LVU101
+ 210              		.loc 1 89 16 is_stmt 0 view .LVU102
+ 211 00a2 4B61     		str	r3, [r1, #20]	@ float
+  90:Core/Src/motor.c **** 	joint6.hlimit = 0;
+ 212              		.loc 1 90 2 is_stmt 1 view .LVU103
+ 213              		.loc 1 90 16 is_stmt 0 view .LVU104
+ 214 00a4 8B61     		str	r3, [r1, #24]	@ float
+  91:Core/Src/motor.c **** }
+ 215              		.loc 1 91 1 view .LVU105
+ 216 00a6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 217              	.L4:
+ 218              		.align	2
+ 219              	.L3:
+ 220 00a8 00000000 		.word	joint1
+ 221 00ac 00000000 		.word	joint2
+ 222 00b0 00000000 		.word	joint3
+ 223 00b4 00000000 		.word	joint4
+ 224 00b8 00000000 		.word	joint5
+ 225 00bc 00000000 		.word	joint6
+ 226 00c0 C3F548C0 		.word	-1068960317
+ 227 00c4 C3F54840 		.word	1078523331
+ 228 00c8 00000000 		.word	hand
+ 229              		.cfi_endproc
+ 230              	.LFE134:
+ 232              		.global	__aeabi_f2d
+ 233              		.global	__aeabi_dmul
+ 234              		.global	__aeabi_d2iz
+ 235              		.section	.text.motor_cal,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	motor_cal
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	motor_cal:
+ 243              	.LVL0:
+ 244              	.LFB135:
+  92:Core/Src/motor.c **** 
+  93:Core/Src/motor.c **** //
+  94:Core/Src/motor.c **** /*
+  95:Core/Src/motor.c **** function:
+  96:Core/Src/motor.c **** 
+  97:Core/Src/motor.c **** //enter paramter : angle of robotic arm and action of hand
+  98:Core/Src/motor.c **** //rad
+  99:Core/Src/motor.c **** */
+ 100:Core/Src/motor.c **** void motor_cal(float *tar_all_angle, int *step)
+ 101:Core/Src/motor.c **** {
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 7
 
 
- 255 0034 D2ED007A 		vldr.32	s15, [r2]
- 256              		.loc 1 91 42 view .LVU95
- 257 0038 14AA     		add	r2, sp, #80
- 258 003a 02EB8302 		add	r2, r2, r3, lsl #2
- 259 003e 12ED067A 		vldr.32	s14, [r2, #-24]
- 260              		.loc 1 91 35 view .LVU96
- 261 0042 67EE877A 		vmul.f32	s15, s15, s14
- 262              		.loc 1 91 16 view .LVU97
- 263 0046 42ED0C7A 		vstr.32	s15, [r2, #-48]
-  88:Core/Src/motor.c **** 	{
- 264              		.loc 1 88 30 is_stmt 1 discriminator 3 view .LVU98
- 265 004a 0133     		adds	r3, r3, #1
- 266              	.LVL4:
-  88:Core/Src/motor.c **** 	{
- 267              		.loc 1 88 30 is_stmt 0 discriminator 3 view .LVU99
- 268 004c DBB2     		uxtb	r3, r3
- 269              	.LVL5:
- 270              	.L5:
-  88:Core/Src/motor.c **** 	{
- 271              		.loc 1 88 24 is_stmt 1 discriminator 1 view .LVU100
- 272 004e 052B     		cmp	r3, #5
- 273 0050 EED9     		bls	.L6
- 274              	.LBE2:
-  92:Core/Src/motor.c **** 	}
-  93:Core/Src/motor.c **** 	end_action = (uint8_t)tar_all_angle[6];
- 275              		.loc 1 93 2 view .LVU101
- 276              		.loc 1 93 37 is_stmt 0 view .LVU102
- 277 0052 D4ED067A 		vldr.32	s15, [r4, #24]
- 278              		.loc 1 93 13 view .LVU103
- 279 0056 FCEEE77A 		vcvt.u32.f32	s15, s15
- 280 005a CDED017A 		vstr.32	s15, [sp, #4]	@ int
- 281 005e 9DF80460 		ldrb	r6, [sp, #4]	@ zero_extendqisi2
- 282              	.LVL6:
-  94:Core/Src/motor.c **** 	float error_angle[6] = {0};
- 283              		.loc 1 94 2 is_stmt 1 view .LVU104
- 284              		.loc 1 94 8 is_stmt 0 view .LVU105
- 285 0062 0023     		movs	r3, #0
- 286              	.LVL7:
- 287              		.loc 1 94 8 view .LVU106
- 288 0064 0293     		str	r3, [sp, #8]
- 289 0066 0393     		str	r3, [sp, #12]
- 290 0068 0493     		str	r3, [sp, #16]
- 291 006a 0593     		str	r3, [sp, #20]
- 292 006c 0693     		str	r3, [sp, #24]
- 293 006e 0793     		str	r3, [sp, #28]
-  95:Core/Src/motor.c **** 	error_angle[0] = tar_angle[0] - joint1.now_angle;
- 294              		.loc 1 95 2 is_stmt 1 view .LVU107
- 295              		.loc 1 95 28 is_stmt 0 view .LVU108
- 296 0070 DDED089A 		vldr.32	s19, [sp, #32]
- 297              		.loc 1 95 40 view .LVU109
- 298 0074 574B     		ldr	r3, .L46+12
- 299 0076 93ED025A 		vldr.32	s10, [r3, #8]
- 300              		.loc 1 95 32 view .LVU110
- 301 007a 39EEC55A 		vsub.f32	s10, s19, s10
- 302              		.loc 1 95 17 view .LVU111
- 303 007e 8DED025A 		vstr.32	s10, [sp, #8]
-  96:Core/Src/motor.c **** 	error_angle[1] = tar_angle[1] - joint2.now_angle;
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 8
+ 245              		.loc 1 101 1 is_stmt 1 view -0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 80
+ 248              		@ frame_needed = 0, uses_anonymous_args = 0
+ 249              		.loc 1 101 1 is_stmt 0 view .LVU107
+ 250 0000 70B5     		push	{r4, r5, r6, lr}
+ 251              	.LCFI1:
+ 252              		.cfi_def_cfa_offset 16
+ 253              		.cfi_offset 4, -16
+ 254              		.cfi_offset 5, -12
+ 255              		.cfi_offset 6, -8
+ 256              		.cfi_offset 14, -4
+ 257 0002 2DED068B 		vpush.64	{d8, d9, d10}
+ 258              	.LCFI2:
+ 259              		.cfi_def_cfa_offset 40
+ 260              		.cfi_offset 80, -40
+ 261              		.cfi_offset 81, -36
+ 262              		.cfi_offset 82, -32
+ 263              		.cfi_offset 83, -28
+ 264              		.cfi_offset 84, -24
+ 265              		.cfi_offset 85, -20
+ 266 0006 94B0     		sub	sp, sp, #80
+ 267              	.LCFI3:
+ 268              		.cfi_def_cfa_offset 120
+ 269 0008 0446     		mov	r4, r0
+ 270 000a 0D46     		mov	r5, r1
+ 102:Core/Src/motor.c **** 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
+ 271              		.loc 1 102 2 is_stmt 1 view .LVU108
+ 272              		.loc 1 102 8 is_stmt 0 view .LVU109
+ 273 000c 0DF1380C 		add	ip, sp, #56
+ 274 0010 AB4E     		ldr	r6, .L65+8
+ 275 0012 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 276              	.LVL1:
+ 277              		.loc 1 102 8 view .LVU110
+ 278 0014 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 279 0018 96E80300 		ldm	r6, {r0, r1}
+ 280 001c 8CE80300 		stm	ip, {r0, r1}
+ 103:Core/Src/motor.c **** 
+ 104:Core/Src/motor.c **** 	float tar_angle[6] = {0};
+ 281              		.loc 1 104 2 is_stmt 1 view .LVU111
+ 282              		.loc 1 104 8 is_stmt 0 view .LVU112
+ 283 0020 0023     		movs	r3, #0
+ 284 0022 0893     		str	r3, [sp, #32]
+ 285 0024 0993     		str	r3, [sp, #36]
+ 286 0026 0A93     		str	r3, [sp, #40]
+ 287 0028 0B93     		str	r3, [sp, #44]
+ 288 002a 0C93     		str	r3, [sp, #48]
+ 289 002c 0D93     		str	r3, [sp, #52]
+ 105:Core/Src/motor.c **** 	unsigned char end_action;
+ 290              		.loc 1 105 2 is_stmt 1 view .LVU113
+ 106:Core/Src/motor.c **** 
+ 107:Core/Src/motor.c **** 	//////////限位
+ 108:Core/Src/motor.c **** 	if (tar_all_angle[0] < joint1.ulimit || tar_all_angle[0] > joint1.hlimit)
+ 291              		.loc 1 108 2 view .LVU114
+ 292              		.loc 1 108 19 is_stmt 0 view .LVU115
+ 293 002e D4ED007A 		vldr.32	s15, [r4]
+ 294              		.loc 1 108 31 view .LVU116
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 8
 
 
- 304              		.loc 1 96 2 is_stmt 1 view .LVU112
- 305              		.loc 1 96 28 is_stmt 0 view .LVU113
- 306 0082 9DED09AA 		vldr.32	s20, [sp, #36]
- 307              		.loc 1 96 40 view .LVU114
- 308 0086 544B     		ldr	r3, .L46+16
- 309 0088 D3ED025A 		vldr.32	s11, [r3, #8]
- 310              		.loc 1 96 32 view .LVU115
- 311 008c 7AEE655A 		vsub.f32	s11, s20, s11
- 312              		.loc 1 96 17 view .LVU116
- 313 0090 CDED035A 		vstr.32	s11, [sp, #12]
-  97:Core/Src/motor.c **** 	error_angle[2] = tar_angle[2] - joint3.now_angle;
- 314              		.loc 1 97 2 is_stmt 1 view .LVU117
- 315              		.loc 1 97 28 is_stmt 0 view .LVU118
- 316 0094 DDED0AAA 		vldr.32	s21, [sp, #40]
- 317              		.loc 1 97 40 view .LVU119
- 318 0098 504B     		ldr	r3, .L46+20
- 319 009a 93ED026A 		vldr.32	s12, [r3, #8]
- 320              		.loc 1 97 32 view .LVU120
- 321 009e 3AEEC66A 		vsub.f32	s12, s21, s12
- 322              		.loc 1 97 17 view .LVU121
- 323 00a2 8DED046A 		vstr.32	s12, [sp, #16]
-  98:Core/Src/motor.c **** 	error_angle[3] = tar_angle[3] - joint4.now_angle;
- 324              		.loc 1 98 2 is_stmt 1 view .LVU122
- 325              		.loc 1 98 28 is_stmt 0 view .LVU123
- 326 00a6 9DED0B9A 		vldr.32	s18, [sp, #44]
- 327              		.loc 1 98 40 view .LVU124
- 328 00aa 4D4B     		ldr	r3, .L46+24
- 329 00ac D3ED026A 		vldr.32	s13, [r3, #8]
- 330              		.loc 1 98 32 view .LVU125
- 331 00b0 79EE666A 		vsub.f32	s13, s18, s13
- 332              		.loc 1 98 17 view .LVU126
- 333 00b4 CDED056A 		vstr.32	s13, [sp, #20]
-  99:Core/Src/motor.c **** 	error_angle[4] = tar_angle[4] - joint5.now_angle;
- 334              		.loc 1 99 2 is_stmt 1 view .LVU127
- 335              		.loc 1 99 28 is_stmt 0 view .LVU128
- 336 00b8 DDED0C8A 		vldr.32	s17, [sp, #48]
- 337              		.loc 1 99 40 view .LVU129
- 338 00bc 494B     		ldr	r3, .L46+28
- 339 00be 93ED027A 		vldr.32	s14, [r3, #8]
- 340              		.loc 1 99 32 view .LVU130
- 341 00c2 38EEC77A 		vsub.f32	s14, s17, s14
- 342              		.loc 1 99 17 view .LVU131
- 343 00c6 8DED067A 		vstr.32	s14, [sp, #24]
- 100:Core/Src/motor.c **** 	error_angle[5] = tar_angle[5] - joint6.now_angle;
- 344              		.loc 1 100 2 is_stmt 1 view .LVU132
- 345              		.loc 1 100 28 is_stmt 0 view .LVU133
- 346 00ca 9DED0D8A 		vldr.32	s16, [sp, #52]
- 347              		.loc 1 100 40 view .LVU134
- 348 00ce 464B     		ldr	r3, .L46+32
- 349 00d0 D3ED027A 		vldr.32	s15, [r3, #8]
- 350              		.loc 1 100 32 view .LVU135
- 351 00d4 78EE677A 		vsub.f32	s15, s16, s15
- 352              		.loc 1 100 17 view .LVU136
- 353 00d8 CDED077A 		vstr.32	s15, [sp, #28]
- 101:Core/Src/motor.c **** 
- 102:Core/Src/motor.c **** 	if (error_angle[0] <= 0)
- 354              		.loc 1 102 2 is_stmt 1 view .LVU137
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 9
+ 295 0032 A44B     		ldr	r3, .L65+12
+ 296 0034 93ED057A 		vldr.32	s14, [r3, #20]
+ 297              		.loc 1 108 5 view .LVU117
+ 298 0038 F4EEC77A 		vcmpe.f32	s15, s14
+ 299 003c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 300 0040 06D4     		bmi	.L6
+ 301              		.loc 1 108 67 discriminator 1 view .LVU118
+ 302 0042 93ED067A 		vldr.32	s14, [r3, #24]
+ 303              		.loc 1 108 39 discriminator 1 view .LVU119
+ 304 0046 F4EEC77A 		vcmpe.f32	s15, s14
+ 305 004a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 306 004e 02DD     		ble	.L7
+ 307              	.L6:
+ 109:Core/Src/motor.c **** 	{
+ 110:Core/Src/motor.c **** 		tar_all_angle[0] = joint1.now_angle;
+ 308              		.loc 1 110 3 is_stmt 1 view .LVU120
+ 309              		.loc 1 110 28 is_stmt 0 view .LVU121
+ 310 0050 9C4B     		ldr	r3, .L65+12
+ 311 0052 9B68     		ldr	r3, [r3, #8]	@ float
+ 312              		.loc 1 110 20 view .LVU122
+ 313 0054 2360     		str	r3, [r4]	@ float
+ 314              	.L7:
+ 111:Core/Src/motor.c **** 	}
+ 112:Core/Src/motor.c **** 	if (tar_all_angle[1] < joint2.ulimit || tar_all_angle[1] > joint2.hlimit)
+ 315              		.loc 1 112 2 is_stmt 1 view .LVU123
+ 316              		.loc 1 112 19 is_stmt 0 view .LVU124
+ 317 0056 D4ED017A 		vldr.32	s15, [r4, #4]
+ 318              		.loc 1 112 31 view .LVU125
+ 319 005a 9B4B     		ldr	r3, .L65+16
+ 320 005c 93ED057A 		vldr.32	s14, [r3, #20]
+ 321              		.loc 1 112 5 view .LVU126
+ 322 0060 F4EEC77A 		vcmpe.f32	s15, s14
+ 323 0064 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 324 0068 06D4     		bmi	.L9
+ 325              		.loc 1 112 67 discriminator 1 view .LVU127
+ 326 006a 93ED067A 		vldr.32	s14, [r3, #24]
+ 327              		.loc 1 112 39 discriminator 1 view .LVU128
+ 328 006e F4EEC77A 		vcmpe.f32	s15, s14
+ 329 0072 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 330 0076 02DD     		ble	.L10
+ 331              	.L9:
+ 113:Core/Src/motor.c **** 	{
+ 114:Core/Src/motor.c **** 		tar_all_angle[1] = joint2.now_angle;
+ 332              		.loc 1 114 3 is_stmt 1 view .LVU129
+ 333              		.loc 1 114 28 is_stmt 0 view .LVU130
+ 334 0078 934B     		ldr	r3, .L65+16
+ 335 007a 9B68     		ldr	r3, [r3, #8]	@ float
+ 336              		.loc 1 114 20 view .LVU131
+ 337 007c 6360     		str	r3, [r4, #4]	@ float
+ 338              	.L10:
+ 115:Core/Src/motor.c **** 	}
+ 116:Core/Src/motor.c **** 	if (tar_all_angle[2] < joint3.ulimit || tar_all_angle[2] > joint3.hlimit)
+ 339              		.loc 1 116 2 is_stmt 1 view .LVU132
+ 340              		.loc 1 116 19 is_stmt 0 view .LVU133
+ 341 007e D4ED027A 		vldr.32	s15, [r4, #8]
+ 342              		.loc 1 116 31 view .LVU134
+ 343 0082 924B     		ldr	r3, .L65+20
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 9
 
 
- 355              		.loc 1 102 5 is_stmt 0 view .LVU138
- 356 00dc B5EEC05A 		vcmpe.f32	s10, #0
- 357 00e0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 358 00e4 2CD9     		bls	.L40
- 103:Core/Src/motor.c **** 		joint1.dir = Reverse;
- 104:Core/Src/motor.c **** 	else
- 105:Core/Src/motor.c **** 		joint1.dir = Forward;
- 359              		.loc 1 105 3 is_stmt 1 view .LVU139
- 360              		.loc 1 105 14 is_stmt 0 view .LVU140
- 361 00e6 3B4B     		ldr	r3, .L46+12
- 362 00e8 0122     		movs	r2, #1
- 363 00ea 1A74     		strb	r2, [r3, #16]
- 364              	.L9:
- 106:Core/Src/motor.c **** 	if (error_angle[1] <= 0)
- 365              		.loc 1 106 2 is_stmt 1 view .LVU141
- 366              		.loc 1 106 5 is_stmt 0 view .LVU142
- 367 00ec F5EEC05A 		vcmpe.f32	s11, #0
- 368 00f0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 369 00f4 28D9     		bls	.L41
- 107:Core/Src/motor.c **** 		joint2.dir = Reverse;
- 108:Core/Src/motor.c **** 	else
- 109:Core/Src/motor.c **** 		joint2.dir = Forward;
- 370              		.loc 1 109 3 is_stmt 1 view .LVU143
- 371              		.loc 1 109 14 is_stmt 0 view .LVU144
- 372 00f6 384B     		ldr	r3, .L46+16
- 373 00f8 0122     		movs	r2, #1
- 374 00fa 1A74     		strb	r2, [r3, #16]
- 375              	.L12:
- 110:Core/Src/motor.c **** 	if (error_angle[2] <= 0)
- 376              		.loc 1 110 2 is_stmt 1 view .LVU145
- 377              		.loc 1 110 5 is_stmt 0 view .LVU146
- 378 00fc B5EEC06A 		vcmpe.f32	s12, #0
- 379 0100 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 380 0104 24D9     		bls	.L42
- 111:Core/Src/motor.c **** 		joint3.dir = Reverse;
- 112:Core/Src/motor.c **** 	else
- 113:Core/Src/motor.c **** 		joint3.dir = Forward;
- 381              		.loc 1 113 3 is_stmt 1 view .LVU147
- 382              		.loc 1 113 14 is_stmt 0 view .LVU148
- 383 0106 354B     		ldr	r3, .L46+20
- 384 0108 0122     		movs	r2, #1
- 385 010a 1A74     		strb	r2, [r3, #16]
- 386              	.L15:
- 114:Core/Src/motor.c **** 	if (error_angle[3] <= 0)
- 387              		.loc 1 114 2 is_stmt 1 view .LVU149
- 388              		.loc 1 114 5 is_stmt 0 view .LVU150
- 389 010c F5EEC06A 		vcmpe.f32	s13, #0
- 390 0110 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 391 0114 20D9     		bls	.L43
- 115:Core/Src/motor.c **** 		joint4.dir = Reverse;
- 116:Core/Src/motor.c **** 	else
- 117:Core/Src/motor.c **** 		joint4.dir = Forward;
- 392              		.loc 1 117 3 is_stmt 1 view .LVU151
- 393              		.loc 1 117 14 is_stmt 0 view .LVU152
- 394 0116 324B     		ldr	r3, .L46+24
- 395 0118 0122     		movs	r2, #1
- 396 011a 1A74     		strb	r2, [r3, #16]
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 10
+ 344 0084 93ED057A 		vldr.32	s14, [r3, #20]
+ 345              		.loc 1 116 5 view .LVU135
+ 346 0088 F4EEC77A 		vcmpe.f32	s15, s14
+ 347 008c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 348 0090 06D4     		bmi	.L12
+ 349              		.loc 1 116 67 discriminator 1 view .LVU136
+ 350 0092 93ED067A 		vldr.32	s14, [r3, #24]
+ 351              		.loc 1 116 39 discriminator 1 view .LVU137
+ 352 0096 F4EEC77A 		vcmpe.f32	s15, s14
+ 353 009a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 354 009e 02DD     		ble	.L13
+ 355              	.L12:
+ 117:Core/Src/motor.c **** 	{
+ 118:Core/Src/motor.c **** 		tar_all_angle[2] = joint3.now_angle;
+ 356              		.loc 1 118 3 is_stmt 1 view .LVU138
+ 357              		.loc 1 118 28 is_stmt 0 view .LVU139
+ 358 00a0 8A4B     		ldr	r3, .L65+20
+ 359 00a2 9B68     		ldr	r3, [r3, #8]	@ float
+ 360              		.loc 1 118 20 view .LVU140
+ 361 00a4 A360     		str	r3, [r4, #8]	@ float
+ 362              	.L13:
+ 119:Core/Src/motor.c **** 	}
+ 120:Core/Src/motor.c **** 	if (tar_all_angle[3] < joint4.ulimit || tar_all_angle[3] > joint4.hlimit)
+ 363              		.loc 1 120 2 is_stmt 1 view .LVU141
+ 364              		.loc 1 120 19 is_stmt 0 view .LVU142
+ 365 00a6 D4ED037A 		vldr.32	s15, [r4, #12]
+ 366              		.loc 1 120 31 view .LVU143
+ 367 00aa 894B     		ldr	r3, .L65+24
+ 368 00ac 93ED057A 		vldr.32	s14, [r3, #20]
+ 369              		.loc 1 120 5 view .LVU144
+ 370 00b0 F4EEC77A 		vcmpe.f32	s15, s14
+ 371 00b4 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 372 00b8 06D4     		bmi	.L15
+ 373              		.loc 1 120 67 discriminator 1 view .LVU145
+ 374 00ba 93ED067A 		vldr.32	s14, [r3, #24]
+ 375              		.loc 1 120 39 discriminator 1 view .LVU146
+ 376 00be F4EEC77A 		vcmpe.f32	s15, s14
+ 377 00c2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 378 00c6 02DD     		ble	.L16
+ 379              	.L15:
+ 121:Core/Src/motor.c **** 	{
+ 122:Core/Src/motor.c **** 		tar_all_angle[3] = joint4.now_angle;
+ 380              		.loc 1 122 3 is_stmt 1 view .LVU147
+ 381              		.loc 1 122 28 is_stmt 0 view .LVU148
+ 382 00c8 814B     		ldr	r3, .L65+24
+ 383 00ca 9B68     		ldr	r3, [r3, #8]	@ float
+ 384              		.loc 1 122 20 view .LVU149
+ 385 00cc E360     		str	r3, [r4, #12]	@ float
+ 386              	.L16:
+ 123:Core/Src/motor.c **** 	}
+ 124:Core/Src/motor.c **** 	if (tar_all_angle[4] < joint5.ulimit || tar_all_angle[4] > joint5.hlimit)
+ 387              		.loc 1 124 2 is_stmt 1 view .LVU150
+ 388              		.loc 1 124 19 is_stmt 0 view .LVU151
+ 389 00ce D4ED047A 		vldr.32	s15, [r4, #16]
+ 390              		.loc 1 124 31 view .LVU152
+ 391 00d2 804B     		ldr	r3, .L65+28
+ 392 00d4 93ED057A 		vldr.32	s14, [r3, #20]
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 10
 
 
- 397              	.L18:
- 118:Core/Src/motor.c **** 	if (error_angle[4] <= 0)
- 398              		.loc 1 118 2 is_stmt 1 view .LVU153
- 399              		.loc 1 118 5 is_stmt 0 view .LVU154
- 400 011c B5EEC07A 		vcmpe.f32	s14, #0
- 401 0120 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 402 0124 1CD9     		bls	.L44
- 119:Core/Src/motor.c **** 		joint5.dir = Reverse;
- 120:Core/Src/motor.c **** 	else
- 121:Core/Src/motor.c **** 		joint5.dir = Forward;
- 403              		.loc 1 121 3 is_stmt 1 view .LVU155
- 404              		.loc 1 121 14 is_stmt 0 view .LVU156
- 405 0126 2F4B     		ldr	r3, .L46+28
- 406 0128 0122     		movs	r2, #1
- 407 012a 1A74     		strb	r2, [r3, #16]
- 408              	.L21:
- 122:Core/Src/motor.c **** 	if (error_angle[5] <= 0)
- 409              		.loc 1 122 2 is_stmt 1 view .LVU157
- 410              		.loc 1 122 5 is_stmt 0 view .LVU158
- 411 012c F5EEC07A 		vcmpe.f32	s15, #0
- 412 0130 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
- 413 0134 18D9     		bls	.L45
- 123:Core/Src/motor.c **** 		joint6.dir = Reverse;
- 124:Core/Src/motor.c **** 	else
- 125:Core/Src/motor.c **** 		joint6.dir = Forward;
- 414              		.loc 1 125 3 is_stmt 1 view .LVU159
- 415              		.loc 1 125 14 is_stmt 0 view .LVU160
- 416 0136 2C4B     		ldr	r3, .L46+32
- 417 0138 0122     		movs	r2, #1
- 418 013a 1A74     		strb	r2, [r3, #16]
- 419              	.L25:
- 420              	.LBB3:
-  88:Core/Src/motor.c **** 	{
- 421              		.loc 1 88 15 view .LVU161
- 422 013c 0024     		movs	r4, #0
- 423              	.LVL8:
-  88:Core/Src/motor.c **** 	{
- 424              		.loc 1 88 15 view .LVU162
- 425 013e 29E0     		b	.L24
- 426              	.LVL9:
- 427              	.L40:
-  88:Core/Src/motor.c **** 	{
- 428              		.loc 1 88 15 view .LVU163
- 429              	.LBE3:
- 103:Core/Src/motor.c **** 	else
- 430              		.loc 1 103 3 is_stmt 1 view .LVU164
- 103:Core/Src/motor.c **** 	else
- 431              		.loc 1 103 14 is_stmt 0 view .LVU165
- 432 0140 244B     		ldr	r3, .L46+12
- 433 0142 0022     		movs	r2, #0
- 434 0144 1A74     		strb	r2, [r3, #16]
- 435 0146 D1E7     		b	.L9
- 436              	.L41:
- 107:Core/Src/motor.c **** 	else
- 437              		.loc 1 107 3 is_stmt 1 view .LVU166
- 107:Core/Src/motor.c **** 	else
- 438              		.loc 1 107 14 is_stmt 0 view .LVU167
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 11
+ 393              		.loc 1 124 5 view .LVU153
+ 394 00d8 F4EEC77A 		vcmpe.f32	s15, s14
+ 395 00dc F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 396 00e0 06D4     		bmi	.L18
+ 397              		.loc 1 124 67 discriminator 1 view .LVU154
+ 398 00e2 93ED067A 		vldr.32	s14, [r3, #24]
+ 399              		.loc 1 124 39 discriminator 1 view .LVU155
+ 400 00e6 F4EEC77A 		vcmpe.f32	s15, s14
+ 401 00ea F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 402 00ee 02DD     		ble	.L19
+ 403              	.L18:
+ 125:Core/Src/motor.c **** 	{
+ 126:Core/Src/motor.c **** 		tar_all_angle[4] = joint5.now_angle;
+ 404              		.loc 1 126 3 is_stmt 1 view .LVU156
+ 405              		.loc 1 126 28 is_stmt 0 view .LVU157
+ 406 00f0 784B     		ldr	r3, .L65+28
+ 407 00f2 9B68     		ldr	r3, [r3, #8]	@ float
+ 408              		.loc 1 126 20 view .LVU158
+ 409 00f4 2361     		str	r3, [r4, #16]	@ float
+ 410              	.L19:
+ 127:Core/Src/motor.c **** 	}
+ 128:Core/Src/motor.c **** 	if (tar_all_angle[5] < joint6.ulimit || tar_all_angle[5] > joint6.hlimit)
+ 411              		.loc 1 128 2 is_stmt 1 view .LVU159
+ 412              		.loc 1 128 19 is_stmt 0 view .LVU160
+ 413 00f6 D4ED057A 		vldr.32	s15, [r4, #20]
+ 414              		.loc 1 128 31 view .LVU161
+ 415 00fa 774B     		ldr	r3, .L65+32
+ 416 00fc 93ED057A 		vldr.32	s14, [r3, #20]
+ 417              		.loc 1 128 5 view .LVU162
+ 418 0100 F4EEC77A 		vcmpe.f32	s15, s14
+ 419 0104 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 420 0108 06D4     		bmi	.L21
+ 421              		.loc 1 128 67 discriminator 1 view .LVU163
+ 422 010a 93ED067A 		vldr.32	s14, [r3, #24]
+ 423              		.loc 1 128 39 discriminator 1 view .LVU164
+ 424 010e F4EEC77A 		vcmpe.f32	s15, s14
+ 425 0112 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 426 0116 02DD     		ble	.L22
+ 427              	.L21:
+ 129:Core/Src/motor.c **** 	{
+ 130:Core/Src/motor.c **** 		tar_all_angle[5] = joint6.now_angle;
+ 428              		.loc 1 130 3 is_stmt 1 view .LVU165
+ 429              		.loc 1 130 28 is_stmt 0 view .LVU166
+ 430 0118 6F4B     		ldr	r3, .L65+32
+ 431 011a 9B68     		ldr	r3, [r3, #8]	@ float
+ 432              		.loc 1 130 20 view .LVU167
+ 433 011c 6361     		str	r3, [r4, #20]	@ float
+ 434              	.L22:
+ 101:Core/Src/motor.c **** 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
+ 435              		.loc 1 101 1 view .LVU168
+ 436 011e 0023     		movs	r3, #0
+ 437 0120 0EE0     		b	.L24
+ 438              	.LVL2:
+ 439              	.L25:
+ 440              	.LBB2:
+ 131:Core/Src/motor.c **** 	}
+ 132:Core/Src/motor.c **** 
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 11
 
 
- 439 0148 234B     		ldr	r3, .L46+16
- 440 014a 0022     		movs	r2, #0
- 441 014c 1A74     		strb	r2, [r3, #16]
- 442 014e D5E7     		b	.L12
- 443              	.L42:
- 111:Core/Src/motor.c **** 	else
- 444              		.loc 1 111 3 is_stmt 1 view .LVU168
- 111:Core/Src/motor.c **** 	else
- 445              		.loc 1 111 14 is_stmt 0 view .LVU169
- 446 0150 224B     		ldr	r3, .L46+20
- 447 0152 0022     		movs	r2, #0
- 448 0154 1A74     		strb	r2, [r3, #16]
- 449 0156 D9E7     		b	.L15
- 450              	.L43:
- 115:Core/Src/motor.c **** 	else
- 451              		.loc 1 115 3 is_stmt 1 view .LVU170
- 115:Core/Src/motor.c **** 	else
- 452              		.loc 1 115 14 is_stmt 0 view .LVU171
- 453 0158 214B     		ldr	r3, .L46+24
- 454 015a 0022     		movs	r2, #0
- 455 015c 1A74     		strb	r2, [r3, #16]
- 456 015e DDE7     		b	.L18
- 457              	.L44:
- 119:Core/Src/motor.c **** 	else
- 458              		.loc 1 119 3 is_stmt 1 view .LVU172
- 119:Core/Src/motor.c **** 	else
- 459              		.loc 1 119 14 is_stmt 0 view .LVU173
- 460 0160 204B     		ldr	r3, .L46+28
- 461 0162 0022     		movs	r2, #0
- 462 0164 1A74     		strb	r2, [r3, #16]
- 463 0166 E1E7     		b	.L21
- 464              	.L45:
- 123:Core/Src/motor.c **** 	else
- 465              		.loc 1 123 3 is_stmt 1 view .LVU174
- 123:Core/Src/motor.c **** 	else
- 466              		.loc 1 123 14 is_stmt 0 view .LVU175
- 467 0168 1F4B     		ldr	r3, .L46+32
- 468 016a 0022     		movs	r2, #0
- 469 016c 1A74     		strb	r2, [r3, #16]
- 470 016e E5E7     		b	.L25
- 471              	.LVL10:
- 472              	.L26:
- 473              	.LBB4:
- 126:Core/Src/motor.c **** 
- 127:Core/Src/motor.c **** 	for (uint8_t i = 0; i < 6; i++)
- 128:Core/Src/motor.c **** 	{
- 129:Core/Src/motor.c **** 		step[i] = (int)(error_angle[i] * 127.3239566);
- 474              		.loc 1 129 3 is_stmt 1 view .LVU176
- 475              		.loc 1 129 30 is_stmt 0 view .LVU177
- 476 0170 14AB     		add	r3, sp, #80
- 477 0172 03EB8403 		add	r3, r3, r4, lsl #2
- 478 0176 53F8480C 		ldr	r0, [r3, #-72]	@ float
- 479 017a FFF7FEFF 		bl	__aeabi_f2d
- 480              	.LVL11:
- 481              		.loc 1 129 34 view .LVU178
- 482 017e 12A3     		adr	r3, .L46
- 483 0180 D3E90023 		ldrd	r2, [r3]
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 12
+ 133:Core/Src/motor.c **** 	for (uint8_t i = 0; i < 6; i++)
+ 134:Core/Src/motor.c **** 	{
+ 135:Core/Src/motor.c **** 		// is angle before radio ,is the factly angle of stepper motor
+ 136:Core/Src/motor.c **** 		tar_angle[i] = tar_all_angle[i] * radio[i];
+ 441              		.loc 1 136 3 is_stmt 1 view .LVU169
+ 442              		.loc 1 136 31 is_stmt 0 view .LVU170
+ 443 0122 04EB8302 		add	r2, r4, r3, lsl #2
+ 444 0126 D2ED007A 		vldr.32	s15, [r2]
+ 445              		.loc 1 136 42 view .LVU171
+ 446 012a 14AA     		add	r2, sp, #80
+ 447 012c 02EB8302 		add	r2, r2, r3, lsl #2
+ 448 0130 12ED067A 		vldr.32	s14, [r2, #-24]
+ 449              		.loc 1 136 35 view .LVU172
+ 450 0134 67EE877A 		vmul.f32	s15, s15, s14
+ 451              		.loc 1 136 16 view .LVU173
+ 452 0138 42ED0C7A 		vstr.32	s15, [r2, #-48]
+ 133:Core/Src/motor.c **** 	{
+ 453              		.loc 1 133 30 is_stmt 1 discriminator 3 view .LVU174
+ 454 013c 0133     		adds	r3, r3, #1
+ 455              	.LVL3:
+ 133:Core/Src/motor.c **** 	{
+ 456              		.loc 1 133 30 is_stmt 0 discriminator 3 view .LVU175
+ 457 013e DBB2     		uxtb	r3, r3
+ 458              	.LVL4:
+ 459              	.L24:
+ 133:Core/Src/motor.c **** 	{
+ 460              		.loc 1 133 24 is_stmt 1 discriminator 1 view .LVU176
+ 461 0140 052B     		cmp	r3, #5
+ 462 0142 EED9     		bls	.L25
+ 463              	.LBE2:
+ 137:Core/Src/motor.c **** 	}
+ 138:Core/Src/motor.c **** 	end_action = (uint8_t)tar_all_angle[6];
+ 464              		.loc 1 138 2 view .LVU177
+ 465              		.loc 1 138 37 is_stmt 0 view .LVU178
+ 466 0144 D4ED067A 		vldr.32	s15, [r4, #24]
+ 467              		.loc 1 138 13 view .LVU179
+ 468 0148 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 469 014c CDED017A 		vstr.32	s15, [sp, #4]	@ int
+ 470 0150 9DF80460 		ldrb	r6, [sp, #4]	@ zero_extendqisi2
+ 471              	.LVL5:
+ 139:Core/Src/motor.c **** 	float error_angle[6] = {0};
+ 472              		.loc 1 139 2 is_stmt 1 view .LVU180
+ 473              		.loc 1 139 8 is_stmt 0 view .LVU181
+ 474 0154 0023     		movs	r3, #0
+ 475              	.LVL6:
+ 476              		.loc 1 139 8 view .LVU182
+ 477 0156 0293     		str	r3, [sp, #8]
+ 478 0158 0393     		str	r3, [sp, #12]
+ 479 015a 0493     		str	r3, [sp, #16]
+ 480 015c 0593     		str	r3, [sp, #20]
+ 481 015e 0693     		str	r3, [sp, #24]
+ 482 0160 0793     		str	r3, [sp, #28]
+ 140:Core/Src/motor.c **** 	error_angle[0] = tar_angle[0] - joint1.now_angle;
+ 483              		.loc 1 140 2 is_stmt 1 view .LVU183
+ 484              		.loc 1 140 28 is_stmt 0 view .LVU184
+ 485 0162 DDED089A 		vldr.32	s19, [sp, #32]
+ 486              		.loc 1 140 40 view .LVU185
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 12
 
 
- 484 0184 FFF7FEFF 		bl	__aeabi_dmul
- 485              	.LVL12:
- 486              		.loc 1 129 13 view .LVU179
- 487 0188 FFF7FEFF 		bl	__aeabi_d2iz
- 488              	.LVL13:
- 489              		.loc 1 129 11 view .LVU180
- 490 018c 45F82400 		str	r0, [r5, r4, lsl #2]
- 127:Core/Src/motor.c **** 	{
- 491              		.loc 1 127 30 is_stmt 1 discriminator 3 view .LVU181
- 492 0190 0134     		adds	r4, r4, #1
- 493              	.LVL14:
- 127:Core/Src/motor.c **** 	{
- 494              		.loc 1 127 30 is_stmt 0 discriminator 3 view .LVU182
- 495 0192 E4B2     		uxtb	r4, r4
- 496              	.LVL15:
- 497              	.L24:
- 127:Core/Src/motor.c **** 	{
- 498              		.loc 1 127 24 is_stmt 1 discriminator 1 view .LVU183
- 499 0194 052C     		cmp	r4, #5
- 500 0196 EBD9     		bls	.L26
- 501              	.LBE4:
- 130:Core/Src/motor.c **** 	}
- 131:Core/Src/motor.c **** 	step[6] = (int)end_action;
- 502              		.loc 1 131 2 view .LVU184
- 503              		.loc 1 131 10 is_stmt 0 view .LVU185
- 504 0198 AE61     		str	r6, [r5, #24]
- 132:Core/Src/motor.c **** 	joint1.now_angle = tar_angle[0];
- 505              		.loc 1 132 2 is_stmt 1 view .LVU186
- 506              		.loc 1 132 19 is_stmt 0 view .LVU187
- 507 019a 0E4B     		ldr	r3, .L46+12
- 508 019c C3ED029A 		vstr.32	s19, [r3, #8]
- 133:Core/Src/motor.c **** 	joint2.now_angle = tar_angle[1];
- 509              		.loc 1 133 2 is_stmt 1 view .LVU188
- 510              		.loc 1 133 19 is_stmt 0 view .LVU189
- 511 01a0 0D4B     		ldr	r3, .L46+16
- 512 01a2 83ED02AA 		vstr.32	s20, [r3, #8]
- 134:Core/Src/motor.c **** 	joint3.now_angle = tar_angle[2];
- 513              		.loc 1 134 2 is_stmt 1 view .LVU190
- 514              		.loc 1 134 19 is_stmt 0 view .LVU191
- 515 01a6 0D4B     		ldr	r3, .L46+20
- 516 01a8 C3ED02AA 		vstr.32	s21, [r3, #8]
- 135:Core/Src/motor.c **** 	joint4.now_angle = tar_angle[3];
- 517              		.loc 1 135 2 is_stmt 1 view .LVU192
- 518              		.loc 1 135 19 is_stmt 0 view .LVU193
- 519 01ac 0C4B     		ldr	r3, .L46+24
- 520 01ae 83ED029A 		vstr.32	s18, [r3, #8]
- 136:Core/Src/motor.c **** 	joint5.now_angle = tar_angle[4];
- 521              		.loc 1 136 2 is_stmt 1 view .LVU194
- 522              		.loc 1 136 19 is_stmt 0 view .LVU195
- 523 01b2 0C4B     		ldr	r3, .L46+28
- 524 01b4 C3ED028A 		vstr.32	s17, [r3, #8]
- 137:Core/Src/motor.c **** 	joint6.now_angle = tar_angle[5];
- 525              		.loc 1 137 2 is_stmt 1 view .LVU196
- 526              		.loc 1 137 19 is_stmt 0 view .LVU197
- 527 01b8 0B4B     		ldr	r3, .L46+32
- 528 01ba 83ED028A 		vstr.32	s16, [r3, #8]
- 138:Core/Src/motor.c **** }
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 13
+ 487 0166 574B     		ldr	r3, .L65+12
+ 488 0168 93ED025A 		vldr.32	s10, [r3, #8]
+ 489              		.loc 1 140 32 view .LVU186
+ 490 016c 39EEC55A 		vsub.f32	s10, s19, s10
+ 491              		.loc 1 140 17 view .LVU187
+ 492 0170 8DED025A 		vstr.32	s10, [sp, #8]
+ 141:Core/Src/motor.c **** 	error_angle[1] = tar_angle[1] - joint2.now_angle;
+ 493              		.loc 1 141 2 is_stmt 1 view .LVU188
+ 494              		.loc 1 141 28 is_stmt 0 view .LVU189
+ 495 0174 9DED09AA 		vldr.32	s20, [sp, #36]
+ 496              		.loc 1 141 40 view .LVU190
+ 497 0178 534B     		ldr	r3, .L65+16
+ 498 017a D3ED025A 		vldr.32	s11, [r3, #8]
+ 499              		.loc 1 141 32 view .LVU191
+ 500 017e 7AEE655A 		vsub.f32	s11, s20, s11
+ 501              		.loc 1 141 17 view .LVU192
+ 502 0182 CDED035A 		vstr.32	s11, [sp, #12]
+ 142:Core/Src/motor.c **** 	error_angle[2] = tar_angle[2] - joint3.now_angle;
+ 503              		.loc 1 142 2 is_stmt 1 view .LVU193
+ 504              		.loc 1 142 28 is_stmt 0 view .LVU194
+ 505 0186 DDED0AAA 		vldr.32	s21, [sp, #40]
+ 506              		.loc 1 142 40 view .LVU195
+ 507 018a 504B     		ldr	r3, .L65+20
+ 508 018c 93ED026A 		vldr.32	s12, [r3, #8]
+ 509              		.loc 1 142 32 view .LVU196
+ 510 0190 3AEEC66A 		vsub.f32	s12, s21, s12
+ 511              		.loc 1 142 17 view .LVU197
+ 512 0194 8DED046A 		vstr.32	s12, [sp, #16]
+ 143:Core/Src/motor.c **** 	error_angle[3] = tar_angle[3] - joint4.now_angle;
+ 513              		.loc 1 143 2 is_stmt 1 view .LVU198
+ 514              		.loc 1 143 28 is_stmt 0 view .LVU199
+ 515 0198 9DED0B9A 		vldr.32	s18, [sp, #44]
+ 516              		.loc 1 143 40 view .LVU200
+ 517 019c 4C4B     		ldr	r3, .L65+24
+ 518 019e D3ED026A 		vldr.32	s13, [r3, #8]
+ 519              		.loc 1 143 32 view .LVU201
+ 520 01a2 79EE666A 		vsub.f32	s13, s18, s13
+ 521              		.loc 1 143 17 view .LVU202
+ 522 01a6 CDED056A 		vstr.32	s13, [sp, #20]
+ 144:Core/Src/motor.c **** 	error_angle[4] = tar_angle[4] - joint5.now_angle;
+ 523              		.loc 1 144 2 is_stmt 1 view .LVU203
+ 524              		.loc 1 144 28 is_stmt 0 view .LVU204
+ 525 01aa DDED0C8A 		vldr.32	s17, [sp, #48]
+ 526              		.loc 1 144 40 view .LVU205
+ 527 01ae 494B     		ldr	r3, .L65+28
+ 528 01b0 93ED027A 		vldr.32	s14, [r3, #8]
+ 529              		.loc 1 144 32 view .LVU206
+ 530 01b4 38EEC77A 		vsub.f32	s14, s17, s14
+ 531              		.loc 1 144 17 view .LVU207
+ 532 01b8 8DED067A 		vstr.32	s14, [sp, #24]
+ 145:Core/Src/motor.c **** 	error_angle[5] = tar_angle[5] - joint6.now_angle;
+ 533              		.loc 1 145 2 is_stmt 1 view .LVU208
+ 534              		.loc 1 145 28 is_stmt 0 view .LVU209
+ 535 01bc 9DED0D8A 		vldr.32	s16, [sp, #52]
+ 536              		.loc 1 145 40 view .LVU210
+ 537 01c0 454B     		ldr	r3, .L65+32
+ 538 01c2 D3ED027A 		vldr.32	s15, [r3, #8]
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 13
 
 
- 529              		.loc 1 138 1 view .LVU198
- 530 01be 14B0     		add	sp, sp, #80
- 531              	.LCFI3:
- 532              		.cfi_def_cfa_offset 40
- 533              		@ sp needed
- 534 01c0 BDEC068B 		vldm	sp!, {d8-d10}
- 535              	.LCFI4:
- 536              		.cfi_restore 84
- 537              		.cfi_restore 85
- 538              		.cfi_restore 82
- 539              		.cfi_restore 83
- 540              		.cfi_restore 80
- 541              		.cfi_restore 81
- 542              		.cfi_def_cfa_offset 16
- 543 01c4 70BD     		pop	{r4, r5, r6, pc}
- 544              	.LVL16:
- 545              	.L47:
- 546              		.loc 1 138 1 view .LVU199
- 547 01c6 00BF     		.align	3
- 548              	.L46:
- 549 01c8 B29476B4 		.word	-1267297102
- 550 01cc BBD45F40 		.word	1080022203
- 551 01d0 00000000 		.word	.LANCHOR0
- 552 01d4 00000000 		.word	joint1
- 553 01d8 00000000 		.word	joint2
- 554 01dc 00000000 		.word	joint3
- 555 01e0 00000000 		.word	joint4
- 556 01e4 00000000 		.word	joint5
- 557 01e8 00000000 		.word	joint6
- 558              		.cfi_endproc
- 559              	.LFE135:
- 561              		.section	.text.Dir_Set,"ax",%progbits
- 562              		.align	1
- 563              		.global	Dir_Set
- 564              		.syntax unified
- 565              		.thumb
- 566              		.thumb_func
- 568              	Dir_Set:
- 569              	.LVL17:
- 570              	.LFB139:
- 139:Core/Src/motor.c **** 
- 140:Core/Src/motor.c **** /*
- 141:Core/Src/motor.c **** thisi is reset key
- 142:Core/Src/motor.c **** joint1 G13
- 143:Core/Src/motor.c **** joint2 G12
- 144:Core/Src/motor.c **** joint3 G11
- 145:Core/Src/motor.c **** joint4 G10
- 146:Core/Src/motor.c **** joint5 G9
- 147:Core/Src/motor.c **** joint6 D7
- 148:Core/Src/motor.c **** */
- 149:Core/Src/motor.c **** 
- 150:Core/Src/motor.c **** u8 Reset_joint(void)
- 151:Core/Src/motor.c **** {
- 152:Core/Src/motor.c **** 	// joint1->joint6
- 153:Core/Src/motor.c **** 	// hand is completely open
- 154:Core/Src/motor.c **** 	// first we move joint1 without stopping,then one by one
- 155:Core/Src/motor.c **** 
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 14
+ 539              		.loc 1 145 32 view .LVU211
+ 540 01c6 78EE677A 		vsub.f32	s15, s16, s15
+ 541              		.loc 1 145 17 view .LVU212
+ 542 01ca CDED077A 		vstr.32	s15, [sp, #28]
+ 146:Core/Src/motor.c **** 
+ 147:Core/Src/motor.c **** 	if (error_angle[0] <= 0)
+ 543              		.loc 1 147 2 is_stmt 1 view .LVU213
+ 544              		.loc 1 147 5 is_stmt 0 view .LVU214
+ 545 01ce B5EEC05A 		vcmpe.f32	s10, #0
+ 546 01d2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 547 01d6 2CD9     		bls	.L59
+ 148:Core/Src/motor.c **** 		joint1.dir = Reverse;
+ 149:Core/Src/motor.c **** 	else
+ 150:Core/Src/motor.c **** 		joint1.dir = Forward;
+ 548              		.loc 1 150 3 is_stmt 1 view .LVU215
+ 549              		.loc 1 150 14 is_stmt 0 view .LVU216
+ 550 01d8 3A4B     		ldr	r3, .L65+12
+ 551 01da 0122     		movs	r2, #1
+ 552 01dc 1A74     		strb	r2, [r3, #16]
+ 553              	.L28:
+ 151:Core/Src/motor.c **** 	if (error_angle[1] <= 0)
+ 554              		.loc 1 151 2 is_stmt 1 view .LVU217
+ 555              		.loc 1 151 5 is_stmt 0 view .LVU218
+ 556 01de F5EEC05A 		vcmpe.f32	s11, #0
+ 557 01e2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 558 01e6 28D9     		bls	.L60
+ 152:Core/Src/motor.c **** 		joint2.dir = Reverse;
+ 153:Core/Src/motor.c **** 	else
+ 154:Core/Src/motor.c **** 		joint2.dir = Forward;
+ 559              		.loc 1 154 3 is_stmt 1 view .LVU219
+ 560              		.loc 1 154 14 is_stmt 0 view .LVU220
+ 561 01e8 374B     		ldr	r3, .L65+16
+ 562 01ea 0122     		movs	r2, #1
+ 563 01ec 1A74     		strb	r2, [r3, #16]
+ 564              	.L31:
+ 155:Core/Src/motor.c **** 	if (error_angle[2] <= 0)
+ 565              		.loc 1 155 2 is_stmt 1 view .LVU221
+ 566              		.loc 1 155 5 is_stmt 0 view .LVU222
+ 567 01ee B5EEC06A 		vcmpe.f32	s12, #0
+ 568 01f2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 569 01f6 24D9     		bls	.L61
+ 156:Core/Src/motor.c **** 		joint3.dir = Reverse;
+ 157:Core/Src/motor.c **** 	else
+ 158:Core/Src/motor.c **** 		joint3.dir = Forward;
+ 570              		.loc 1 158 3 is_stmt 1 view .LVU223
+ 571              		.loc 1 158 14 is_stmt 0 view .LVU224
+ 572 01f8 344B     		ldr	r3, .L65+20
+ 573 01fa 0122     		movs	r2, #1
+ 574 01fc 1A74     		strb	r2, [r3, #16]
+ 575              	.L34:
+ 159:Core/Src/motor.c **** 	if (error_angle[3] <= 0)
+ 576              		.loc 1 159 2 is_stmt 1 view .LVU225
+ 577              		.loc 1 159 5 is_stmt 0 view .LVU226
+ 578 01fe F5EEC06A 		vcmpe.f32	s13, #0
+ 579 0202 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 580 0206 20D9     		bls	.L62
+ 160:Core/Src/motor.c **** 		joint4.dir = Reverse;
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 14
 
 
- 156:Core/Src/motor.c **** 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
- 157:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
- 158:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
- 159:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
- 160:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
- 161:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
- 162:Core/Src/motor.c **** 
- 163:Core/Src/motor.c **** 	int step = 1;
- 164:Core/Src/motor.c **** 	while (1)
- 165:Core/Src/motor.c **** 	{
- 166:Core/Src/motor.c **** 		Motor_Action(joint1_GPIO_Port, joint1_Pin, step);
- 167:Core/Src/motor.c **** 		if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
- 168:Core/Src/motor.c **** 		{
- 169:Core/Src/motor.c **** 			HAL_Delay(20);
- 170:Core/Src/motor.c **** 			if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
- 171:Core/Src/motor.c **** 			{
- 172:Core/Src/motor.c **** 				joint1.isreset = Reset;
- 173:Core/Src/motor.c **** 				break;
- 174:Core/Src/motor.c **** 			}
- 175:Core/Src/motor.c **** 		}
- 176:Core/Src/motor.c **** 	}
- 177:Core/Src/motor.c **** 
- 178:Core/Src/motor.c **** 	while (1)
- 179:Core/Src/motor.c **** 	{
- 180:Core/Src/motor.c **** 		Motor_Action(joint2_GPIO_Port, joint2_Pin, step);
- 181:Core/Src/motor.c **** 		if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
- 182:Core/Src/motor.c **** 		{
- 183:Core/Src/motor.c **** 			HAL_Delay(20);
- 184:Core/Src/motor.c **** 			if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
- 185:Core/Src/motor.c **** 			{
- 186:Core/Src/motor.c **** 				joint2.isreset = Reset;
- 187:Core/Src/motor.c **** 				break;
- 188:Core/Src/motor.c **** 			}
- 189:Core/Src/motor.c **** 		}
- 190:Core/Src/motor.c **** 	}
- 191:Core/Src/motor.c **** 
- 192:Core/Src/motor.c **** 	while (1)
- 193:Core/Src/motor.c **** 	{
- 194:Core/Src/motor.c **** 		Motor_Action(joint3_GPIO_Port, joint3_Pin, step);
- 195:Core/Src/motor.c **** 		if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
- 196:Core/Src/motor.c **** 		{
- 197:Core/Src/motor.c **** 			HAL_Delay(20);
- 198:Core/Src/motor.c **** 			if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
- 199:Core/Src/motor.c **** 			{
- 200:Core/Src/motor.c **** 				joint3.isreset = Reset;
- 201:Core/Src/motor.c **** 				break;
- 202:Core/Src/motor.c **** 			}
- 203:Core/Src/motor.c **** 		}
- 204:Core/Src/motor.c **** 	}
- 205:Core/Src/motor.c **** 
- 206:Core/Src/motor.c **** 	while (1)
- 207:Core/Src/motor.c **** 	{
- 208:Core/Src/motor.c **** 		Motor_Action(joint4_GPIO_Port, joint4_Pin, step);
- 209:Core/Src/motor.c **** 		if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
- 210:Core/Src/motor.c **** 		{
- 211:Core/Src/motor.c **** 			HAL_Delay(20);
- 212:Core/Src/motor.c **** 			if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 15
+ 161:Core/Src/motor.c **** 	else
+ 162:Core/Src/motor.c **** 		joint4.dir = Forward;
+ 581              		.loc 1 162 3 is_stmt 1 view .LVU227
+ 582              		.loc 1 162 14 is_stmt 0 view .LVU228
+ 583 0208 314B     		ldr	r3, .L65+24
+ 584 020a 0122     		movs	r2, #1
+ 585 020c 1A74     		strb	r2, [r3, #16]
+ 586              	.L37:
+ 163:Core/Src/motor.c **** 	if (error_angle[4] <= 0)
+ 587              		.loc 1 163 2 is_stmt 1 view .LVU229
+ 588              		.loc 1 163 5 is_stmt 0 view .LVU230
+ 589 020e B5EEC07A 		vcmpe.f32	s14, #0
+ 590 0212 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 591 0216 1CD9     		bls	.L63
+ 164:Core/Src/motor.c **** 		joint5.dir = Reverse;
+ 165:Core/Src/motor.c **** 	else
+ 166:Core/Src/motor.c **** 		joint5.dir = Forward;
+ 592              		.loc 1 166 3 is_stmt 1 view .LVU231
+ 593              		.loc 1 166 14 is_stmt 0 view .LVU232
+ 594 0218 2E4B     		ldr	r3, .L65+28
+ 595 021a 0122     		movs	r2, #1
+ 596 021c 1A74     		strb	r2, [r3, #16]
+ 597              	.L40:
+ 167:Core/Src/motor.c **** 	if (error_angle[5] <= 0)
+ 598              		.loc 1 167 2 is_stmt 1 view .LVU233
+ 599              		.loc 1 167 5 is_stmt 0 view .LVU234
+ 600 021e F5EEC07A 		vcmpe.f32	s15, #0
+ 601 0222 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 602 0226 18D9     		bls	.L64
+ 168:Core/Src/motor.c **** 		joint6.dir = Reverse;
+ 169:Core/Src/motor.c **** 	else
+ 170:Core/Src/motor.c **** 		joint6.dir = Forward;
+ 603              		.loc 1 170 3 is_stmt 1 view .LVU235
+ 604              		.loc 1 170 14 is_stmt 0 view .LVU236
+ 605 0228 2B4B     		ldr	r3, .L65+32
+ 606 022a 0122     		movs	r2, #1
+ 607 022c 1A74     		strb	r2, [r3, #16]
+ 608              	.L44:
+ 101:Core/Src/motor.c **** 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
+ 609              		.loc 1 101 1 view .LVU237
+ 610 022e 0024     		movs	r4, #0
+ 611              	.LVL7:
+ 101:Core/Src/motor.c **** 	float radio[6] = {54, 6, 0, 4.5, 54, 6};
+ 612              		.loc 1 101 1 view .LVU238
+ 613 0230 29E0     		b	.L43
+ 614              	.LVL8:
+ 615              	.L59:
+ 148:Core/Src/motor.c **** 	else
+ 616              		.loc 1 148 3 is_stmt 1 view .LVU239
+ 148:Core/Src/motor.c **** 	else
+ 617              		.loc 1 148 14 is_stmt 0 view .LVU240
+ 618 0232 244B     		ldr	r3, .L65+12
+ 619 0234 0022     		movs	r2, #0
+ 620 0236 1A74     		strb	r2, [r3, #16]
+ 621 0238 D1E7     		b	.L28
+ 622              	.L60:
+ 152:Core/Src/motor.c **** 	else
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 15
 
 
- 213:Core/Src/motor.c **** 			{
- 214:Core/Src/motor.c **** 				joint4.isreset = Reset;
- 215:Core/Src/motor.c **** 				break;
- 216:Core/Src/motor.c **** 			}
- 217:Core/Src/motor.c **** 		}
- 218:Core/Src/motor.c **** 	}
- 219:Core/Src/motor.c **** 
- 220:Core/Src/motor.c **** 	while (1)
- 221:Core/Src/motor.c **** 	{
- 222:Core/Src/motor.c **** 		Motor_Action(joint5_GPIO_Port, joint5_Pin, step);
- 223:Core/Src/motor.c **** 		if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
- 224:Core/Src/motor.c **** 		{
- 225:Core/Src/motor.c **** 			HAL_Delay(20);
- 226:Core/Src/motor.c **** 			if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
- 227:Core/Src/motor.c **** 			{
- 228:Core/Src/motor.c **** 				joint5.isreset = Reset;
- 229:Core/Src/motor.c **** 				break;
- 230:Core/Src/motor.c **** 			}
- 231:Core/Src/motor.c **** 		}
- 232:Core/Src/motor.c **** 	}
- 233:Core/Src/motor.c **** 
- 234:Core/Src/motor.c **** 	while (1)
- 235:Core/Src/motor.c **** 	{
- 236:Core/Src/motor.c **** 		Motor_Action(joint6_GPIO_Port, joint6_Pin, step);
- 237:Core/Src/motor.c **** 		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
- 238:Core/Src/motor.c **** 		{
- 239:Core/Src/motor.c **** 			HAL_Delay(20);
- 240:Core/Src/motor.c **** 			if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
- 241:Core/Src/motor.c **** 			{
- 242:Core/Src/motor.c **** 				joint6.isreset = Reset;
- 243:Core/Src/motor.c **** 				break;
- 244:Core/Src/motor.c **** 			}
- 245:Core/Src/motor.c **** 		}
- 246:Core/Src/motor.c **** 	}
- 247:Core/Src/motor.c **** 	/*
- 248:Core/Src/motor.c **** 	@this is a servo debug ,so we should know how to control the servo
+ 623              		.loc 1 152 3 is_stmt 1 view .LVU241
+ 152:Core/Src/motor.c **** 	else
+ 624              		.loc 1 152 14 is_stmt 0 view .LVU242
+ 625 023a 234B     		ldr	r3, .L65+16
+ 626 023c 0022     		movs	r2, #0
+ 627 023e 1A74     		strb	r2, [r3, #16]
+ 628 0240 D5E7     		b	.L31
+ 629              	.L61:
+ 156:Core/Src/motor.c **** 	else
+ 630              		.loc 1 156 3 is_stmt 1 view .LVU243
+ 156:Core/Src/motor.c **** 	else
+ 631              		.loc 1 156 14 is_stmt 0 view .LVU244
+ 632 0242 224B     		ldr	r3, .L65+20
+ 633 0244 0022     		movs	r2, #0
+ 634 0246 1A74     		strb	r2, [r3, #16]
+ 635 0248 D9E7     		b	.L34
+ 636              	.L62:
+ 160:Core/Src/motor.c **** 	else
+ 637              		.loc 1 160 3 is_stmt 1 view .LVU245
+ 160:Core/Src/motor.c **** 	else
+ 638              		.loc 1 160 14 is_stmt 0 view .LVU246
+ 639 024a 214B     		ldr	r3, .L65+24
+ 640 024c 0022     		movs	r2, #0
+ 641 024e 1A74     		strb	r2, [r3, #16]
+ 642 0250 DDE7     		b	.L37
+ 643              	.L63:
+ 164:Core/Src/motor.c **** 	else
+ 644              		.loc 1 164 3 is_stmt 1 view .LVU247
+ 164:Core/Src/motor.c **** 	else
+ 645              		.loc 1 164 14 is_stmt 0 view .LVU248
+ 646 0252 204B     		ldr	r3, .L65+28
+ 647 0254 0022     		movs	r2, #0
+ 648 0256 1A74     		strb	r2, [r3, #16]
+ 649 0258 E1E7     		b	.L40
+ 650              	.L64:
+ 168:Core/Src/motor.c **** 	else
+ 651              		.loc 1 168 3 is_stmt 1 view .LVU249
+ 168:Core/Src/motor.c **** 	else
+ 652              		.loc 1 168 14 is_stmt 0 view .LVU250
+ 653 025a 1F4B     		ldr	r3, .L65+32
+ 654 025c 0022     		movs	r2, #0
+ 655 025e 1A74     		strb	r2, [r3, #16]
+ 656 0260 E5E7     		b	.L44
+ 657              	.LVL9:
+ 658              	.L45:
+ 659              	.LBB3:
+ 171:Core/Src/motor.c **** 
+ 172:Core/Src/motor.c **** 	for (uint8_t i = 0; i < 6; i++)
+ 173:Core/Src/motor.c **** 	{
+ 174:Core/Src/motor.c **** 		step[i] = (int)(error_angle[i] * 127.3239566);
+ 660              		.loc 1 174 3 is_stmt 1 view .LVU251
+ 661              		.loc 1 174 30 is_stmt 0 view .LVU252
+ 662 0262 14AB     		add	r3, sp, #80
+ 663 0264 03EB8403 		add	r3, r3, r4, lsl #2
+ 664 0268 53F8480C 		ldr	r0, [r3, #-72]	@ float
+ 665 026c FFF7FEFF 		bl	__aeabi_f2d
+ 666              	.LVL10:
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 16
+
+
+ 667              		.loc 1 174 34 view .LVU253
+ 668 0270 11A3     		adr	r3, .L65
+ 669 0272 D3E90023 		ldrd	r2, [r3]
+ 670 0276 FFF7FEFF 		bl	__aeabi_dmul
+ 671              	.LVL11:
+ 672              		.loc 1 174 13 view .LVU254
+ 673 027a FFF7FEFF 		bl	__aeabi_d2iz
+ 674              	.LVL12:
+ 675              		.loc 1 174 11 view .LVU255
+ 676 027e 45F82400 		str	r0, [r5, r4, lsl #2]
+ 172:Core/Src/motor.c **** 	{
+ 677              		.loc 1 172 30 is_stmt 1 discriminator 3 view .LVU256
+ 678 0282 0134     		adds	r4, r4, #1
+ 679              	.LVL13:
+ 172:Core/Src/motor.c **** 	{
+ 680              		.loc 1 172 30 is_stmt 0 discriminator 3 view .LVU257
+ 681 0284 E4B2     		uxtb	r4, r4
+ 682              	.LVL14:
+ 683              	.L43:
+ 172:Core/Src/motor.c **** 	{
+ 684              		.loc 1 172 24 is_stmt 1 discriminator 1 view .LVU258
+ 685 0286 052C     		cmp	r4, #5
+ 686 0288 EBD9     		bls	.L45
+ 687              	.LBE3:
+ 175:Core/Src/motor.c **** 	}
+ 176:Core/Src/motor.c **** 	step[6] = (int)end_action;
+ 688              		.loc 1 176 2 view .LVU259
+ 689              		.loc 1 176 10 is_stmt 0 view .LVU260
+ 690 028a AE61     		str	r6, [r5, #24]
+ 177:Core/Src/motor.c **** 	joint1.now_angle = tar_angle[0];
+ 691              		.loc 1 177 2 is_stmt 1 view .LVU261
+ 692              		.loc 1 177 19 is_stmt 0 view .LVU262
+ 693 028c 0D4B     		ldr	r3, .L65+12
+ 694 028e C3ED029A 		vstr.32	s19, [r3, #8]
+ 178:Core/Src/motor.c **** 	joint2.now_angle = tar_angle[1];
+ 695              		.loc 1 178 2 is_stmt 1 view .LVU263
+ 696              		.loc 1 178 19 is_stmt 0 view .LVU264
+ 697 0292 0D4B     		ldr	r3, .L65+16
+ 698 0294 83ED02AA 		vstr.32	s20, [r3, #8]
+ 179:Core/Src/motor.c **** 	joint3.now_angle = tar_angle[2];
+ 699              		.loc 1 179 2 is_stmt 1 view .LVU265
+ 700              		.loc 1 179 19 is_stmt 0 view .LVU266
+ 701 0298 0C4B     		ldr	r3, .L65+20
+ 702 029a C3ED02AA 		vstr.32	s21, [r3, #8]
+ 180:Core/Src/motor.c **** 	joint4.now_angle = tar_angle[3];
+ 703              		.loc 1 180 2 is_stmt 1 view .LVU267
+ 704              		.loc 1 180 19 is_stmt 0 view .LVU268
+ 705 029e 0C4B     		ldr	r3, .L65+24
+ 706 02a0 83ED029A 		vstr.32	s18, [r3, #8]
+ 181:Core/Src/motor.c **** 	joint5.now_angle = tar_angle[4];
+ 707              		.loc 1 181 2 is_stmt 1 view .LVU269
+ 708              		.loc 1 181 19 is_stmt 0 view .LVU270
+ 709 02a4 0B4B     		ldr	r3, .L65+28
+ 710 02a6 C3ED028A 		vstr.32	s17, [r3, #8]
+ 182:Core/Src/motor.c **** 	joint6.now_angle = tar_angle[5];
+ 711              		.loc 1 182 2 is_stmt 1 view .LVU271
+ 712              		.loc 1 182 19 is_stmt 0 view .LVU272
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 17
+
+
+ 713 02aa 0B4B     		ldr	r3, .L65+32
+ 714 02ac 83ED028A 		vstr.32	s16, [r3, #8]
+ 183:Core/Src/motor.c **** }
+ 715              		.loc 1 183 1 view .LVU273
+ 716 02b0 14B0     		add	sp, sp, #80
+ 717              	.LCFI4:
+ 718              		.cfi_def_cfa_offset 40
+ 719              		@ sp needed
+ 720 02b2 BDEC068B 		vldm	sp!, {d8-d10}
+ 721              	.LCFI5:
+ 722              		.cfi_restore 84
+ 723              		.cfi_restore 85
+ 724              		.cfi_restore 82
+ 725              		.cfi_restore 83
+ 726              		.cfi_restore 80
+ 727              		.cfi_restore 81
+ 728              		.cfi_def_cfa_offset 16
+ 729 02b6 70BD     		pop	{r4, r5, r6, pc}
+ 730              	.LVL15:
+ 731              	.L66:
+ 732              		.loc 1 183 1 view .LVU274
+ 733              		.align	3
+ 734              	.L65:
+ 735 02b8 B29476B4 		.word	-1267297102
+ 736 02bc BBD45F40 		.word	1080022203
+ 737 02c0 00000000 		.word	.LANCHOR0
+ 738 02c4 00000000 		.word	joint1
+ 739 02c8 00000000 		.word	joint2
+ 740 02cc 00000000 		.word	joint3
+ 741 02d0 00000000 		.word	joint4
+ 742 02d4 00000000 		.word	joint5
+ 743 02d8 00000000 		.word	joint6
+ 744              		.cfi_endproc
+ 745              	.LFE135:
+ 747              		.section	.text.Dir_Set,"ax",%progbits
+ 748              		.align	1
+ 749              		.global	Dir_Set
+ 750              		.syntax unified
+ 751              		.thumb
+ 752              		.thumb_func
+ 754              	Dir_Set:
+ 755              	.LVL16:
+ 756              	.LFB139:
+ 184:Core/Src/motor.c **** 
+ 185:Core/Src/motor.c **** /*
+ 186:Core/Src/motor.c **** thisi is reset key
+ 187:Core/Src/motor.c **** joint1 G13
+ 188:Core/Src/motor.c **** joint2 G12
+ 189:Core/Src/motor.c **** joint3 G11
+ 190:Core/Src/motor.c **** joint4 G10
+ 191:Core/Src/motor.c **** joint5 G9
+ 192:Core/Src/motor.c **** joint6 D7
+ 193:Core/Src/motor.c **** */
+ 194:Core/Src/motor.c **** 
+ 195:Core/Src/motor.c **** u8 Reset_joint(void)
+ 196:Core/Src/motor.c **** {
+ 197:Core/Src/motor.c **** 	// joint1->joint6
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 18
+
+
+ 198:Core/Src/motor.c **** 	// hand is completely open
+ 199:Core/Src/motor.c **** 	// first we move joint1 without stopping,then one by one
+ 200:Core/Src/motor.c **** 
+ 201:Core/Src/motor.c **** 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
+ 202:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+ 203:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+ 204:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+ 205:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+ 206:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
+ 207:Core/Src/motor.c **** 
+ 208:Core/Src/motor.c **** 	int step = 1;
+ 209:Core/Src/motor.c **** 
+ 210:Core/Src/motor.c **** 	while (1)
+ 211:Core/Src/motor.c **** 	{
+ 212:Core/Src/motor.c **** 
+ 213:Core/Src/motor.c **** 		Motor_Action(joint1_GPIO_Port, joint1_Pin, step);
+ 214:Core/Src/motor.c **** 		if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
+ 215:Core/Src/motor.c **** 		{
+ 216:Core/Src/motor.c **** 
+ 217:Core/Src/motor.c **** 			joint1.isreset = Reset;
+ 218:Core/Src/motor.c **** 			break;
+ 219:Core/Src/motor.c **** 		}
+ 220:Core/Src/motor.c **** 	}
+ 221:Core/Src/motor.c **** 	joint1.dir = Forward;
+ 222:Core/Src/motor.c **** 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
+ 223:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, 16900);
+ 224:Core/Src/motor.c **** 
+ 225:Core/Src/motor.c **** 	while (1)
+ 226:Core/Src/motor.c **** 	{
+ 227:Core/Src/motor.c **** 		Motor_Action(joint2_GPIO_Port, joint2_Pin, step);
+ 228:Core/Src/motor.c **** 		if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
+ 229:Core/Src/motor.c **** 		{
+ 230:Core/Src/motor.c **** 			joint2.isreset = Reset;
+ 231:Core/Src/motor.c **** 			break;
+ 232:Core/Src/motor.c **** 		}
+ 233:Core/Src/motor.c **** 	}
+ 234:Core/Src/motor.c **** 	joint2.dir = Reverse;
+ 235:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+ 236:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, 3400);
+ 237:Core/Src/motor.c **** 
+ 238:Core/Src/motor.c **** 
+ 239:Core/Src/motor.c **** 	while (1)
+ 240:Core/Src/motor.c **** 	{
+ 241:Core/Src/motor.c **** 		Motor_Action(joint3_GPIO_Port, joint3_Pin, step);
+ 242:Core/Src/motor.c **** 		if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
+ 243:Core/Src/motor.c **** 		{
+ 244:Core/Src/motor.c **** 
+ 245:Core/Src/motor.c **** 			joint3.isreset = Reset;
+ 246:Core/Src/motor.c **** 			break;
+ 247:Core/Src/motor.c **** 		}
+ 248:Core/Src/motor.c **** 	}
  249:Core/Src/motor.c **** 
- 250:Core/Src/motor.c **** 	while(1)
- 251:Core/Src/motor.c **** 	{
- 252:Core/Src/motor.c **** 		Motor_Action(joint2_GPIO_Port,joint2_Pin,step);
- 253:Core/Src/motor.c **** 		if(Read_KEY(K2_GPIO_Port,K2_Pin) == GPIO_PIN_RESET)
- 254:Core/Src/motor.c **** 		{
- 255:Core/Src/motor.c **** 			HAL_Delay(20);
- 256:Core/Src/motor.c **** 			if(Read_KEY(K2_GPIO_Port,K2_Pin) == GPIO_PIN_RESET)
- 257:Core/Src/motor.c **** 			{
- 258:Core/Src/motor.c **** 				joint2.isreset=Reset;
- 259:Core/Src/motor.c **** 				break;
- 260:Core/Src/motor.c **** 			}
+ 250:Core/Src/motor.c **** 	joint3.dir = Forward;
+ 251:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+ 252:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, 800);
+ 253:Core/Src/motor.c **** 
+ 254:Core/Src/motor.c **** 	while (1)
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 19
+
+
+ 255:Core/Src/motor.c **** 	{
+ 256:Core/Src/motor.c **** 		Motor_Action(joint4_GPIO_Port, joint4_Pin, step);
+ 257:Core/Src/motor.c **** 		if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
+ 258:Core/Src/motor.c **** 		{
+ 259:Core/Src/motor.c **** 			joint4.isreset = Reset;
+ 260:Core/Src/motor.c **** 			break;
  261:Core/Src/motor.c **** 		}
  262:Core/Src/motor.c **** 	}
- 263:Core/Src/motor.c **** 	*/
- 264:Core/Src/motor.c **** 	return OK;
- 265:Core/Src/motor.c **** }
+ 263:Core/Src/motor.c **** 	joint4.dir = Forward;
+ 264:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+ 265:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, 10275);
  266:Core/Src/motor.c **** 
- 267:Core/Src/motor.c **** // 方向控制
- 268:Core/Src/motor.c **** void Motor_Dir(void)
- 269:Core/Src/motor.c **** {
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 16
-
-
- 270:Core/Src/motor.c **** 	Dir_Set(joint1_GPIO_Port, joint1_Pin, (GPIO_PinState)joint1.dir);
- 271:Core/Src/motor.c **** 	Dir_Set(joint2_GPIO_Port, joint2_Pin, (GPIO_PinState)joint2.dir);
- 272:Core/Src/motor.c **** 	Dir_Set(joint3_GPIO_Port, joint3_Pin, (GPIO_PinState)joint3.dir);
- 273:Core/Src/motor.c **** 	Dir_Set(joint4_GPIO_Port, joint4_Pin, (GPIO_PinState)joint4.dir);
- 274:Core/Src/motor.c **** 	Dir_Set(joint5_GPIO_Port, joint5_Pin, (GPIO_PinState)joint5.dir);
- 275:Core/Src/motor.c **** 	Dir_Set(joint6_GPIO_Port, joint6_Pin, (GPIO_PinState)joint6.dir);
- 276:Core/Src/motor.c **** }
+ 267:Core/Src/motor.c **** 
+ 268:Core/Src/motor.c **** 
+ 269:Core/Src/motor.c **** 	while (1)
+ 270:Core/Src/motor.c **** 	{
+ 271:Core/Src/motor.c **** 		Motor_Action(joint5_GPIO_Port, joint5_Pin, step);
+ 272:Core/Src/motor.c **** 		if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
+ 273:Core/Src/motor.c **** 		{
+ 274:Core/Src/motor.c **** 
+ 275:Core/Src/motor.c **** 				joint5.isreset = Reset;
+ 276:Core/Src/motor.c **** 				break;
  277:Core/Src/motor.c **** 
- 278:Core/Src/motor.c **** // 上层运动控制
- 279:Core/Src/motor.c **** u8 Motor_Move(int *step)
- 280:Core/Src/motor.c **** {
- 281:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
- 282:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
- 283:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
- 284:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
- 285:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
- 286:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
- 287:Core/Src/motor.c **** 	if (hand.action == ON)
- 288:Core/Src/motor.c **** 	{
- 289:Core/Src/motor.c **** 		// 打开夹爪
- 290:Core/Src/motor.c **** 	}
- 291:Core/Src/motor.c **** 	else if (hand.action != ON)
- 292:Core/Src/motor.c **** 	{
- 293:Core/Src/motor.c **** 		// 关闭夹爪
- 294:Core/Src/motor.c **** 	}
- 295:Core/Src/motor.c **** 	return OK;
- 296:Core/Src/motor.c **** }
- 297:Core/Src/motor.c **** 
- 298:Core/Src/motor.c **** // 底层方向函数
- 299:Core/Src/motor.c **** u8 Dir_Set(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState Dir)
- 300:Core/Src/motor.c **** {
- 571              		.loc 1 300 1 is_stmt 1 view -0
- 572              		.cfi_startproc
- 573              		@ args = 0, pretend = 0, frame = 0
- 574              		@ frame_needed = 0, uses_anonymous_args = 0
- 575              		.loc 1 300 1 is_stmt 0 view .LVU201
- 576 0000 08B5     		push	{r3, lr}
- 577              	.LCFI5:
- 578              		.cfi_def_cfa_offset 8
- 579              		.cfi_offset 3, -8
- 580              		.cfi_offset 14, -4
- 301:Core/Src/motor.c **** 	HAL_GPIO_WritePin(GPIOx, GPIO_Pin, Dir);
- 581              		.loc 1 301 2 is_stmt 1 view .LVU202
- 582 0002 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 583              	.LVL18:
- 302:Core/Src/motor.c **** 	return OK;
- 584              		.loc 1 302 2 view .LVU203
- 303:Core/Src/motor.c **** }
- 585              		.loc 1 303 1 is_stmt 0 view .LVU204
- 586 0006 0120     		movs	r0, #1
- 587 0008 08BD     		pop	{r3, pc}
- 588              		.cfi_endproc
- 589              	.LFE139:
- 591              		.section	.text.Motor_Dir,"ax",%progbits
- 592              		.align	1
- 593              		.global	Motor_Dir
- 594              		.syntax unified
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 17
+ 278:Core/Src/motor.c **** 		}
+ 279:Core/Src/motor.c **** 	}
+ 280:Core/Src/motor.c **** 	joint5.dir = Forward;
+ 281:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+ 282:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, 2300);
+ 283:Core/Src/motor.c **** 
+ 284:Core/Src/motor.c **** 	while (1)
+ 285:Core/Src/motor.c **** 	{
+ 286:Core/Src/motor.c **** 		Motor_Action(joint6_GPIO_Port, joint6_Pin, step);
+ 287:Core/Src/motor.c **** 		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
+ 288:Core/Src/motor.c **** 		{
+ 289:Core/Src/motor.c **** 			joint6.isreset = Reset;
+ 290:Core/Src/motor.c **** 			break;
+ 291:Core/Src/motor.c **** 		}
+ 292:Core/Src/motor.c **** 	}
+ 293:Core/Src/motor.c **** 	joint6.dir=Reverse;
+ 294:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,(GPIO_PinState)joint6.dir);
+ 295:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, 1620);
+ 296:Core/Src/motor.c **** 	while(1)
+ 297:Core/Src/motor.c **** 	{}
+ 298:Core/Src/motor.c **** 	/*
+ 299:Core/Src/motor.c **** 	@this is a servo debug ,so we should know how to control the servo
+ 300:Core/Src/motor.c **** 
+ 301:Core/Src/motor.c **** 	while(1)
+ 302:Core/Src/motor.c **** 	{
+ 303:Core/Src/motor.c **** 		Motor_Action(joint2_GPIO_Port,joint2_Pin,step);
+ 304:Core/Src/motor.c **** 		if(Read_KEY(K2_GPIO_Port,K2_Pin) == GPIO_PIN_RESET)
+ 305:Core/Src/motor.c **** 		{
+ 306:Core/Src/motor.c **** 			HAL_Delay(20);
+ 307:Core/Src/motor.c **** 			if(Read_KEY(K2_GPIO_Port,K2_Pin) == GPIO_PIN_RESET)
+ 308:Core/Src/motor.c **** 			{
+ 309:Core/Src/motor.c **** 				joint2.isreset=Reset;
+ 310:Core/Src/motor.c **** 				break;
+ 311:Core/Src/motor.c **** 			}
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 20
 
 
- 595              		.thumb
- 596              		.thumb_func
- 598              	Motor_Dir:
- 599              	.LFB137:
- 269:Core/Src/motor.c **** 	Dir_Set(joint1_GPIO_Port, joint1_Pin, (GPIO_PinState)joint1.dir);
- 600              		.loc 1 269 1 is_stmt 1 view -0
- 601              		.cfi_startproc
- 602              		@ args = 0, pretend = 0, frame = 0
- 603              		@ frame_needed = 0, uses_anonymous_args = 0
- 604 0000 10B5     		push	{r4, lr}
- 605              	.LCFI6:
- 606              		.cfi_def_cfa_offset 8
- 607              		.cfi_offset 4, -8
- 608              		.cfi_offset 14, -4
- 270:Core/Src/motor.c **** 	Dir_Set(joint2_GPIO_Port, joint2_Pin, (GPIO_PinState)joint2.dir);
- 609              		.loc 1 270 2 view .LVU206
- 610 0002 144B     		ldr	r3, .L52
- 611 0004 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 612 0006 4FF40071 		mov	r1, #512
- 613 000a 1348     		ldr	r0, .L52+4
- 614 000c FFF7FEFF 		bl	Dir_Set
- 615              	.LVL19:
- 271:Core/Src/motor.c **** 	Dir_Set(joint3_GPIO_Port, joint3_Pin, (GPIO_PinState)joint3.dir);
- 616              		.loc 1 271 2 view .LVU207
- 617 0010 124C     		ldr	r4, .L52+8
- 618 0012 134B     		ldr	r3, .L52+12
- 619 0014 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 620 0016 2021     		movs	r1, #32
- 621 0018 2046     		mov	r0, r4
- 622 001a FFF7FEFF 		bl	Dir_Set
- 623              	.LVL20:
- 272:Core/Src/motor.c **** 	Dir_Set(joint4_GPIO_Port, joint4_Pin, (GPIO_PinState)joint4.dir);
- 624              		.loc 1 272 2 view .LVU208
- 625 001e 114B     		ldr	r3, .L52+16
- 626 0020 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 627 0022 4021     		movs	r1, #64
- 628 0024 2046     		mov	r0, r4
- 629 0026 FFF7FEFF 		bl	Dir_Set
- 630              	.LVL21:
- 273:Core/Src/motor.c **** 	Dir_Set(joint5_GPIO_Port, joint5_Pin, (GPIO_PinState)joint5.dir);
- 631              		.loc 1 273 2 view .LVU209
- 632 002a 0F4B     		ldr	r3, .L52+20
- 633 002c 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 634 002e 4FF48051 		mov	r1, #4096
- 635 0032 0E48     		ldr	r0, .L52+24
- 636 0034 FFF7FEFF 		bl	Dir_Set
- 637              	.LVL22:
- 274:Core/Src/motor.c **** 	Dir_Set(joint6_GPIO_Port, joint6_Pin, (GPIO_PinState)joint6.dir);
- 638              		.loc 1 274 2 view .LVU210
- 639 0038 0D4B     		ldr	r3, .L52+28
- 640 003a 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 641 003c 0121     		movs	r1, #1
- 642 003e 2046     		mov	r0, r4
- 643 0040 FFF7FEFF 		bl	Dir_Set
- 644              	.LVL23:
- 275:Core/Src/motor.c **** }
- 645              		.loc 1 275 2 view .LVU211
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 18
+ 312:Core/Src/motor.c **** 		}
+ 313:Core/Src/motor.c **** 	}
+ 314:Core/Src/motor.c **** 	*/
+ 315:Core/Src/motor.c **** 	return OK;
+ 316:Core/Src/motor.c **** }
+ 317:Core/Src/motor.c **** 
+ 318:Core/Src/motor.c **** // 方向控制
+ 319:Core/Src/motor.c **** void Motor_Dir(void)
+ 320:Core/Src/motor.c **** {
+ 321:Core/Src/motor.c **** 	Dir_Set(joint1_GPIO_Port, joint1_Pin, (GPIO_PinState)joint1.dir);
+ 322:Core/Src/motor.c **** 	Dir_Set(joint2_GPIO_Port, joint2_Pin, (GPIO_PinState)joint2.dir);
+ 323:Core/Src/motor.c **** 	Dir_Set(joint3_GPIO_Port, joint3_Pin, (GPIO_PinState)joint3.dir);
+ 324:Core/Src/motor.c **** 	Dir_Set(joint4_GPIO_Port, joint4_Pin, (GPIO_PinState)joint4.dir);
+ 325:Core/Src/motor.c **** 	Dir_Set(joint5_GPIO_Port, joint5_Pin, (GPIO_PinState)joint5.dir);
+ 326:Core/Src/motor.c **** 	Dir_Set(joint6_GPIO_Port, joint6_Pin, (GPIO_PinState)joint6.dir);
+ 327:Core/Src/motor.c **** }
+ 328:Core/Src/motor.c **** 
+ 329:Core/Src/motor.c **** // 上层运动控制
+ 330:Core/Src/motor.c **** u8 Motor_Move(int *step)
+ 331:Core/Src/motor.c **** {
+ 332:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
+ 333:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
+ 334:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
+ 335:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
+ 336:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
+ 337:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
+ 338:Core/Src/motor.c **** 	if (hand.action == ON)
+ 339:Core/Src/motor.c **** 	{
+ 340:Core/Src/motor.c **** 		// 打开夹爪
+ 341:Core/Src/motor.c **** 	}
+ 342:Core/Src/motor.c **** 	else if (hand.action != ON)
+ 343:Core/Src/motor.c **** 	{
+ 344:Core/Src/motor.c **** 		// 关闭夹爪
+ 345:Core/Src/motor.c **** 	}
+ 346:Core/Src/motor.c **** 	return OK;
+ 347:Core/Src/motor.c **** }
+ 348:Core/Src/motor.c **** 
+ 349:Core/Src/motor.c **** // 底层方向函数
+ 350:Core/Src/motor.c **** u8 Dir_Set(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState Dir)
+ 351:Core/Src/motor.c **** {
+ 757              		.loc 1 351 1 is_stmt 1 view -0
+ 758              		.cfi_startproc
+ 759              		@ args = 0, pretend = 0, frame = 0
+ 760              		@ frame_needed = 0, uses_anonymous_args = 0
+ 761              		.loc 1 351 1 is_stmt 0 view .LVU276
+ 762 0000 08B5     		push	{r3, lr}
+ 763              	.LCFI6:
+ 764              		.cfi_def_cfa_offset 8
+ 765              		.cfi_offset 3, -8
+ 766              		.cfi_offset 14, -4
+ 352:Core/Src/motor.c **** 	if ((GPIOx == DIR1_GPIO_Port && GPIO_Pin == DIR1_Pin) ||
+ 767              		.loc 1 352 2 is_stmt 1 view .LVU277
+ 768              		.loc 1 352 5 is_stmt 0 view .LVU278
+ 769 0002 174B     		ldr	r3, .L81
+ 770 0004 9842     		cmp	r0, r3
+ 771 0006 07D0     		beq	.L76
+ 772              	.L68:
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 21
 
 
- 646 0044 0B4B     		ldr	r3, .L52+32
- 647 0046 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 648 0048 1021     		movs	r1, #16
- 649 004a 2046     		mov	r0, r4
- 650 004c FFF7FEFF 		bl	Dir_Set
- 651              	.LVL24:
- 276:Core/Src/motor.c **** 
- 652              		.loc 1 276 1 is_stmt 0 view .LVU212
- 653 0050 10BD     		pop	{r4, pc}
- 654              	.L53:
- 655 0052 00BF     		.align	2
- 656              	.L52:
- 657 0054 00000000 		.word	joint1
- 658 0058 00100240 		.word	1073876992
- 659 005c 00000240 		.word	1073872896
- 660 0060 00000000 		.word	joint2
- 661 0064 00000000 		.word	joint3
- 662 0068 00000000 		.word	joint4
- 663 006c 000C0240 		.word	1073875968
- 664 0070 00000000 		.word	joint5
- 665 0074 00000000 		.word	joint6
- 666              		.cfi_endproc
- 667              	.LFE137:
- 669              		.section	.text.Motor_Action,"ax",%progbits
- 670              		.align	1
- 671              		.global	Motor_Action
- 672              		.syntax unified
- 673              		.thumb
- 674              		.thumb_func
- 676              	Motor_Action:
- 677              	.LVL25:
- 678              	.LFB140:
- 304:Core/Src/motor.c **** // 底层函数运动函数
- 305:Core/Src/motor.c **** u8 Motor_Action(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, int Step)
- 306:Core/Src/motor.c **** {
- 679              		.loc 1 306 1 is_stmt 1 view -0
- 680              		.cfi_startproc
- 681              		@ args = 0, pretend = 0, frame = 0
- 682              		@ frame_needed = 0, uses_anonymous_args = 0
- 683              		.loc 1 306 1 is_stmt 0 view .LVU214
- 684 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 685              	.LCFI7:
- 686              		.cfi_def_cfa_offset 24
- 687              		.cfi_offset 3, -24
- 688              		.cfi_offset 4, -20
- 689              		.cfi_offset 5, -16
- 690              		.cfi_offset 6, -12
- 691              		.cfi_offset 7, -8
- 692              		.cfi_offset 14, -4
- 693 0002 0746     		mov	r7, r0
- 694 0004 0E46     		mov	r6, r1
- 695 0006 1546     		mov	r5, r2
- 307:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
- 696              		.loc 1 307 2 is_stmt 1 view .LVU215
- 697              	.LBB5:
- 698              		.loc 1 307 7 view .LVU216
- 699              	.LVL26:
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 19
+ 773              		.loc 1 352 56 discriminator 3 view .LVU279
+ 774 0008 164B     		ldr	r3, .L81+4
+ 775 000a 9842     		cmp	r0, r3
+ 776 000c 0DD0     		beq	.L77
+ 777              	.L70:
+ 353:Core/Src/motor.c **** 		(GPIOx == DIR5_GPIO_Port && GPIO_Pin == DIR5_Pin) ||
+ 354:Core/Src/motor.c **** 		(GPIOx == DIR6_GPIO_Port && GPIO_Pin == DIR6_Pin))
+ 355:Core/Src/motor.c **** 	{
+ 356:Core/Src/motor.c **** 		if (Dir == Forward)
+ 357:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 358:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 359:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 360:Core/Src/motor.c **** 	}
+ 361:Core/Src/motor.c **** 	else if ((GPIOx == DIR2_GPIO_Port && GPIO_Pin == DIR2_Pin) ||
+ 778              		.loc 1 361 7 is_stmt 1 view .LVU280
+ 779              		.loc 1 361 10 is_stmt 0 view .LVU281
+ 780 000e 144B     		ldr	r3, .L81
+ 781 0010 9842     		cmp	r0, r3
+ 782 0012 12D0     		beq	.L78
+ 783              	.LVL17:
+ 784              	.L72:
+ 362:Core/Src/motor.c **** 			 (GPIOx == DIR3_GPIO_Port && GPIO_Pin == DIR3_Pin) ||
+ 363:Core/Src/motor.c **** 			 (GPIOx == DIR4_GPIO_Port && GPIO_Pin == DIR4_Pin))
+ 364:Core/Src/motor.c **** 	{
+ 365:Core/Src/motor.c **** 		if (Dir == Forward)
+ 366:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 367:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 368:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 369:Core/Src/motor.c **** 	}
+ 370:Core/Src/motor.c **** 	else
+ 371:Core/Src/motor.c **** 	{
+ 372:Core/Src/motor.c **** 		return ERROR; // 错误的引脚
+ 373:Core/Src/motor.c **** 	}
+ 374:Core/Src/motor.c **** 
+ 375:Core/Src/motor.c **** 	return OK;
+ 376:Core/Src/motor.c **** }
+ 785              		.loc 1 376 1 view .LVU282
+ 786 0014 0120     		movs	r0, #1
+ 787 0016 08BD     		pop	{r3, pc}
+ 788              	.LVL18:
+ 789              	.L76:
+ 352:Core/Src/motor.c **** 		(GPIOx == DIR5_GPIO_Port && GPIO_Pin == DIR5_Pin) ||
+ 790              		.loc 1 352 31 discriminator 1 view .LVU283
+ 791 0018 0829     		cmp	r1, #8
+ 792 001a F5D1     		bne	.L68
+ 793              	.L69:
+ 356:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 794              		.loc 1 356 3 is_stmt 1 view .LVU284
+ 356:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 795              		.loc 1 356 6 is_stmt 0 view .LVU285
+ 796 001c 012A     		cmp	r2, #1
+ 797 001e 09D0     		beq	.L79
+ 358:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 798              		.loc 1 358 8 is_stmt 1 view .LVU286
+ 358:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 799              		.loc 1 358 11 is_stmt 0 view .LVU287
+ 800 0020 002A     		cmp	r2, #0
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 22
 
 
- 700              		.loc 1 307 11 is_stmt 0 view .LVU217
- 701 0008 0024     		movs	r4, #0
- 702              		.loc 1 307 2 view .LVU218
- 703 000a 07E0     		b	.L55
- 704              	.LVL27:
- 705              	.L56:
- 308:Core/Src/motor.c **** 	{
- 309:Core/Src/motor.c **** 		Toggle(GPIOx, GPIO_Pin);
- 706              		.loc 1 309 3 is_stmt 1 view .LVU219
- 707 000c 3146     		mov	r1, r6
- 708 000e 3846     		mov	r0, r7
- 709 0010 FFF7FEFF 		bl	Toggle
- 710              	.LVL28:
- 310:Core/Src/motor.c **** 		for_delay_us(100);
- 711              		.loc 1 310 3 view .LVU220
- 712 0014 6420     		movs	r0, #100
- 713 0016 FFF7FEFF 		bl	for_delay_us
- 714              	.LVL29:
- 307:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
- 715              		.loc 1 307 29 discriminator 3 view .LVU221
- 716 001a 0134     		adds	r4, r4, #1
- 717              	.LVL30:
- 718              	.L55:
- 307:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
- 719              		.loc 1 307 20 discriminator 1 view .LVU222
- 720 001c AC42     		cmp	r4, r5
- 721 001e F5DB     		blt	.L56
- 722              	.LBE5:
- 311:Core/Src/motor.c **** 	}
- 312:Core/Src/motor.c **** 	return OK;
- 723              		.loc 1 312 2 view .LVU223
- 313:Core/Src/motor.c **** }
- 724              		.loc 1 313 1 is_stmt 0 view .LVU224
- 725 0020 0120     		movs	r0, #1
- 726 0022 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 727              		.loc 1 313 1 view .LVU225
- 728              		.cfi_endproc
- 729              	.LFE140:
- 731              		.section	.text.Reset_joint,"ax",%progbits
- 732              		.align	1
- 733              		.global	Reset_joint
- 734              		.syntax unified
- 735              		.thumb
- 736              		.thumb_func
- 738              	Reset_joint:
- 739              	.LFB136:
- 151:Core/Src/motor.c **** 	// joint1->joint6
- 740              		.loc 1 151 1 is_stmt 1 view -0
- 741              		.cfi_startproc
- 742              		@ args = 0, pretend = 0, frame = 0
- 743              		@ frame_needed = 0, uses_anonymous_args = 0
- 744 0000 10B5     		push	{r4, lr}
- 745              	.LCFI8:
- 746              		.cfi_def_cfa_offset 8
- 747              		.cfi_offset 4, -8
- 748              		.cfi_offset 14, -4
- 156:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 20
+ 801 0022 F7D1     		bne	.L72
+ 359:Core/Src/motor.c **** 	}
+ 802              		.loc 1 359 4 is_stmt 1 view .LVU288
+ 803 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 804              	.LVL19:
+ 359:Core/Src/motor.c **** 	}
+ 805              		.loc 1 359 4 is_stmt 0 view .LVU289
+ 806 0028 F4E7     		b	.L72
+ 807              	.LVL20:
+ 808              	.L77:
+ 353:Core/Src/motor.c **** 		(GPIOx == DIR6_GPIO_Port && GPIO_Pin == DIR6_Pin))
+ 809              		.loc 1 353 28 view .LVU290
+ 810 002a 4029     		cmp	r1, #64
+ 811 002c F6D0     		beq	.L69
+ 354:Core/Src/motor.c **** 	{
+ 812              		.loc 1 354 28 view .LVU291
+ 813 002e 2029     		cmp	r1, #32
+ 814 0030 EDD1     		bne	.L70
+ 815 0032 F3E7     		b	.L69
+ 816              	.L79:
+ 357:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 817              		.loc 1 357 4 is_stmt 1 view .LVU292
+ 818 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 819              	.LVL21:
+ 357:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 820              		.loc 1 357 4 is_stmt 0 view .LVU293
+ 821 0038 ECE7     		b	.L72
+ 822              	.LVL22:
+ 823              	.L78:
+ 362:Core/Src/motor.c **** 			 (GPIOx == DIR4_GPIO_Port && GPIO_Pin == DIR4_Pin))
+ 824              		.loc 1 362 55 view .LVU294
+ 825 003a 1029     		cmp	r1, #16
+ 826 003c 04D0     		beq	.L73
+ 361:Core/Src/motor.c **** 			 (GPIOx == DIR3_GPIO_Port && GPIO_Pin == DIR3_Pin) ||
+ 827              		.loc 1 361 61 view .LVU295
+ 828 003e 2029     		cmp	r1, #32
+ 829 0040 02D0     		beq	.L73
+ 362:Core/Src/motor.c **** 			 (GPIOx == DIR4_GPIO_Port && GPIO_Pin == DIR4_Pin))
+ 830              		.loc 1 362 55 view .LVU296
+ 831 0042 B1F5807F 		cmp	r1, #256
+ 832 0046 E5D1     		bne	.L72
+ 833              	.L73:
+ 365:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 834              		.loc 1 365 3 is_stmt 1 view .LVU297
+ 365:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+ 835              		.loc 1 365 6 is_stmt 0 view .LVU298
+ 836 0048 012A     		cmp	r2, #1
+ 837 004a 05D0     		beq	.L80
+ 367:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 838              		.loc 1 367 8 is_stmt 1 view .LVU299
+ 367:Core/Src/motor.c **** 			HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+ 839              		.loc 1 367 11 is_stmt 0 view .LVU300
+ 840 004c 002A     		cmp	r2, #0
+ 841 004e E1D1     		bne	.L72
+ 368:Core/Src/motor.c **** 	}
+ 842              		.loc 1 368 4 is_stmt 1 view .LVU301
+ 843 0050 0122     		movs	r2, #1
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 23
 
 
- 749              		.loc 1 156 2 view .LVU227
- 750 0002 5F4C     		ldr	r4, .L72
- 751 0004 5F4B     		ldr	r3, .L72+4
- 752 0006 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 753 0008 0821     		movs	r1, #8
- 754 000a 2046     		mov	r0, r4
- 755 000c FFF7FEFF 		bl	Dir_Set
- 756              	.LVL31:
- 157:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
- 757              		.loc 1 157 2 view .LVU228
- 758 0010 5D4B     		ldr	r3, .L72+8
- 759 0012 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 760 0014 1021     		movs	r1, #16
- 761 0016 2046     		mov	r0, r4
- 762 0018 FFF7FEFF 		bl	Dir_Set
- 763              	.LVL32:
- 158:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
- 764              		.loc 1 158 2 view .LVU229
- 765 001c 5B4B     		ldr	r3, .L72+12
- 766 001e 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 767 0020 2021     		movs	r1, #32
- 768 0022 2046     		mov	r0, r4
- 769 0024 FFF7FEFF 		bl	Dir_Set
- 770              	.LVL33:
- 159:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
- 771              		.loc 1 159 2 view .LVU230
- 772 0028 594B     		ldr	r3, .L72+16
- 773 002a 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 774 002c 4FF48071 		mov	r1, #256
- 775 0030 2046     		mov	r0, r4
- 776 0032 FFF7FEFF 		bl	Dir_Set
- 777              	.LVL34:
- 160:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
- 778              		.loc 1 160 2 view .LVU231
- 779 0036 04F50064 		add	r4, r4, #2048
- 780 003a 564B     		ldr	r3, .L72+20
- 781 003c 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 782 003e 4021     		movs	r1, #64
- 783 0040 2046     		mov	r0, r4
- 784 0042 FFF7FEFF 		bl	Dir_Set
- 785              	.LVL35:
- 161:Core/Src/motor.c **** 
- 786              		.loc 1 161 2 view .LVU232
- 787 0046 544B     		ldr	r3, .L72+24
- 788 0048 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
- 789 004a 2021     		movs	r1, #32
- 790 004c 2046     		mov	r0, r4
- 791 004e FFF7FEFF 		bl	Dir_Set
- 792              	.LVL36:
- 163:Core/Src/motor.c **** 	while (1)
- 793              		.loc 1 163 2 view .LVU233
- 794              	.L59:
- 164:Core/Src/motor.c **** 	{
- 795              		.loc 1 164 2 view .LVU234
- 166:Core/Src/motor.c **** 		if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
- 796              		.loc 1 166 3 view .LVU235
- 797 0052 0122     		movs	r2, #1
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 21
+ 844              	.LVL23:
+ 368:Core/Src/motor.c **** 	}
+ 845              		.loc 1 368 4 is_stmt 0 view .LVU302
+ 846 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 847              	.LVL24:
+ 368:Core/Src/motor.c **** 	}
+ 848              		.loc 1 368 4 view .LVU303
+ 849 0056 DDE7     		b	.L72
+ 850              	.LVL25:
+ 851              	.L80:
+ 366:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 852              		.loc 1 366 4 is_stmt 1 view .LVU304
+ 853 0058 0022     		movs	r2, #0
+ 854              	.LVL26:
+ 366:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 855              		.loc 1 366 4 is_stmt 0 view .LVU305
+ 856 005a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 857              	.LVL27:
+ 366:Core/Src/motor.c **** 		else if (Dir == Reverse)
+ 858              		.loc 1 366 4 view .LVU306
+ 859 005e D9E7     		b	.L72
+ 860              	.L82:
+ 861              		.align	2
+ 862              	.L81:
+ 863 0060 00040240 		.word	1073873920
+ 864 0064 000C0240 		.word	1073875968
+ 865              		.cfi_endproc
+ 866              	.LFE139:
+ 868              		.section	.text.Motor_Dir,"ax",%progbits
+ 869              		.align	1
+ 870              		.global	Motor_Dir
+ 871              		.syntax unified
+ 872              		.thumb
+ 873              		.thumb_func
+ 875              	Motor_Dir:
+ 876              	.LFB137:
+ 320:Core/Src/motor.c **** 	Dir_Set(joint1_GPIO_Port, joint1_Pin, (GPIO_PinState)joint1.dir);
+ 877              		.loc 1 320 1 is_stmt 1 view -0
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 0
+ 880              		@ frame_needed = 0, uses_anonymous_args = 0
+ 881 0000 38B5     		push	{r3, r4, r5, lr}
+ 882              	.LCFI7:
+ 883              		.cfi_def_cfa_offset 16
+ 884              		.cfi_offset 3, -16
+ 885              		.cfi_offset 4, -12
+ 886              		.cfi_offset 5, -8
+ 887              		.cfi_offset 14, -4
+ 321:Core/Src/motor.c **** 	Dir_Set(joint2_GPIO_Port, joint2_Pin, (GPIO_PinState)joint2.dir);
+ 888              		.loc 1 321 2 view .LVU308
+ 889 0002 144D     		ldr	r5, .L85
+ 890 0004 144B     		ldr	r3, .L85+4
+ 891 0006 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 892 0008 0821     		movs	r1, #8
+ 893 000a 2846     		mov	r0, r5
+ 894 000c FFF7FEFF 		bl	Dir_Set
+ 895              	.LVL28:
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 24
 
 
- 798 0054 4FF40071 		mov	r1, #512
- 799 0058 5048     		ldr	r0, .L72+28
- 800 005a FFF7FEFF 		bl	Motor_Action
- 801              	.LVL37:
- 167:Core/Src/motor.c **** 		{
- 802              		.loc 1 167 3 view .LVU236
- 167:Core/Src/motor.c **** 		{
- 803              		.loc 1 167 7 is_stmt 0 view .LVU237
- 804 005e 4FF40051 		mov	r1, #8192
- 805 0062 4F48     		ldr	r0, .L72+32
- 806 0064 FFF7FEFF 		bl	Read_KEY
- 807              	.LVL38:
- 167:Core/Src/motor.c **** 		{
- 808              		.loc 1 167 6 discriminator 1 view .LVU238
- 809 0068 0028     		cmp	r0, #0
- 810 006a F2D1     		bne	.L59
- 169:Core/Src/motor.c **** 			if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
- 811              		.loc 1 169 4 is_stmt 1 view .LVU239
- 812 006c 1420     		movs	r0, #20
- 813 006e FFF7FEFF 		bl	HAL_Delay
- 814              	.LVL39:
- 170:Core/Src/motor.c **** 			{
- 815              		.loc 1 170 4 view .LVU240
- 170:Core/Src/motor.c **** 			{
- 816              		.loc 1 170 8 is_stmt 0 view .LVU241
- 817 0072 4FF40051 		mov	r1, #8192
- 818 0076 4A48     		ldr	r0, .L72+32
- 819 0078 FFF7FEFF 		bl	Read_KEY
- 820              	.LVL40:
- 170:Core/Src/motor.c **** 			{
- 821              		.loc 1 170 7 discriminator 1 view .LVU242
- 822 007c 0028     		cmp	r0, #0
- 823 007e E8D1     		bne	.L59
- 172:Core/Src/motor.c **** 				break;
- 824              		.loc 1 172 5 is_stmt 1 view .LVU243
- 172:Core/Src/motor.c **** 				break;
- 825              		.loc 1 172 20 is_stmt 0 view .LVU244
- 826 0080 404B     		ldr	r3, .L72+4
- 827 0082 0122     		movs	r2, #1
- 828 0084 5A74     		strb	r2, [r3, #17]
- 173:Core/Src/motor.c **** 			}
- 829              		.loc 1 173 5 is_stmt 1 view .LVU245
- 830              	.L61:
- 178:Core/Src/motor.c **** 	{
- 831              		.loc 1 178 2 view .LVU246
- 180:Core/Src/motor.c **** 		if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
- 832              		.loc 1 180 3 view .LVU247
- 833 0086 0122     		movs	r2, #1
- 834 0088 2021     		movs	r1, #32
- 835 008a 4648     		ldr	r0, .L72+36
- 836 008c FFF7FEFF 		bl	Motor_Action
- 837              	.LVL41:
- 181:Core/Src/motor.c **** 		{
- 838              		.loc 1 181 3 view .LVU248
- 181:Core/Src/motor.c **** 		{
- 839              		.loc 1 181 7 is_stmt 0 view .LVU249
- 840 0090 4FF48051 		mov	r1, #4096
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 22
+ 322:Core/Src/motor.c **** 	Dir_Set(joint3_GPIO_Port, joint3_Pin, (GPIO_PinState)joint3.dir);
+ 896              		.loc 1 322 2 view .LVU309
+ 897 0010 124C     		ldr	r4, .L85+8
+ 898 0012 134B     		ldr	r3, .L85+12
+ 899 0014 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 900 0016 2021     		movs	r1, #32
+ 901 0018 2046     		mov	r0, r4
+ 902 001a FFF7FEFF 		bl	Dir_Set
+ 903              	.LVL29:
+ 323:Core/Src/motor.c **** 	Dir_Set(joint4_GPIO_Port, joint4_Pin, (GPIO_PinState)joint4.dir);
+ 904              		.loc 1 323 2 view .LVU310
+ 905 001e 114B     		ldr	r3, .L85+16
+ 906 0020 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 907 0022 4021     		movs	r1, #64
+ 908 0024 2046     		mov	r0, r4
+ 909 0026 FFF7FEFF 		bl	Dir_Set
+ 910              	.LVL30:
+ 324:Core/Src/motor.c **** 	Dir_Set(joint5_GPIO_Port, joint5_Pin, (GPIO_PinState)joint5.dir);
+ 911              		.loc 1 324 2 view .LVU311
+ 912 002a 0F4B     		ldr	r3, .L85+20
+ 913 002c 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 914 002e 4FF48051 		mov	r1, #4096
+ 915 0032 2846     		mov	r0, r5
+ 916 0034 FFF7FEFF 		bl	Dir_Set
+ 917              	.LVL31:
+ 325:Core/Src/motor.c **** 	Dir_Set(joint6_GPIO_Port, joint6_Pin, (GPIO_PinState)joint6.dir);
+ 918              		.loc 1 325 2 view .LVU312
+ 919 0038 0C4B     		ldr	r3, .L85+24
+ 920 003a 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 921 003c 0121     		movs	r1, #1
+ 922 003e 2046     		mov	r0, r4
+ 923 0040 FFF7FEFF 		bl	Dir_Set
+ 924              	.LVL32:
+ 326:Core/Src/motor.c **** }
+ 925              		.loc 1 326 2 view .LVU313
+ 926 0044 0A4B     		ldr	r3, .L85+28
+ 927 0046 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 928 0048 1021     		movs	r1, #16
+ 929 004a 2046     		mov	r0, r4
+ 930 004c FFF7FEFF 		bl	Dir_Set
+ 931              	.LVL33:
+ 327:Core/Src/motor.c **** 
+ 932              		.loc 1 327 1 is_stmt 0 view .LVU314
+ 933 0050 38BD     		pop	{r3, r4, r5, pc}
+ 934              	.L86:
+ 935 0052 00BF     		.align	2
+ 936              	.L85:
+ 937 0054 000C0240 		.word	1073875968
+ 938 0058 00000000 		.word	joint1
+ 939 005c 00000240 		.word	1073872896
+ 940 0060 00000000 		.word	joint2
+ 941 0064 00000000 		.word	joint3
+ 942 0068 00000000 		.word	joint4
+ 943 006c 00000000 		.word	joint5
+ 944 0070 00000000 		.word	joint6
+ 945              		.cfi_endproc
+ 946              	.LFE137:
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 25
 
 
- 841 0094 4248     		ldr	r0, .L72+32
- 842 0096 FFF7FEFF 		bl	Read_KEY
- 843              	.LVL42:
- 181:Core/Src/motor.c **** 		{
- 844              		.loc 1 181 6 discriminator 1 view .LVU250
- 845 009a 0028     		cmp	r0, #0
- 846 009c F3D1     		bne	.L61
- 183:Core/Src/motor.c **** 			if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
- 847              		.loc 1 183 4 is_stmt 1 view .LVU251
- 848 009e 1420     		movs	r0, #20
- 849 00a0 FFF7FEFF 		bl	HAL_Delay
- 850              	.LVL43:
- 184:Core/Src/motor.c **** 			{
- 851              		.loc 1 184 4 view .LVU252
- 184:Core/Src/motor.c **** 			{
- 852              		.loc 1 184 8 is_stmt 0 view .LVU253
- 853 00a4 4FF48051 		mov	r1, #4096
- 854 00a8 3D48     		ldr	r0, .L72+32
- 855 00aa FFF7FEFF 		bl	Read_KEY
- 856              	.LVL44:
- 184:Core/Src/motor.c **** 			{
- 857              		.loc 1 184 7 discriminator 1 view .LVU254
- 858 00ae 0028     		cmp	r0, #0
- 859 00b0 E9D1     		bne	.L61
- 186:Core/Src/motor.c **** 				break;
- 860              		.loc 1 186 5 is_stmt 1 view .LVU255
- 186:Core/Src/motor.c **** 				break;
- 861              		.loc 1 186 20 is_stmt 0 view .LVU256
- 862 00b2 354B     		ldr	r3, .L72+8
- 863 00b4 0122     		movs	r2, #1
- 864 00b6 5A74     		strb	r2, [r3, #17]
- 187:Core/Src/motor.c **** 			}
- 865              		.loc 1 187 5 is_stmt 1 view .LVU257
- 866              	.L63:
- 192:Core/Src/motor.c **** 	{
- 867              		.loc 1 192 2 view .LVU258
- 194:Core/Src/motor.c **** 		if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
- 868              		.loc 1 194 3 view .LVU259
- 869 00b8 0122     		movs	r2, #1
- 870 00ba 4021     		movs	r1, #64
- 871 00bc 3948     		ldr	r0, .L72+36
- 872 00be FFF7FEFF 		bl	Motor_Action
- 873              	.LVL45:
- 195:Core/Src/motor.c **** 		{
- 874              		.loc 1 195 3 view .LVU260
- 195:Core/Src/motor.c **** 		{
- 875              		.loc 1 195 7 is_stmt 0 view .LVU261
- 876 00c2 4FF40061 		mov	r1, #2048
- 877 00c6 3648     		ldr	r0, .L72+32
- 878 00c8 FFF7FEFF 		bl	Read_KEY
- 879              	.LVL46:
- 195:Core/Src/motor.c **** 		{
- 880              		.loc 1 195 6 discriminator 1 view .LVU262
- 881 00cc 0028     		cmp	r0, #0
- 882 00ce F3D1     		bne	.L63
- 197:Core/Src/motor.c **** 			if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
- 883              		.loc 1 197 4 is_stmt 1 view .LVU263
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 23
+ 948              		.section	.text.Motor_Action,"ax",%progbits
+ 949              		.align	1
+ 950              		.global	Motor_Action
+ 951              		.syntax unified
+ 952              		.thumb
+ 953              		.thumb_func
+ 955              	Motor_Action:
+ 956              	.LVL34:
+ 957              	.LFB140:
+ 377:Core/Src/motor.c **** // 底层函数运动函数
+ 378:Core/Src/motor.c **** u8 Motor_Action(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, int Step)
+ 379:Core/Src/motor.c **** {
+ 958              		.loc 1 379 1 is_stmt 1 view -0
+ 959              		.cfi_startproc
+ 960              		@ args = 0, pretend = 0, frame = 0
+ 961              		@ frame_needed = 0, uses_anonymous_args = 0
+ 962              		.loc 1 379 1 is_stmt 0 view .LVU316
+ 963 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 964              	.LCFI8:
+ 965              		.cfi_def_cfa_offset 24
+ 966              		.cfi_offset 3, -24
+ 967              		.cfi_offset 4, -20
+ 968              		.cfi_offset 5, -16
+ 969              		.cfi_offset 6, -12
+ 970              		.cfi_offset 7, -8
+ 971              		.cfi_offset 14, -4
+ 972 0002 0746     		mov	r7, r0
+ 973 0004 0E46     		mov	r6, r1
+ 974 0006 1546     		mov	r5, r2
+ 380:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
+ 975              		.loc 1 380 2 is_stmt 1 view .LVU317
+ 976              	.LBB4:
+ 977              		.loc 1 380 7 view .LVU318
+ 978              	.LVL35:
+ 979              		.loc 1 380 11 is_stmt 0 view .LVU319
+ 980 0008 0024     		movs	r4, #0
+ 981              		.loc 1 380 2 view .LVU320
+ 982 000a 08E0     		b	.L88
+ 983              	.LVL36:
+ 984              	.L89:
+ 381:Core/Src/motor.c **** 	{
+ 382:Core/Src/motor.c **** 		Toggle(GPIOx, GPIO_Pin);
+ 985              		.loc 1 382 3 is_stmt 1 view .LVU321
+ 986 000c 3146     		mov	r1, r6
+ 987 000e 3846     		mov	r0, r7
+ 988 0010 FFF7FEFF 		bl	Toggle
+ 989              	.LVL37:
+ 383:Core/Src/motor.c **** 		for_delay_us(300);
+ 990              		.loc 1 383 3 view .LVU322
+ 991 0014 4FF49670 		mov	r0, #300
+ 992 0018 FFF7FEFF 		bl	for_delay_us
+ 993              	.LVL38:
+ 380:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
+ 994              		.loc 1 380 29 discriminator 3 view .LVU323
+ 995 001c 0134     		adds	r4, r4, #1
+ 996              	.LVL39:
+ 997              	.L88:
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 26
 
 
- 884 00d0 1420     		movs	r0, #20
- 885 00d2 FFF7FEFF 		bl	HAL_Delay
- 886              	.LVL47:
- 198:Core/Src/motor.c **** 			{
- 887              		.loc 1 198 4 view .LVU264
- 198:Core/Src/motor.c **** 			{
- 888              		.loc 1 198 8 is_stmt 0 view .LVU265
- 889 00d6 4FF40061 		mov	r1, #2048
- 890 00da 3148     		ldr	r0, .L72+32
- 891 00dc FFF7FEFF 		bl	Read_KEY
- 892              	.LVL48:
- 198:Core/Src/motor.c **** 			{
- 893              		.loc 1 198 7 discriminator 1 view .LVU266
- 894 00e0 0028     		cmp	r0, #0
- 895 00e2 E9D1     		bne	.L63
- 200:Core/Src/motor.c **** 				break;
- 896              		.loc 1 200 5 is_stmt 1 view .LVU267
- 200:Core/Src/motor.c **** 				break;
- 897              		.loc 1 200 20 is_stmt 0 view .LVU268
- 898 00e4 294B     		ldr	r3, .L72+12
- 899 00e6 0122     		movs	r2, #1
- 900 00e8 5A74     		strb	r2, [r3, #17]
- 201:Core/Src/motor.c **** 			}
- 901              		.loc 1 201 5 is_stmt 1 view .LVU269
- 902              	.L65:
- 206:Core/Src/motor.c **** 	{
- 903              		.loc 1 206 2 view .LVU270
- 208:Core/Src/motor.c **** 		if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
- 904              		.loc 1 208 3 view .LVU271
- 905 00ea 0122     		movs	r2, #1
- 906 00ec 4FF48051 		mov	r1, #4096
- 907 00f0 2D48     		ldr	r0, .L72+40
- 908 00f2 FFF7FEFF 		bl	Motor_Action
- 909              	.LVL49:
- 209:Core/Src/motor.c **** 		{
- 910              		.loc 1 209 3 view .LVU272
- 209:Core/Src/motor.c **** 		{
- 911              		.loc 1 209 7 is_stmt 0 view .LVU273
- 912 00f6 4FF48061 		mov	r1, #1024
- 913 00fa 2948     		ldr	r0, .L72+32
- 914 00fc FFF7FEFF 		bl	Read_KEY
- 915              	.LVL50:
- 209:Core/Src/motor.c **** 		{
- 916              		.loc 1 209 6 discriminator 1 view .LVU274
- 917 0100 0028     		cmp	r0, #0
- 918 0102 F2D1     		bne	.L65
- 211:Core/Src/motor.c **** 			if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
- 919              		.loc 1 211 4 is_stmt 1 view .LVU275
- 920 0104 1420     		movs	r0, #20
- 921 0106 FFF7FEFF 		bl	HAL_Delay
- 922              	.LVL51:
- 212:Core/Src/motor.c **** 			{
- 923              		.loc 1 212 4 view .LVU276
- 212:Core/Src/motor.c **** 			{
- 924              		.loc 1 212 8 is_stmt 0 view .LVU277
- 925 010a 4FF48061 		mov	r1, #1024
- 926 010e 2448     		ldr	r0, .L72+32
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 24
+ 380:Core/Src/motor.c **** 	for (int i = 0; i < Step; i++)
+ 998              		.loc 1 380 20 discriminator 1 view .LVU324
+ 999 001e AC42     		cmp	r4, r5
+ 1000 0020 F4DB     		blt	.L89
+ 1001              	.LBE4:
+ 384:Core/Src/motor.c **** 	}
+ 385:Core/Src/motor.c **** 	return OK;
+ 1002              		.loc 1 385 2 view .LVU325
+ 386:Core/Src/motor.c **** }
+ 1003              		.loc 1 386 1 is_stmt 0 view .LVU326
+ 1004 0022 0120     		movs	r0, #1
+ 1005 0024 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1006              		.loc 1 386 1 view .LVU327
+ 1007              		.cfi_endproc
+ 1008              	.LFE140:
+ 1010              		.section	.text.Reset_joint,"ax",%progbits
+ 1011              		.align	1
+ 1012              		.global	Reset_joint
+ 1013              		.syntax unified
+ 1014              		.thumb
+ 1015              		.thumb_func
+ 1017              	Reset_joint:
+ 1018              	.LFB136:
+ 196:Core/Src/motor.c **** 	// joint1->joint6
+ 1019              		.loc 1 196 1 is_stmt 1 view -0
+ 1020              		.cfi_startproc
+ 1021              		@ args = 0, pretend = 0, frame = 0
+ 1022              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1023 0000 10B5     		push	{r4, lr}
+ 1024              	.LCFI9:
+ 1025              		.cfi_def_cfa_offset 8
+ 1026              		.cfi_offset 4, -8
+ 1027              		.cfi_offset 14, -4
+ 201:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+ 1028              		.loc 1 201 2 view .LVU329
+ 1029 0002 684C     		ldr	r4, .L100
+ 1030 0004 684B     		ldr	r3, .L100+4
+ 1031 0006 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1032 0008 0821     		movs	r1, #8
+ 1033 000a 2046     		mov	r0, r4
+ 1034 000c FFF7FEFF 		bl	Dir_Set
+ 1035              	.LVL40:
+ 202:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+ 1036              		.loc 1 202 2 view .LVU330
+ 1037 0010 664B     		ldr	r3, .L100+8
+ 1038 0012 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1039 0014 1021     		movs	r1, #16
+ 1040 0016 2046     		mov	r0, r4
+ 1041 0018 FFF7FEFF 		bl	Dir_Set
+ 1042              	.LVL41:
+ 203:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+ 1043              		.loc 1 203 2 view .LVU331
+ 1044 001c 644B     		ldr	r3, .L100+12
+ 1045 001e 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1046 0020 2021     		movs	r1, #32
+ 1047 0022 2046     		mov	r0, r4
+ 1048 0024 FFF7FEFF 		bl	Dir_Set
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 27
 
 
- 927 0110 FFF7FEFF 		bl	Read_KEY
- 928              	.LVL52:
- 212:Core/Src/motor.c **** 			{
- 929              		.loc 1 212 7 discriminator 1 view .LVU278
- 930 0114 0028     		cmp	r0, #0
- 931 0116 E8D1     		bne	.L65
- 214:Core/Src/motor.c **** 				break;
- 932              		.loc 1 214 5 is_stmt 1 view .LVU279
- 214:Core/Src/motor.c **** 				break;
- 933              		.loc 1 214 20 is_stmt 0 view .LVU280
- 934 0118 1D4B     		ldr	r3, .L72+16
- 935 011a 0122     		movs	r2, #1
- 936 011c 5A74     		strb	r2, [r3, #17]
- 215:Core/Src/motor.c **** 			}
- 937              		.loc 1 215 5 is_stmt 1 view .LVU281
- 938              	.L67:
- 220:Core/Src/motor.c **** 	{
- 939              		.loc 1 220 2 view .LVU282
- 222:Core/Src/motor.c **** 		if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
- 940              		.loc 1 222 3 view .LVU283
- 941 011e 0122     		movs	r2, #1
- 942 0120 1146     		mov	r1, r2
- 943 0122 2048     		ldr	r0, .L72+36
- 944 0124 FFF7FEFF 		bl	Motor_Action
- 945              	.LVL53:
- 223:Core/Src/motor.c **** 		{
- 946              		.loc 1 223 3 view .LVU284
- 223:Core/Src/motor.c **** 		{
- 947              		.loc 1 223 7 is_stmt 0 view .LVU285
- 948 0128 4FF40071 		mov	r1, #512
- 949 012c 1C48     		ldr	r0, .L72+32
- 950 012e FFF7FEFF 		bl	Read_KEY
- 951              	.LVL54:
- 223:Core/Src/motor.c **** 		{
- 952              		.loc 1 223 6 discriminator 1 view .LVU286
- 953 0132 0028     		cmp	r0, #0
- 954 0134 F3D1     		bne	.L67
- 225:Core/Src/motor.c **** 			if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
- 955              		.loc 1 225 4 is_stmt 1 view .LVU287
- 956 0136 1420     		movs	r0, #20
- 957 0138 FFF7FEFF 		bl	HAL_Delay
- 958              	.LVL55:
- 226:Core/Src/motor.c **** 			{
- 959              		.loc 1 226 4 view .LVU288
- 226:Core/Src/motor.c **** 			{
- 960              		.loc 1 226 8 is_stmt 0 view .LVU289
- 961 013c 4FF40071 		mov	r1, #512
- 962 0140 1748     		ldr	r0, .L72+32
- 963 0142 FFF7FEFF 		bl	Read_KEY
- 964              	.LVL56:
- 226:Core/Src/motor.c **** 			{
- 965              		.loc 1 226 7 discriminator 1 view .LVU290
- 966 0146 0028     		cmp	r0, #0
- 967 0148 E9D1     		bne	.L67
- 228:Core/Src/motor.c **** 				break;
- 968              		.loc 1 228 5 is_stmt 1 view .LVU291
- 228:Core/Src/motor.c **** 				break;
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 25
+ 1049              	.LVL42:
+ 204:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+ 1050              		.loc 1 204 2 view .LVU332
+ 1051 0028 624B     		ldr	r3, .L100+16
+ 1052 002a 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1053 002c 4FF48071 		mov	r1, #256
+ 1054 0030 2046     		mov	r0, r4
+ 1055 0032 FFF7FEFF 		bl	Dir_Set
+ 1056              	.LVL43:
+ 205:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
+ 1057              		.loc 1 205 2 view .LVU333
+ 1058 0036 04F50064 		add	r4, r4, #2048
+ 1059 003a 5F4B     		ldr	r3, .L100+20
+ 1060 003c 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1061 003e 4021     		movs	r1, #64
+ 1062 0040 2046     		mov	r0, r4
+ 1063 0042 FFF7FEFF 		bl	Dir_Set
+ 1064              	.LVL44:
+ 206:Core/Src/motor.c **** 
+ 1065              		.loc 1 206 2 view .LVU334
+ 1066 0046 5D4B     		ldr	r3, .L100+24
+ 1067 0048 1A7C     		ldrb	r2, [r3, #16]	@ zero_extendqisi2
+ 1068 004a 2021     		movs	r1, #32
+ 1069 004c 2046     		mov	r0, r4
+ 1070 004e FFF7FEFF 		bl	Dir_Set
+ 1071              	.LVL45:
+ 208:Core/Src/motor.c **** 
+ 1072              		.loc 1 208 2 view .LVU335
+ 1073              	.L92:
+ 210:Core/Src/motor.c **** 	{
+ 1074              		.loc 1 210 2 view .LVU336
+ 213:Core/Src/motor.c **** 		if (Read_KEY(K1_GPIO_Port, K1_Pin) == GPIO_PIN_RESET)
+ 1075              		.loc 1 213 3 view .LVU337
+ 1076 0052 0122     		movs	r2, #1
+ 1077 0054 0821     		movs	r1, #8
+ 1078 0056 5A48     		ldr	r0, .L100+28
+ 1079 0058 FFF7FEFF 		bl	Motor_Action
+ 1080              	.LVL46:
+ 214:Core/Src/motor.c **** 		{
+ 1081              		.loc 1 214 3 view .LVU338
+ 214:Core/Src/motor.c **** 		{
+ 1082              		.loc 1 214 7 is_stmt 0 view .LVU339
+ 1083 005c 0421     		movs	r1, #4
+ 1084 005e 5948     		ldr	r0, .L100+32
+ 1085 0060 FFF7FEFF 		bl	Read_KEY
+ 1086              	.LVL47:
+ 214:Core/Src/motor.c **** 		{
+ 1087              		.loc 1 214 6 discriminator 1 view .LVU340
+ 1088 0064 0028     		cmp	r0, #0
+ 1089 0066 F4D1     		bne	.L92
+ 217:Core/Src/motor.c **** 			break;
+ 1090              		.loc 1 217 4 is_stmt 1 view .LVU341
+ 217:Core/Src/motor.c **** 			break;
+ 1091              		.loc 1 217 19 is_stmt 0 view .LVU342
+ 1092 0068 4F4B     		ldr	r3, .L100+4
+ 1093 006a 0122     		movs	r2, #1
+ 1094 006c 5A74     		strb	r2, [r3, #17]
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 28
 
 
- 969              		.loc 1 228 20 is_stmt 0 view .LVU292
- 970 014a 124B     		ldr	r3, .L72+20
- 971 014c 0122     		movs	r2, #1
- 972 014e 5A74     		strb	r2, [r3, #17]
- 229:Core/Src/motor.c **** 			}
- 973              		.loc 1 229 5 is_stmt 1 view .LVU293
- 974              	.L69:
- 234:Core/Src/motor.c **** 	{
- 975              		.loc 1 234 2 view .LVU294
- 236:Core/Src/motor.c **** 		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
- 976              		.loc 1 236 3 view .LVU295
- 977 0150 0122     		movs	r2, #1
- 978 0152 1021     		movs	r1, #16
- 979 0154 1348     		ldr	r0, .L72+36
- 980 0156 FFF7FEFF 		bl	Motor_Action
- 981              	.LVL57:
- 237:Core/Src/motor.c **** 		{
- 982              		.loc 1 237 3 view .LVU296
- 237:Core/Src/motor.c **** 		{
- 983              		.loc 1 237 7 is_stmt 0 view .LVU297
- 984 015a 8021     		movs	r1, #128
- 985 015c 1248     		ldr	r0, .L72+40
- 986 015e FFF7FEFF 		bl	Read_KEY
- 987              	.LVL58:
- 237:Core/Src/motor.c **** 		{
- 988              		.loc 1 237 6 discriminator 1 view .LVU298
- 989 0162 0028     		cmp	r0, #0
- 990 0164 F4D1     		bne	.L69
- 239:Core/Src/motor.c **** 			if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
- 991              		.loc 1 239 4 is_stmt 1 view .LVU299
- 992 0166 1420     		movs	r0, #20
- 993 0168 FFF7FEFF 		bl	HAL_Delay
- 994              	.LVL59:
- 240:Core/Src/motor.c **** 			{
- 995              		.loc 1 240 4 view .LVU300
- 240:Core/Src/motor.c **** 			{
- 996              		.loc 1 240 8 is_stmt 0 view .LVU301
- 997 016c 8021     		movs	r1, #128
- 998 016e 0E48     		ldr	r0, .L72+40
- 999 0170 FFF7FEFF 		bl	Read_KEY
- 1000              	.LVL60:
- 240:Core/Src/motor.c **** 			{
- 1001              		.loc 1 240 7 discriminator 1 view .LVU302
- 1002 0174 0028     		cmp	r0, #0
- 1003 0176 EBD1     		bne	.L69
- 242:Core/Src/motor.c **** 				break;
- 1004              		.loc 1 242 5 is_stmt 1 view .LVU303
- 242:Core/Src/motor.c **** 				break;
- 1005              		.loc 1 242 20 is_stmt 0 view .LVU304
- 1006 0178 0120     		movs	r0, #1
- 1007 017a 074B     		ldr	r3, .L72+24
- 1008 017c 5874     		strb	r0, [r3, #17]
- 243:Core/Src/motor.c **** 			}
- 1009              		.loc 1 243 5 is_stmt 1 view .LVU305
- 264:Core/Src/motor.c **** }
- 1010              		.loc 1 264 2 view .LVU306
+ 218:Core/Src/motor.c **** 		}
+ 1095              		.loc 1 218 4 is_stmt 1 view .LVU343
+ 221:Core/Src/motor.c **** 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
+ 1096              		.loc 1 221 2 view .LVU344
+ 221:Core/Src/motor.c **** 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
+ 1097              		.loc 1 221 13 is_stmt 0 view .LVU345
+ 1098 006e 1A74     		strb	r2, [r3, #16]
+ 222:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, 16900);
+ 1099              		.loc 1 222 2 is_stmt 1 view .LVU346
+ 1100 0070 0821     		movs	r1, #8
+ 1101 0072 00F18040 		add	r0, r0, #1073741824
+ 1102 0076 00F50130 		add	r0, r0, #132096
+ 1103 007a FFF7FEFF 		bl	Dir_Set
+ 1104              	.LVL48:
+ 223:Core/Src/motor.c **** 
+ 1105              		.loc 1 223 2 view .LVU347
+ 1106 007e 44F20422 		movw	r2, #16900
+ 1107 0082 0821     		movs	r1, #8
+ 1108 0084 4E48     		ldr	r0, .L100+28
+ 1109 0086 FFF7FEFF 		bl	Motor_Action
+ 1110              	.LVL49:
+ 1111              	.L93:
+ 225:Core/Src/motor.c **** 	{
+ 1112              		.loc 1 225 2 view .LVU348
+ 227:Core/Src/motor.c **** 		if (Read_KEY(K2_GPIO_Port, K2_Pin) == GPIO_PIN_RESET)
+ 1113              		.loc 1 227 3 view .LVU349
+ 1114 008a 0122     		movs	r2, #1
+ 1115 008c 2021     		movs	r1, #32
+ 1116 008e 4E48     		ldr	r0, .L100+36
+ 1117 0090 FFF7FEFF 		bl	Motor_Action
+ 1118              	.LVL50:
+ 228:Core/Src/motor.c **** 		{
+ 1119              		.loc 1 228 3 view .LVU350
+ 228:Core/Src/motor.c **** 		{
+ 1120              		.loc 1 228 7 is_stmt 0 view .LVU351
+ 1121 0094 0821     		movs	r1, #8
+ 1122 0096 4B48     		ldr	r0, .L100+32
+ 1123 0098 FFF7FEFF 		bl	Read_KEY
+ 1124              	.LVL51:
+ 228:Core/Src/motor.c **** 		{
+ 1125              		.loc 1 228 6 discriminator 1 view .LVU352
+ 1126 009c 0028     		cmp	r0, #0
+ 1127 009e F4D1     		bne	.L93
+ 230:Core/Src/motor.c **** 			break;
+ 1128              		.loc 1 230 4 is_stmt 1 view .LVU353
+ 230:Core/Src/motor.c **** 			break;
+ 1129              		.loc 1 230 19 is_stmt 0 view .LVU354
+ 1130 00a0 424B     		ldr	r3, .L100+8
+ 1131 00a2 0122     		movs	r2, #1
+ 1132 00a4 5A74     		strb	r2, [r3, #17]
+ 231:Core/Src/motor.c **** 		}
+ 1133              		.loc 1 231 4 is_stmt 1 view .LVU355
+ 234:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+ 1134              		.loc 1 234 2 view .LVU356
+ 234:Core/Src/motor.c **** 	Dir_Set(DIR2_GPIO_Port, DIR2_Pin, (GPIO_PinState)joint2.dir);
+ 1135              		.loc 1 234 13 is_stmt 0 view .LVU357
+ 1136 00a6 0022     		movs	r2, #0
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 29
+
+
+ 1137 00a8 1A74     		strb	r2, [r3, #16]
+ 235:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, 3400);
+ 1138              		.loc 1 235 2 is_stmt 1 view .LVU358
+ 1139 00aa 1021     		movs	r1, #16
+ 1140 00ac 00F18040 		add	r0, r0, #1073741824
+ 1141 00b0 00F50130 		add	r0, r0, #132096
+ 1142 00b4 FFF7FEFF 		bl	Dir_Set
+ 1143              	.LVL52:
+ 236:Core/Src/motor.c **** 
+ 1144              		.loc 1 236 2 view .LVU359
+ 1145 00b8 40F64852 		movw	r2, #3400
+ 1146 00bc 2021     		movs	r1, #32
+ 1147 00be 4248     		ldr	r0, .L100+36
+ 1148 00c0 FFF7FEFF 		bl	Motor_Action
+ 1149              	.LVL53:
+ 1150              	.L94:
+ 239:Core/Src/motor.c **** 	{
+ 1151              		.loc 1 239 2 view .LVU360
+ 241:Core/Src/motor.c **** 		if (Read_KEY(K3_GPIO_Port, K3_Pin) == GPIO_PIN_RESET)
+ 1152              		.loc 1 241 3 view .LVU361
+ 1153 00c4 0122     		movs	r2, #1
+ 1154 00c6 4021     		movs	r1, #64
+ 1155 00c8 3F48     		ldr	r0, .L100+36
+ 1156 00ca FFF7FEFF 		bl	Motor_Action
+ 1157              	.LVL54:
+ 242:Core/Src/motor.c **** 		{
+ 1158              		.loc 1 242 3 view .LVU362
+ 242:Core/Src/motor.c **** 		{
+ 1159              		.loc 1 242 7 is_stmt 0 view .LVU363
+ 1160 00ce 1021     		movs	r1, #16
+ 1161 00d0 3C48     		ldr	r0, .L100+32
+ 1162 00d2 FFF7FEFF 		bl	Read_KEY
+ 1163              	.LVL55:
+ 242:Core/Src/motor.c **** 		{
+ 1164              		.loc 1 242 6 discriminator 1 view .LVU364
+ 1165 00d6 0028     		cmp	r0, #0
+ 1166 00d8 F4D1     		bne	.L94
+ 245:Core/Src/motor.c **** 			break;
+ 1167              		.loc 1 245 4 is_stmt 1 view .LVU365
+ 245:Core/Src/motor.c **** 			break;
+ 1168              		.loc 1 245 19 is_stmt 0 view .LVU366
+ 1169 00da 354B     		ldr	r3, .L100+12
+ 1170 00dc 0122     		movs	r2, #1
+ 1171 00de 5A74     		strb	r2, [r3, #17]
+ 246:Core/Src/motor.c **** 		}
+ 1172              		.loc 1 246 4 is_stmt 1 view .LVU367
+ 250:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+ 1173              		.loc 1 250 2 view .LVU368
+ 250:Core/Src/motor.c **** 	Dir_Set(DIR3_GPIO_Port, DIR3_Pin, (GPIO_PinState)joint3.dir);
+ 1174              		.loc 1 250 13 is_stmt 0 view .LVU369
+ 1175 00e0 1A74     		strb	r2, [r3, #16]
+ 251:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, 800);
+ 1176              		.loc 1 251 2 is_stmt 1 view .LVU370
+ 1177 00e2 2021     		movs	r1, #32
+ 1178 00e4 00F18040 		add	r0, r0, #1073741824
+ 1179 00e8 00F50130 		add	r0, r0, #132096
+ 1180 00ec FFF7FEFF 		bl	Dir_Set
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 30
+
+
+ 1181              	.LVL56:
+ 252:Core/Src/motor.c **** 
+ 1182              		.loc 1 252 2 view .LVU371
+ 1183 00f0 4FF44872 		mov	r2, #800
+ 1184 00f4 4021     		movs	r1, #64
+ 1185 00f6 3448     		ldr	r0, .L100+36
+ 1186 00f8 FFF7FEFF 		bl	Motor_Action
+ 1187              	.LVL57:
+ 1188              	.L95:
+ 254:Core/Src/motor.c **** 	{
+ 1189              		.loc 1 254 2 view .LVU372
+ 256:Core/Src/motor.c **** 		if (Read_KEY(K4_GPIO_Port, K4_Pin) == GPIO_PIN_RESET)
+ 1190              		.loc 1 256 3 view .LVU373
+ 1191 00fc 0122     		movs	r2, #1
+ 1192 00fe 4FF48051 		mov	r1, #4096
+ 1193 0102 2F48     		ldr	r0, .L100+28
+ 1194 0104 FFF7FEFF 		bl	Motor_Action
+ 1195              	.LVL58:
+ 257:Core/Src/motor.c **** 		{
+ 1196              		.loc 1 257 3 view .LVU374
+ 257:Core/Src/motor.c **** 		{
+ 1197              		.loc 1 257 7 is_stmt 0 view .LVU375
+ 1198 0108 2021     		movs	r1, #32
+ 1199 010a 2E48     		ldr	r0, .L100+32
+ 1200 010c FFF7FEFF 		bl	Read_KEY
+ 1201              	.LVL59:
+ 257:Core/Src/motor.c **** 		{
+ 1202              		.loc 1 257 6 discriminator 1 view .LVU376
+ 1203 0110 0028     		cmp	r0, #0
+ 1204 0112 F3D1     		bne	.L95
+ 259:Core/Src/motor.c **** 			break;
+ 1205              		.loc 1 259 4 is_stmt 1 view .LVU377
+ 259:Core/Src/motor.c **** 			break;
+ 1206              		.loc 1 259 19 is_stmt 0 view .LVU378
+ 1207 0114 274B     		ldr	r3, .L100+16
+ 1208 0116 0122     		movs	r2, #1
+ 1209 0118 5A74     		strb	r2, [r3, #17]
+ 260:Core/Src/motor.c **** 		}
+ 1210              		.loc 1 260 4 is_stmt 1 view .LVU379
+ 263:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+ 1211              		.loc 1 263 2 view .LVU380
+ 263:Core/Src/motor.c **** 	Dir_Set(DIR4_GPIO_Port, DIR4_Pin, (GPIO_PinState)joint4.dir);
+ 1212              		.loc 1 263 13 is_stmt 0 view .LVU381
+ 1213 011a 1A74     		strb	r2, [r3, #16]
+ 264:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, 10275);
+ 1214              		.loc 1 264 2 is_stmt 1 view .LVU382
+ 1215 011c 4FF48071 		mov	r1, #256
+ 1216 0120 00F18040 		add	r0, r0, #1073741824
+ 1217 0124 00F50130 		add	r0, r0, #132096
+ 1218 0128 FFF7FEFF 		bl	Dir_Set
+ 1219              	.LVL60:
  265:Core/Src/motor.c **** 
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 26
+ 1220              		.loc 1 265 2 view .LVU383
+ 1221 012c 42F62302 		movw	r2, #10275
+ 1222 0130 4FF48051 		mov	r1, #4096
+ 1223 0134 2248     		ldr	r0, .L100+28
+ 1224 0136 FFF7FEFF 		bl	Motor_Action
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 31
 
 
- 1011              		.loc 1 265 1 is_stmt 0 view .LVU307
- 1012 017e 10BD     		pop	{r4, pc}
- 1013              	.L73:
- 1014              		.align	2
- 1015              	.L72:
- 1016 0180 00040240 		.word	1073873920
- 1017 0184 00000000 		.word	joint1
- 1018 0188 00000000 		.word	joint2
- 1019 018c 00000000 		.word	joint3
- 1020 0190 00000000 		.word	joint4
- 1021 0194 00000000 		.word	joint5
- 1022 0198 00000000 		.word	joint6
- 1023 019c 00100240 		.word	1073876992
- 1024 01a0 00180240 		.word	1073879040
- 1025 01a4 00000240 		.word	1073872896
- 1026 01a8 000C0240 		.word	1073875968
- 1027              		.cfi_endproc
- 1028              	.LFE136:
- 1030              		.section	.text.Motor_Move,"ax",%progbits
- 1031              		.align	1
- 1032              		.global	Motor_Move
- 1033              		.syntax unified
- 1034              		.thumb
- 1035              		.thumb_func
- 1037              	Motor_Move:
- 1038              	.LVL61:
- 1039              	.LFB138:
- 280:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
- 1040              		.loc 1 280 1 is_stmt 1 view -0
- 1041              		.cfi_startproc
- 1042              		@ args = 0, pretend = 0, frame = 0
- 1043              		@ frame_needed = 0, uses_anonymous_args = 0
- 280:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
- 1044              		.loc 1 280 1 is_stmt 0 view .LVU309
- 1045 0000 38B5     		push	{r3, r4, r5, lr}
- 1046              	.LCFI9:
- 1047              		.cfi_def_cfa_offset 16
- 1048              		.cfi_offset 3, -16
- 1049              		.cfi_offset 4, -12
- 1050              		.cfi_offset 5, -8
- 1051              		.cfi_offset 14, -4
- 1052 0002 0446     		mov	r4, r0
- 281:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
- 1053              		.loc 1 281 2 is_stmt 1 view .LVU310
- 1054 0004 0268     		ldr	r2, [r0]
- 1055 0006 4FF40071 		mov	r1, #512
- 1056 000a 1048     		ldr	r0, .L76
- 1057              	.LVL62:
- 281:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
- 1058              		.loc 1 281 2 is_stmt 0 view .LVU311
- 1059 000c FFF7FEFF 		bl	Motor_Action
- 1060              	.LVL63:
- 282:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
- 1061              		.loc 1 282 2 is_stmt 1 view .LVU312
- 1062 0010 0F4D     		ldr	r5, .L76+4
- 1063 0012 6268     		ldr	r2, [r4, #4]
- 1064 0014 2021     		movs	r1, #32
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 27
+ 1225              	.LVL61:
+ 1226              	.L96:
+ 269:Core/Src/motor.c **** 	{
+ 1227              		.loc 1 269 2 view .LVU384
+ 271:Core/Src/motor.c **** 		if (Read_KEY(K5_GPIO_Port, K5_Pin) == GPIO_PIN_RESET)
+ 1228              		.loc 1 271 3 view .LVU385
+ 1229 013a 0122     		movs	r2, #1
+ 1230 013c 1146     		mov	r1, r2
+ 1231 013e 2248     		ldr	r0, .L100+36
+ 1232 0140 FFF7FEFF 		bl	Motor_Action
+ 1233              	.LVL62:
+ 272:Core/Src/motor.c **** 		{
+ 1234              		.loc 1 272 3 view .LVU386
+ 272:Core/Src/motor.c **** 		{
+ 1235              		.loc 1 272 7 is_stmt 0 view .LVU387
+ 1236 0144 4021     		movs	r1, #64
+ 1237 0146 1F48     		ldr	r0, .L100+32
+ 1238 0148 FFF7FEFF 		bl	Read_KEY
+ 1239              	.LVL63:
+ 272:Core/Src/motor.c **** 		{
+ 1240              		.loc 1 272 6 discriminator 1 view .LVU388
+ 1241 014c 0028     		cmp	r0, #0
+ 1242 014e F4D1     		bne	.L96
+ 275:Core/Src/motor.c **** 				break;
+ 1243              		.loc 1 275 5 is_stmt 1 view .LVU389
+ 275:Core/Src/motor.c **** 				break;
+ 1244              		.loc 1 275 20 is_stmt 0 view .LVU390
+ 1245 0150 194B     		ldr	r3, .L100+20
+ 1246 0152 0124     		movs	r4, #1
+ 1247 0154 5C74     		strb	r4, [r3, #17]
+ 276:Core/Src/motor.c **** 
+ 1248              		.loc 1 276 5 is_stmt 1 view .LVU391
+ 280:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+ 1249              		.loc 1 280 2 view .LVU392
+ 280:Core/Src/motor.c **** 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
+ 1250              		.loc 1 280 13 is_stmt 0 view .LVU393
+ 1251 0156 1C74     		strb	r4, [r3, #16]
+ 281:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, 2300);
+ 1252              		.loc 1 281 2 is_stmt 1 view .LVU394
+ 1253 0158 2246     		mov	r2, r4
+ 1254 015a 4021     		movs	r1, #64
+ 1255 015c 1848     		ldr	r0, .L100+28
+ 1256 015e FFF7FEFF 		bl	Dir_Set
+ 1257              	.LVL64:
+ 282:Core/Src/motor.c **** 
+ 1258              		.loc 1 282 2 view .LVU395
+ 1259 0162 40F6FC02 		movw	r2, #2300
+ 1260 0166 2146     		mov	r1, r4
+ 1261 0168 1748     		ldr	r0, .L100+36
+ 1262 016a FFF7FEFF 		bl	Motor_Action
+ 1263              	.LVL65:
+ 1264              	.L97:
+ 284:Core/Src/motor.c **** 	{
+ 1265              		.loc 1 284 2 view .LVU396
+ 286:Core/Src/motor.c **** 		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
+ 1266              		.loc 1 286 3 view .LVU397
+ 1267 016e 0122     		movs	r2, #1
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 32
 
 
- 1065 0016 2846     		mov	r0, r5
- 1066 0018 FFF7FEFF 		bl	Motor_Action
- 1067              	.LVL64:
- 283:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
- 1068              		.loc 1 283 2 view .LVU313
- 1069 001c A268     		ldr	r2, [r4, #8]
- 1070 001e 4021     		movs	r1, #64
- 1071 0020 2846     		mov	r0, r5
- 1072 0022 FFF7FEFF 		bl	Motor_Action
- 1073              	.LVL65:
- 284:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
- 1074              		.loc 1 284 2 view .LVU314
- 1075 0026 E268     		ldr	r2, [r4, #12]
- 1076 0028 4FF48051 		mov	r1, #4096
- 1077 002c 0948     		ldr	r0, .L76+8
- 1078 002e FFF7FEFF 		bl	Motor_Action
- 1079              	.LVL66:
- 285:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
- 1080              		.loc 1 285 2 view .LVU315
- 1081 0032 2269     		ldr	r2, [r4, #16]
- 1082 0034 0121     		movs	r1, #1
- 1083 0036 2846     		mov	r0, r5
- 1084 0038 FFF7FEFF 		bl	Motor_Action
- 1085              	.LVL67:
- 286:Core/Src/motor.c **** 	if (hand.action == ON)
- 1086              		.loc 1 286 2 view .LVU316
- 1087 003c 6269     		ldr	r2, [r4, #20]
- 1088 003e 1021     		movs	r1, #16
- 1089 0040 2846     		mov	r0, r5
- 1090 0042 FFF7FEFF 		bl	Motor_Action
- 1091              	.LVL68:
- 287:Core/Src/motor.c **** 	{
- 1092              		.loc 1 287 2 view .LVU317
- 291:Core/Src/motor.c **** 	{
- 1093              		.loc 1 291 7 view .LVU318
- 294:Core/Src/motor.c **** 	return OK;
- 1094              		.loc 1 294 2 view .LVU319
- 295:Core/Src/motor.c **** }
- 1095              		.loc 1 295 2 view .LVU320
- 296:Core/Src/motor.c **** 
- 1096              		.loc 1 296 1 is_stmt 0 view .LVU321
- 1097 0046 0120     		movs	r0, #1
- 1098 0048 38BD     		pop	{r3, r4, r5, pc}
- 1099              	.LVL69:
- 1100              	.L77:
- 296:Core/Src/motor.c **** 
- 1101              		.loc 1 296 1 view .LVU322
- 1102 004a 00BF     		.align	2
- 1103              	.L76:
- 1104 004c 00100240 		.word	1073876992
- 1105 0050 00000240 		.word	1073872896
- 1106 0054 000C0240 		.word	1073875968
- 1107              		.cfi_endproc
- 1108              	.LFE138:
- 1110              		.global	hand
- 1111              		.section	.bss.hand,"aw",%nobits
- 1112              		.align	2
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 28
+ 1268 0170 1021     		movs	r1, #16
+ 1269 0172 1548     		ldr	r0, .L100+36
+ 1270 0174 FFF7FEFF 		bl	Motor_Action
+ 1271              	.LVL66:
+ 287:Core/Src/motor.c **** 		{
+ 1272              		.loc 1 287 3 view .LVU398
+ 287:Core/Src/motor.c **** 		{
+ 1273              		.loc 1 287 7 is_stmt 0 view .LVU399
+ 1274 0178 8021     		movs	r1, #128
+ 1275 017a 1148     		ldr	r0, .L100+28
+ 1276 017c FFF7FEFF 		bl	Read_KEY
+ 1277              	.LVL67:
+ 287:Core/Src/motor.c **** 		{
+ 1278              		.loc 1 287 6 discriminator 1 view .LVU400
+ 1279 0180 0028     		cmp	r0, #0
+ 1280 0182 F4D1     		bne	.L97
+ 289:Core/Src/motor.c **** 			break;
+ 1281              		.loc 1 289 4 is_stmt 1 view .LVU401
+ 289:Core/Src/motor.c **** 			break;
+ 1282              		.loc 1 289 19 is_stmt 0 view .LVU402
+ 1283 0184 0D4B     		ldr	r3, .L100+24
+ 1284 0186 0122     		movs	r2, #1
+ 1285 0188 5A74     		strb	r2, [r3, #17]
+ 290:Core/Src/motor.c **** 		}
+ 1286              		.loc 1 290 4 is_stmt 1 view .LVU403
+ 293:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,(GPIO_PinState)joint6.dir);
+ 1287              		.loc 1 293 2 view .LVU404
+ 293:Core/Src/motor.c **** 	Dir_Set(DIR6_GPIO_Port,DIR6_Pin,(GPIO_PinState)joint6.dir);
+ 1288              		.loc 1 293 12 is_stmt 0 view .LVU405
+ 1289 018a 0022     		movs	r2, #0
+ 1290 018c 1A74     		strb	r2, [r3, #16]
+ 294:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, 1620);
+ 1291              		.loc 1 294 2 is_stmt 1 view .LVU406
+ 1292 018e 2021     		movs	r1, #32
+ 1293 0190 0B48     		ldr	r0, .L100+28
+ 1294 0192 FFF7FEFF 		bl	Dir_Set
+ 1295              	.LVL68:
+ 295:Core/Src/motor.c **** 	while(1)
+ 1296              		.loc 1 295 2 view .LVU407
+ 1297 0196 40F25462 		movw	r2, #1620
+ 1298 019a 1021     		movs	r1, #16
+ 1299 019c 0A48     		ldr	r0, .L100+36
+ 1300 019e FFF7FEFF 		bl	Motor_Action
+ 1301              	.LVL69:
+ 1302              	.L98:
+ 296:Core/Src/motor.c **** 	{}
+ 1303              		.loc 1 296 2 view .LVU408
+ 297:Core/Src/motor.c **** 	/*
+ 1304              		.loc 1 297 3 view .LVU409
+ 296:Core/Src/motor.c **** 	{}
+ 1305              		.loc 1 296 7 view .LVU410
+ 1306 01a2 FEE7     		b	.L98
+ 1307              	.L101:
+ 1308              		.align	2
+ 1309              	.L100:
+ 1310 01a4 00040240 		.word	1073873920
+ 1311 01a8 00000000 		.word	joint1
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 33
 
 
- 1115              	hand:
- 1116 0000 00000000 		.space	8
- 1116      00000000 
- 1117              		.global	joint6
- 1118              		.section	.bss.joint6,"aw",%nobits
- 1119              		.align	2
- 1122              	joint6:
- 1123 0000 00000000 		.space	20
- 1123      00000000 
- 1123      00000000 
- 1123      00000000 
- 1123      00000000 
- 1124              		.global	joint5
- 1125              		.section	.bss.joint5,"aw",%nobits
- 1126              		.align	2
- 1129              	joint5:
- 1130 0000 00000000 		.space	20
- 1130      00000000 
- 1130      00000000 
- 1130      00000000 
- 1130      00000000 
- 1131              		.global	joint4
- 1132              		.section	.bss.joint4,"aw",%nobits
- 1133              		.align	2
- 1136              	joint4:
- 1137 0000 00000000 		.space	20
- 1137      00000000 
- 1137      00000000 
- 1137      00000000 
- 1137      00000000 
- 1138              		.global	joint3
- 1139              		.section	.bss.joint3,"aw",%nobits
- 1140              		.align	2
- 1143              	joint3:
- 1144 0000 00000000 		.space	20
- 1144      00000000 
- 1144      00000000 
- 1144      00000000 
- 1144      00000000 
- 1145              		.global	joint2
- 1146              		.section	.bss.joint2,"aw",%nobits
- 1147              		.align	2
- 1150              	joint2:
- 1151 0000 00000000 		.space	20
- 1151      00000000 
- 1151      00000000 
- 1151      00000000 
- 1151      00000000 
- 1152              		.global	joint1
- 1153              		.section	.bss.joint1,"aw",%nobits
- 1154              		.align	2
- 1157              	joint1:
- 1158 0000 00000000 		.space	20
- 1158      00000000 
- 1158      00000000 
- 1158      00000000 
- 1158      00000000 
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 29
+ 1312 01ac 00000000 		.word	joint2
+ 1313 01b0 00000000 		.word	joint3
+ 1314 01b4 00000000 		.word	joint4
+ 1315 01b8 00000000 		.word	joint5
+ 1316 01bc 00000000 		.word	joint6
+ 1317 01c0 000C0240 		.word	1073875968
+ 1318 01c4 00180240 		.word	1073879040
+ 1319 01c8 00000240 		.word	1073872896
+ 1320              		.cfi_endproc
+ 1321              	.LFE136:
+ 1323              		.section	.text.Motor_Move,"ax",%progbits
+ 1324              		.align	1
+ 1325              		.global	Motor_Move
+ 1326              		.syntax unified
+ 1327              		.thumb
+ 1328              		.thumb_func
+ 1330              	Motor_Move:
+ 1331              	.LVL70:
+ 1332              	.LFB138:
+ 331:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
+ 1333              		.loc 1 331 1 view -0
+ 1334              		.cfi_startproc
+ 1335              		@ args = 0, pretend = 0, frame = 0
+ 1336              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331:Core/Src/motor.c **** 	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
+ 1337              		.loc 1 331 1 is_stmt 0 view .LVU412
+ 1338 0000 70B5     		push	{r4, r5, r6, lr}
+ 1339              	.LCFI10:
+ 1340              		.cfi_def_cfa_offset 16
+ 1341              		.cfi_offset 4, -16
+ 1342              		.cfi_offset 5, -12
+ 1343              		.cfi_offset 6, -8
+ 1344              		.cfi_offset 14, -4
+ 1345 0002 0446     		mov	r4, r0
+ 332:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
+ 1346              		.loc 1 332 2 is_stmt 1 view .LVU413
+ 1347 0004 114E     		ldr	r6, .L104
+ 1348 0006 0268     		ldr	r2, [r0]
+ 1349 0008 0821     		movs	r1, #8
+ 1350 000a 3046     		mov	r0, r6
+ 1351              	.LVL71:
+ 332:Core/Src/motor.c **** 	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
+ 1352              		.loc 1 332 2 is_stmt 0 view .LVU414
+ 1353 000c FFF7FEFF 		bl	Motor_Action
+ 1354              	.LVL72:
+ 333:Core/Src/motor.c **** 	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
+ 1355              		.loc 1 333 2 is_stmt 1 view .LVU415
+ 1356 0010 0F4D     		ldr	r5, .L104+4
+ 1357 0012 6268     		ldr	r2, [r4, #4]
+ 1358 0014 2021     		movs	r1, #32
+ 1359 0016 2846     		mov	r0, r5
+ 1360 0018 FFF7FEFF 		bl	Motor_Action
+ 1361              	.LVL73:
+ 334:Core/Src/motor.c **** 	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
+ 1362              		.loc 1 334 2 view .LVU416
+ 1363 001c A268     		ldr	r2, [r4, #8]
+ 1364 001e 4021     		movs	r1, #64
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 34
 
 
- 1159              		.global	radio
- 1160              		.section	.data.radio,"aw"
- 1161              		.align	2
- 1164              	radio:
- 1165 0000 0000E040 		.word	1088421888
- 1166 0004 0000C040 		.word	1086324736
- 1167 0008 00000000 		.word	0
- 1168 000c 00009040 		.word	1083179008
- 1169 0010 0000C040 		.word	1086324736
- 1170 0014 0000C040 		.word	1086324736
- 1171              		.section	.rodata
- 1172              		.align	2
- 1173              		.set	.LANCHOR0,. + 0
- 1174              	.LC0:
- 1175 0000 00005842 		.word	1113063424
- 1176 0004 0000C040 		.word	1086324736
- 1177 0008 00000000 		.word	0
- 1178 000c 00009040 		.word	1083179008
- 1179 0010 00005842 		.word	1113063424
- 1180 0014 0000C040 		.word	1086324736
- 1181              		.text
- 1182              	.Letext0:
- 1183              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
- 1184              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
- 1185              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 1186              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 1187              		.file 6 "Core/Inc/motor.h"
- 1188              		.file 7 "Core/Inc/package.h"
- 1189              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
- 1190              		.file 9 "Core/Inc/main.h"
-ARM GAS  D:\software\msy64\tmp\ccRmEk4t.s 			page 30
+ 1365 0020 2846     		mov	r0, r5
+ 1366 0022 FFF7FEFF 		bl	Motor_Action
+ 1367              	.LVL74:
+ 335:Core/Src/motor.c **** 	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
+ 1368              		.loc 1 335 2 view .LVU417
+ 1369 0026 E268     		ldr	r2, [r4, #12]
+ 1370 0028 4FF48051 		mov	r1, #4096
+ 1371 002c 3046     		mov	r0, r6
+ 1372 002e FFF7FEFF 		bl	Motor_Action
+ 1373              	.LVL75:
+ 336:Core/Src/motor.c **** 	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
+ 1374              		.loc 1 336 2 view .LVU418
+ 1375 0032 2269     		ldr	r2, [r4, #16]
+ 1376 0034 0121     		movs	r1, #1
+ 1377 0036 2846     		mov	r0, r5
+ 1378 0038 FFF7FEFF 		bl	Motor_Action
+ 1379              	.LVL76:
+ 337:Core/Src/motor.c **** 	if (hand.action == ON)
+ 1380              		.loc 1 337 2 view .LVU419
+ 1381 003c 6269     		ldr	r2, [r4, #20]
+ 1382 003e 1021     		movs	r1, #16
+ 1383 0040 2846     		mov	r0, r5
+ 1384 0042 FFF7FEFF 		bl	Motor_Action
+ 1385              	.LVL77:
+ 338:Core/Src/motor.c **** 	{
+ 1386              		.loc 1 338 2 view .LVU420
+ 342:Core/Src/motor.c **** 	{
+ 1387              		.loc 1 342 7 view .LVU421
+ 345:Core/Src/motor.c **** 	return OK;
+ 1388              		.loc 1 345 2 view .LVU422
+ 346:Core/Src/motor.c **** }
+ 1389              		.loc 1 346 2 view .LVU423
+ 347:Core/Src/motor.c **** 
+ 1390              		.loc 1 347 1 is_stmt 0 view .LVU424
+ 1391 0046 0120     		movs	r0, #1
+ 1392 0048 70BD     		pop	{r4, r5, r6, pc}
+ 1393              	.LVL78:
+ 1394              	.L105:
+ 347:Core/Src/motor.c **** 
+ 1395              		.loc 1 347 1 view .LVU425
+ 1396 004a 00BF     		.align	2
+ 1397              	.L104:
+ 1398 004c 000C0240 		.word	1073875968
+ 1399 0050 00000240 		.word	1073872896
+ 1400              		.cfi_endproc
+ 1401              	.LFE138:
+ 1403              		.global	hand
+ 1404              		.section	.bss.hand,"aw",%nobits
+ 1405              		.align	2
+ 1408              	hand:
+ 1409 0000 00000000 		.space	8
+ 1409      00000000 
+ 1410              		.global	joint6
+ 1411              		.section	.bss.joint6,"aw",%nobits
+ 1412              		.align	2
+ 1415              	joint6:
+ 1416 0000 00000000 		.space	28
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 35
+
+
+ 1416      00000000 
+ 1416      00000000 
+ 1416      00000000 
+ 1416      00000000 
+ 1417              		.global	joint5
+ 1418              		.section	.bss.joint5,"aw",%nobits
+ 1419              		.align	2
+ 1422              	joint5:
+ 1423 0000 00000000 		.space	28
+ 1423      00000000 
+ 1423      00000000 
+ 1423      00000000 
+ 1423      00000000 
+ 1424              		.global	joint4
+ 1425              		.section	.bss.joint4,"aw",%nobits
+ 1426              		.align	2
+ 1429              	joint4:
+ 1430 0000 00000000 		.space	28
+ 1430      00000000 
+ 1430      00000000 
+ 1430      00000000 
+ 1430      00000000 
+ 1431              		.global	joint3
+ 1432              		.section	.bss.joint3,"aw",%nobits
+ 1433              		.align	2
+ 1436              	joint3:
+ 1437 0000 00000000 		.space	28
+ 1437      00000000 
+ 1437      00000000 
+ 1437      00000000 
+ 1437      00000000 
+ 1438              		.global	joint2
+ 1439              		.section	.bss.joint2,"aw",%nobits
+ 1440              		.align	2
+ 1443              	joint2:
+ 1444 0000 00000000 		.space	28
+ 1444      00000000 
+ 1444      00000000 
+ 1444      00000000 
+ 1444      00000000 
+ 1445              		.global	joint1
+ 1446              		.section	.bss.joint1,"aw",%nobits
+ 1447              		.align	2
+ 1450              	joint1:
+ 1451 0000 00000000 		.space	28
+ 1451      00000000 
+ 1451      00000000 
+ 1451      00000000 
+ 1451      00000000 
+ 1452              		.global	radio
+ 1453              		.section	.data.radio,"aw"
+ 1454              		.align	2
+ 1457              	radio:
+ 1458 0000 00005842 		.word	1113063424
+ 1459 0004 00801C42 		.word	1109164032
+ 1460 0008 00402042 		.word	1109409792
+ 1461 000c 00C00F42 		.word	1108328448
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 36
+
+
+ 1462 0010 00000D42 		.word	1108148224
+ 1463 0014 00001A41 		.word	1092222976
+ 1464              		.section	.rodata
+ 1465              		.align	2
+ 1466              		.set	.LANCHOR0,. + 0
+ 1467              	.LC0:
+ 1468 0000 00005842 		.word	1113063424
+ 1469 0004 0000C040 		.word	1086324736
+ 1470 0008 00000000 		.word	0
+ 1471 000c 00009040 		.word	1083179008
+ 1472 0010 00005842 		.word	1113063424
+ 1473 0014 0000C040 		.word	1086324736
+ 1474              		.text
+ 1475              	.Letext0:
+ 1476              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 1477              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 1478              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 1479              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 1480              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1481              		.file 7 "Core/Inc/motor.h"
+ 1482              		.file 8 "Core/Inc/package.h"
+ 1483              		.file 9 "Core/Inc/main.h"
+ARM GAS  D:\software\msy64\tmp\ccUZC0L3.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 motor.c
-D:\software\msy64\tmp\ccRmEk4t.s:21     .text.Motor_Init:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:27     .text.Motor_Init:00000000 Motor_Init
-D:\software\msy64\tmp\ccRmEk4t.s:175    .text.Motor_Init:00000088 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1157   .bss.joint1:00000000 joint1
-D:\software\msy64\tmp\ccRmEk4t.s:1150   .bss.joint2:00000000 joint2
-D:\software\msy64\tmp\ccRmEk4t.s:1143   .bss.joint3:00000000 joint3
-D:\software\msy64\tmp\ccRmEk4t.s:1136   .bss.joint4:00000000 joint4
-D:\software\msy64\tmp\ccRmEk4t.s:1129   .bss.joint5:00000000 joint5
-D:\software\msy64\tmp\ccRmEk4t.s:1122   .bss.joint6:00000000 joint6
-D:\software\msy64\tmp\ccRmEk4t.s:1115   .bss.hand:00000000 hand
-D:\software\msy64\tmp\ccRmEk4t.s:189    .text.motor_cal:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:195    .text.motor_cal:00000000 motor_cal
-D:\software\msy64\tmp\ccRmEk4t.s:549    .text.motor_cal:000001c8 $d
-D:\software\msy64\tmp\ccRmEk4t.s:562    .text.Dir_Set:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:568    .text.Dir_Set:00000000 Dir_Set
-D:\software\msy64\tmp\ccRmEk4t.s:592    .text.Motor_Dir:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:598    .text.Motor_Dir:00000000 Motor_Dir
-D:\software\msy64\tmp\ccRmEk4t.s:657    .text.Motor_Dir:00000054 $d
-D:\software\msy64\tmp\ccRmEk4t.s:670    .text.Motor_Action:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:676    .text.Motor_Action:00000000 Motor_Action
-D:\software\msy64\tmp\ccRmEk4t.s:732    .text.Reset_joint:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:738    .text.Reset_joint:00000000 Reset_joint
-D:\software\msy64\tmp\ccRmEk4t.s:1016   .text.Reset_joint:00000180 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1031   .text.Motor_Move:00000000 $t
-D:\software\msy64\tmp\ccRmEk4t.s:1037   .text.Motor_Move:00000000 Motor_Move
-D:\software\msy64\tmp\ccRmEk4t.s:1104   .text.Motor_Move:0000004c $d
-D:\software\msy64\tmp\ccRmEk4t.s:1112   .bss.hand:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1119   .bss.joint6:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1126   .bss.joint5:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1133   .bss.joint4:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1140   .bss.joint3:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1147   .bss.joint2:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1154   .bss.joint1:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1164   .data.radio:00000000 radio
-D:\software\msy64\tmp\ccRmEk4t.s:1161   .data.radio:00000000 $d
-D:\software\msy64\tmp\ccRmEk4t.s:1172   .rodata:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:21     .text.Motor_Init:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:27     .text.Motor_Init:00000000 Motor_Init
+D:\software\msy64\tmp\ccUZC0L3.s:220    .text.Motor_Init:000000a8 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1450   .bss.joint1:00000000 joint1
+D:\software\msy64\tmp\ccUZC0L3.s:1443   .bss.joint2:00000000 joint2
+D:\software\msy64\tmp\ccUZC0L3.s:1436   .bss.joint3:00000000 joint3
+D:\software\msy64\tmp\ccUZC0L3.s:1429   .bss.joint4:00000000 joint4
+D:\software\msy64\tmp\ccUZC0L3.s:1422   .bss.joint5:00000000 joint5
+D:\software\msy64\tmp\ccUZC0L3.s:1415   .bss.joint6:00000000 joint6
+D:\software\msy64\tmp\ccUZC0L3.s:1408   .bss.hand:00000000 hand
+D:\software\msy64\tmp\ccUZC0L3.s:236    .text.motor_cal:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:242    .text.motor_cal:00000000 motor_cal
+D:\software\msy64\tmp\ccUZC0L3.s:735    .text.motor_cal:000002b8 $d
+D:\software\msy64\tmp\ccUZC0L3.s:748    .text.Dir_Set:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:754    .text.Dir_Set:00000000 Dir_Set
+D:\software\msy64\tmp\ccUZC0L3.s:863    .text.Dir_Set:00000060 $d
+D:\software\msy64\tmp\ccUZC0L3.s:869    .text.Motor_Dir:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:875    .text.Motor_Dir:00000000 Motor_Dir
+D:\software\msy64\tmp\ccUZC0L3.s:937    .text.Motor_Dir:00000054 $d
+D:\software\msy64\tmp\ccUZC0L3.s:949    .text.Motor_Action:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:955    .text.Motor_Action:00000000 Motor_Action
+D:\software\msy64\tmp\ccUZC0L3.s:1011   .text.Reset_joint:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:1017   .text.Reset_joint:00000000 Reset_joint
+D:\software\msy64\tmp\ccUZC0L3.s:1310   .text.Reset_joint:000001a4 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1324   .text.Motor_Move:00000000 $t
+D:\software\msy64\tmp\ccUZC0L3.s:1330   .text.Motor_Move:00000000 Motor_Move
+D:\software\msy64\tmp\ccUZC0L3.s:1398   .text.Motor_Move:0000004c $d
+D:\software\msy64\tmp\ccUZC0L3.s:1405   .bss.hand:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1412   .bss.joint6:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1419   .bss.joint5:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1426   .bss.joint4:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1433   .bss.joint3:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1440   .bss.joint2:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1447   .bss.joint1:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1457   .data.radio:00000000 radio
+D:\software\msy64\tmp\ccUZC0L3.s:1454   .data.radio:00000000 $d
+D:\software\msy64\tmp\ccUZC0L3.s:1465   .rodata:00000000 $d
 
 UNDEFINED SYMBOLS
 __aeabi_f2d
@@ -1761,4 +2174,3 @@ HAL_GPIO_WritePin
 Toggle
 for_delay_us
 Read_KEY
-HAL_Delay

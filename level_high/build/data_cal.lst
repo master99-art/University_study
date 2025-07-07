@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
   27:Core/Src/data_cal.c **** //注意：这里数据中预留了一个字节的控制位，其他的可以自行扩展，更改s
   28:Core/Src/data_cal.c **** --------------------------------------------------------------------------*/
   29:Core/Src/data_cal.c **** 
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 2
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 2
 
 
   30:Core/Src/data_cal.c **** /**************************************************************************
@@ -118,7 +118,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
   84:Core/Src/data_cal.c **** 				// printf("header ok\n");
   85:Core/Src/data_cal.c **** 				receiveBuff[0] = header[0]; // buf[0]
   86:Core/Src/data_cal.c **** 				receiveBuff[1] = header[1]; // buf[1]
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 3
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 3
 
 
   87:Core/Src/data_cal.c **** 				USARTBufferIndex = 0;		// 缓冲区初始化
@@ -178,7 +178,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  141:Core/Src/data_cal.c **** 					joint6Set.data[k] = receiveBuff[k + 13];
  142:Core/Src/data_cal.c **** 				}
  143:Core/Src/data_cal.c **** 
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 4
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 4
 
 
  144:Core/Src/data_cal.c **** 				AngleSet[0] = ((float)joint1Set.d / 1000.0);
@@ -238,7 +238,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  198:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
  199:Core/Src/data_cal.c **** 	{
  200:Core/Src/data_cal.c **** 		buf[i + 3] = joint11.data[i];  // buf[3]  buf[4]
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 5
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 5
 
 
  201:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
@@ -298,7 +298,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
   50              	.LVL3:
   51              		.loc 1 233 12 view .LVU9
   52 0008 89B2     		uxth	r1, r1
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 6
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 6
 
 
   53              	.LVL4:
@@ -358,7 +358,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
   92 0026 4008     		lsrs	r0, r0, #1
   93              	.LVL12:
  239:Core/Src/data_cal.c **** 			else
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 7
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 7
 
 
   94              		.loc 1 239 9 view .LVU26
@@ -418,7 +418,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
   71:Core/Src/data_cal.c **** 	dataLength = sizeof(receiveBuff) - 6;
  137              		.loc 1 71 2 view .LVU38
   72:Core/Src/data_cal.c **** 	USART_Receiver = receiveBuff[1];
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 8
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 8
 
 
  138              		.loc 1 72 2 view .LVU39
@@ -478,7 +478,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  178              		.loc 1 93 23 is_stmt 0 view .LVU53
  179 002e 5F4B     		ldr	r3, .L25+4
  180 0030 1D70     		strb	r5, [r3]
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 9
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 9
 
 
  181              	.LVL18:
@@ -538,7 +538,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  102:Core/Src/data_cal.c **** 			USARTBufferIndex++;
  219              		.loc 1 102 15 is_stmt 0 view .LVU70
  220 0054 544B     		ldr	r3, .L25
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 10
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 10
 
 
  221 0056 1D80     		strh	r5, [r3]	@ movhi
@@ -598,7 +598,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  260              		.loc 1 115 4 is_stmt 1 view .LVU85
  116:Core/Src/data_cal.c **** 			// 检查信息校验值
  261              		.loc 1 116 4 view .LVU86
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 11
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 11
 
 
  116:Core/Src/data_cal.c **** 			// 检查信息校验值
@@ -658,7 +658,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  134:Core/Src/data_cal.c **** 				{
  301              		.loc 1 134 5 is_stmt 1 view .LVU102
  134:Core/Src/data_cal.c **** 				{
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 12
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 12
 
 
  302              		.loc 1 134 12 is_stmt 0 view .LVU103
@@ -718,7 +718,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  340 00d4 CC54     		strb	r4, [r1, r3]
  141:Core/Src/data_cal.c **** 				}
  341              		.loc 1 141 6 is_stmt 1 view .LVU120
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 13
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 13
 
 
  141:Core/Src/data_cal.c **** 				}
@@ -778,7 +778,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  381              		.loc 1 146 5 is_stmt 1 view .LVU135
  146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
  382              		.loc 1 146 36 is_stmt 0 view .LVU136
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 14
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 14
 
 
  383 011e 2B4A     		ldr	r2, .L25+36
@@ -838,7 +838,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
  421              		.loc 1 149 39 view .LVU153
  422 016e C7EE276A 		vdiv.f32	s13, s14, s15
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 15
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 15
 
 
  149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
@@ -898,7 +898,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  459              		.loc 1 159 5 is_stmt 1 view .LVU171
  159:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
  460              		.loc 1 159 7 is_stmt 0 view .LVU172
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 16
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 16
 
 
  461 01a0 074A     		ldr	r2, .L25+24
@@ -958,7 +958,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  513 000a 0193     		str	r3, [sp, #4]
  514 000c 0293     		str	r3, [sp, #8]
  515 000e 8DF80C30 		strb	r3, [sp, #12]
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 17
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 17
 
 
  176:Core/Src/data_cal.c **** 	length = 13;
@@ -1018,7 +1018,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  553 004e 17EE100A 		vmov	r0, s14	@ int
  554 0052 0880     		strh	r0, [r1]	@ movhi
  181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 18
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 18
 
 
  555              		.loc 1 181 2 is_stmt 1 view .LVU194
@@ -1078,7 +1078,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
  593              		.loc 1 183 39 view .LVU211
  594 009a 86EE267A 		vdiv.f32	s14, s12, s13
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 19
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 19
 
 
  183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
@@ -1138,7 +1138,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  633              		.loc 1 194 22 is_stmt 1 discriminator 3 view .LVU227
  634 00dc 0133     		adds	r3, r3, #1
  635              	.LVL31:
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 20
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 20
 
 
  636              	.L28:
@@ -1198,7 +1198,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  674              		.loc 1 202 14 view .LVU243
  675 010c 03F11702 		add	r2, r3, #23
  676 0110 6A44     		add	r2, sp, r2
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 21
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 21
 
 
  677 0112 02F8101C 		strb	r1, [r2, #-16]
@@ -1258,7 +1258,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  716 014a 8DF80F30 		strb	r3, [sp, #15]
  211:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
  717              		.loc 1 211 2 is_stmt 1 view .LVU259
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 22
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 22
 
 
  211:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
@@ -1318,7 +1318,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  763 01a8 00000000 		.word	joint6
  764 01ac 00000000 		.word	joint61
  765 01b0 00000000 		.word	header
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 23
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 23
 
 
  766 01b4 00000000 		.word	hand
@@ -1378,7 +1378,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  845              		.align	2
  848              	joint1Set:
  849 0000 0000     		.space	2
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 24
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 24
 
 
  850              		.global	joint61
@@ -1438,7 +1438,7 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  919      00000000 
  919      00000000 
  919      00000000 
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 25
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 25
 
 
  920              		.text
@@ -1452,67 +1452,67 @@ ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 1
  928              		.file 8 "Core/Inc/motor.h"
  929              		.file 9 "Core/Inc/data_cal.h"
  930              		.file 10 "Core/Inc/main.h"
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 26
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 data_cal.c
-D:\software\msy64\tmp\ccWLTKzh.s:21     .text.getCrc8:00000000 $t
-D:\software\msy64\tmp\ccWLTKzh.s:27     .text.getCrc8:00000000 getCrc8
-D:\software\msy64\tmp\ccWLTKzh.s:109    .text.usartReceiveOneData:00000000 $t
-D:\software\msy64\tmp\ccWLTKzh.s:115    .text.usartReceiveOneData:00000000 usartReceiveOneData
-D:\software\msy64\tmp\ccWLTKzh.s:167    .text.usartReceiveOneData:00000026 $d
-D:\software\msy64\tmp\ccWLTKzh.s:171    .text.usartReceiveOneData:0000002a $t
-D:\software\msy64\tmp\ccWLTKzh.s:467    .text.usartReceiveOneData:000001a8 $d
-D:\software\msy64\tmp\ccWLTKzh.s:806    .bss.dataLength.6:00000000 dataLength.6
-D:\software\msy64\tmp\ccWLTKzh.s:800    .bss.USARTReceiverFront.5:00000000 USARTReceiverFront.5
-D:\software\msy64\tmp\ccWLTKzh.s:795    .data.Start_Flag.4:00000000 Start_Flag.4
-D:\software\msy64\tmp\ccWLTKzh.s:790    .bss.USARTBufferIndex.3:00000000 USARTBufferIndex.3
-D:\software\msy64\tmp\ccWLTKzh.s:785    .bss.checkSum.2:00000000 checkSum.2
-D:\software\msy64\tmp\ccWLTKzh.s:780    .bss.j.1:00000000 j.1
-D:\software\msy64\tmp\ccWLTKzh.s:774    .bss.k.0:00000000 k.0
-D:\software\msy64\tmp\ccWLTKzh.s:848    .bss.joint1Set:00000000 joint1Set
-D:\software\msy64\tmp\ccWLTKzh.s:841    .bss.joint2Set:00000000 joint2Set
-D:\software\msy64\tmp\ccWLTKzh.s:834    .bss.joint3Set:00000000 joint3Set
-D:\software\msy64\tmp\ccWLTKzh.s:827    .bss.joint4Set:00000000 joint4Set
-D:\software\msy64\tmp\ccWLTKzh.s:820    .bss.joint5Set:00000000 joint5Set
-D:\software\msy64\tmp\ccWLTKzh.s:813    .bss.joint6Set:00000000 joint6Set
-D:\software\msy64\tmp\ccWLTKzh.s:918    .bss.AngleSet:00000000 AngleSet
-D:\software\msy64\tmp\ccWLTKzh.s:486    .text.usartSendData:00000000 $t
-D:\software\msy64\tmp\ccWLTKzh.s:492    .text.usartSendData:00000000 usartSendData
-D:\software\msy64\tmp\ccWLTKzh.s:751    .text.usartSendData:00000178 $d
-D:\software\msy64\tmp\ccWLTKzh.s:890    .bss.joint11:00000000 joint11
-D:\software\msy64\tmp\ccWLTKzh.s:883    .bss.joint21:00000000 joint21
-D:\software\msy64\tmp\ccWLTKzh.s:876    .bss.joint31:00000000 joint31
-D:\software\msy64\tmp\ccWLTKzh.s:869    .bss.joint41:00000000 joint41
-D:\software\msy64\tmp\ccWLTKzh.s:862    .bss.joint51:00000000 joint51
-D:\software\msy64\tmp\ccWLTKzh.s:855    .bss.joint61:00000000 joint61
-D:\software\msy64\tmp\ccWLTKzh.s:904    .rodata.header:00000000 header
-D:\software\msy64\tmp\ccWLTKzh.s:771    .bss.k.0:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:777    .bss.j.1:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:786    .bss.checkSum.2:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:791    .bss.USARTBufferIndex.3:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:801    .bss.USARTReceiverFront.5:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:803    .bss.dataLength.6:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:810    .bss.joint6Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:817    .bss.joint5Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:824    .bss.joint4Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:831    .bss.joint3Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:838    .bss.joint2Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:845    .bss.joint1Set:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:852    .bss.joint61:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:859    .bss.joint51:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:866    .bss.joint41:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:873    .bss.joint31:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:880    .bss.joint21:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:887    .bss.joint11:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:897    .rodata.ender:00000000 ender
-D:\software\msy64\tmp\ccWLTKzh.s:894    .rodata.ender:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:901    .rodata.header:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:911    .bss.receiveBuff:00000000 receiveBuff
-D:\software\msy64\tmp\ccWLTKzh.s:908    .bss.receiveBuff:00000000 $d
-D:\software\msy64\tmp\ccWLTKzh.s:915    .bss.AngleSet:00000000 $d
-ARM GAS  D:\software\msy64\tmp\ccWLTKzh.s 			page 27
+D:\software\msy64\tmp\cc6x09rd.s:21     .text.getCrc8:00000000 $t
+D:\software\msy64\tmp\cc6x09rd.s:27     .text.getCrc8:00000000 getCrc8
+D:\software\msy64\tmp\cc6x09rd.s:109    .text.usartReceiveOneData:00000000 $t
+D:\software\msy64\tmp\cc6x09rd.s:115    .text.usartReceiveOneData:00000000 usartReceiveOneData
+D:\software\msy64\tmp\cc6x09rd.s:167    .text.usartReceiveOneData:00000026 $d
+D:\software\msy64\tmp\cc6x09rd.s:171    .text.usartReceiveOneData:0000002a $t
+D:\software\msy64\tmp\cc6x09rd.s:467    .text.usartReceiveOneData:000001a8 $d
+D:\software\msy64\tmp\cc6x09rd.s:806    .bss.dataLength.6:00000000 dataLength.6
+D:\software\msy64\tmp\cc6x09rd.s:800    .bss.USARTReceiverFront.5:00000000 USARTReceiverFront.5
+D:\software\msy64\tmp\cc6x09rd.s:795    .data.Start_Flag.4:00000000 Start_Flag.4
+D:\software\msy64\tmp\cc6x09rd.s:790    .bss.USARTBufferIndex.3:00000000 USARTBufferIndex.3
+D:\software\msy64\tmp\cc6x09rd.s:785    .bss.checkSum.2:00000000 checkSum.2
+D:\software\msy64\tmp\cc6x09rd.s:780    .bss.j.1:00000000 j.1
+D:\software\msy64\tmp\cc6x09rd.s:774    .bss.k.0:00000000 k.0
+D:\software\msy64\tmp\cc6x09rd.s:848    .bss.joint1Set:00000000 joint1Set
+D:\software\msy64\tmp\cc6x09rd.s:841    .bss.joint2Set:00000000 joint2Set
+D:\software\msy64\tmp\cc6x09rd.s:834    .bss.joint3Set:00000000 joint3Set
+D:\software\msy64\tmp\cc6x09rd.s:827    .bss.joint4Set:00000000 joint4Set
+D:\software\msy64\tmp\cc6x09rd.s:820    .bss.joint5Set:00000000 joint5Set
+D:\software\msy64\tmp\cc6x09rd.s:813    .bss.joint6Set:00000000 joint6Set
+D:\software\msy64\tmp\cc6x09rd.s:918    .bss.AngleSet:00000000 AngleSet
+D:\software\msy64\tmp\cc6x09rd.s:486    .text.usartSendData:00000000 $t
+D:\software\msy64\tmp\cc6x09rd.s:492    .text.usartSendData:00000000 usartSendData
+D:\software\msy64\tmp\cc6x09rd.s:751    .text.usartSendData:00000178 $d
+D:\software\msy64\tmp\cc6x09rd.s:890    .bss.joint11:00000000 joint11
+D:\software\msy64\tmp\cc6x09rd.s:883    .bss.joint21:00000000 joint21
+D:\software\msy64\tmp\cc6x09rd.s:876    .bss.joint31:00000000 joint31
+D:\software\msy64\tmp\cc6x09rd.s:869    .bss.joint41:00000000 joint41
+D:\software\msy64\tmp\cc6x09rd.s:862    .bss.joint51:00000000 joint51
+D:\software\msy64\tmp\cc6x09rd.s:855    .bss.joint61:00000000 joint61
+D:\software\msy64\tmp\cc6x09rd.s:904    .rodata.header:00000000 header
+D:\software\msy64\tmp\cc6x09rd.s:771    .bss.k.0:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:777    .bss.j.1:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:786    .bss.checkSum.2:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:791    .bss.USARTBufferIndex.3:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:801    .bss.USARTReceiverFront.5:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:803    .bss.dataLength.6:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:810    .bss.joint6Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:817    .bss.joint5Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:824    .bss.joint4Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:831    .bss.joint3Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:838    .bss.joint2Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:845    .bss.joint1Set:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:852    .bss.joint61:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:859    .bss.joint51:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:866    .bss.joint41:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:873    .bss.joint31:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:880    .bss.joint21:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:887    .bss.joint11:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:897    .rodata.ender:00000000 ender
+D:\software\msy64\tmp\cc6x09rd.s:894    .rodata.ender:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:901    .rodata.header:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:911    .bss.receiveBuff:00000000 receiveBuff
+D:\software\msy64\tmp\cc6x09rd.s:908    .bss.receiveBuff:00000000 $d
+D:\software\msy64\tmp\cc6x09rd.s:915    .bss.AngleSet:00000000 $d
+ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 27
 
 
 
