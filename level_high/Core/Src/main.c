@@ -58,8 +58,8 @@ u8 Rec_Data[19] = {0};
 enum ACTION Flag = STOP;
 u8 test_data[3];
 u8 test_flag = 0;
-int count = 0;
-int tem = 0;
+int step[6];
+float angle[7] = {0, 0, 0, 0, PI * 2, 0, 0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,10 +69,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart == &huart1)
   {
-    test_flag = 1;
-    HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
+    Flag = MOVE;
+    HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
+    
+    usartReceiveOneData(Rec_Data, &huart1);
   }
-  // Flag = MOVE;
 }
 void function(void)
 {
@@ -86,9 +87,9 @@ void function(void)
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
 
@@ -126,14 +127,12 @@ int main(void)
   // OLED_Clear(); // 清屏
   Reset_joint();
 
-  // HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
-  HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
-  int step[6];
+  HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
+  // HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
 
   // OLED_ShowNum(1, 1, 123456789, 9, 16, 0);
-  float angle[7] = {0, 0, 0, 0, PI * 2, 0, 0};
 
-  HAL_Delay(2000);
+  // HAL_Delay(200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -141,46 +140,16 @@ int main(void)
   while (1)
   {
 
-    // if(Flag == MOVE)
-    // {
-    // if (test_flag == 1)
-    // {
-    //   tem++;
-    //   // HAL_UART_Transmit(&huart1, test_data, 3, 0xf);
-
-    //   // OLED_ShowNum(8, 1, tem, 6, 16, 0);
-    //   test_flag = 0;
-    // }
-    // usartSendData(&huart1);
-    // HAL_Delay(500);
-    // OLED_ShowString(16, 1, test_data, sizeof(test_data), 0);
-    // 	step = motor_cal(AngleSet);
-    // 	Motor_Dir();
-    // 	Motor_Move(step);
-    // }
-    // usartSendData(&huart1);
-
-    // if (tem == 0)
-    // {
-    //   for (int i = 0; i < 7050; i++)
-    //   {
-    //     function();
-    //     for_delay_us(50);
-    //     count++; 
-    //   }
-    //   tem = 1;
-    // }
-    // test step whole circle
-    //  if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
-    //  {
-    //    tem = 1;
-    //  }
-    //  if (tem == 0)
-    //  {
-    //    function();
-    //    count++;
-    //    for_delay_us(100);
-    // }
+    if (Flag == MOVE)
+    {
+      // OLED_ShowString(16, 1, test_data, sizeof(test_data), 0);
+      motor_cal(AngleSet, step);
+      Motor_Dir();
+      Motor_Move(step);
+      Flag= STOP; // 重置标志位
+    }
+    usartSendData(&huart1);
+    for_delay_us(1000);
 
     /* USER CODE END WHILE */
 
@@ -190,22 +159,22 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -220,9 +189,8 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -239,9 +207,9 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -253,14 +221,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

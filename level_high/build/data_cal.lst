@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -35,7 +35,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
    4:Core/Src/data_cal.c **** #include <stdio.h>
    5:Core/Src/data_cal.c **** #include <string.h>
    6:Core/Src/data_cal.c **** #include "main.h"
-   7:Core/Src/data_cal.c **** 
+   7:Core/Src/data_cal.c **** #include "string.h"
    8:Core/Src/data_cal.c **** float AngleSet[7] = {0};
    9:Core/Src/data_cal.c **** 
   10:Core/Src/data_cal.c **** /*
@@ -58,7 +58,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   27:Core/Src/data_cal.c **** //注意：这里数据中预留了一个字节的控制位，其他的可以自行扩展，更改s
   28:Core/Src/data_cal.c **** --------------------------------------------------------------------------*/
   29:Core/Src/data_cal.c **** 
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 2
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 2
 
 
   30:Core/Src/data_cal.c **** /**************************************************************************
@@ -72,7 +72,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   38:Core/Src/data_cal.c **** const unsigned char ender[2] = {0x0d, 0x0a};
   39:Core/Src/data_cal.c **** 
   40:Core/Src/data_cal.c **** /*******************使用联合体可以快速的转换数据类型***************************/
-  41:Core/Src/data_cal.c **** // 发送数据（左轮速、右轮速、角度）共用体（-32767 - +32768）
+  41:Core/Src/data_cal.c **** 
   42:Core/Src/data_cal.c **** union sendData
   43:Core/Src/data_cal.c **** {
   44:Core/Src/data_cal.c **** 	// 这里传入d为数字
@@ -90,7 +90,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   56:Core/Src/data_cal.c **** 
   57:Core/Src/data_cal.c **** /**************************************************************************
   58:Core/Src/data_cal.c **** 函数功能：通过串口中断服务函数,获取目标关节角度，夹爪标志位，传入�
-  59:Core/Src/data_cal.c **** 入口参数：左轮轮速控制地址、右轮轮速控制地址、舵机转向角度地址、预
+  59:Core/Src/data_cal.c **** 入口参数：传入的数据
   60:Core/Src/data_cal.c **** 返回  值：无特殊意义
   61:Core/Src/data_cal.c **** **************************************************************************/
   62:Core/Src/data_cal.c **** int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
@@ -103,7 +103,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   69:Core/Src/data_cal.c **** 	static unsigned char USARTReceiverFront = 0;
   70:Core/Src/data_cal.c **** 	static unsigned char Start_Flag = START; // 一帧数据传送开始标志位
   71:Core/Src/data_cal.c **** 	static short dataLength = 0;
-  72:Core/Src/data_cal.c **** 	dataLength = sizeof(receiveBuff) - 6;
+  72:Core/Src/data_cal.c **** 
   73:Core/Src/data_cal.c **** 	USART_Receiver = receiveBuff[1];
   74:Core/Src/data_cal.c **** 	USARTReceiverFront = receiveBuff[0];
   75:Core/Src/data_cal.c **** 
@@ -118,7 +118,7 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   84:Core/Src/data_cal.c **** 				// printf("header ok\n");
   85:Core/Src/data_cal.c **** 				receiveBuff[0] = header[0]; // buf[0]
   86:Core/Src/data_cal.c **** 				receiveBuff[1] = header[1]; // buf[1]
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 3
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 3
 
 
   87:Core/Src/data_cal.c **** 				USARTBufferIndex = 0;		// 缓冲区初始化
@@ -130,257 +130,237 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
   93:Core/Src/data_cal.c **** 			USARTReceiverFront = USART_Receiver;
   94:Core/Src/data_cal.c **** 		}
   95:Core/Src/data_cal.c **** 	}
-  96:Core/Src/data_cal.c **** 	else
+  96:Core/Src/data_cal.c **** 	if (Start_Flag != START)
   97:Core/Src/data_cal.c **** 	{
-  98:Core/Src/data_cal.c **** 		switch (USARTBufferIndex)
-  99:Core/Src/data_cal.c **** 		{
- 100:Core/Src/data_cal.c **** 		case 0: // 接收左右轮速度数据的长度
- 101:Core/Src/data_cal.c **** 			receiveBuff[2] = USART_Receiver;
- 102:Core/Src/data_cal.c **** 			dataLength = receiveBuff[2]; // buf[2]
- 103:Core/Src/data_cal.c **** 			USARTBufferIndex++;
- 104:Core/Src/data_cal.c **** 			break;
- 105:Core/Src/data_cal.c **** 		case 1:									 // 接收所有数据，并赋值处理
- 106:Core/Src/data_cal.c **** 			receiveBuff[j + 3] = USART_Receiver; // buf[3] - buf[9]
- 107:Core/Src/data_cal.c **** 			j++;
- 108:Core/Src/data_cal.c **** 			if (j >= dataLength)
- 109:Core/Src/data_cal.c **** 			{
- 110:Core/Src/data_cal.c **** 				j = 0;
- 111:Core/Src/data_cal.c **** 				USARTBufferIndex++;
- 112:Core/Src/data_cal.c **** 			}
- 113:Core/Src/data_cal.c **** 			break;
- 114:Core/Src/data_cal.c **** 		case 2: // 接收校验值信息
- 115:Core/Src/data_cal.c **** 			receiveBuff[3 + dataLength] = USART_Receiver;
- 116:Core/Src/data_cal.c **** 			checkSum = getCrc8(receiveBuff, 3 + dataLength);
- 117:Core/Src/data_cal.c **** 			// 检查信息校验值
- 118:Core/Src/data_cal.c **** 			if (checkSum != receiveBuff[3 + dataLength])
- 119:Core/Src/data_cal.c **** 				return 0;
- 120:Core/Src/data_cal.c **** 			USARTBufferIndex++;
- 121:Core/Src/data_cal.c **** 			break;
- 122:Core/Src/data_cal.c **** 
- 123:Core/Src/data_cal.c **** 		case 3: // 接收信息尾
- 124:Core/Src/data_cal.c **** 			if (k == 0)
- 125:Core/Src/data_cal.c **** 			{
- 126:Core/Src/data_cal.c **** 				// 数据0d     buf[11]  无需判断
- 127:Core/Src/data_cal.c **** 				k++;
- 128:Core/Src/data_cal.c **** 			}
- 129:Core/Src/data_cal.c **** 			else if (k == 1)
- 130:Core/Src/data_cal.c **** 			{
- 131:Core/Src/data_cal.c **** 				// 数据0a     buf[12] 无需判断
- 132:Core/Src/data_cal.c **** 
- 133:Core/Src/data_cal.c **** 				// 进行角度赋值操作
- 134:Core/Src/data_cal.c **** 				for (k = 0; k < 2; k++)
- 135:Core/Src/data_cal.c **** 				{
- 136:Core/Src/data_cal.c **** 					joint1Set.data[k] = receiveBuff[k + 3];
- 137:Core/Src/data_cal.c **** 					joint2Set.data[k] = receiveBuff[k + 5];
- 138:Core/Src/data_cal.c **** 					joint3Set.data[k] = receiveBuff[k + 7];
- 139:Core/Src/data_cal.c **** 					joint4Set.data[k] = receiveBuff[k + 9];
- 140:Core/Src/data_cal.c **** 					joint5Set.data[k] = receiveBuff[k + 11];
- 141:Core/Src/data_cal.c **** 					joint6Set.data[k] = receiveBuff[k + 13];
- 142:Core/Src/data_cal.c **** 				}
- 143:Core/Src/data_cal.c **** 
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 4
+  98:Core/Src/data_cal.c **** 		dataLength = receiveBuff[2];
+  99:Core/Src/data_cal.c **** 		checkSum = getCrc8(receiveBuff, 3 + dataLength);
+ 100:Core/Src/data_cal.c **** 		if (checkSum == receiveBuff[3 + dataLength])
+ 101:Core/Src/data_cal.c **** 		{
+ 102:Core/Src/data_cal.c **** 			// 进行角度赋值操作
+ 103:Core/Src/data_cal.c **** 			for (k = 0; k < 2; k++)
+ 104:Core/Src/data_cal.c **** 			{
+ 105:Core/Src/data_cal.c **** 				joint1Set.data[k] = receiveBuff[k + 3];
+ 106:Core/Src/data_cal.c **** 				joint2Set.data[k] = receiveBuff[k + 5];
+ 107:Core/Src/data_cal.c **** 				joint3Set.data[k] = receiveBuff[k + 7];
+ 108:Core/Src/data_cal.c **** 				joint4Set.data[k] = receiveBuff[k + 9];
+ 109:Core/Src/data_cal.c **** 				joint5Set.data[k] = receiveBuff[k + 11];
+ 110:Core/Src/data_cal.c **** 				joint6Set.data[k] = receiveBuff[k + 13];
+ 111:Core/Src/data_cal.c **** 			}
+ 112:Core/Src/data_cal.c **** 
+ 113:Core/Src/data_cal.c **** 			AngleSet[0] = ((float)joint1Set.d / 1000.0);
+ 114:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 115:Core/Src/data_cal.c **** 			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+ 116:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ 117:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 118:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 119:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 120:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 121:Core/Src/data_cal.c **** 			// 完成一个数据包的接收，相关变量清零，等待下一字节数据
+ 122:Core/Src/data_cal.c **** 			USARTBufferIndex = 0;
+ 123:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 124:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 125:Core/Src/data_cal.c **** 			checkSum = 0;
+ 126:Core/Src/data_cal.c **** 			dataLength = 0;
+ 127:Core/Src/data_cal.c **** 			j = 0;
+ 128:Core/Src/data_cal.c **** 			k = 0;
+ 129:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 130:Core/Src/data_cal.c **** 		}
+ 131:Core/Src/data_cal.c **** 		else
+ 132:Core/Src/data_cal.c **** 		{
+ 133:Core/Src/data_cal.c **** 			for (u8 i = 0; i < 19; i++)
+ 134:Core/Src/data_cal.c **** 				receiveBuff[i] = 0; // 清除接收缓存
+ 135:Core/Src/data_cal.c **** 			// 校验和错误，清除接收缓存
+ 136:Core/Src/data_cal.c **** 			USARTBufferIndex = 0;
+ 137:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 138:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 139:Core/Src/data_cal.c **** 			checkSum = 0;
+ 140:Core/Src/data_cal.c **** 			dataLength = 0;
+ 141:Core/Src/data_cal.c **** 			j = 0;
+ 142:Core/Src/data_cal.c **** 			k = 0;
+ 143:Core/Src/data_cal.c **** 			return 0; // 返回错误
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 4
 
 
- 144:Core/Src/data_cal.c **** 				AngleSet[0] = ((float)joint1Set.d / 1000.0);
- 145:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 146:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 147:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 148:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 149:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 150:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 151:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 152:Core/Src/data_cal.c **** 				// 完成一个数据包的接收，相关变量清零，等待下一字节数据
- 153:Core/Src/data_cal.c **** 				USARTBufferIndex = 0;
- 154:Core/Src/data_cal.c **** 				USARTReceiverFront = 0;
- 155:Core/Src/data_cal.c **** 				Start_Flag = START;
- 156:Core/Src/data_cal.c **** 				checkSum = 0;
- 157:Core/Src/data_cal.c **** 				dataLength = 0;
- 158:Core/Src/data_cal.c **** 				j = 0;
- 159:Core/Src/data_cal.c **** 				k = 0;
- 160:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 161:Core/Src/data_cal.c **** 			}
- 162:Core/Src/data_cal.c **** 			break;
- 163:Core/Src/data_cal.c **** 		default:
- 164:Core/Src/data_cal.c **** 			break;
- 165:Core/Src/data_cal.c **** 		}
- 166:Core/Src/data_cal.c **** 	}
- 167:Core/Src/data_cal.c **** 	return 0;
- 168:Core/Src/data_cal.c **** }
- 169:Core/Src/data_cal.c **** /**************************************************************************
- 170:Core/Src/data_cal.c **** 
- 171:Core/Src/data_cal.c **** **************************************************************************/
- 172:Core/Src/data_cal.c **** void usartSendData(UART_HandleTypeDef *huart)
- 173:Core/Src/data_cal.c **** {
- 174:Core/Src/data_cal.c **** 	// 协议数据缓存数组
- 175:Core/Src/data_cal.c **** 	unsigned char buf[13] = {0};
- 176:Core/Src/data_cal.c **** 	int i, length = 0;
- 177:Core/Src/data_cal.c **** 	length = 13;
- 178:Core/Src/data_cal.c **** 	// 计算joint角度
- 179:Core/Src/data_cal.c **** 	joint11.d = (short)(joint1.now_angle / radio[0] * 1000);
- 180:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 181:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 182:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 183:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 184:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 185:Core/Src/data_cal.c **** 
- 186:Core/Src/data_cal.c **** 	// joint11.d = (short)(12341);
- 187:Core/Src/data_cal.c **** 	// joint21.d = (short)(124);
- 188:Core/Src/data_cal.c **** 	// joint31.d = (short)(324);
- 189:Core/Src/data_cal.c **** 	// joint41.d = (short)(54);
- 190:Core/Src/data_cal.c **** 	// joint51.d = (short)(243);
- 191:Core/Src/data_cal.c **** 	// joint61.d = (short)(568);
- 192:Core/Src/data_cal.c **** 
- 193:Core/Src/data_cal.c **** 	// 设置消息头
- 194:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
- 195:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
- 196:Core/Src/data_cal.c **** 
- 197:Core/Src/data_cal.c **** 	buf[2] = length; // buf[2]
- 198:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
- 199:Core/Src/data_cal.c **** 	{
- 200:Core/Src/data_cal.c **** 		buf[i + 3] = joint11.data[i];  // buf[3]  buf[4]
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 5
+ 144:Core/Src/data_cal.c **** 		}
+ 145:Core/Src/data_cal.c **** 	}
+ 146:Core/Src/data_cal.c **** 
+ 147:Core/Src/data_cal.c **** 	
+ 148:Core/Src/data_cal.c **** 	return 0;
+ 149:Core/Src/data_cal.c **** }
+ 150:Core/Src/data_cal.c **** /**************************************************************************
+ 151:Core/Src/data_cal.c **** 
+ 152:Core/Src/data_cal.c **** **************************************************************************/
+ 153:Core/Src/data_cal.c **** void usartSendData(UART_HandleTypeDef *huart)
+ 154:Core/Src/data_cal.c **** {
+ 155:Core/Src/data_cal.c **** 	// 协议数据缓存数组
+ 156:Core/Src/data_cal.c **** 	unsigned char buf[13] = {0};
+ 157:Core/Src/data_cal.c **** 	int i, length = 0;
+ 158:Core/Src/data_cal.c **** 	length = 13;
+ 159:Core/Src/data_cal.c **** 	// 计算joint角度
+ 160:Core/Src/data_cal.c **** 	joint11.d = (short)(joint1.now_angle / radio[0] * 1000.0);
+ 161:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 162:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 163:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 164:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 165:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 166:Core/Src/data_cal.c **** 
+ 167:Core/Src/data_cal.c **** 	// joint11.d = (short)(1);
+ 168:Core/Src/data_cal.c **** 	// joint21.d = (short)(122);
+ 169:Core/Src/data_cal.c **** 	// joint31.d = (short)(1223);
+ 170:Core/Src/data_cal.c **** 	// joint41.d = (short)(1234);
+ 171:Core/Src/data_cal.c **** 	// joint51.d = (short)(145);
+ 172:Core/Src/data_cal.c **** 	// joint61.d = (short)(145);
+ 173:Core/Src/data_cal.c **** 	// 设置
+ 174:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
+ 175:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 176:Core/Src/data_cal.c **** 
+ 177:Core/Src/data_cal.c **** 	buf[2] = length; // buf[2]
+ 178:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
+ 179:Core/Src/data_cal.c **** 	{
+ 180:Core/Src/data_cal.c **** 		buf[i + 3] = joint11.data[i];  // buf[3]  buf[4]
+ 181:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
+ 182:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
+ 183:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
+ 184:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
+ 185:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
+ 186:Core/Src/data_cal.c **** 	}
+ 187:Core/Src/data_cal.c **** 	// buf[i + 7] = 					   // buf[7] buf[8]// 预留控制指令
+ 188:Core/Src/data_cal.c **** 	buf[3 + length - 1] = (u8)hand.action; // 夹爪
+ 189:Core/Src/data_cal.c **** 
+ 190:Core/Src/data_cal.c **** 	// 设置校验值、消息尾
+ 191:Core/Src/data_cal.c **** 	buf[3 + length] = getCrc8(buf, 3 + length); // buf[10]
+ 192:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
+ 193:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
+ 194:Core/Src/data_cal.c **** 
+ 195:Core/Src/data_cal.c **** 	HAL_UART_Transmit(huart, (uint8_t *)buf, 19, 0xf);
+ 196:Core/Src/data_cal.c **** }
+ 197:Core/Src/data_cal.c **** /**************************************************************************
+ 198:Core/Src/data_cal.c **** 函数功能：发送指定大小的字符数组，被usartSendData函数调用
+ 199:Core/Src/data_cal.c **** 入口参数：数组地址、数组大小
+ 200:Core/Src/data_cal.c **** 返回  值：无
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 5
 
 
- 201:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
- 202:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
- 203:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
- 204:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
- 205:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
- 206:Core/Src/data_cal.c **** 	}
- 207:Core/Src/data_cal.c **** 	// buf[i + 7] = 					   // buf[7] buf[8]// 预留控制指令
- 208:Core/Src/data_cal.c **** 	buf[3 + length - 1] = (u8)hand.action; // 夹爪
- 209:Core/Src/data_cal.c **** 
- 210:Core/Src/data_cal.c **** 	// 设置校验值、消息尾
- 211:Core/Src/data_cal.c **** 	buf[3 + length] = getCrc8(buf, 3 + length); // buf[10]
- 212:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
- 213:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
- 214:Core/Src/data_cal.c **** 
- 215:Core/Src/data_cal.c **** 	HAL_UART_Transmit(huart, (uint8_t *)buf, 19, 100);
- 216:Core/Src/data_cal.c **** }
- 217:Core/Src/data_cal.c **** /**************************************************************************
- 218:Core/Src/data_cal.c **** 函数功能：发送指定大小的字符数组，被usartSendData函数调用
- 219:Core/Src/data_cal.c **** 入口参数：数组地址、数组大小
- 220:Core/Src/data_cal.c **** 返回  值：无
- 221:Core/Src/data_cal.c **** **************************************************************************/
- 222:Core/Src/data_cal.c **** 
- 223:Core/Src/data_cal.c **** /**************************************************************************
- 224:Core/Src/data_cal.c **** 函数功能：计算八位循环冗余校验，被usartSendData和usartReceiveOneData函数调用
- 225:Core/Src/data_cal.c **** 入口参数：数组地址、数组大小
- 226:Core/Src/data_cal.c **** 返回  值：无
- 227:Core/Src/data_cal.c **** **************************************************************************/
- 228:Core/Src/data_cal.c **** unsigned char getCrc8(unsigned char *ptr, unsigned short len)
- 229:Core/Src/data_cal.c **** {
-  30              		.loc 1 229 1 view -0
+ 201:Core/Src/data_cal.c **** **************************************************************************/
+ 202:Core/Src/data_cal.c **** 
+ 203:Core/Src/data_cal.c **** /**************************************************************************
+ 204:Core/Src/data_cal.c **** 函数功能：计算八位循环冗余校验，被usartSendData和usartReceiveOneData函数调用
+ 205:Core/Src/data_cal.c **** 入口参数：数组地址、数组大小
+ 206:Core/Src/data_cal.c **** 返回  值：无
+ 207:Core/Src/data_cal.c **** **************************************************************************/
+ 208:Core/Src/data_cal.c **** unsigned char getCrc8(unsigned char *ptr, unsigned short len)
+ 209:Core/Src/data_cal.c **** {
+  30              		.loc 1 209 1 view -0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
-  35              		.loc 1 229 1 is_stmt 0 view .LVU1
+  35              		.loc 1 209 1 is_stmt 0 view .LVU1
   36 0000 0246     		mov	r2, r0
- 230:Core/Src/data_cal.c **** 	unsigned char crc;
-  37              		.loc 1 230 2 is_stmt 1 view .LVU2
- 231:Core/Src/data_cal.c **** 	unsigned char i;
-  38              		.loc 1 231 2 view .LVU3
- 232:Core/Src/data_cal.c **** 	crc = 0;
-  39              		.loc 1 232 2 view .LVU4
+ 210:Core/Src/data_cal.c **** 	unsigned char crc;
+  37              		.loc 1 210 2 is_stmt 1 view .LVU2
+ 211:Core/Src/data_cal.c **** 	unsigned char i;
+  38              		.loc 1 211 2 view .LVU3
+ 212:Core/Src/data_cal.c **** 	crc = 0;
+  39              		.loc 1 212 2 view .LVU4
   40              	.LVL1:
- 233:Core/Src/data_cal.c **** 	while (len--)
-  41              		.loc 1 233 2 view .LVU5
- 232:Core/Src/data_cal.c **** 	crc = 0;
-  42              		.loc 1 232 6 is_stmt 0 view .LVU6
+ 213:Core/Src/data_cal.c **** 	while (len--)
+  41              		.loc 1 213 2 view .LVU5
+ 212:Core/Src/data_cal.c **** 	crc = 0;
+  42              		.loc 1 212 6 is_stmt 0 view .LVU6
   43 0002 0020     		movs	r0, #0
   44              	.LVL2:
   45              	.L2:
-  46              		.loc 1 233 9 is_stmt 1 view .LVU7
+  46              		.loc 1 213 9 is_stmt 1 view .LVU7
   47 0004 0B46     		mov	r3, r1
-  48              		.loc 1 233 12 is_stmt 0 view .LVU8
+  48              		.loc 1 213 12 is_stmt 0 view .LVU8
   49 0006 0139     		subs	r1, r1, #1
   50              	.LVL3:
-  51              		.loc 1 233 12 view .LVU9
+  51              		.loc 1 213 12 view .LVU9
   52 0008 89B2     		uxth	r1, r1
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 6
-
-
   53              	.LVL4:
-  54              		.loc 1 233 9 view .LVU10
+  54              		.loc 1 213 9 view .LVU10
   55 000a 8BB1     		cbz	r3, .L8
- 234:Core/Src/data_cal.c **** 	{
- 235:Core/Src/data_cal.c **** 		crc ^= *ptr++;
-  56              		.loc 1 235 3 is_stmt 1 view .LVU11
+ 214:Core/Src/data_cal.c **** 	{
+ 215:Core/Src/data_cal.c **** 		crc ^= *ptr++;
+  56              		.loc 1 215 3 is_stmt 1 view .LVU11
   57              	.LVL5:
-  58              		.loc 1 235 10 is_stmt 0 view .LVU12
+  58              		.loc 1 215 10 is_stmt 0 view .LVU12
   59 000c 12F8013B 		ldrb	r3, [r2], #1	@ zero_extendqisi2
   60              	.LVL6:
-  61              		.loc 1 235 7 view .LVU13
+  61              		.loc 1 215 7 view .LVU13
   62 0010 5840     		eors	r0, r0, r3
   63              	.LVL7:
- 236:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
-  64              		.loc 1 236 3 is_stmt 1 view .LVU14
-  65              		.loc 1 236 10 is_stmt 0 view .LVU15
+ 216:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
+  64              		.loc 1 216 3 is_stmt 1 view .LVU14
+  65              		.loc 1 216 10 is_stmt 0 view .LVU15
   66 0012 0023     		movs	r3, #0
-  67              		.loc 1 236 3 view .LVU16
+  67              		.loc 1 216 3 view .LVU16
   68 0014 02E0     		b	.L3
   69              	.LVL8:
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 6
+
+
   70              	.L4:
- 237:Core/Src/data_cal.c **** 		{
- 238:Core/Src/data_cal.c **** 			if (crc & 0x01)
- 239:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
- 240:Core/Src/data_cal.c **** 			else
- 241:Core/Src/data_cal.c **** 				crc >>= 1;
-  71              		.loc 1 241 5 is_stmt 1 view .LVU17
-  72              		.loc 1 241 9 is_stmt 0 view .LVU18
+ 217:Core/Src/data_cal.c **** 		{
+ 218:Core/Src/data_cal.c **** 			if (crc & 0x01)
+ 219:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
+ 220:Core/Src/data_cal.c **** 			else
+ 221:Core/Src/data_cal.c **** 				crc >>= 1;
+  71              		.loc 1 221 5 is_stmt 1 view .LVU17
+  72              		.loc 1 221 9 is_stmt 0 view .LVU18
   73 0016 4008     		lsrs	r0, r0, #1
   74              	.LVL9:
   75              	.L5:
- 236:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
-  76              		.loc 1 236 23 is_stmt 1 discriminator 2 view .LVU19
+ 216:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
+  76              		.loc 1 216 23 is_stmt 1 discriminator 2 view .LVU19
   77 0018 0133     		adds	r3, r3, #1
   78              	.LVL10:
- 236:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
-  79              		.loc 1 236 23 is_stmt 0 discriminator 2 view .LVU20
+ 216:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
+  79              		.loc 1 216 23 is_stmt 0 discriminator 2 view .LVU20
   80 001a DBB2     		uxtb	r3, r3
   81              	.LVL11:
   82              	.L3:
- 236:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
-  83              		.loc 1 236 17 is_stmt 1 discriminator 1 view .LVU21
+ 216:Core/Src/data_cal.c **** 		for (i = 0; i < 8; i++)
+  83              		.loc 1 216 17 is_stmt 1 discriminator 1 view .LVU21
   84 001c 072B     		cmp	r3, #7
   85 001e F1D8     		bhi	.L2
- 238:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
-  86              		.loc 1 238 4 view .LVU22
- 238:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
-  87              		.loc 1 238 7 is_stmt 0 view .LVU23
+ 218:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
+  86              		.loc 1 218 4 view .LVU22
+ 218:Core/Src/data_cal.c **** 				crc = (crc >> 1) ^ 0x8C;
+  87              		.loc 1 218 7 is_stmt 0 view .LVU23
   88 0020 10F0010F 		tst	r0, #1
   89 0024 F7D0     		beq	.L4
- 239:Core/Src/data_cal.c **** 			else
-  90              		.loc 1 239 5 is_stmt 1 view .LVU24
- 239:Core/Src/data_cal.c **** 			else
-  91              		.loc 1 239 9 is_stmt 0 view .LVU25
+ 219:Core/Src/data_cal.c **** 			else
+  90              		.loc 1 219 5 is_stmt 1 view .LVU24
+ 219:Core/Src/data_cal.c **** 			else
+  91              		.loc 1 219 9 is_stmt 0 view .LVU25
   92 0026 4008     		lsrs	r0, r0, #1
   93              	.LVL12:
- 239:Core/Src/data_cal.c **** 			else
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 7
-
-
-  94              		.loc 1 239 9 view .LVU26
+ 219:Core/Src/data_cal.c **** 			else
+  94              		.loc 1 219 9 view .LVU26
   95 0028 80F08C00 		eor	r0, r0, #140
   96 002c C0B2     		uxtb	r0, r0
   97              	.LVL13:
- 239:Core/Src/data_cal.c **** 			else
-  98              		.loc 1 239 9 view .LVU27
+ 219:Core/Src/data_cal.c **** 			else
+  98              		.loc 1 219 9 view .LVU27
   99 002e F3E7     		b	.L5
  100              	.LVL14:
  101              	.L8:
- 242:Core/Src/data_cal.c **** 		}
- 243:Core/Src/data_cal.c **** 	}
- 244:Core/Src/data_cal.c **** 	return crc;
- 102              		.loc 1 244 2 is_stmt 1 view .LVU28
- 245:Core/Src/data_cal.c **** }
- 103              		.loc 1 245 1 is_stmt 0 view .LVU29
+ 222:Core/Src/data_cal.c **** 		}
+ 223:Core/Src/data_cal.c **** 	}
+ 224:Core/Src/data_cal.c **** 	return crc;
+ 102              		.loc 1 224 2 is_stmt 1 view .LVU28
+ 225:Core/Src/data_cal.c **** }
+ 103              		.loc 1 225 1 is_stmt 0 view .LVU29
  104 0030 7047     		bx	lr
  105              		.cfi_endproc
  106              	.LFE139:
  108              		.section	.text.usartReceiveOneData,"ax",%progbits
  109              		.align	1
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 7
+
+
  110              		.global	usartReceiveOneData
  111              		.syntax unified
  112              		.thumb
@@ -402,1121 +382,1151 @@ ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 1
  127              		.cfi_offset 4, -12
  128              		.cfi_offset 5, -8
  129              		.cfi_offset 14, -4
+ 130 0002 0446     		mov	r4, r0
   65:Core/Src/data_cal.c **** 	static unsigned char checkSum = 0;		   // ？
- 130              		.loc 1 65 2 is_stmt 1 view .LVU32
- 131              	.LVL16:
+ 131              		.loc 1 65 2 is_stmt 1 view .LVU32
+ 132              	.LVL16:
   66:Core/Src/data_cal.c **** 	static unsigned char USARTBufferIndex = 0; // 串口索引
- 132              		.loc 1 66 2 view .LVU33
+ 133              		.loc 1 66 2 view .LVU33
   67:Core/Src/data_cal.c **** 	static short j = 0, k = 0;
- 133              		.loc 1 67 2 view .LVU34
+ 134              		.loc 1 67 2 view .LVU34
   68:Core/Src/data_cal.c **** 	static unsigned char USARTReceiverFront = 0;
- 134              		.loc 1 68 2 view .LVU35
+ 135              		.loc 1 68 2 view .LVU35
   69:Core/Src/data_cal.c **** 	static unsigned char Start_Flag = START; // 一帧数据传送开始标志位
- 135              		.loc 1 69 2 view .LVU36
+ 136              		.loc 1 69 2 view .LVU36
   70:Core/Src/data_cal.c **** 	static short dataLength = 0;
- 136              		.loc 1 70 2 view .LVU37
-  71:Core/Src/data_cal.c **** 	dataLength = sizeof(receiveBuff) - 6;
- 137              		.loc 1 71 2 view .LVU38
-  72:Core/Src/data_cal.c **** 	USART_Receiver = receiveBuff[1];
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 8
-
-
- 138              		.loc 1 72 2 view .LVU39
-  72:Core/Src/data_cal.c **** 	USART_Receiver = receiveBuff[1];
- 139              		.loc 1 72 13 is_stmt 0 view .LVU40
- 140 0002 694B     		ldr	r3, .L25
- 141 0004 4FF6FE72 		movw	r2, #65534
- 142 0008 1A80     		strh	r2, [r3]	@ movhi
+ 137              		.loc 1 70 2 view .LVU37
+  71:Core/Src/data_cal.c **** 
+ 138              		.loc 1 71 2 view .LVU38
   73:Core/Src/data_cal.c **** 	USARTReceiverFront = receiveBuff[0];
- 143              		.loc 1 73 2 is_stmt 1 view .LVU41
+ 139              		.loc 1 73 2 view .LVU39
   73:Core/Src/data_cal.c **** 	USARTReceiverFront = receiveBuff[0];
- 144              		.loc 1 73 17 is_stmt 0 view .LVU42
- 145 000a 4578     		ldrb	r5, [r0, #1]	@ zero_extendqisi2
- 146              	.LVL17:
+ 140              		.loc 1 73 17 is_stmt 0 view .LVU40
+ 141 0004 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+ 142              	.LVL17:
   74:Core/Src/data_cal.c **** 
- 147              		.loc 1 74 2 is_stmt 1 view .LVU43
+ 143              		.loc 1 74 2 is_stmt 1 view .LVU41
   74:Core/Src/data_cal.c **** 
- 148              		.loc 1 74 34 is_stmt 0 view .LVU44
- 149 000c 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 144              		.loc 1 74 34 is_stmt 0 view .LVU42
+ 145 0006 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
   74:Core/Src/data_cal.c **** 
- 150              		.loc 1 74 21 view .LVU45
- 151 000e 674A     		ldr	r2, .L25+4
- 152 0010 1370     		strb	r3, [r2]
+ 146              		.loc 1 74 21 view .LVU43
+ 147 0008 614A     		ldr	r2, .L21
+ 148 000a 1370     		strb	r3, [r2]
   77:Core/Src/data_cal.c **** 	{
- 153              		.loc 1 77 2 is_stmt 1 view .LVU46
+ 149              		.loc 1 77 2 is_stmt 1 view .LVU44
   77:Core/Src/data_cal.c **** 	{
- 154              		.loc 1 77 17 is_stmt 0 view .LVU47
- 155 0012 674A     		ldr	r2, .L25+8
- 156 0014 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 150              		.loc 1 77 17 is_stmt 0 view .LVU45
+ 151 000c 614A     		ldr	r2, .L21+4
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 8
+
+
+ 152 000e 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
   77:Core/Src/data_cal.c **** 	{
- 157              		.loc 1 77 5 view .LVU48
- 158 0016 112A     		cmp	r2, #17
- 159 0018 07D0     		beq	.L23
-  98:Core/Src/data_cal.c **** 		{
- 160              		.loc 1 98 3 is_stmt 1 view .LVU49
- 161 001a 664B     		ldr	r3, .L25+12
- 162 001c 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
- 163 001e 032C     		cmp	r4, #3
- 164 0020 07D8     		bhi	.L12
- 165 0022 DFE804F0 		tbb	[pc, r4]
- 166              	.L14:
- 167 0026 16       		.byte	(.L17-.L14)/2
- 168 0027 1D       		.byte	(.L16-.L14)/2
- 169 0028 2F       		.byte	(.L15-.L14)/2
- 170 0029 3A       		.byte	(.L13-.L14)/2
- 171              		.p2align 1
- 172              	.L23:
+ 153              		.loc 1 77 5 view .LVU46
+ 154 0010 112A     		cmp	r2, #17
+ 155 0012 16D0     		beq	.L19
+ 156              	.L10:
+  96:Core/Src/data_cal.c **** 	{
+ 157              		.loc 1 96 2 is_stmt 1 view .LVU47
+  96:Core/Src/data_cal.c **** 	{
+ 158              		.loc 1 96 17 is_stmt 0 view .LVU48
+ 159 0014 5F4B     		ldr	r3, .L21+4
+ 160 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  96:Core/Src/data_cal.c **** 	{
+ 161              		.loc 1 96 5 view .LVU49
+ 162 0018 112B     		cmp	r3, #17
+ 163 001a 00F09E80 		beq	.L12
+  98:Core/Src/data_cal.c **** 		checkSum = getCrc8(receiveBuff, 3 + dataLength);
+ 164              		.loc 1 98 3 is_stmt 1 view .LVU50
+  98:Core/Src/data_cal.c **** 		checkSum = getCrc8(receiveBuff, 3 + dataLength);
+ 165              		.loc 1 98 27 is_stmt 0 view .LVU51
+ 166 001e A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 167              	.LVL18:
+  98:Core/Src/data_cal.c **** 		checkSum = getCrc8(receiveBuff, 3 + dataLength);
+ 168              		.loc 1 98 14 view .LVU52
+ 169 0020 5D4B     		ldr	r3, .L21+8
+ 170 0022 1980     		strh	r1, [r3]	@ movhi
+  99:Core/Src/data_cal.c **** 		if (checkSum == receiveBuff[3 + dataLength])
+ 171              		.loc 1 99 3 is_stmt 1 view .LVU53
+  99:Core/Src/data_cal.c **** 		if (checkSum == receiveBuff[3 + dataLength])
+ 172              		.loc 1 99 14 is_stmt 0 view .LVU54
+ 173 0024 CD1C     		adds	r5, r1, #3
+ 174 0026 2946     		mov	r1, r5
+ 175 0028 2046     		mov	r0, r4
+ 176              	.LVL19:
+  99:Core/Src/data_cal.c **** 		if (checkSum == receiveBuff[3 + dataLength])
+ 177              		.loc 1 99 14 view .LVU55
+ 178 002a FFF7FEFF 		bl	getCrc8
+ 179              	.LVL20:
+  99:Core/Src/data_cal.c **** 		if (checkSum == receiveBuff[3 + dataLength])
+ 180              		.loc 1 99 12 discriminator 1 view .LVU56
+ 181 002e 5B4B     		ldr	r3, .L21+12
+ 182 0030 1870     		strb	r0, [r3]
+ 100:Core/Src/data_cal.c **** 		{
+ 183              		.loc 1 100 3 is_stmt 1 view .LVU57
+ 100:Core/Src/data_cal.c **** 		{
+ 184              		.loc 1 100 30 is_stmt 0 view .LVU58
+ 185 0032 635D     		ldrb	r3, [r4, r5]	@ zero_extendqisi2
+ 100:Core/Src/data_cal.c **** 		{
+ 186              		.loc 1 100 6 view .LVU59
+ 187 0034 9842     		cmp	r0, r3
+ 188 0036 40F0A980 		bne	.L17
+ 103:Core/Src/data_cal.c **** 			{
+ 189              		.loc 1 103 4 is_stmt 1 view .LVU60
+ 103:Core/Src/data_cal.c **** 			{
+ 190              		.loc 1 103 11 is_stmt 0 view .LVU61
+ 191 003a 594B     		ldr	r3, .L21+16
+ 192 003c 0022     		movs	r2, #0
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 9
+
+
+ 193 003e 1A80     		strh	r2, [r3]	@ movhi
+ 103:Core/Src/data_cal.c **** 			{
+ 194              		.loc 1 103 4 view .LVU62
+ 195 0040 28E0     		b	.L14
+ 196              	.LVL21:
+ 197              	.L19:
   79:Core/Src/data_cal.c **** 		{
- 173              		.loc 1 79 3 view .LVU50
+ 198              		.loc 1 79 3 is_stmt 1 view .LVU63
   79:Core/Src/data_cal.c **** 		{
- 174              		.loc 1 79 6 is_stmt 0 view .LVU51
- 175 002a AA2D     		cmp	r5, #170
- 176 002c 03D0     		beq	.L24
+ 199              		.loc 1 79 6 is_stmt 0 view .LVU64
+ 200 0042 AA29     		cmp	r1, #170
+ 201 0044 02D0     		beq	.L20
   93:Core/Src/data_cal.c **** 		}
- 177              		.loc 1 93 4 is_stmt 1 view .LVU52
+ 202              		.loc 1 93 4 is_stmt 1 view .LVU65
   93:Core/Src/data_cal.c **** 		}
- 178              		.loc 1 93 23 is_stmt 0 view .LVU53
- 179 002e 5F4B     		ldr	r3, .L25+4
- 180 0030 1D70     		strb	r5, [r3]
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 9
-
-
- 181              	.LVL18:
- 182              	.L12:
- 168:Core/Src/data_cal.c **** /**************************************************************************
- 183              		.loc 1 168 1 view .LVU54
- 184 0032 0020     		movs	r0, #0
- 185 0034 38BD     		pop	{r3, r4, r5, pc}
- 186              	.LVL19:
- 187              	.L24:
+ 203              		.loc 1 93 23 is_stmt 0 view .LVU66
+ 204 0046 524B     		ldr	r3, .L21
+ 205 0048 1970     		strb	r1, [r3]
+ 206 004a E3E7     		b	.L10
+ 207              	.L20:
   81:Core/Src/data_cal.c **** 			{
- 188              		.loc 1 81 4 is_stmt 1 view .LVU55
+ 208              		.loc 1 81 4 is_stmt 1 view .LVU67
   81:Core/Src/data_cal.c **** 			{
- 189              		.loc 1 81 7 is_stmt 0 view .LVU56
- 190 0036 552B     		cmp	r3, #85
- 191 0038 FBD1     		bne	.L12
+ 209              		.loc 1 81 7 is_stmt 0 view .LVU68
+ 210 004c 552B     		cmp	r3, #85
+ 211 004e E1D1     		bne	.L10
   83:Core/Src/data_cal.c **** 				// printf("header ok\n");
- 192              		.loc 1 83 5 is_stmt 1 view .LVU57
+ 212              		.loc 1 83 5 is_stmt 1 view .LVU69
   83:Core/Src/data_cal.c **** 				// printf("header ok\n");
- 193              		.loc 1 83 16 is_stmt 0 view .LVU58
- 194 003a 0023     		movs	r3, #0
- 195 003c 5C4A     		ldr	r2, .L25+8
- 196 003e 1370     		strb	r3, [r2]
+ 213              		.loc 1 83 16 is_stmt 0 view .LVU70
+ 214 0050 0023     		movs	r3, #0
+ 215 0052 504A     		ldr	r2, .L21+4
+ 216 0054 1370     		strb	r3, [r2]
   85:Core/Src/data_cal.c **** 				receiveBuff[1] = header[1]; // buf[1]
- 197              		.loc 1 85 5 is_stmt 1 view .LVU59
+ 217              		.loc 1 85 5 is_stmt 1 view .LVU71
   85:Core/Src/data_cal.c **** 				receiveBuff[1] = header[1]; // buf[1]
- 198              		.loc 1 85 20 is_stmt 0 view .LVU60
- 199 0040 5522     		movs	r2, #85
- 200 0042 0270     		strb	r2, [r0]
+ 218              		.loc 1 85 20 is_stmt 0 view .LVU72
+ 219 0056 5522     		movs	r2, #85
+ 220 0058 0270     		strb	r2, [r0]
   86:Core/Src/data_cal.c **** 				USARTBufferIndex = 0;		// 缓冲区初始化
- 201              		.loc 1 86 5 is_stmt 1 view .LVU61
+ 221              		.loc 1 86 5 is_stmt 1 view .LVU73
   86:Core/Src/data_cal.c **** 				USARTBufferIndex = 0;		// 缓冲区初始化
- 202              		.loc 1 86 20 is_stmt 0 view .LVU62
- 203 0044 AA22     		movs	r2, #170
- 204 0046 4270     		strb	r2, [r0, #1]
+ 222              		.loc 1 86 20 is_stmt 0 view .LVU74
+ 223 005a AA22     		movs	r2, #170
+ 224 005c 4270     		strb	r2, [r0, #1]
   87:Core/Src/data_cal.c **** 				checkSum = 0x00;			// 校验和初始化
- 205              		.loc 1 87 5 is_stmt 1 view .LVU63
+ 225              		.loc 1 87 5 is_stmt 1 view .LVU75
   87:Core/Src/data_cal.c **** 				checkSum = 0x00;			// 校验和初始化
- 206              		.loc 1 87 22 is_stmt 0 view .LVU64
- 207 0048 5A4A     		ldr	r2, .L25+12
- 208 004a 1370     		strb	r3, [r2]
+ 226              		.loc 1 87 22 is_stmt 0 view .LVU76
+ 227 005e 514A     		ldr	r2, .L21+20
+ 228 0060 1370     		strb	r3, [r2]
   88:Core/Src/data_cal.c **** 			}
- 209              		.loc 1 88 5 is_stmt 1 view .LVU65
+ 229              		.loc 1 88 5 is_stmt 1 view .LVU77
   88:Core/Src/data_cal.c **** 			}
- 210              		.loc 1 88 14 is_stmt 0 view .LVU66
- 211 004c 5A4A     		ldr	r2, .L25+16
- 212 004e 1370     		strb	r3, [r2]
- 213 0050 EFE7     		b	.L12
- 214              	.L17:
- 101:Core/Src/data_cal.c **** 			dataLength = receiveBuff[2]; // buf[2]
- 215              		.loc 1 101 4 is_stmt 1 view .LVU67
- 101:Core/Src/data_cal.c **** 			dataLength = receiveBuff[2]; // buf[2]
- 216              		.loc 1 101 19 is_stmt 0 view .LVU68
- 217 0052 8570     		strb	r5, [r0, #2]
- 102:Core/Src/data_cal.c **** 			USARTBufferIndex++;
- 218              		.loc 1 102 4 is_stmt 1 view .LVU69
- 102:Core/Src/data_cal.c **** 			USARTBufferIndex++;
- 219              		.loc 1 102 15 is_stmt 0 view .LVU70
- 220 0054 544B     		ldr	r3, .L25
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 10
+ 230              		.loc 1 88 14 is_stmt 0 view .LVU78
+ 231 0062 4E4A     		ldr	r2, .L21+12
+ 232 0064 1370     		strb	r3, [r2]
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 10
 
 
- 221 0056 1D80     		strh	r5, [r3]	@ movhi
- 103:Core/Src/data_cal.c **** 			break;
- 222              		.loc 1 103 4 is_stmt 1 view .LVU71
- 103:Core/Src/data_cal.c **** 			break;
- 223              		.loc 1 103 20 is_stmt 0 view .LVU72
- 224 0058 631C     		adds	r3, r4, #1
- 225 005a 564A     		ldr	r2, .L25+12
- 226 005c 1370     		strb	r3, [r2]
- 104:Core/Src/data_cal.c **** 		case 1:									 // 接收所有数据，并赋值处理
- 227              		.loc 1 104 4 is_stmt 1 view .LVU73
- 228 005e E8E7     		b	.L12
- 229              	.L16:
- 106:Core/Src/data_cal.c **** 			j++;
- 230              		.loc 1 106 4 view .LVU74
- 106:Core/Src/data_cal.c **** 			j++;
- 231              		.loc 1 106 15 is_stmt 0 view .LVU75
- 232 0060 564A     		ldr	r2, .L25+20
- 233 0062 B2F90030 		ldrsh	r3, [r2]
- 234 0066 D91C     		adds	r1, r3, #3
- 235              	.LVL20:
- 106:Core/Src/data_cal.c **** 			j++;
- 236              		.loc 1 106 23 view .LVU76
- 237 0068 4554     		strb	r5, [r0, r1]
- 107:Core/Src/data_cal.c **** 			if (j >= dataLength)
- 238              		.loc 1 107 4 is_stmt 1 view .LVU77
- 107:Core/Src/data_cal.c **** 			if (j >= dataLength)
- 239              		.loc 1 107 5 is_stmt 0 view .LVU78
- 240 006a 0133     		adds	r3, r3, #1
- 241 006c 1BB2     		sxth	r3, r3
- 242 006e 1380     		strh	r3, [r2]	@ movhi
- 108:Core/Src/data_cal.c **** 			{
- 243              		.loc 1 108 4 is_stmt 1 view .LVU79
- 108:Core/Src/data_cal.c **** 			{
- 244              		.loc 1 108 7 is_stmt 0 view .LVU80
- 245 0070 13F1020F 		cmn	r3, #2
- 246 0074 DDDB     		blt	.L12
- 110:Core/Src/data_cal.c **** 				USARTBufferIndex++;
- 247              		.loc 1 110 5 is_stmt 1 view .LVU81
- 110:Core/Src/data_cal.c **** 				USARTBufferIndex++;
- 248              		.loc 1 110 7 is_stmt 0 view .LVU82
- 249 0076 1346     		mov	r3, r2
- 250 0078 0022     		movs	r2, #0
- 251 007a 1A80     		strh	r2, [r3]	@ movhi
- 111:Core/Src/data_cal.c **** 			}
- 252              		.loc 1 111 5 is_stmt 1 view .LVU83
- 111:Core/Src/data_cal.c **** 			}
- 253              		.loc 1 111 21 is_stmt 0 view .LVU84
- 254 007c 631C     		adds	r3, r4, #1
- 255 007e 4D4A     		ldr	r2, .L25+12
- 256 0080 1370     		strb	r3, [r2]
- 257 0082 D6E7     		b	.L12
- 258              	.LVL21:
- 259              	.L15:
- 115:Core/Src/data_cal.c **** 			checkSum = getCrc8(receiveBuff, 3 + dataLength);
- 260              		.loc 1 115 4 is_stmt 1 view .LVU85
- 116:Core/Src/data_cal.c **** 			// 检查信息校验值
- 261              		.loc 1 116 4 view .LVU86
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 11
+ 233 0066 D5E7     		b	.L10
+ 234              	.LVL22:
+ 235              	.L15:
+ 105:Core/Src/data_cal.c **** 				joint2Set.data[k] = receiveBuff[k + 5];
+ 236              		.loc 1 105 5 is_stmt 1 view .LVU79
+ 105:Core/Src/data_cal.c **** 				joint2Set.data[k] = receiveBuff[k + 5];
+ 237              		.loc 1 105 36 is_stmt 0 view .LVU80
+ 238 0068 E218     		adds	r2, r4, r3
+ 239 006a D078     		ldrb	r0, [r2, #3]	@ zero_extendqisi2
+ 105:Core/Src/data_cal.c **** 				joint2Set.data[k] = receiveBuff[k + 5];
+ 240              		.loc 1 105 23 view .LVU81
+ 241 006c 4E49     		ldr	r1, .L21+24
+ 242 006e C854     		strb	r0, [r1, r3]
+ 106:Core/Src/data_cal.c **** 				joint3Set.data[k] = receiveBuff[k + 7];
+ 243              		.loc 1 106 5 is_stmt 1 view .LVU82
+ 106:Core/Src/data_cal.c **** 				joint3Set.data[k] = receiveBuff[k + 7];
+ 244              		.loc 1 106 36 is_stmt 0 view .LVU83
+ 245 0070 5079     		ldrb	r0, [r2, #5]	@ zero_extendqisi2
+ 106:Core/Src/data_cal.c **** 				joint3Set.data[k] = receiveBuff[k + 7];
+ 246              		.loc 1 106 23 view .LVU84
+ 247 0072 4E49     		ldr	r1, .L21+28
+ 248 0074 C854     		strb	r0, [r1, r3]
+ 107:Core/Src/data_cal.c **** 				joint4Set.data[k] = receiveBuff[k + 9];
+ 249              		.loc 1 107 5 is_stmt 1 view .LVU85
+ 107:Core/Src/data_cal.c **** 				joint4Set.data[k] = receiveBuff[k + 9];
+ 250              		.loc 1 107 36 is_stmt 0 view .LVU86
+ 251 0076 D079     		ldrb	r0, [r2, #7]	@ zero_extendqisi2
+ 107:Core/Src/data_cal.c **** 				joint4Set.data[k] = receiveBuff[k + 9];
+ 252              		.loc 1 107 23 view .LVU87
+ 253 0078 4D49     		ldr	r1, .L21+32
+ 254 007a C854     		strb	r0, [r1, r3]
+ 108:Core/Src/data_cal.c **** 				joint5Set.data[k] = receiveBuff[k + 11];
+ 255              		.loc 1 108 5 is_stmt 1 view .LVU88
+ 108:Core/Src/data_cal.c **** 				joint5Set.data[k] = receiveBuff[k + 11];
+ 256              		.loc 1 108 36 is_stmt 0 view .LVU89
+ 257 007c 507A     		ldrb	r0, [r2, #9]	@ zero_extendqisi2
+ 108:Core/Src/data_cal.c **** 				joint5Set.data[k] = receiveBuff[k + 11];
+ 258              		.loc 1 108 23 view .LVU90
+ 259 007e 4D49     		ldr	r1, .L21+36
+ 260 0080 C854     		strb	r0, [r1, r3]
+ 109:Core/Src/data_cal.c **** 				joint6Set.data[k] = receiveBuff[k + 13];
+ 261              		.loc 1 109 5 is_stmt 1 view .LVU91
+ 109:Core/Src/data_cal.c **** 				joint6Set.data[k] = receiveBuff[k + 13];
+ 262              		.loc 1 109 36 is_stmt 0 view .LVU92
+ 263 0082 D07A     		ldrb	r0, [r2, #11]	@ zero_extendqisi2
+ 109:Core/Src/data_cal.c **** 				joint6Set.data[k] = receiveBuff[k + 13];
+ 264              		.loc 1 109 23 view .LVU93
+ 265 0084 4C49     		ldr	r1, .L21+40
+ 266 0086 C854     		strb	r0, [r1, r3]
+ 110:Core/Src/data_cal.c **** 			}
+ 267              		.loc 1 110 5 is_stmt 1 view .LVU94
+ 110:Core/Src/data_cal.c **** 			}
+ 268              		.loc 1 110 36 is_stmt 0 view .LVU95
+ 269 0088 517B     		ldrb	r1, [r2, #13]	@ zero_extendqisi2
+ 110:Core/Src/data_cal.c **** 			}
+ 270              		.loc 1 110 23 view .LVU96
+ 271 008a 4C4A     		ldr	r2, .L21+44
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 11
 
 
- 116:Core/Src/data_cal.c **** 			// 检查信息校验值
- 262              		.loc 1 116 15 is_stmt 0 view .LVU87
- 263 0084 0121     		movs	r1, #1
- 264              	.LVL22:
- 116:Core/Src/data_cal.c **** 			// 检查信息校验值
- 265              		.loc 1 116 15 view .LVU88
- 266 0086 FFF7FEFF 		bl	getCrc8
- 267              	.LVL23:
- 116:Core/Src/data_cal.c **** 			// 检查信息校验值
- 268              		.loc 1 116 13 discriminator 1 view .LVU89
- 269 008a 4B4B     		ldr	r3, .L25+16
- 270 008c 1870     		strb	r0, [r3]
- 118:Core/Src/data_cal.c **** 				return 0;
- 271              		.loc 1 118 4 is_stmt 1 view .LVU90
- 118:Core/Src/data_cal.c **** 				return 0;
- 272              		.loc 1 118 7 is_stmt 0 view .LVU91
- 273 008e A842     		cmp	r0, r5
- 274 0090 CFD1     		bne	.L12
- 120:Core/Src/data_cal.c **** 			break;
- 275              		.loc 1 120 4 is_stmt 1 view .LVU92
- 120:Core/Src/data_cal.c **** 			break;
- 276              		.loc 1 120 20 is_stmt 0 view .LVU93
- 277 0092 631C     		adds	r3, r4, #1
- 278 0094 474A     		ldr	r2, .L25+12
- 279 0096 1370     		strb	r3, [r2]
- 121:Core/Src/data_cal.c **** 
- 280              		.loc 1 121 4 is_stmt 1 view .LVU94
- 281 0098 CBE7     		b	.L12
- 282              	.LVL24:
- 283              	.L13:
- 124:Core/Src/data_cal.c **** 			{
- 284              		.loc 1 124 4 view .LVU95
- 124:Core/Src/data_cal.c **** 			{
- 285              		.loc 1 124 10 is_stmt 0 view .LVU96
- 286 009a 494B     		ldr	r3, .L25+24
- 287 009c B3F90030 		ldrsh	r3, [r3]
- 124:Core/Src/data_cal.c **** 			{
- 288              		.loc 1 124 7 view .LVU97
- 289 00a0 1BB9     		cbnz	r3, .L18
- 127:Core/Src/data_cal.c **** 			}
- 290              		.loc 1 127 5 is_stmt 1 view .LVU98
- 127:Core/Src/data_cal.c **** 			}
- 291              		.loc 1 127 6 is_stmt 0 view .LVU99
- 292 00a2 0133     		adds	r3, r3, #1
- 293 00a4 464A     		ldr	r2, .L25+24
- 294 00a6 1380     		strh	r3, [r2]	@ movhi
- 295 00a8 C3E7     		b	.L12
- 296              	.L18:
- 129:Core/Src/data_cal.c **** 			{
- 297              		.loc 1 129 9 is_stmt 1 view .LVU100
- 129:Core/Src/data_cal.c **** 			{
- 298              		.loc 1 129 12 is_stmt 0 view .LVU101
- 299 00aa 012B     		cmp	r3, #1
- 300 00ac C1D1     		bne	.L12
- 134:Core/Src/data_cal.c **** 				{
- 301              		.loc 1 134 5 is_stmt 1 view .LVU102
- 134:Core/Src/data_cal.c **** 				{
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 12
+ 272 008c D154     		strb	r1, [r2, r3]
+ 103:Core/Src/data_cal.c **** 			{
+ 273              		.loc 1 103 24 is_stmt 1 discriminator 3 view .LVU97
+ 274 008e 0133     		adds	r3, r3, #1
+ 275 0090 434A     		ldr	r2, .L21+16
+ 276 0092 1380     		strh	r3, [r2]	@ movhi
+ 277              	.L14:
+ 103:Core/Src/data_cal.c **** 			{
+ 278              		.loc 1 103 18 discriminator 1 view .LVU98
+ 279 0094 424B     		ldr	r3, .L21+16
+ 280 0096 B3F90030 		ldrsh	r3, [r3]
+ 281 009a 012B     		cmp	r3, #1
+ 282 009c E4DD     		ble	.L15
+ 113:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 283              		.loc 1 113 4 view .LVU99
+ 113:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 284              		.loc 1 113 35 is_stmt 0 view .LVU100
+ 285 009e 424B     		ldr	r3, .L21+24
+ 286 00a0 B3F90030 		ldrsh	r3, [r3]
+ 287 00a4 07EE103A 		vmov	s14, r3	@ int
+ 113:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 288              		.loc 1 113 19 view .LVU101
+ 289 00a8 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 113:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 290              		.loc 1 113 38 view .LVU102
+ 291 00ac DFED447A 		vldr.32	s15, .L21+48
+ 292 00b0 C7EE276A 		vdiv.f32	s13, s14, s15
+ 113:Core/Src/data_cal.c **** 			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+ 293              		.loc 1 113 16 view .LVU103
+ 294 00b4 434B     		ldr	r3, .L21+52
+ 295 00b6 C3ED006A 		vstr.32	s13, [r3]
+ 114:Core/Src/data_cal.c **** 			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+ 296              		.loc 1 114 4 is_stmt 1 view .LVU104
+ 114:Core/Src/data_cal.c **** 			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+ 297              		.loc 1 114 36 is_stmt 0 view .LVU105
+ 298 00ba 3C4A     		ldr	r2, .L21+28
+ 299 00bc B2F90020 		ldrsh	r2, [r2]
+ 300 00c0 06EE902A 		vmov	s13, r2	@ int
+ 114:Core/Src/data_cal.c **** 			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+ 301              		.loc 1 114 20 view .LVU106
+ 302 00c4 F8EEE66A 		vcvt.f32.s32	s13, s13
+ 114:Core/Src/data_cal.c **** 			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+ 303              		.loc 1 114 16 view .LVU107
+ 304 00c8 86EEA77A 		vdiv.f32	s14, s13, s15
+ 305 00cc B1EE477A 		vneg.f32	s14, s14
+ 306 00d0 83ED017A 		vstr.32	s14, [r3, #4]
+ 115:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ 307              		.loc 1 115 4 is_stmt 1 view .LVU108
+ 115:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ 308              		.loc 1 115 35 is_stmt 0 view .LVU109
+ 309 00d4 364A     		ldr	r2, .L21+32
+ 310 00d6 B2F90020 		ldrsh	r2, [r2]
+ 311 00da 07EE102A 		vmov	s14, r2	@ int
+ 115:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ 312              		.loc 1 115 19 view .LVU110
+ 313 00de B8EEC77A 		vcvt.f32.s32	s14, s14
+ 115:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 12
 
 
- 302              		.loc 1 134 12 is_stmt 0 view .LVU103
- 303 00ae 444B     		ldr	r3, .L25+24
- 304 00b0 0022     		movs	r2, #0
- 305 00b2 1A80     		strh	r2, [r3]	@ movhi
- 134:Core/Src/data_cal.c **** 				{
- 306              		.loc 1 134 5 view .LVU104
- 307 00b4 15E0     		b	.L19
- 308              	.LVL25:
- 309              	.L20:
- 136:Core/Src/data_cal.c **** 					joint2Set.data[k] = receiveBuff[k + 5];
- 310              		.loc 1 136 6 is_stmt 1 view .LVU105
- 136:Core/Src/data_cal.c **** 					joint2Set.data[k] = receiveBuff[k + 5];
- 311              		.loc 1 136 37 is_stmt 0 view .LVU106
- 312 00b6 C218     		adds	r2, r0, r3
- 313 00b8 D478     		ldrb	r4, [r2, #3]	@ zero_extendqisi2
- 136:Core/Src/data_cal.c **** 					joint2Set.data[k] = receiveBuff[k + 5];
- 314              		.loc 1 136 24 view .LVU107
- 315 00ba 4249     		ldr	r1, .L25+28
- 316 00bc CC54     		strb	r4, [r1, r3]
- 137:Core/Src/data_cal.c **** 					joint3Set.data[k] = receiveBuff[k + 7];
- 317              		.loc 1 137 6 is_stmt 1 view .LVU108
- 137:Core/Src/data_cal.c **** 					joint3Set.data[k] = receiveBuff[k + 7];
- 318              		.loc 1 137 37 is_stmt 0 view .LVU109
- 319 00be 5479     		ldrb	r4, [r2, #5]	@ zero_extendqisi2
- 137:Core/Src/data_cal.c **** 					joint3Set.data[k] = receiveBuff[k + 7];
- 320              		.loc 1 137 24 view .LVU110
- 321 00c0 4149     		ldr	r1, .L25+32
- 322 00c2 CC54     		strb	r4, [r1, r3]
- 138:Core/Src/data_cal.c **** 					joint4Set.data[k] = receiveBuff[k + 9];
- 323              		.loc 1 138 6 is_stmt 1 view .LVU111
- 138:Core/Src/data_cal.c **** 					joint4Set.data[k] = receiveBuff[k + 9];
- 324              		.loc 1 138 37 is_stmt 0 view .LVU112
- 325 00c4 D479     		ldrb	r4, [r2, #7]	@ zero_extendqisi2
- 138:Core/Src/data_cal.c **** 					joint4Set.data[k] = receiveBuff[k + 9];
- 326              		.loc 1 138 24 view .LVU113
- 327 00c6 4149     		ldr	r1, .L25+36
- 328 00c8 CC54     		strb	r4, [r1, r3]
- 139:Core/Src/data_cal.c **** 					joint5Set.data[k] = receiveBuff[k + 11];
- 329              		.loc 1 139 6 is_stmt 1 view .LVU114
- 139:Core/Src/data_cal.c **** 					joint5Set.data[k] = receiveBuff[k + 11];
- 330              		.loc 1 139 37 is_stmt 0 view .LVU115
- 331 00ca 547A     		ldrb	r4, [r2, #9]	@ zero_extendqisi2
- 139:Core/Src/data_cal.c **** 					joint5Set.data[k] = receiveBuff[k + 11];
- 332              		.loc 1 139 24 view .LVU116
- 333 00cc 4049     		ldr	r1, .L25+40
- 334 00ce CC54     		strb	r4, [r1, r3]
- 140:Core/Src/data_cal.c **** 					joint6Set.data[k] = receiveBuff[k + 13];
- 335              		.loc 1 140 6 is_stmt 1 view .LVU117
- 140:Core/Src/data_cal.c **** 					joint6Set.data[k] = receiveBuff[k + 13];
- 336              		.loc 1 140 37 is_stmt 0 view .LVU118
- 337 00d0 D47A     		ldrb	r4, [r2, #11]	@ zero_extendqisi2
- 140:Core/Src/data_cal.c **** 					joint6Set.data[k] = receiveBuff[k + 13];
- 338              		.loc 1 140 24 view .LVU119
- 339 00d2 4049     		ldr	r1, .L25+44
- 340 00d4 CC54     		strb	r4, [r1, r3]
- 141:Core/Src/data_cal.c **** 				}
- 341              		.loc 1 141 6 is_stmt 1 view .LVU120
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 13
+ 314              		.loc 1 115 38 view .LVU111
+ 315 00e2 C7EE276A 		vdiv.f32	s13, s14, s15
+ 115:Core/Src/data_cal.c **** 			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+ 316              		.loc 1 115 16 view .LVU112
+ 317 00e6 C3ED026A 		vstr.32	s13, [r3, #8]
+ 116:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 318              		.loc 1 116 4 is_stmt 1 view .LVU113
+ 116:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 319              		.loc 1 116 35 is_stmt 0 view .LVU114
+ 320 00ea 324A     		ldr	r2, .L21+36
+ 321 00ec B2F90020 		ldrsh	r2, [r2]
+ 322 00f0 07EE102A 		vmov	s14, r2	@ int
+ 116:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 323              		.loc 1 116 19 view .LVU115
+ 324 00f4 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 116:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 325              		.loc 1 116 38 view .LVU116
+ 326 00f8 C7EE276A 		vdiv.f32	s13, s14, s15
+ 116:Core/Src/data_cal.c **** 			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+ 327              		.loc 1 116 16 view .LVU117
+ 328 00fc C3ED036A 		vstr.32	s13, [r3, #12]
+ 117:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 329              		.loc 1 117 4 is_stmt 1 view .LVU118
+ 117:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 330              		.loc 1 117 35 is_stmt 0 view .LVU119
+ 331 0100 2D4A     		ldr	r2, .L21+40
+ 332 0102 B2F90020 		ldrsh	r2, [r2]
+ 333 0106 07EE102A 		vmov	s14, r2	@ int
+ 117:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 334              		.loc 1 117 19 view .LVU120
+ 335 010a B8EEC77A 		vcvt.f32.s32	s14, s14
+ 117:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 336              		.loc 1 117 38 view .LVU121
+ 337 010e C7EE276A 		vdiv.f32	s13, s14, s15
+ 117:Core/Src/data_cal.c **** 			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+ 338              		.loc 1 117 16 view .LVU122
+ 339 0112 C3ED046A 		vstr.32	s13, [r3, #16]
+ 118:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 340              		.loc 1 118 4 is_stmt 1 view .LVU123
+ 118:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 341              		.loc 1 118 35 is_stmt 0 view .LVU124
+ 342 0116 294A     		ldr	r2, .L21+44
+ 343 0118 B2F90020 		ldrsh	r2, [r2]
+ 344 011c 07EE102A 		vmov	s14, r2	@ int
+ 118:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 345              		.loc 1 118 19 view .LVU125
+ 346 0120 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 118:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 347              		.loc 1 118 38 view .LVU126
+ 348 0124 C7EE276A 		vdiv.f32	s13, s14, s15
+ 118:Core/Src/data_cal.c **** 			AngleSet[6] = (float)receiveBuff[15];
+ 349              		.loc 1 118 16 view .LVU127
+ 350 0128 C3ED056A 		vstr.32	s13, [r3, #20]
+ 119:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 351              		.loc 1 119 4 is_stmt 1 view .LVU128
+ 119:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 352              		.loc 1 119 36 is_stmt 0 view .LVU129
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 13
 
 
- 141:Core/Src/data_cal.c **** 				}
- 342              		.loc 1 141 37 is_stmt 0 view .LVU121
- 343 00d6 517B     		ldrb	r1, [r2, #13]	@ zero_extendqisi2
- 141:Core/Src/data_cal.c **** 				}
- 344              		.loc 1 141 24 view .LVU122
- 345 00d8 3F4A     		ldr	r2, .L25+48
- 346 00da D154     		strb	r1, [r2, r3]
- 134:Core/Src/data_cal.c **** 				{
- 347              		.loc 1 134 25 is_stmt 1 discriminator 3 view .LVU123
- 348 00dc 0133     		adds	r3, r3, #1
- 349 00de 384A     		ldr	r2, .L25+24
- 350 00e0 1380     		strh	r3, [r2]	@ movhi
- 351              	.L19:
- 134:Core/Src/data_cal.c **** 				{
- 352              		.loc 1 134 19 discriminator 1 view .LVU124
- 353 00e2 374B     		ldr	r3, .L25+24
- 354 00e4 B3F90030 		ldrsh	r3, [r3]
- 355 00e8 012B     		cmp	r3, #1
- 356 00ea E4DD     		ble	.L20
- 144:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 357              		.loc 1 144 5 view .LVU125
- 144:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 358              		.loc 1 144 36 is_stmt 0 view .LVU126
- 359 00ec 354B     		ldr	r3, .L25+28
- 360 00ee B3F90030 		ldrsh	r3, [r3]
- 361 00f2 07EE103A 		vmov	s14, r3	@ int
- 144:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 362              		.loc 1 144 20 view .LVU127
- 363 00f6 B8EEC77A 		vcvt.f32.s32	s14, s14
- 144:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 364              		.loc 1 144 39 view .LVU128
- 365 00fa DFED387A 		vldr.32	s15, .L25+52
- 366 00fe C7EE276A 		vdiv.f32	s13, s14, s15
- 144:Core/Src/data_cal.c **** 				AngleSet[1] = ((float)joint2Set.d / 1000.0);
- 367              		.loc 1 144 17 view .LVU129
- 368 0102 374B     		ldr	r3, .L25+56
- 369 0104 C3ED006A 		vstr.32	s13, [r3]
- 145:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 370              		.loc 1 145 5 is_stmt 1 view .LVU130
- 145:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 371              		.loc 1 145 36 is_stmt 0 view .LVU131
- 372 0108 2F4A     		ldr	r2, .L25+32
- 373 010a B2F90020 		ldrsh	r2, [r2]
- 374 010e 07EE102A 		vmov	s14, r2	@ int
- 145:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 375              		.loc 1 145 20 view .LVU132
- 376 0112 B8EEC77A 		vcvt.f32.s32	s14, s14
- 145:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 377              		.loc 1 145 39 view .LVU133
- 378 0116 C7EE276A 		vdiv.f32	s13, s14, s15
- 145:Core/Src/data_cal.c **** 				AngleSet[2] = ((float)joint3Set.d / 1000.0);
- 379              		.loc 1 145 17 view .LVU134
- 380 011a C3ED016A 		vstr.32	s13, [r3, #4]
- 146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 381              		.loc 1 146 5 is_stmt 1 view .LVU135
- 146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 382              		.loc 1 146 36 is_stmt 0 view .LVU136
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 14
+ 353 012c E27B     		ldrb	r2, [r4, #15]	@ zero_extendqisi2
+ 354 012e 07EE902A 		vmov	s15, r2	@ int
+ 119:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 355              		.loc 1 119 18 view .LVU130
+ 356 0132 F8EE677A 		vcvt.f32.u32	s15, s15
+ 119:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 357              		.loc 1 119 16 view .LVU131
+ 358 0136 C3ED067A 		vstr.32	s15, [r3, #24]
+ 122:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 359              		.loc 1 122 4 is_stmt 1 view .LVU132
+ 122:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 360              		.loc 1 122 21 is_stmt 0 view .LVU133
+ 361 013a 0023     		movs	r3, #0
+ 362 013c 194A     		ldr	r2, .L21+20
+ 363 013e 1370     		strb	r3, [r2]
+ 123:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 364              		.loc 1 123 4 is_stmt 1 view .LVU134
+ 123:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 365              		.loc 1 123 23 is_stmt 0 view .LVU135
+ 366 0140 134A     		ldr	r2, .L21
+ 367 0142 1370     		strb	r3, [r2]
+ 124:Core/Src/data_cal.c **** 			checkSum = 0;
+ 368              		.loc 1 124 4 is_stmt 1 view .LVU136
+ 124:Core/Src/data_cal.c **** 			checkSum = 0;
+ 369              		.loc 1 124 15 is_stmt 0 view .LVU137
+ 370 0144 134A     		ldr	r2, .L21+4
+ 371 0146 1121     		movs	r1, #17
+ 372 0148 1170     		strb	r1, [r2]
+ 125:Core/Src/data_cal.c **** 			dataLength = 0;
+ 373              		.loc 1 125 4 is_stmt 1 view .LVU138
+ 125:Core/Src/data_cal.c **** 			dataLength = 0;
+ 374              		.loc 1 125 13 is_stmt 0 view .LVU139
+ 375 014a 144A     		ldr	r2, .L21+12
+ 376 014c 1370     		strb	r3, [r2]
+ 126:Core/Src/data_cal.c **** 			j = 0;
+ 377              		.loc 1 126 4 is_stmt 1 view .LVU140
+ 126:Core/Src/data_cal.c **** 			j = 0;
+ 378              		.loc 1 126 15 is_stmt 0 view .LVU141
+ 379 014e 124A     		ldr	r2, .L21+8
+ 380 0150 1380     		strh	r3, [r2]	@ movhi
+ 127:Core/Src/data_cal.c **** 			k = 0;
+ 381              		.loc 1 127 4 is_stmt 1 view .LVU142
+ 127:Core/Src/data_cal.c **** 			k = 0;
+ 382              		.loc 1 127 6 is_stmt 0 view .LVU143
+ 383 0152 1D4A     		ldr	r2, .L21+56
+ 384 0154 1380     		strh	r3, [r2]	@ movhi
+ 128:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 385              		.loc 1 128 4 is_stmt 1 view .LVU144
+ 128:Core/Src/data_cal.c **** 			//-----------------------------------------------------------------
+ 386              		.loc 1 128 6 is_stmt 0 view .LVU145
+ 387 0156 124A     		ldr	r2, .L21+16
+ 388 0158 1380     		strh	r3, [r2]	@ movhi
+ 389              	.L12:
+ 149:Core/Src/data_cal.c **** /**************************************************************************
+ 390              		.loc 1 149 1 view .LVU146
+ 391 015a 0020     		movs	r0, #0
+ 392 015c 38BD     		pop	{r3, r4, r5, pc}
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 14
 
 
- 383 011e 2B4A     		ldr	r2, .L25+36
- 384 0120 B2F90020 		ldrsh	r2, [r2]
- 385 0124 07EE102A 		vmov	s14, r2	@ int
- 146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 386              		.loc 1 146 20 view .LVU137
- 387 0128 B8EEC77A 		vcvt.f32.s32	s14, s14
- 146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 388              		.loc 1 146 39 view .LVU138
- 389 012c C7EE276A 		vdiv.f32	s13, s14, s15
- 146:Core/Src/data_cal.c **** 				AngleSet[3] = ((float)joint4Set.d / 1000.0);
- 390              		.loc 1 146 17 view .LVU139
- 391 0130 C3ED026A 		vstr.32	s13, [r3, #8]
- 147:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 392              		.loc 1 147 5 is_stmt 1 view .LVU140
- 147:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 393              		.loc 1 147 36 is_stmt 0 view .LVU141
- 394 0134 264A     		ldr	r2, .L25+40
- 395 0136 B2F90020 		ldrsh	r2, [r2]
- 396 013a 07EE102A 		vmov	s14, r2	@ int
- 147:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 397              		.loc 1 147 20 view .LVU142
- 398 013e B8EEC77A 		vcvt.f32.s32	s14, s14
- 147:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 399              		.loc 1 147 39 view .LVU143
- 400 0142 C7EE276A 		vdiv.f32	s13, s14, s15
- 147:Core/Src/data_cal.c **** 				AngleSet[4] = ((float)joint5Set.d / 1000.0);
- 401              		.loc 1 147 17 view .LVU144
- 402 0146 C3ED036A 		vstr.32	s13, [r3, #12]
- 148:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 403              		.loc 1 148 5 is_stmt 1 view .LVU145
- 148:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 404              		.loc 1 148 36 is_stmt 0 view .LVU146
- 405 014a 224A     		ldr	r2, .L25+44
- 406 014c B2F90020 		ldrsh	r2, [r2]
- 407 0150 07EE102A 		vmov	s14, r2	@ int
- 148:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 408              		.loc 1 148 20 view .LVU147
- 409 0154 B8EEC77A 		vcvt.f32.s32	s14, s14
- 148:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 410              		.loc 1 148 39 view .LVU148
- 411 0158 C7EE276A 		vdiv.f32	s13, s14, s15
- 148:Core/Src/data_cal.c **** 				AngleSet[5] = ((float)joint6Set.d / 1000.0);
- 412              		.loc 1 148 17 view .LVU149
- 413 015c C3ED046A 		vstr.32	s13, [r3, #16]
- 149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 414              		.loc 1 149 5 is_stmt 1 view .LVU150
- 149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 415              		.loc 1 149 36 is_stmt 0 view .LVU151
- 416 0160 1D4A     		ldr	r2, .L25+48
- 417 0162 B2F90020 		ldrsh	r2, [r2]
- 418 0166 07EE102A 		vmov	s14, r2	@ int
- 149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 419              		.loc 1 149 20 view .LVU152
- 420 016a B8EEC77A 		vcvt.f32.s32	s14, s14
- 149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 421              		.loc 1 149 39 view .LVU153
- 422 016e C7EE276A 		vdiv.f32	s13, s14, s15
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 15
+ 393              	.LVL23:
+ 394              	.L16:
+ 395              	.LBB2:
+ 134:Core/Src/data_cal.c **** 			// 校验和错误，清除接收缓存
+ 396              		.loc 1 134 5 is_stmt 1 view .LVU147
+ 134:Core/Src/data_cal.c **** 			// 校验和错误，清除接收缓存
+ 397              		.loc 1 134 20 is_stmt 0 view .LVU148
+ 398 015e 0022     		movs	r2, #0
+ 399 0160 E254     		strb	r2, [r4, r3]
+ 133:Core/Src/data_cal.c **** 				receiveBuff[i] = 0; // 清除接收缓存
+ 400              		.loc 1 133 28 is_stmt 1 discriminator 3 view .LVU149
+ 401 0162 0133     		adds	r3, r3, #1
+ 402              	.LVL24:
+ 133:Core/Src/data_cal.c **** 				receiveBuff[i] = 0; // 清除接收缓存
+ 403              		.loc 1 133 28 is_stmt 0 discriminator 3 view .LVU150
+ 404 0164 DBB2     		uxtb	r3, r3
+ 405              	.LVL25:
+ 406              	.L13:
+ 133:Core/Src/data_cal.c **** 				receiveBuff[i] = 0; // 清除接收缓存
+ 407              		.loc 1 133 21 is_stmt 1 discriminator 1 view .LVU151
+ 408 0166 122B     		cmp	r3, #18
+ 409 0168 F9D9     		bls	.L16
+ 410              	.LBE2:
+ 136:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 411              		.loc 1 136 4 view .LVU152
+ 136:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 412              		.loc 1 136 21 is_stmt 0 view .LVU153
+ 413 016a 0023     		movs	r3, #0
+ 414              	.LVL26:
+ 136:Core/Src/data_cal.c **** 			USARTReceiverFront = 0;
+ 415              		.loc 1 136 21 view .LVU154
+ 416 016c 0D4A     		ldr	r2, .L21+20
+ 417 016e 1370     		strb	r3, [r2]
+ 137:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 418              		.loc 1 137 4 is_stmt 1 view .LVU155
+ 137:Core/Src/data_cal.c **** 			Start_Flag = START;
+ 419              		.loc 1 137 23 is_stmt 0 view .LVU156
+ 420 0170 074A     		ldr	r2, .L21
+ 421 0172 1370     		strb	r3, [r2]
+ 138:Core/Src/data_cal.c **** 			checkSum = 0;
+ 422              		.loc 1 138 4 is_stmt 1 view .LVU157
+ 138:Core/Src/data_cal.c **** 			checkSum = 0;
+ 423              		.loc 1 138 15 is_stmt 0 view .LVU158
+ 424 0174 074A     		ldr	r2, .L21+4
+ 425 0176 1121     		movs	r1, #17
+ 426 0178 1170     		strb	r1, [r2]
+ 139:Core/Src/data_cal.c **** 			dataLength = 0;
+ 427              		.loc 1 139 4 is_stmt 1 view .LVU159
+ 139:Core/Src/data_cal.c **** 			dataLength = 0;
+ 428              		.loc 1 139 13 is_stmt 0 view .LVU160
+ 429 017a 084A     		ldr	r2, .L21+12
+ 430 017c 1370     		strb	r3, [r2]
+ 140:Core/Src/data_cal.c **** 			j = 0;
+ 431              		.loc 1 140 4 is_stmt 1 view .LVU161
+ 140:Core/Src/data_cal.c **** 			j = 0;
+ 432              		.loc 1 140 15 is_stmt 0 view .LVU162
+ 433 017e 064A     		ldr	r2, .L21+8
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 15
 
 
- 149:Core/Src/data_cal.c **** 				AngleSet[6] = (float)receiveBuff[15];
- 423              		.loc 1 149 17 view .LVU154
- 424 0172 C3ED056A 		vstr.32	s13, [r3, #20]
- 150:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 425              		.loc 1 150 5 is_stmt 1 view .LVU155
- 150:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 426              		.loc 1 150 37 is_stmt 0 view .LVU156
- 427 0176 C27B     		ldrb	r2, [r0, #15]	@ zero_extendqisi2
- 428 0178 07EE902A 		vmov	s15, r2	@ int
- 150:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 429              		.loc 1 150 19 view .LVU157
- 430 017c F8EE677A 		vcvt.f32.u32	s15, s15
- 150:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 431              		.loc 1 150 17 view .LVU158
- 432 0180 C3ED067A 		vstr.32	s15, [r3, #24]
- 153:Core/Src/data_cal.c **** 				USARTReceiverFront = 0;
- 433              		.loc 1 153 5 is_stmt 1 view .LVU159
- 153:Core/Src/data_cal.c **** 				USARTReceiverFront = 0;
- 434              		.loc 1 153 22 is_stmt 0 view .LVU160
- 435 0184 0023     		movs	r3, #0
- 436 0186 0B4A     		ldr	r2, .L25+12
- 437 0188 1370     		strb	r3, [r2]
- 154:Core/Src/data_cal.c **** 				Start_Flag = START;
- 438              		.loc 1 154 5 is_stmt 1 view .LVU161
- 154:Core/Src/data_cal.c **** 				Start_Flag = START;
- 439              		.loc 1 154 24 is_stmt 0 view .LVU162
- 440 018a 084A     		ldr	r2, .L25+4
- 441 018c 1370     		strb	r3, [r2]
- 155:Core/Src/data_cal.c **** 				checkSum = 0;
- 442              		.loc 1 155 5 is_stmt 1 view .LVU163
- 155:Core/Src/data_cal.c **** 				checkSum = 0;
- 443              		.loc 1 155 16 is_stmt 0 view .LVU164
- 444 018e 084A     		ldr	r2, .L25+8
- 445 0190 1121     		movs	r1, #17
- 446 0192 1170     		strb	r1, [r2]
- 156:Core/Src/data_cal.c **** 				dataLength = 0;
- 447              		.loc 1 156 5 is_stmt 1 view .LVU165
- 156:Core/Src/data_cal.c **** 				dataLength = 0;
- 448              		.loc 1 156 14 is_stmt 0 view .LVU166
- 449 0194 084A     		ldr	r2, .L25+16
- 450 0196 1370     		strb	r3, [r2]
- 157:Core/Src/data_cal.c **** 				j = 0;
- 451              		.loc 1 157 5 is_stmt 1 view .LVU167
- 157:Core/Src/data_cal.c **** 				j = 0;
- 452              		.loc 1 157 16 is_stmt 0 view .LVU168
- 453 0198 034A     		ldr	r2, .L25
- 454 019a 1380     		strh	r3, [r2]	@ movhi
- 158:Core/Src/data_cal.c **** 				k = 0;
- 455              		.loc 1 158 5 is_stmt 1 view .LVU169
- 158:Core/Src/data_cal.c **** 				k = 0;
- 456              		.loc 1 158 7 is_stmt 0 view .LVU170
- 457 019c 074A     		ldr	r2, .L25+20
- 458 019e 1380     		strh	r3, [r2]	@ movhi
- 159:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 459              		.loc 1 159 5 is_stmt 1 view .LVU171
- 159:Core/Src/data_cal.c **** 				//-----------------------------------------------------------------
- 460              		.loc 1 159 7 is_stmt 0 view .LVU172
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 16
+ 434 0180 1380     		strh	r3, [r2]	@ movhi
+ 141:Core/Src/data_cal.c **** 			k = 0;
+ 435              		.loc 1 141 4 is_stmt 1 view .LVU163
+ 141:Core/Src/data_cal.c **** 			k = 0;
+ 436              		.loc 1 141 6 is_stmt 0 view .LVU164
+ 437 0182 114A     		ldr	r2, .L21+56
+ 438 0184 1380     		strh	r3, [r2]	@ movhi
+ 142:Core/Src/data_cal.c **** 			return 0; // 返回错误
+ 439              		.loc 1 142 4 is_stmt 1 view .LVU165
+ 142:Core/Src/data_cal.c **** 			return 0; // 返回错误
+ 440              		.loc 1 142 6 is_stmt 0 view .LVU166
+ 441 0186 064A     		ldr	r2, .L21+16
+ 442 0188 1380     		strh	r3, [r2]	@ movhi
+ 143:Core/Src/data_cal.c **** 		}
+ 443              		.loc 1 143 4 is_stmt 1 view .LVU167
+ 143:Core/Src/data_cal.c **** 		}
+ 444              		.loc 1 143 11 is_stmt 0 view .LVU168
+ 445 018a E6E7     		b	.L12
+ 446              	.LVL27:
+ 447              	.L17:
+ 448              	.LBB3:
+ 133:Core/Src/data_cal.c **** 				receiveBuff[i] = 0; // 清除接收缓存
+ 449              		.loc 1 133 12 view .LVU169
+ 450 018c 0023     		movs	r3, #0
+ 451 018e EAE7     		b	.L13
+ 452              	.L22:
+ 453              		.align	2
+ 454              	.L21:
+ 455 0190 00000000 		.word	USARTReceiverFront.6
+ 456 0194 00000000 		.word	Start_Flag.5
+ 457 0198 00000000 		.word	dataLength.2
+ 458 019c 00000000 		.word	checkSum.3
+ 459 01a0 00000000 		.word	k.1
+ 460 01a4 00000000 		.word	USARTBufferIndex.4
+ 461 01a8 00000000 		.word	joint1Set
+ 462 01ac 00000000 		.word	joint2Set
+ 463 01b0 00000000 		.word	joint3Set
+ 464 01b4 00000000 		.word	joint4Set
+ 465 01b8 00000000 		.word	joint5Set
+ 466 01bc 00000000 		.word	joint6Set
+ 467 01c0 00007A44 		.word	1148846080
+ 468 01c4 00000000 		.word	AngleSet
+ 469 01c8 00000000 		.word	j.0
+ 470              	.LBE3:
+ 471              		.cfi_endproc
+ 472              	.LFE137:
+ 474              		.global	__aeabi_f2d
+ 475              		.global	__aeabi_dmul
+ 476              		.global	__aeabi_d2iz
+ 477              		.section	.text.usartSendData,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	usartSendData
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	usartSendData:
+ 485              	.LVL28:
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 16
 
 
- 461 01a0 074A     		ldr	r2, .L25+24
- 462 01a2 1380     		strh	r3, [r2]	@ movhi
- 463 01a4 45E7     		b	.L12
- 464              	.L26:
- 465 01a6 00BF     		.align	2
- 466              	.L25:
- 467 01a8 00000000 		.word	dataLength.6
- 468 01ac 00000000 		.word	USARTReceiverFront.5
- 469 01b0 00000000 		.word	Start_Flag.4
- 470 01b4 00000000 		.word	USARTBufferIndex.3
- 471 01b8 00000000 		.word	checkSum.2
- 472 01bc 00000000 		.word	j.1
- 473 01c0 00000000 		.word	k.0
- 474 01c4 00000000 		.word	joint1Set
- 475 01c8 00000000 		.word	joint2Set
- 476 01cc 00000000 		.word	joint3Set
- 477 01d0 00000000 		.word	joint4Set
- 478 01d4 00000000 		.word	joint5Set
- 479 01d8 00000000 		.word	joint6Set
- 480 01dc 00007A44 		.word	1148846080
- 481 01e0 00000000 		.word	AngleSet
- 482              		.cfi_endproc
- 483              	.LFE137:
- 485              		.section	.text.usartSendData,"ax",%progbits
- 486              		.align	1
- 487              		.global	usartSendData
- 488              		.syntax unified
- 489              		.thumb
- 490              		.thumb_func
- 492              	usartSendData:
- 493              	.LVL26:
- 494              	.LFB138:
- 173:Core/Src/data_cal.c **** 	// 协议数据缓存数组
- 495              		.loc 1 173 1 is_stmt 1 view -0
- 496              		.cfi_startproc
- 497              		@ args = 0, pretend = 0, frame = 16
- 498              		@ frame_needed = 0, uses_anonymous_args = 0
- 173:Core/Src/data_cal.c **** 	// 协议数据缓存数组
- 499              		.loc 1 173 1 is_stmt 0 view .LVU174
- 500 0000 10B5     		push	{r4, lr}
- 501              	.LCFI1:
- 502              		.cfi_def_cfa_offset 8
- 503              		.cfi_offset 4, -8
- 504              		.cfi_offset 14, -4
- 505 0002 84B0     		sub	sp, sp, #16
- 506              	.LCFI2:
- 507              		.cfi_def_cfa_offset 24
- 508 0004 0446     		mov	r4, r0
- 175:Core/Src/data_cal.c **** 	int i, length = 0;
- 509              		.loc 1 175 2 is_stmt 1 view .LVU175
- 175:Core/Src/data_cal.c **** 	int i, length = 0;
- 510              		.loc 1 175 16 is_stmt 0 view .LVU176
- 511 0006 0023     		movs	r3, #0
- 512 0008 0093     		str	r3, [sp]
- 513 000a 0193     		str	r3, [sp, #4]
- 514 000c 0293     		str	r3, [sp, #8]
- 515 000e 8DF80C30 		strb	r3, [sp, #12]
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 17
+ 486              	.LFB138:
+ 154:Core/Src/data_cal.c **** 	// 协议数据缓存数组
+ 487              		.loc 1 154 1 is_stmt 1 view -0
+ 488              		.cfi_startproc
+ 489              		@ args = 0, pretend = 0, frame = 16
+ 490              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154:Core/Src/data_cal.c **** 	// 协议数据缓存数组
+ 491              		.loc 1 154 1 is_stmt 0 view .LVU171
+ 492 0000 70B5     		push	{r4, r5, r6, lr}
+ 493              	.LCFI1:
+ 494              		.cfi_def_cfa_offset 16
+ 495              		.cfi_offset 4, -16
+ 496              		.cfi_offset 5, -12
+ 497              		.cfi_offset 6, -8
+ 498              		.cfi_offset 14, -4
+ 499 0002 84B0     		sub	sp, sp, #16
+ 500              	.LCFI2:
+ 501              		.cfi_def_cfa_offset 32
+ 502 0004 0546     		mov	r5, r0
+ 156:Core/Src/data_cal.c **** 	int i, length = 0;
+ 503              		.loc 1 156 2 is_stmt 1 view .LVU172
+ 156:Core/Src/data_cal.c **** 	int i, length = 0;
+ 504              		.loc 1 156 16 is_stmt 0 view .LVU173
+ 505 0006 0024     		movs	r4, #0
+ 506 0008 0094     		str	r4, [sp]
+ 507 000a 0194     		str	r4, [sp, #4]
+ 508 000c 0294     		str	r4, [sp, #8]
+ 509 000e 8DF80C40 		strb	r4, [sp, #12]
+ 157:Core/Src/data_cal.c **** 	length = 13;
+ 510              		.loc 1 157 2 is_stmt 1 view .LVU174
+ 511              	.LVL29:
+ 158:Core/Src/data_cal.c **** 	// 计算joint角度
+ 512              		.loc 1 158 2 view .LVU175
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 513              		.loc 1 160 2 view .LVU176
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 514              		.loc 1 160 28 is_stmt 0 view .LVU177
+ 515 0012 644B     		ldr	r3, .L29
+ 516 0014 93ED027A 		vldr.32	s14, [r3, #8]
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 517              		.loc 1 160 46 view .LVU178
+ 518 0018 634E     		ldr	r6, .L29+4
+ 519 001a D6ED007A 		vldr.32	s15, [r6]
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 520              		.loc 1 160 39 view .LVU179
+ 521 001e C7EE277A 		vdiv.f32	s15, s14, s15
+ 522 0022 17EE900A 		vmov	r0, s15
+ 523              	.LVL30:
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 524              		.loc 1 160 39 view .LVU180
+ 525 0026 FFF7FEFF 		bl	__aeabi_f2d
+ 526              	.LVL31:
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 527              		.loc 1 160 50 view .LVU181
+ 528 002a 0022     		movs	r2, #0
+ 529 002c 5F4B     		ldr	r3, .L29+8
+ 530 002e FFF7FEFF 		bl	__aeabi_dmul
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 17
 
 
- 176:Core/Src/data_cal.c **** 	length = 13;
- 516              		.loc 1 176 2 is_stmt 1 view .LVU177
- 517              	.LVL27:
- 177:Core/Src/data_cal.c **** 	// 计算joint角度
- 518              		.loc 1 177 2 view .LVU178
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 519              		.loc 1 179 2 view .LVU179
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 520              		.loc 1 179 28 is_stmt 0 view .LVU180
- 521 0012 594A     		ldr	r2, .L33
- 522 0014 D2ED026A 		vldr.32	s13, [r2, #8]
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 523              		.loc 1 179 46 view .LVU181
- 524 0018 584A     		ldr	r2, .L33+4
- 525 001a D2ED007A 		vldr.32	s15, [r2]
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 526              		.loc 1 179 39 view .LVU182
- 527 001e 86EEA77A 		vdiv.f32	s14, s13, s15
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 528              		.loc 1 179 50 view .LVU183
- 529 0022 DFED577A 		vldr.32	s15, .L33+8
- 530 0026 27EE277A 		vmul.f32	s14, s14, s15
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 531              		.loc 1 179 14 view .LVU184
- 532 002a BDEEC77A 		vcvt.s32.f32	s14, s14
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 533              		.loc 1 179 12 view .LVU185
- 534 002e 5549     		ldr	r1, .L33+12
- 535 0030 17EE100A 		vmov	r0, s14	@ int
- 536              	.LVL28:
- 179:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
- 537              		.loc 1 179 12 view .LVU186
- 538 0034 0880     		strh	r0, [r1]	@ movhi
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 539              		.loc 1 180 2 is_stmt 1 view .LVU187
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 540              		.loc 1 180 28 is_stmt 0 view .LVU188
- 541 0036 5449     		ldr	r1, .L33+16
- 542 0038 91ED026A 		vldr.32	s12, [r1, #8]
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 543              		.loc 1 180 46 view .LVU189
- 544 003c D2ED016A 		vldr.32	s13, [r2, #4]
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 545              		.loc 1 180 39 view .LVU190
- 546 0040 86EE267A 		vdiv.f32	s14, s12, s13
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 547              		.loc 1 180 50 view .LVU191
- 548 0044 27EE277A 		vmul.f32	s14, s14, s15
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 549              		.loc 1 180 14 view .LVU192
- 550 0048 BDEEC77A 		vcvt.s32.f32	s14, s14
- 180:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
- 551              		.loc 1 180 12 view .LVU193
- 552 004c 4F49     		ldr	r1, .L33+20
- 553 004e 17EE100A 		vmov	r0, s14	@ int
- 554 0052 0880     		strh	r0, [r1]	@ movhi
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 18
+ 531              	.LVL32:
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 532              		.loc 1 160 14 view .LVU182
+ 533 0032 FFF7FEFF 		bl	__aeabi_d2iz
+ 534              	.LVL33:
+ 160:Core/Src/data_cal.c **** 	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+ 535              		.loc 1 160 12 view .LVU183
+ 536 0036 5E4B     		ldr	r3, .L29+12
+ 537 0038 1880     		strh	r0, [r3]	@ movhi
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 538              		.loc 1 161 2 is_stmt 1 view .LVU184
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 539              		.loc 1 161 28 is_stmt 0 view .LVU185
+ 540 003a 5E4B     		ldr	r3, .L29+16
+ 541 003c 93ED027A 		vldr.32	s14, [r3, #8]
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 542              		.loc 1 161 46 view .LVU186
+ 543 0040 D6ED017A 		vldr.32	s15, [r6, #4]
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 544              		.loc 1 161 39 view .LVU187
+ 545 0044 C7EE277A 		vdiv.f32	s15, s14, s15
+ 546 0048 17EE900A 		vmov	r0, s15
+ 547 004c FFF7FEFF 		bl	__aeabi_f2d
+ 548              	.LVL34:
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 549              		.loc 1 161 50 view .LVU188
+ 550 0050 0022     		movs	r2, #0
+ 551 0052 564B     		ldr	r3, .L29+8
+ 552 0054 FFF7FEFF 		bl	__aeabi_dmul
+ 553              	.LVL35:
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 554              		.loc 1 161 14 view .LVU189
+ 555 0058 FFF7FEFF 		bl	__aeabi_d2iz
+ 556              	.LVL36:
+ 161:Core/Src/data_cal.c **** 	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+ 557              		.loc 1 161 12 view .LVU190
+ 558 005c 564B     		ldr	r3, .L29+20
+ 559 005e 1880     		strh	r0, [r3]	@ movhi
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 560              		.loc 1 162 2 is_stmt 1 view .LVU191
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 561              		.loc 1 162 28 is_stmt 0 view .LVU192
+ 562 0060 564B     		ldr	r3, .L29+24
+ 563 0062 93ED027A 		vldr.32	s14, [r3, #8]
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 564              		.loc 1 162 46 view .LVU193
+ 565 0066 D6ED027A 		vldr.32	s15, [r6, #8]
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 566              		.loc 1 162 39 view .LVU194
+ 567 006a C7EE277A 		vdiv.f32	s15, s14, s15
+ 568 006e 17EE900A 		vmov	r0, s15
+ 569 0072 FFF7FEFF 		bl	__aeabi_f2d
+ 570              	.LVL37:
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 571              		.loc 1 162 50 view .LVU195
+ 572 0076 0022     		movs	r2, #0
+ 573 0078 4C4B     		ldr	r3, .L29+8
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 18
 
 
- 555              		.loc 1 181 2 is_stmt 1 view .LVU194
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 556              		.loc 1 181 28 is_stmt 0 view .LVU195
- 557 0054 4E49     		ldr	r1, .L33+24
- 558 0056 91ED026A 		vldr.32	s12, [r1, #8]
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 559              		.loc 1 181 46 view .LVU196
- 560 005a D2ED026A 		vldr.32	s13, [r2, #8]
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 561              		.loc 1 181 39 view .LVU197
- 562 005e 86EE267A 		vdiv.f32	s14, s12, s13
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 563              		.loc 1 181 50 view .LVU198
- 564 0062 27EE277A 		vmul.f32	s14, s14, s15
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 565              		.loc 1 181 14 view .LVU199
- 566 0066 BDEEC77A 		vcvt.s32.f32	s14, s14
- 181:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
- 567              		.loc 1 181 12 view .LVU200
- 568 006a 4A49     		ldr	r1, .L33+28
- 569 006c 17EE100A 		vmov	r0, s14	@ int
- 570 0070 0880     		strh	r0, [r1]	@ movhi
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 571              		.loc 1 182 2 is_stmt 1 view .LVU201
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 572              		.loc 1 182 28 is_stmt 0 view .LVU202
- 573 0072 4949     		ldr	r1, .L33+32
- 574 0074 91ED026A 		vldr.32	s12, [r1, #8]
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 575              		.loc 1 182 46 view .LVU203
- 576 0078 D2ED036A 		vldr.32	s13, [r2, #12]
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 577              		.loc 1 182 39 view .LVU204
- 578 007c 86EE267A 		vdiv.f32	s14, s12, s13
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 579              		.loc 1 182 50 view .LVU205
- 580 0080 27EE277A 		vmul.f32	s14, s14, s15
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 581              		.loc 1 182 14 view .LVU206
- 582 0084 BDEEC77A 		vcvt.s32.f32	s14, s14
- 182:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
- 583              		.loc 1 182 12 view .LVU207
- 584 0088 4449     		ldr	r1, .L33+36
- 585 008a 17EE100A 		vmov	r0, s14	@ int
- 586 008e 0880     		strh	r0, [r1]	@ movhi
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 587              		.loc 1 183 2 is_stmt 1 view .LVU208
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 588              		.loc 1 183 28 is_stmt 0 view .LVU209
- 589 0090 4349     		ldr	r1, .L33+40
- 590 0092 91ED026A 		vldr.32	s12, [r1, #8]
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 591              		.loc 1 183 46 view .LVU210
- 592 0096 D2ED046A 		vldr.32	s13, [r2, #16]
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 593              		.loc 1 183 39 view .LVU211
- 594 009a 86EE267A 		vdiv.f32	s14, s12, s13
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 19
+ 574 007a FFF7FEFF 		bl	__aeabi_dmul
+ 575              	.LVL38:
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 576              		.loc 1 162 14 view .LVU196
+ 577 007e FFF7FEFF 		bl	__aeabi_d2iz
+ 578              	.LVL39:
+ 162:Core/Src/data_cal.c **** 	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+ 579              		.loc 1 162 12 view .LVU197
+ 580 0082 4F4B     		ldr	r3, .L29+28
+ 581 0084 1880     		strh	r0, [r3]	@ movhi
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 582              		.loc 1 163 2 is_stmt 1 view .LVU198
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 583              		.loc 1 163 28 is_stmt 0 view .LVU199
+ 584 0086 4F4B     		ldr	r3, .L29+32
+ 585 0088 93ED027A 		vldr.32	s14, [r3, #8]
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 586              		.loc 1 163 46 view .LVU200
+ 587 008c D6ED037A 		vldr.32	s15, [r6, #12]
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 588              		.loc 1 163 39 view .LVU201
+ 589 0090 C7EE277A 		vdiv.f32	s15, s14, s15
+ 590 0094 17EE900A 		vmov	r0, s15
+ 591 0098 FFF7FEFF 		bl	__aeabi_f2d
+ 592              	.LVL40:
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 593              		.loc 1 163 50 view .LVU202
+ 594 009c 0022     		movs	r2, #0
+ 595 009e 434B     		ldr	r3, .L29+8
+ 596 00a0 FFF7FEFF 		bl	__aeabi_dmul
+ 597              	.LVL41:
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 598              		.loc 1 163 14 view .LVU203
+ 599 00a4 FFF7FEFF 		bl	__aeabi_d2iz
+ 600              	.LVL42:
+ 163:Core/Src/data_cal.c **** 	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+ 601              		.loc 1 163 12 view .LVU204
+ 602 00a8 474B     		ldr	r3, .L29+36
+ 603 00aa 1880     		strh	r0, [r3]	@ movhi
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 604              		.loc 1 164 2 is_stmt 1 view .LVU205
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 605              		.loc 1 164 28 is_stmt 0 view .LVU206
+ 606 00ac 474B     		ldr	r3, .L29+40
+ 607 00ae 93ED027A 		vldr.32	s14, [r3, #8]
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 608              		.loc 1 164 46 view .LVU207
+ 609 00b2 D6ED047A 		vldr.32	s15, [r6, #16]
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 610              		.loc 1 164 39 view .LVU208
+ 611 00b6 C7EE277A 		vdiv.f32	s15, s14, s15
+ 612 00ba 17EE900A 		vmov	r0, s15
+ 613 00be FFF7FEFF 		bl	__aeabi_f2d
+ 614              	.LVL43:
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 615              		.loc 1 164 50 view .LVU209
+ 616 00c2 0022     		movs	r2, #0
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 19
 
 
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 595              		.loc 1 183 50 view .LVU212
- 596 009e 27EE277A 		vmul.f32	s14, s14, s15
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 597              		.loc 1 183 14 view .LVU213
- 598 00a2 BDEEC77A 		vcvt.s32.f32	s14, s14
- 183:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
- 599              		.loc 1 183 12 view .LVU214
- 600 00a6 3F49     		ldr	r1, .L33+44
- 601 00a8 17EE100A 		vmov	r0, s14	@ int
- 602 00ac 0880     		strh	r0, [r1]	@ movhi
- 184:Core/Src/data_cal.c **** 
- 603              		.loc 1 184 2 is_stmt 1 view .LVU215
- 184:Core/Src/data_cal.c **** 
- 604              		.loc 1 184 28 is_stmt 0 view .LVU216
- 605 00ae 3E49     		ldr	r1, .L33+48
- 606 00b0 91ED026A 		vldr.32	s12, [r1, #8]
- 184:Core/Src/data_cal.c **** 
- 607              		.loc 1 184 46 view .LVU217
- 608 00b4 D2ED056A 		vldr.32	s13, [r2, #20]
- 184:Core/Src/data_cal.c **** 
- 609              		.loc 1 184 39 view .LVU218
- 610 00b8 86EE267A 		vdiv.f32	s14, s12, s13
- 184:Core/Src/data_cal.c **** 
- 611              		.loc 1 184 50 view .LVU219
- 612 00bc 67EE277A 		vmul.f32	s15, s14, s15
- 184:Core/Src/data_cal.c **** 
- 613              		.loc 1 184 14 view .LVU220
- 614 00c0 FDEEE77A 		vcvt.s32.f32	s15, s15
- 184:Core/Src/data_cal.c **** 
- 615              		.loc 1 184 12 view .LVU221
- 616 00c4 394A     		ldr	r2, .L33+52
- 617 00c6 17EE901A 		vmov	r1, s15	@ int
- 618 00ca 1180     		strh	r1, [r2]	@ movhi
- 194:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
- 619              		.loc 1 194 2 is_stmt 1 view .LVU222
- 620              	.LVL29:
- 194:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
- 621              		.loc 1 194 2 is_stmt 0 view .LVU223
- 622 00cc 07E0     		b	.L28
- 623              	.LVL30:
- 624              	.L29:
- 195:Core/Src/data_cal.c **** 
- 625              		.loc 1 195 3 is_stmt 1 view .LVU224
- 195:Core/Src/data_cal.c **** 
- 626              		.loc 1 195 18 is_stmt 0 view .LVU225
- 627 00ce 384A     		ldr	r2, .L33+56
- 628 00d0 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
- 195:Core/Src/data_cal.c **** 
- 629              		.loc 1 195 10 view .LVU226
- 630 00d2 03F11002 		add	r2, r3, #16
- 631 00d6 6A44     		add	r2, sp, r2
- 632 00d8 02F8101C 		strb	r1, [r2, #-16]
- 194:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
- 633              		.loc 1 194 22 is_stmt 1 discriminator 3 view .LVU227
- 634 00dc 0133     		adds	r3, r3, #1
- 635              	.LVL31:
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 20
+ 617 00c4 394B     		ldr	r3, .L29+8
+ 618 00c6 FFF7FEFF 		bl	__aeabi_dmul
+ 619              	.LVL44:
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 620              		.loc 1 164 14 view .LVU210
+ 621 00ca FFF7FEFF 		bl	__aeabi_d2iz
+ 622              	.LVL45:
+ 164:Core/Src/data_cal.c **** 	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
+ 623              		.loc 1 164 12 view .LVU211
+ 624 00ce 404B     		ldr	r3, .L29+44
+ 625 00d0 1880     		strh	r0, [r3]	@ movhi
+ 165:Core/Src/data_cal.c **** 
+ 626              		.loc 1 165 2 is_stmt 1 view .LVU212
+ 165:Core/Src/data_cal.c **** 
+ 627              		.loc 1 165 28 is_stmt 0 view .LVU213
+ 628 00d2 404B     		ldr	r3, .L29+48
+ 629 00d4 93ED027A 		vldr.32	s14, [r3, #8]
+ 165:Core/Src/data_cal.c **** 
+ 630              		.loc 1 165 46 view .LVU214
+ 631 00d8 D6ED057A 		vldr.32	s15, [r6, #20]
+ 165:Core/Src/data_cal.c **** 
+ 632              		.loc 1 165 39 view .LVU215
+ 633 00dc C7EE277A 		vdiv.f32	s15, s14, s15
+ 634 00e0 17EE900A 		vmov	r0, s15
+ 635 00e4 FFF7FEFF 		bl	__aeabi_f2d
+ 636              	.LVL46:
+ 165:Core/Src/data_cal.c **** 
+ 637              		.loc 1 165 50 view .LVU216
+ 638 00e8 0022     		movs	r2, #0
+ 639 00ea 304B     		ldr	r3, .L29+8
+ 640 00ec FFF7FEFF 		bl	__aeabi_dmul
+ 641              	.LVL47:
+ 165:Core/Src/data_cal.c **** 
+ 642              		.loc 1 165 14 view .LVU217
+ 643 00f0 FFF7FEFF 		bl	__aeabi_d2iz
+ 644              	.LVL48:
+ 165:Core/Src/data_cal.c **** 
+ 645              		.loc 1 165 12 view .LVU218
+ 646 00f4 384B     		ldr	r3, .L29+52
+ 647 00f6 1880     		strh	r0, [r3]	@ movhi
+ 174:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 648              		.loc 1 174 2 is_stmt 1 view .LVU219
+ 649              	.LVL49:
+ 174:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 650              		.loc 1 174 9 is_stmt 0 view .LVU220
+ 651 00f8 2346     		mov	r3, r4
+ 174:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 652              		.loc 1 174 2 view .LVU221
+ 653 00fa 07E0     		b	.L24
+ 654              	.LVL50:
+ 655              	.L25:
+ 175:Core/Src/data_cal.c **** 
+ 656              		.loc 1 175 3 is_stmt 1 view .LVU222
+ 175:Core/Src/data_cal.c **** 
+ 657              		.loc 1 175 18 is_stmt 0 view .LVU223
+ 658 00fc 374A     		ldr	r2, .L29+56
+ 659 00fe D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 20
 
 
- 636              	.L28:
- 194:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
- 637              		.loc 1 194 16 discriminator 1 view .LVU228
- 638 00de 012B     		cmp	r3, #1
- 639 00e0 F5DD     		ble	.L29
- 197:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
- 640              		.loc 1 197 2 view .LVU229
- 197:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
- 641              		.loc 1 197 9 is_stmt 0 view .LVU230
- 642 00e2 0D23     		movs	r3, #13
- 643              	.LVL32:
- 197:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
- 644              		.loc 1 197 9 view .LVU231
- 645 00e4 8DF80230 		strb	r3, [sp, #2]
- 198:Core/Src/data_cal.c **** 	{
- 646              		.loc 1 198 2 is_stmt 1 view .LVU232
- 647              	.LVL33:
- 198:Core/Src/data_cal.c **** 	{
- 648              		.loc 1 198 9 is_stmt 0 view .LVU233
- 649 00e8 0023     		movs	r3, #0
- 198:Core/Src/data_cal.c **** 	{
- 650              		.loc 1 198 2 view .LVU234
- 651 00ea 2AE0     		b	.L30
- 652              	.LVL34:
- 653              	.L31:
- 200:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
- 654              		.loc 1 200 3 is_stmt 1 view .LVU235
- 200:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
- 655              		.loc 1 200 28 is_stmt 0 view .LVU236
- 656 00ec 2549     		ldr	r1, .L33+12
- 657 00ee C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 200:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
- 658              		.loc 1 200 14 view .LVU237
- 659 00f0 03F11302 		add	r2, r3, #19
- 660 00f4 6A44     		add	r2, sp, r2
- 661 00f6 02F8101C 		strb	r1, [r2, #-16]
- 201:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
- 662              		.loc 1 201 3 is_stmt 1 view .LVU238
- 201:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
- 663              		.loc 1 201 28 is_stmt 0 view .LVU239
- 664 00fa 2449     		ldr	r1, .L33+20
- 665 00fc C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 201:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
- 666              		.loc 1 201 14 view .LVU240
- 667 00fe 03F11502 		add	r2, r3, #21
- 668 0102 6A44     		add	r2, sp, r2
- 669 0104 02F8101C 		strb	r1, [r2, #-16]
- 202:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
- 670              		.loc 1 202 3 is_stmt 1 view .LVU241
- 202:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
- 671              		.loc 1 202 28 is_stmt 0 view .LVU242
- 672 0108 2249     		ldr	r1, .L33+28
- 673 010a C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 202:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
- 674              		.loc 1 202 14 view .LVU243
- 675 010c 03F11702 		add	r2, r3, #23
- 676 0110 6A44     		add	r2, sp, r2
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 21
+ 175:Core/Src/data_cal.c **** 
+ 660              		.loc 1 175 10 view .LVU224
+ 661 0100 03F11002 		add	r2, r3, #16
+ 662 0104 6A44     		add	r2, sp, r2
+ 663 0106 02F8101C 		strb	r1, [r2, #-16]
+ 174:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 664              		.loc 1 174 22 is_stmt 1 discriminator 3 view .LVU225
+ 665 010a 0133     		adds	r3, r3, #1
+ 666              	.LVL51:
+ 667              	.L24:
+ 174:Core/Src/data_cal.c **** 		buf[i] = header[i]; // buf[0] buf[1]
+ 668              		.loc 1 174 16 discriminator 1 view .LVU226
+ 669 010c 012B     		cmp	r3, #1
+ 670 010e F5DD     		ble	.L25
+ 177:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
+ 671              		.loc 1 177 2 view .LVU227
+ 177:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
+ 672              		.loc 1 177 9 is_stmt 0 view .LVU228
+ 673 0110 0D23     		movs	r3, #13
+ 674              	.LVL52:
+ 177:Core/Src/data_cal.c **** 	for (i = 0; i < 2; i++)
+ 675              		.loc 1 177 9 view .LVU229
+ 676 0112 8DF80230 		strb	r3, [sp, #2]
+ 178:Core/Src/data_cal.c **** 	{
+ 677              		.loc 1 178 2 is_stmt 1 view .LVU230
+ 678              	.LVL53:
+ 178:Core/Src/data_cal.c **** 	{
+ 679              		.loc 1 178 9 is_stmt 0 view .LVU231
+ 680 0116 0023     		movs	r3, #0
+ 178:Core/Src/data_cal.c **** 	{
+ 681              		.loc 1 178 2 view .LVU232
+ 682 0118 2AE0     		b	.L26
+ 683              	.LVL54:
+ 684              	.L27:
+ 180:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
+ 685              		.loc 1 180 3 is_stmt 1 view .LVU233
+ 180:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
+ 686              		.loc 1 180 28 is_stmt 0 view .LVU234
+ 687 011a 2549     		ldr	r1, .L29+12
+ 688 011c C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 180:Core/Src/data_cal.c **** 		buf[i + 5] = joint21.data[i];  // buf[5]  buf[6]
+ 689              		.loc 1 180 14 view .LVU235
+ 690 011e 03F11302 		add	r2, r3, #19
+ 691 0122 6A44     		add	r2, sp, r2
+ 692 0124 02F8101C 		strb	r1, [r2, #-16]
+ 181:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
+ 693              		.loc 1 181 3 is_stmt 1 view .LVU236
+ 181:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
+ 694              		.loc 1 181 28 is_stmt 0 view .LVU237
+ 695 0128 2349     		ldr	r1, .L29+20
+ 696 012a C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 181:Core/Src/data_cal.c **** 		buf[i + 7] = joint31.data[i];  // buf[7]  buf[8]
+ 697              		.loc 1 181 14 view .LVU238
+ 698 012c 03F11502 		add	r2, r3, #21
+ 699 0130 6A44     		add	r2, sp, r2
+ 700 0132 02F8101C 		strb	r1, [r2, #-16]
+ 182:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 21
 
 
- 677 0112 02F8101C 		strb	r1, [r2, #-16]
- 203:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
- 678              		.loc 1 203 3 is_stmt 1 view .LVU244
- 203:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
- 679              		.loc 1 203 28 is_stmt 0 view .LVU245
- 680 0116 2149     		ldr	r1, .L33+36
- 681 0118 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 203:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
- 682              		.loc 1 203 14 view .LVU246
- 683 011a 03F11902 		add	r2, r3, #25
- 684 011e 6A44     		add	r2, sp, r2
- 685 0120 02F8101C 		strb	r1, [r2, #-16]
- 204:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
- 686              		.loc 1 204 3 is_stmt 1 view .LVU247
- 204:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
- 687              		.loc 1 204 29 is_stmt 0 view .LVU248
- 688 0124 1F49     		ldr	r1, .L33+44
- 689 0126 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 204:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
- 690              		.loc 1 204 15 view .LVU249
- 691 0128 03F11B02 		add	r2, r3, #27
- 692 012c 6A44     		add	r2, sp, r2
- 693 012e 02F8101C 		strb	r1, [r2, #-16]
- 205:Core/Src/data_cal.c **** 	}
- 694              		.loc 1 205 3 is_stmt 1 view .LVU250
- 205:Core/Src/data_cal.c **** 	}
- 695              		.loc 1 205 29 is_stmt 0 view .LVU251
- 696 0132 1E49     		ldr	r1, .L33+52
- 697 0134 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
- 205:Core/Src/data_cal.c **** 	}
- 698              		.loc 1 205 15 view .LVU252
- 699 0136 03F11D02 		add	r2, r3, #29
- 700 013a 6A44     		add	r2, sp, r2
- 701 013c 02F8101C 		strb	r1, [r2, #-16]
- 198:Core/Src/data_cal.c **** 	{
- 702              		.loc 1 198 22 is_stmt 1 discriminator 3 view .LVU253
- 703 0140 0133     		adds	r3, r3, #1
- 704              	.LVL35:
- 705              	.L30:
- 198:Core/Src/data_cal.c **** 	{
- 706              		.loc 1 198 16 discriminator 1 view .LVU254
- 707 0142 012B     		cmp	r3, #1
- 708 0144 D2DD     		ble	.L31
- 208:Core/Src/data_cal.c **** 
- 709              		.loc 1 208 2 view .LVU255
- 208:Core/Src/data_cal.c **** 
- 710              		.loc 1 208 32 is_stmt 0 view .LVU256
- 711 0146 1B4B     		ldr	r3, .L33+60
- 712              	.LVL36:
- 208:Core/Src/data_cal.c **** 
- 713              		.loc 1 208 32 view .LVU257
- 714 0148 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
- 208:Core/Src/data_cal.c **** 
- 715              		.loc 1 208 22 view .LVU258
- 716 014a 8DF80F30 		strb	r3, [sp, #15]
- 211:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
- 717              		.loc 1 211 2 is_stmt 1 view .LVU259
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 22
+ 701              		.loc 1 182 3 is_stmt 1 view .LVU239
+ 182:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
+ 702              		.loc 1 182 28 is_stmt 0 view .LVU240
+ 703 0136 2249     		ldr	r1, .L29+28
+ 704 0138 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 182:Core/Src/data_cal.c **** 		buf[i + 9] = joint41.data[i];  // buf[9]  buf[10]
+ 705              		.loc 1 182 14 view .LVU241
+ 706 013a 03F11702 		add	r2, r3, #23
+ 707 013e 6A44     		add	r2, sp, r2
+ 708 0140 02F8101C 		strb	r1, [r2, #-16]
+ 183:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
+ 709              		.loc 1 183 3 is_stmt 1 view .LVU242
+ 183:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
+ 710              		.loc 1 183 28 is_stmt 0 view .LVU243
+ 711 0144 2049     		ldr	r1, .L29+36
+ 712 0146 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 183:Core/Src/data_cal.c **** 		buf[i + 11] = joint51.data[i]; // buf[11] buf[12]
+ 713              		.loc 1 183 14 view .LVU244
+ 714 0148 03F11902 		add	r2, r3, #25
+ 715 014c 6A44     		add	r2, sp, r2
+ 716 014e 02F8101C 		strb	r1, [r2, #-16]
+ 184:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
+ 717              		.loc 1 184 3 is_stmt 1 view .LVU245
+ 184:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
+ 718              		.loc 1 184 29 is_stmt 0 view .LVU246
+ 719 0152 1F49     		ldr	r1, .L29+44
+ 720 0154 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 184:Core/Src/data_cal.c **** 		buf[i + 13] = joint61.data[i]; // buf[13] buf[14]
+ 721              		.loc 1 184 15 view .LVU247
+ 722 0156 03F11B02 		add	r2, r3, #27
+ 723 015a 6A44     		add	r2, sp, r2
+ 724 015c 02F8101C 		strb	r1, [r2, #-16]
+ 185:Core/Src/data_cal.c **** 	}
+ 725              		.loc 1 185 3 is_stmt 1 view .LVU248
+ 185:Core/Src/data_cal.c **** 	}
+ 726              		.loc 1 185 29 is_stmt 0 view .LVU249
+ 727 0160 1D49     		ldr	r1, .L29+52
+ 728 0162 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 185:Core/Src/data_cal.c **** 	}
+ 729              		.loc 1 185 15 view .LVU250
+ 730 0164 03F11D02 		add	r2, r3, #29
+ 731 0168 6A44     		add	r2, sp, r2
+ 732 016a 02F8101C 		strb	r1, [r2, #-16]
+ 178:Core/Src/data_cal.c **** 	{
+ 733              		.loc 1 178 22 is_stmt 1 discriminator 3 view .LVU251
+ 734 016e 0133     		adds	r3, r3, #1
+ 735              	.LVL55:
+ 736              	.L26:
+ 178:Core/Src/data_cal.c **** 	{
+ 737              		.loc 1 178 16 discriminator 1 view .LVU252
+ 738 0170 012B     		cmp	r3, #1
+ 739 0172 D2DD     		ble	.L27
+ 188:Core/Src/data_cal.c **** 
+ 740              		.loc 1 188 2 view .LVU253
+ 188:Core/Src/data_cal.c **** 
+ 741              		.loc 1 188 32 is_stmt 0 view .LVU254
+ 742 0174 1A4B     		ldr	r3, .L29+60
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 22
 
 
- 211:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
- 718              		.loc 1 211 20 is_stmt 0 view .LVU260
- 719 014e 1021     		movs	r1, #16
- 720 0150 6846     		mov	r0, sp
- 721 0152 FFF7FEFF 		bl	getCrc8
- 722              	.LVL37:
- 211:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
- 723              		.loc 1 211 18 discriminator 1 view .LVU261
- 724 0156 8DF81000 		strb	r0, [sp, #16]
- 212:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
- 725              		.loc 1 212 2 is_stmt 1 view .LVU262
- 212:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
- 726              		.loc 1 212 22 is_stmt 0 view .LVU263
- 727 015a 0D23     		movs	r3, #13
- 728 015c 8DF81130 		strb	r3, [sp, #17]
- 213:Core/Src/data_cal.c **** 
- 729              		.loc 1 213 2 is_stmt 1 view .LVU264
- 213:Core/Src/data_cal.c **** 
- 730              		.loc 1 213 22 is_stmt 0 view .LVU265
- 731 0160 0A23     		movs	r3, #10
- 732 0162 8DF81230 		strb	r3, [sp, #18]
- 215:Core/Src/data_cal.c **** }
- 733              		.loc 1 215 2 is_stmt 1 view .LVU266
- 734 0166 6423     		movs	r3, #100
- 735 0168 1322     		movs	r2, #19
- 736 016a 6946     		mov	r1, sp
- 737 016c 2046     		mov	r0, r4
- 738 016e FFF7FEFF 		bl	HAL_UART_Transmit
- 739              	.LVL38:
- 216:Core/Src/data_cal.c **** /**************************************************************************
- 740              		.loc 1 216 1 is_stmt 0 view .LVU267
- 741 0172 04B0     		add	sp, sp, #16
- 742              	.LCFI3:
- 743              		.cfi_def_cfa_offset 8
- 744              		@ sp needed
- 745 0174 10BD     		pop	{r4, pc}
- 746              	.LVL39:
- 747              	.L34:
- 216:Core/Src/data_cal.c **** /**************************************************************************
- 748              		.loc 1 216 1 view .LVU268
- 749 0176 00BF     		.align	2
- 750              	.L33:
- 751 0178 00000000 		.word	joint1
- 752 017c 00000000 		.word	radio
- 753 0180 00007A44 		.word	1148846080
- 754 0184 00000000 		.word	joint11
- 755 0188 00000000 		.word	joint2
- 756 018c 00000000 		.word	joint21
- 757 0190 00000000 		.word	joint3
- 758 0194 00000000 		.word	joint31
- 759 0198 00000000 		.word	joint4
- 760 019c 00000000 		.word	joint41
- 761 01a0 00000000 		.word	joint5
- 762 01a4 00000000 		.word	joint51
- 763 01a8 00000000 		.word	joint6
- 764 01ac 00000000 		.word	joint61
- 765 01b0 00000000 		.word	header
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 23
+ 743              	.LVL56:
+ 188:Core/Src/data_cal.c **** 
+ 744              		.loc 1 188 32 view .LVU255
+ 745 0176 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 188:Core/Src/data_cal.c **** 
+ 746              		.loc 1 188 22 view .LVU256
+ 747 0178 8DF80F30 		strb	r3, [sp, #15]
+ 191:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
+ 748              		.loc 1 191 2 is_stmt 1 view .LVU257
+ 191:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
+ 749              		.loc 1 191 20 is_stmt 0 view .LVU258
+ 750 017c 1021     		movs	r1, #16
+ 751 017e 6846     		mov	r0, sp
+ 752 0180 FFF7FEFF 		bl	getCrc8
+ 753              	.LVL57:
+ 191:Core/Src/data_cal.c **** 	buf[3 + length + 1] = ender[0];				// buf[11]
+ 754              		.loc 1 191 18 discriminator 1 view .LVU259
+ 755 0184 8DF81000 		strb	r0, [sp, #16]
+ 192:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
+ 756              		.loc 1 192 2 is_stmt 1 view .LVU260
+ 192:Core/Src/data_cal.c **** 	buf[3 + length + 2] = ender[1];				// buf[12]
+ 757              		.loc 1 192 22 is_stmt 0 view .LVU261
+ 758 0188 0D23     		movs	r3, #13
+ 759 018a 8DF81130 		strb	r3, [sp, #17]
+ 193:Core/Src/data_cal.c **** 
+ 760              		.loc 1 193 2 is_stmt 1 view .LVU262
+ 193:Core/Src/data_cal.c **** 
+ 761              		.loc 1 193 22 is_stmt 0 view .LVU263
+ 762 018e 0A23     		movs	r3, #10
+ 763 0190 8DF81230 		strb	r3, [sp, #18]
+ 195:Core/Src/data_cal.c **** }
+ 764              		.loc 1 195 2 is_stmt 1 view .LVU264
+ 765 0194 0F23     		movs	r3, #15
+ 766 0196 1322     		movs	r2, #19
+ 767 0198 6946     		mov	r1, sp
+ 768 019a 2846     		mov	r0, r5
+ 769 019c FFF7FEFF 		bl	HAL_UART_Transmit
+ 770              	.LVL58:
+ 196:Core/Src/data_cal.c **** /**************************************************************************
+ 771              		.loc 1 196 1 is_stmt 0 view .LVU265
+ 772 01a0 04B0     		add	sp, sp, #16
+ 773              	.LCFI3:
+ 774              		.cfi_def_cfa_offset 16
+ 775              		@ sp needed
+ 776 01a2 70BD     		pop	{r4, r5, r6, pc}
+ 777              	.LVL59:
+ 778              	.L30:
+ 196:Core/Src/data_cal.c **** /**************************************************************************
+ 779              		.loc 1 196 1 view .LVU266
+ 780              		.align	2
+ 781              	.L29:
+ 782 01a4 00000000 		.word	joint1
+ 783 01a8 00000000 		.word	radio
+ 784 01ac 00408F40 		.word	1083129856
+ 785 01b0 00000000 		.word	joint11
+ 786 01b4 00000000 		.word	joint2
+ 787 01b8 00000000 		.word	joint21
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 23
 
 
- 766 01b4 00000000 		.word	hand
- 767              		.cfi_endproc
- 768              	.LFE138:
- 770              		.section	.bss.k.0,"aw",%nobits
- 771              		.align	1
- 774              	k.0:
- 775 0000 0000     		.space	2
- 776              		.section	.bss.j.1,"aw",%nobits
- 777              		.align	1
- 780              	j.1:
- 781 0000 0000     		.space	2
- 782              		.section	.bss.checkSum.2,"aw",%nobits
- 785              	checkSum.2:
- 786 0000 00       		.space	1
- 787              		.section	.bss.USARTBufferIndex.3,"aw",%nobits
- 790              	USARTBufferIndex.3:
- 791 0000 00       		.space	1
- 792              		.section	.data.Start_Flag.4,"aw"
- 795              	Start_Flag.4:
- 796 0000 11       		.byte	17
- 797              		.section	.bss.USARTReceiverFront.5,"aw",%nobits
- 800              	USARTReceiverFront.5:
- 801 0000 00       		.space	1
- 802              		.section	.bss.dataLength.6,"aw",%nobits
- 803              		.align	1
- 806              	dataLength.6:
- 807 0000 0000     		.space	2
- 808              		.global	joint6Set
- 809              		.section	.bss.joint6Set,"aw",%nobits
- 810              		.align	2
- 813              	joint6Set:
- 814 0000 0000     		.space	2
- 815              		.global	joint5Set
- 816              		.section	.bss.joint5Set,"aw",%nobits
- 817              		.align	2
- 820              	joint5Set:
- 821 0000 0000     		.space	2
- 822              		.global	joint4Set
- 823              		.section	.bss.joint4Set,"aw",%nobits
- 824              		.align	2
- 827              	joint4Set:
- 828 0000 0000     		.space	2
- 829              		.global	joint3Set
- 830              		.section	.bss.joint3Set,"aw",%nobits
- 831              		.align	2
- 834              	joint3Set:
- 835 0000 0000     		.space	2
- 836              		.global	joint2Set
- 837              		.section	.bss.joint2Set,"aw",%nobits
- 838              		.align	2
- 841              	joint2Set:
- 842 0000 0000     		.space	2
- 843              		.global	joint1Set
- 844              		.section	.bss.joint1Set,"aw",%nobits
- 845              		.align	2
- 848              	joint1Set:
- 849 0000 0000     		.space	2
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 24
+ 788 01bc 00000000 		.word	joint3
+ 789 01c0 00000000 		.word	joint31
+ 790 01c4 00000000 		.word	joint4
+ 791 01c8 00000000 		.word	joint41
+ 792 01cc 00000000 		.word	joint5
+ 793 01d0 00000000 		.word	joint51
+ 794 01d4 00000000 		.word	joint6
+ 795 01d8 00000000 		.word	joint61
+ 796 01dc 00000000 		.word	header
+ 797 01e0 00000000 		.word	hand
+ 798              		.cfi_endproc
+ 799              	.LFE138:
+ 801              		.section	.bss.j.0,"aw",%nobits
+ 802              		.align	1
+ 805              	j.0:
+ 806 0000 0000     		.space	2
+ 807              		.section	.bss.k.1,"aw",%nobits
+ 808              		.align	1
+ 811              	k.1:
+ 812 0000 0000     		.space	2
+ 813              		.section	.bss.dataLength.2,"aw",%nobits
+ 814              		.align	1
+ 817              	dataLength.2:
+ 818 0000 0000     		.space	2
+ 819              		.section	.bss.checkSum.3,"aw",%nobits
+ 822              	checkSum.3:
+ 823 0000 00       		.space	1
+ 824              		.section	.bss.USARTBufferIndex.4,"aw",%nobits
+ 827              	USARTBufferIndex.4:
+ 828 0000 00       		.space	1
+ 829              		.section	.data.Start_Flag.5,"aw"
+ 832              	Start_Flag.5:
+ 833 0000 11       		.byte	17
+ 834              		.section	.bss.USARTReceiverFront.6,"aw",%nobits
+ 837              	USARTReceiverFront.6:
+ 838 0000 00       		.space	1
+ 839              		.global	joint6Set
+ 840              		.section	.bss.joint6Set,"aw",%nobits
+ 841              		.align	2
+ 844              	joint6Set:
+ 845 0000 0000     		.space	2
+ 846              		.global	joint5Set
+ 847              		.section	.bss.joint5Set,"aw",%nobits
+ 848              		.align	2
+ 851              	joint5Set:
+ 852 0000 0000     		.space	2
+ 853              		.global	joint4Set
+ 854              		.section	.bss.joint4Set,"aw",%nobits
+ 855              		.align	2
+ 858              	joint4Set:
+ 859 0000 0000     		.space	2
+ 860              		.global	joint3Set
+ 861              		.section	.bss.joint3Set,"aw",%nobits
+ 862              		.align	2
+ 865              	joint3Set:
+ 866 0000 0000     		.space	2
+ 867              		.global	joint2Set
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 24
 
 
- 850              		.global	joint61
- 851              		.section	.bss.joint61,"aw",%nobits
- 852              		.align	2
- 855              	joint61:
- 856 0000 0000     		.space	2
- 857              		.global	joint51
- 858              		.section	.bss.joint51,"aw",%nobits
- 859              		.align	2
- 862              	joint51:
- 863 0000 0000     		.space	2
- 864              		.global	joint41
- 865              		.section	.bss.joint41,"aw",%nobits
- 866              		.align	2
- 869              	joint41:
- 870 0000 0000     		.space	2
- 871              		.global	joint31
- 872              		.section	.bss.joint31,"aw",%nobits
- 873              		.align	2
- 876              	joint31:
- 877 0000 0000     		.space	2
- 878              		.global	joint21
- 879              		.section	.bss.joint21,"aw",%nobits
- 880              		.align	2
- 883              	joint21:
- 884 0000 0000     		.space	2
- 885              		.global	joint11
- 886              		.section	.bss.joint11,"aw",%nobits
- 887              		.align	2
- 890              	joint11:
- 891 0000 0000     		.space	2
- 892              		.global	ender
- 893              		.section	.rodata.ender,"a"
- 894              		.align	2
- 897              	ender:
- 898 0000 0D0A     		.ascii	"\015\012"
- 899              		.global	header
- 900              		.section	.rodata.header,"a"
- 901              		.align	2
- 904              	header:
- 905 0000 55AA     		.ascii	"U\252"
- 906              		.global	receiveBuff
- 907              		.section	.bss.receiveBuff,"aw",%nobits
- 908              		.align	2
- 911              	receiveBuff:
- 912 0000 00000000 		.space	16
- 912      00000000 
- 912      00000000 
- 912      00000000 
- 913              		.global	AngleSet
- 914              		.section	.bss.AngleSet,"aw",%nobits
- 915              		.align	2
- 918              	AngleSet:
- 919 0000 00000000 		.space	28
- 919      00000000 
- 919      00000000 
- 919      00000000 
- 919      00000000 
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 25
+ 868              		.section	.bss.joint2Set,"aw",%nobits
+ 869              		.align	2
+ 872              	joint2Set:
+ 873 0000 0000     		.space	2
+ 874              		.global	joint1Set
+ 875              		.section	.bss.joint1Set,"aw",%nobits
+ 876              		.align	2
+ 879              	joint1Set:
+ 880 0000 0000     		.space	2
+ 881              		.global	joint61
+ 882              		.section	.bss.joint61,"aw",%nobits
+ 883              		.align	2
+ 886              	joint61:
+ 887 0000 0000     		.space	2
+ 888              		.global	joint51
+ 889              		.section	.bss.joint51,"aw",%nobits
+ 890              		.align	2
+ 893              	joint51:
+ 894 0000 0000     		.space	2
+ 895              		.global	joint41
+ 896              		.section	.bss.joint41,"aw",%nobits
+ 897              		.align	2
+ 900              	joint41:
+ 901 0000 0000     		.space	2
+ 902              		.global	joint31
+ 903              		.section	.bss.joint31,"aw",%nobits
+ 904              		.align	2
+ 907              	joint31:
+ 908 0000 0000     		.space	2
+ 909              		.global	joint21
+ 910              		.section	.bss.joint21,"aw",%nobits
+ 911              		.align	2
+ 914              	joint21:
+ 915 0000 0000     		.space	2
+ 916              		.global	joint11
+ 917              		.section	.bss.joint11,"aw",%nobits
+ 918              		.align	2
+ 921              	joint11:
+ 922 0000 0000     		.space	2
+ 923              		.global	ender
+ 924              		.section	.rodata.ender,"a"
+ 925              		.align	2
+ 928              	ender:
+ 929 0000 0D0A     		.ascii	"\015\012"
+ 930              		.global	header
+ 931              		.section	.rodata.header,"a"
+ 932              		.align	2
+ 935              	header:
+ 936 0000 55AA     		.ascii	"U\252"
+ 937              		.global	receiveBuff
+ 938              		.section	.bss.receiveBuff,"aw",%nobits
+ 939              		.align	2
+ 942              	receiveBuff:
+ 943 0000 00000000 		.space	16
+ 943      00000000 
+ 943      00000000 
+ 943      00000000 
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 25
 
 
- 920              		.text
- 921              	.Letext0:
- 922              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
- 923              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
- 924              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 925              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 926              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 927              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 928              		.file 8 "Core/Inc/motor.h"
- 929              		.file 9 "Core/Inc/data_cal.h"
- 930              		.file 10 "Core/Inc/main.h"
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 26
+ 944              		.global	AngleSet
+ 945              		.section	.bss.AngleSet,"aw",%nobits
+ 946              		.align	2
+ 949              	AngleSet:
+ 950 0000 00000000 		.space	28
+ 950      00000000 
+ 950      00000000 
+ 950      00000000 
+ 950      00000000 
+ 951              		.text
+ 952              	.Letext0:
+ 953              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 954              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 955              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 956              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 957              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 958              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 959              		.file 8 "Core/Inc/motor.h"
+ 960              		.file 9 "Core/Inc/data_cal.h"
+ 961              		.file 10 "Core/Inc/main.h"
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 data_cal.c
-D:\software\msy64\tmp\cc6x09rd.s:21     .text.getCrc8:00000000 $t
-D:\software\msy64\tmp\cc6x09rd.s:27     .text.getCrc8:00000000 getCrc8
-D:\software\msy64\tmp\cc6x09rd.s:109    .text.usartReceiveOneData:00000000 $t
-D:\software\msy64\tmp\cc6x09rd.s:115    .text.usartReceiveOneData:00000000 usartReceiveOneData
-D:\software\msy64\tmp\cc6x09rd.s:167    .text.usartReceiveOneData:00000026 $d
-D:\software\msy64\tmp\cc6x09rd.s:171    .text.usartReceiveOneData:0000002a $t
-D:\software\msy64\tmp\cc6x09rd.s:467    .text.usartReceiveOneData:000001a8 $d
-D:\software\msy64\tmp\cc6x09rd.s:806    .bss.dataLength.6:00000000 dataLength.6
-D:\software\msy64\tmp\cc6x09rd.s:800    .bss.USARTReceiverFront.5:00000000 USARTReceiverFront.5
-D:\software\msy64\tmp\cc6x09rd.s:795    .data.Start_Flag.4:00000000 Start_Flag.4
-D:\software\msy64\tmp\cc6x09rd.s:790    .bss.USARTBufferIndex.3:00000000 USARTBufferIndex.3
-D:\software\msy64\tmp\cc6x09rd.s:785    .bss.checkSum.2:00000000 checkSum.2
-D:\software\msy64\tmp\cc6x09rd.s:780    .bss.j.1:00000000 j.1
-D:\software\msy64\tmp\cc6x09rd.s:774    .bss.k.0:00000000 k.0
-D:\software\msy64\tmp\cc6x09rd.s:848    .bss.joint1Set:00000000 joint1Set
-D:\software\msy64\tmp\cc6x09rd.s:841    .bss.joint2Set:00000000 joint2Set
-D:\software\msy64\tmp\cc6x09rd.s:834    .bss.joint3Set:00000000 joint3Set
-D:\software\msy64\tmp\cc6x09rd.s:827    .bss.joint4Set:00000000 joint4Set
-D:\software\msy64\tmp\cc6x09rd.s:820    .bss.joint5Set:00000000 joint5Set
-D:\software\msy64\tmp\cc6x09rd.s:813    .bss.joint6Set:00000000 joint6Set
-D:\software\msy64\tmp\cc6x09rd.s:918    .bss.AngleSet:00000000 AngleSet
-D:\software\msy64\tmp\cc6x09rd.s:486    .text.usartSendData:00000000 $t
-D:\software\msy64\tmp\cc6x09rd.s:492    .text.usartSendData:00000000 usartSendData
-D:\software\msy64\tmp\cc6x09rd.s:751    .text.usartSendData:00000178 $d
-D:\software\msy64\tmp\cc6x09rd.s:890    .bss.joint11:00000000 joint11
-D:\software\msy64\tmp\cc6x09rd.s:883    .bss.joint21:00000000 joint21
-D:\software\msy64\tmp\cc6x09rd.s:876    .bss.joint31:00000000 joint31
-D:\software\msy64\tmp\cc6x09rd.s:869    .bss.joint41:00000000 joint41
-D:\software\msy64\tmp\cc6x09rd.s:862    .bss.joint51:00000000 joint51
-D:\software\msy64\tmp\cc6x09rd.s:855    .bss.joint61:00000000 joint61
-D:\software\msy64\tmp\cc6x09rd.s:904    .rodata.header:00000000 header
-D:\software\msy64\tmp\cc6x09rd.s:771    .bss.k.0:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:777    .bss.j.1:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:786    .bss.checkSum.2:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:791    .bss.USARTBufferIndex.3:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:801    .bss.USARTReceiverFront.5:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:803    .bss.dataLength.6:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:810    .bss.joint6Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:817    .bss.joint5Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:824    .bss.joint4Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:831    .bss.joint3Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:838    .bss.joint2Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:845    .bss.joint1Set:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:852    .bss.joint61:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:859    .bss.joint51:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:866    .bss.joint41:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:873    .bss.joint31:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:880    .bss.joint21:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:887    .bss.joint11:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:897    .rodata.ender:00000000 ender
-D:\software\msy64\tmp\cc6x09rd.s:894    .rodata.ender:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:901    .rodata.header:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:911    .bss.receiveBuff:00000000 receiveBuff
-D:\software\msy64\tmp\cc6x09rd.s:908    .bss.receiveBuff:00000000 $d
-D:\software\msy64\tmp\cc6x09rd.s:915    .bss.AngleSet:00000000 $d
-ARM GAS  D:\software\msy64\tmp\cc6x09rd.s 			page 27
-
-
+D:\software\msy64\tmp\ccoxajcT.s:21     .text.getCrc8:00000000 $t
+D:\software\msy64\tmp\ccoxajcT.s:27     .text.getCrc8:00000000 getCrc8
+D:\software\msy64\tmp\ccoxajcT.s:109    .text.usartReceiveOneData:00000000 $t
+D:\software\msy64\tmp\ccoxajcT.s:115    .text.usartReceiveOneData:00000000 usartReceiveOneData
+D:\software\msy64\tmp\ccoxajcT.s:455    .text.usartReceiveOneData:00000190 $d
+D:\software\msy64\tmp\ccoxajcT.s:837    .bss.USARTReceiverFront.6:00000000 USARTReceiverFront.6
+D:\software\msy64\tmp\ccoxajcT.s:832    .data.Start_Flag.5:00000000 Start_Flag.5
+D:\software\msy64\tmp\ccoxajcT.s:817    .bss.dataLength.2:00000000 dataLength.2
+D:\software\msy64\tmp\ccoxajcT.s:822    .bss.checkSum.3:00000000 checkSum.3
+D:\software\msy64\tmp\ccoxajcT.s:811    .bss.k.1:00000000 k.1
+D:\software\msy64\tmp\ccoxajcT.s:827    .bss.USARTBufferIndex.4:00000000 USARTBufferIndex.4
+D:\software\msy64\tmp\ccoxajcT.s:879    .bss.joint1Set:00000000 joint1Set
+D:\software\msy64\tmp\ccoxajcT.s:872    .bss.joint2Set:00000000 joint2Set
+D:\software\msy64\tmp\ccoxajcT.s:865    .bss.joint3Set:00000000 joint3Set
+D:\software\msy64\tmp\ccoxajcT.s:858    .bss.joint4Set:00000000 joint4Set
+D:\software\msy64\tmp\ccoxajcT.s:851    .bss.joint5Set:00000000 joint5Set
+D:\software\msy64\tmp\ccoxajcT.s:844    .bss.joint6Set:00000000 joint6Set
+D:\software\msy64\tmp\ccoxajcT.s:949    .bss.AngleSet:00000000 AngleSet
+D:\software\msy64\tmp\ccoxajcT.s:805    .bss.j.0:00000000 j.0
+D:\software\msy64\tmp\ccoxajcT.s:478    .text.usartSendData:00000000 $t
+D:\software\msy64\tmp\ccoxajcT.s:484    .text.usartSendData:00000000 usartSendData
+D:\software\msy64\tmp\ccoxajcT.s:782    .text.usartSendData:000001a4 $d
+D:\software\msy64\tmp\ccoxajcT.s:921    .bss.joint11:00000000 joint11
+D:\software\msy64\tmp\ccoxajcT.s:914    .bss.joint21:00000000 joint21
+D:\software\msy64\tmp\ccoxajcT.s:907    .bss.joint31:00000000 joint31
+D:\software\msy64\tmp\ccoxajcT.s:900    .bss.joint41:00000000 joint41
+D:\software\msy64\tmp\ccoxajcT.s:893    .bss.joint51:00000000 joint51
+D:\software\msy64\tmp\ccoxajcT.s:886    .bss.joint61:00000000 joint61
+D:\software\msy64\tmp\ccoxajcT.s:935    .rodata.header:00000000 header
+D:\software\msy64\tmp\ccoxajcT.s:802    .bss.j.0:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:808    .bss.k.1:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:814    .bss.dataLength.2:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:823    .bss.checkSum.3:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:828    .bss.USARTBufferIndex.4:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:838    .bss.USARTReceiverFront.6:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:841    .bss.joint6Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:848    .bss.joint5Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:855    .bss.joint4Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:862    .bss.joint3Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:869    .bss.joint2Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:876    .bss.joint1Set:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:883    .bss.joint61:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:890    .bss.joint51:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:897    .bss.joint41:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:904    .bss.joint31:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:911    .bss.joint21:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:918    .bss.joint11:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:928    .rodata.ender:00000000 ender
+D:\software\msy64\tmp\ccoxajcT.s:925    .rodata.ender:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:932    .rodata.header:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:942    .bss.receiveBuff:00000000 receiveBuff
+D:\software\msy64\tmp\ccoxajcT.s:939    .bss.receiveBuff:00000000 $d
+D:\software\msy64\tmp\ccoxajcT.s:946    .bss.AngleSet:00000000 $d
 
 UNDEFINED SYMBOLS
+ARM GAS  D:\software\msy64\tmp\ccoxajcT.s 			page 27
+
+
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_d2iz
 HAL_UART_Transmit
 joint1
 radio

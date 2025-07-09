@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "main.h"
-
+#include "string.h"
 float AngleSet[7] = {0};
 
 /*
@@ -38,7 +38,7 @@ const unsigned char header[2] = {0x55, 0xaa};
 const unsigned char ender[2] = {0x0d, 0x0a};
 
 /*******************使用联合体可以快速的转换数据类型***************************/
-// 发送数据（左轮速、右轮速、角度）共用体（-32767 - +32768）
+
 union sendData
 {
 	// 这里传入d为数字
@@ -56,7 +56,7 @@ union receiveData
 
 /**************************************************************************
 函数功能：通过串口中断服务函数,获取目标关节角度，夹爪标志位，传入参数中
-入口参数：左轮轮速控制地址、右轮轮速控制地址、舵机转向角度地址、预留控制标志位
+入口参数：传入的数据
 返回  值：无特殊意义
 **************************************************************************/
 int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
@@ -69,7 +69,7 @@ int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
 	static unsigned char USARTReceiverFront = 0;
 	static unsigned char Start_Flag = START; // 一帧数据传送开始标志位
 	static short dataLength = 0;
-	dataLength = sizeof(receiveBuff) - 6;
+
 	USART_Receiver = receiveBuff[1];
 	USARTReceiverFront = receiveBuff[0];
 
@@ -93,77 +93,58 @@ int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
 			USARTReceiverFront = USART_Receiver;
 		}
 	}
-	else
+	if (Start_Flag != START)
 	{
-		switch (USARTBufferIndex)
+		dataLength = receiveBuff[2];
+		checkSum = getCrc8(receiveBuff, 3 + dataLength);
+		if (checkSum == receiveBuff[3 + dataLength])
 		{
-		case 0: // 接收左右轮速度数据的长度
-			receiveBuff[2] = USART_Receiver;
-			dataLength = receiveBuff[2]; // buf[2]
-			USARTBufferIndex++;
-			break;
-		case 1:									 // 接收所有数据，并赋值处理
-			receiveBuff[j + 3] = USART_Receiver; // buf[3] - buf[9]
-			j++;
-			if (j >= dataLength)
+			// 进行角度赋值操作
+			for (k = 0; k < 2; k++)
 			{
-				j = 0;
-				USARTBufferIndex++;
+				joint1Set.data[k] = receiveBuff[k + 3];
+				joint2Set.data[k] = receiveBuff[k + 5];
+				joint3Set.data[k] = receiveBuff[k + 7];
+				joint4Set.data[k] = receiveBuff[k + 9];
+				joint5Set.data[k] = receiveBuff[k + 11];
+				joint6Set.data[k] = receiveBuff[k + 13];
 			}
-			break;
-		case 2: // 接收校验值信息
-			receiveBuff[3 + dataLength] = USART_Receiver;
-			checkSum = getCrc8(receiveBuff, 3 + dataLength);
-			// 检查信息校验值
-			if (checkSum != receiveBuff[3 + dataLength])
-				return 0;
-			USARTBufferIndex++;
-			break;
 
-		case 3: // 接收信息尾
-			if (k == 0)
-			{
-				// 数据0d     buf[11]  无需判断
-				k++;
-			}
-			else if (k == 1)
-			{
-				// 数据0a     buf[12] 无需判断
-
-				// 进行角度赋值操作
-				for (k = 0; k < 2; k++)
-				{
-					joint1Set.data[k] = receiveBuff[k + 3];
-					joint2Set.data[k] = receiveBuff[k + 5];
-					joint3Set.data[k] = receiveBuff[k + 7];
-					joint4Set.data[k] = receiveBuff[k + 9];
-					joint5Set.data[k] = receiveBuff[k + 11];
-					joint6Set.data[k] = receiveBuff[k + 13];
-				}
-
-				AngleSet[0] = ((float)joint1Set.d / 1000.0);
-				AngleSet[1] = ((float)joint2Set.d / 1000.0);
-				AngleSet[2] = ((float)joint3Set.d / 1000.0);
-				AngleSet[3] = ((float)joint4Set.d / 1000.0);
-				AngleSet[4] = ((float)joint5Set.d / 1000.0);
-				AngleSet[5] = ((float)joint6Set.d / 1000.0);
-				AngleSet[6] = (float)receiveBuff[15];
-				//-----------------------------------------------------------------
-				// 完成一个数据包的接收，相关变量清零，等待下一字节数据
-				USARTBufferIndex = 0;
-				USARTReceiverFront = 0;
-				Start_Flag = START;
-				checkSum = 0;
-				dataLength = 0;
-				j = 0;
-				k = 0;
-				//-----------------------------------------------------------------
-			}
-			break;
-		default:
-			break;
+			AngleSet[0] = ((float)joint1Set.d / 1000.0);
+			AngleSet[1] = -((float)joint2Set.d / 1000.0);
+			AngleSet[2] = ((float)joint3Set.d / 1000.0);
+			AngleSet[3] = ((float)joint4Set.d / 1000.0);
+			AngleSet[4] = ((float)joint5Set.d / 1000.0);
+			AngleSet[5] = ((float)joint6Set.d / 1000.0);
+			AngleSet[6] = (float)receiveBuff[15];
+			//-----------------------------------------------------------------
+			// 完成一个数据包的接收，相关变量清零，等待下一字节数据
+			USARTBufferIndex = 0;
+			USARTReceiverFront = 0;
+			Start_Flag = START;
+			checkSum = 0;
+			dataLength = 0;
+			j = 0;
+			k = 0;
+			//-----------------------------------------------------------------
+		}
+		else
+		{
+			for (u8 i = 0; i < 19; i++)
+				receiveBuff[i] = 0; // 清除接收缓存
+			// 校验和错误，清除接收缓存
+			USARTBufferIndex = 0;
+			USARTReceiverFront = 0;
+			Start_Flag = START;
+			checkSum = 0;
+			dataLength = 0;
+			j = 0;
+			k = 0;
+			return 0; // 返回错误
 		}
 	}
+
+	
 	return 0;
 }
 /**************************************************************************
@@ -176,21 +157,20 @@ void usartSendData(UART_HandleTypeDef *huart)
 	int i, length = 0;
 	length = 13;
 	// 计算joint角度
-	joint11.d = (short)(joint1.now_angle / radio[0] * 1000);
-	joint21.d = (short)(joint2.now_angle / radio[1] * 1000);
-	joint31.d = (short)(joint3.now_angle / radio[2] * 1000);
-	joint41.d = (short)(joint4.now_angle / radio[3] * 1000);
-	joint51.d = (short)(joint5.now_angle / radio[4] * 1000);
-	joint61.d = (short)(joint6.now_angle / radio[5] * 1000);
+	joint11.d = (short)(joint1.now_angle / radio[0] * 1000.0);
+	joint21.d = (short)(joint2.now_angle / radio[1] * 1000.0);
+	joint31.d = (short)(joint3.now_angle / radio[2] * 1000.0);
+	joint41.d = (short)(joint4.now_angle / radio[3] * 1000.0);
+	joint51.d = (short)(joint5.now_angle / radio[4] * 1000.0);
+	joint61.d = (short)(joint6.now_angle / radio[5] * 1000.0);
 
-	// joint11.d = (short)(12341);
-	// joint21.d = (short)(124);
-	// joint31.d = (short)(324);
-	// joint41.d = (short)(54);
-	// joint51.d = (short)(243);
-	// joint61.d = (short)(568);
-
-	// 设置消息头
+	// joint11.d = (short)(1);
+	// joint21.d = (short)(122);
+	// joint31.d = (short)(1223);
+	// joint41.d = (short)(1234);
+	// joint51.d = (short)(145);
+	// joint61.d = (short)(145);
+	// 设置
 	for (i = 0; i < 2; i++)
 		buf[i] = header[i]; // buf[0] buf[1]
 
@@ -212,7 +192,7 @@ void usartSendData(UART_HandleTypeDef *huart)
 	buf[3 + length + 1] = ender[0];				// buf[11]
 	buf[3 + length + 2] = ender[1];				// buf[12]
 
-	HAL_UART_Transmit(huart, (uint8_t *)buf, 19, 100);
+	HAL_UART_Transmit(huart, (uint8_t *)buf, 19, 0xf);
 }
 /**************************************************************************
 函数功能：发送指定大小的字符数组，被usartSendData函数调用
