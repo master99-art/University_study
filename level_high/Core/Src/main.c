@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -58,23 +59,49 @@ u8 Rec_Data[19] = {0};
 enum ACTION Flag = STOP;
 u8 test_data[3];
 u8 test_flag = 0;
-int step[6];
-float angle[7] = {0, 0, 0, 0, PI * 2, 0, 0};
+int step[6] = {0};
+
+float angleset[7] = {0};
+// usart的dma
+u8 dma_test[19] = {0};
+
+#define BUF_SIZE 95
+#define PACKAGE_SIZE 19
+    uint8_t dma_buffer1[BUF_SIZE];
+uint8_t dma_buffer2[BUF_SIZE];
+volatile uint8_t current_active_buffer = 0; // 0: buffer1, 1: buffer2
+volatile uint16_t last_received_size = 0;
+volatile uint8_t new_data_available = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-  if (huart == &huart1)
+  if (huart->Instance == USART1)
   {
+    // 记录接收到的数据量
+    last_received_size = Size;
+
+    // 切换缓冲区
+    // if (current_active_buffer == 0)
+    // {
+    //   current_active_buffer = 1;
+    //   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dma_buffer2, BUF_SIZE);
+    // }
+    // else
+    // {
+    //   current_active_buffer = 0;
+    //   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dma_buffer1, BUF_SIZE);
+    // }
+    HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dma_test, 19);
     Flag = MOVE;
-    HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
-    
-    usartReceiveOneData(Rec_Data, &huart1);
+    // 设置新数据可用标志
+    new_data_available = 1;
   }
 }
+
 void function(void)
 {
   HAL_GPIO_TogglePin(joint5_GPIO_Port, joint5_Pin);
@@ -87,9 +114,9 @@ void function(void)
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
@@ -115,22 +142,26 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   Motor_Init();
+
   /*这里是机械臂寻找复位
   ，还有oled的初始化，但是不知道为什么，这里oled初始化会出错，*/
   // OLED_Init();  // OLED初始
   // OLED_Clear(); // 清屏
-  Reset_joint();
+  // Reset_joint();
 
-  HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
+  // HAL_UART_Receive_IT(&huart1, Rec_Data, sizeof(Rec_Data));
   // HAL_UART_Receive_IT(&huart1, test_data, sizeof(test_data));
-
-  // OLED_ShowNum(1, 1, 123456789, 9, 16, 0);
+  // HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dma_buffer1, BUF_SIZE);
+  HAL_UARTEx_ReceiveToIdle_DMA(&huart1, dma_test, 19);
+  float temp[6] = { 1.0892242055348749, -0.17332101096690133, 1.0859638345521907, -0.00022042666860048007, 1.8829263017972695, -0.48260819561700136};
+  // 1.0892242055348749, -0.17332101096690133, 1.0859638345521907, -0.00022042666860048007, 1.8829263017972695, -0.48260819561700136
 
   // HAL_Delay(200);
   /* USER CODE END 2 */
@@ -143,38 +174,57 @@ int main(void)
     if (Flag == MOVE)
     {
       // OLED_ShowString(16, 1, test_data, sizeof(test_data), 0);
-      motor_cal(AngleSet, step);
+      // if (new_data_available == 1)
+      // {
+        // usartReceiveOneData(current_active_buffer == 0 ? dma_buffer2 : dma_buffer1, &huart1, angleset);
+        usartReceiveOneData(dma_test, &huart1, angleset);
+      //   new_data_available = 0; // 重置标志位
+      // }
+      motor_cal(angleset, step);
       Motor_Dir();
       Motor_Move(step);
-      Flag= STOP; // 重置标志位
+      Flag = STOP; // 重置标志位
     }
-    usartSendData(&huart1);
-    for_delay_us(1000);
-
+    // HAL_Delay(500);
+    // usartSendData(&huart1);
+    // usartReceiveOneData(current_active_buffer == 0 ? dma_buffer2 : dma_buffer1, &huart1, angleset);
+    // if (flag == 0)
+    // {
+    //   motor_cal(temp, step);
+    //   Motor_Dir();
+    //   Motor_Move(step);
+    //   flag = 1;
+    // }
+    // HAL_Delay(1000);
+    // for_delay_us(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
+
+  // motor_cal(temp, step);
+  // Motor_Dir();
+  // Motor_Move(step);
   /* USER CODE END 3 */
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-   */
+  */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-   * in the RCC_OscInitTypeDef structure.
-   */
+  * in the RCC_OscInitTypeDef structure.
+  */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -189,8 +239,9 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -207,9 +258,9 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -221,14 +272,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

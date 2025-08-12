@@ -18,7 +18,7 @@ joint6		9.625:1
 joint7 or hand
 */
 
-float radio[6] = {54, 39.125, 40.0625, 35.9375, 35.25, 9.625};
+float radio[6] = {54.00, 39.125, 40.0625, 35.9375, 35.25, 9.625};
 struct joint joint1, joint2, joint3, joint4, joint5, joint6;
 struct hand hand;
 
@@ -172,7 +172,11 @@ void motor_cal(float *tar_all_angle, int *step)
 	else
 		joint6.dir = Forward;
 
-
+	for(u8 i=0;i<6;i++)
+	{
+		if (error_angle[i] < 0)
+		error_angle[i] = -error_angle[i];
+	}
 	for (uint8_t i = 0; i < 6; i++)
 	{
 		step[i] = (int)(error_angle[i] * 127.3239566);
@@ -222,11 +226,10 @@ u8 Reset_joint(void)
 			break;
 		}
 	}
-	joint1.dir = Forward;
+	joint1.dir = Reverse;
 	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)joint1.dir);
-	Motor_Action(joint1_GPIO_Port, joint1_Pin, 16900);
-	Dir_Set(DIR1_GPIO_Port, DIR1_Pin, (GPIO_PinState)!joint1.dir);
-	Motor_Action(joint1_GPIO_Port, joint1_Pin, 43200/2);
+	Motor_Action(joint1_GPIO_Port, joint1_Pin, 4700);
+	joint1.dir = Forward;
 
 	while (1)
 	{
@@ -283,18 +286,19 @@ u8 Reset_joint(void)
 	Dir_Set(DIR5_GPIO_Port, DIR5_Pin, (GPIO_PinState)joint5.dir);
 	Motor_Action(joint5_GPIO_Port, joint5_Pin, 2300);
 
-	while (1)
-	{
-		Motor_Action(joint6_GPIO_Port, joint6_Pin, step);
-		if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
-		{
-			joint6.isreset = Reset;
-			break;
-		}
-	}
-	joint6.dir = Reverse;
-	Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
-	Motor_Action(joint6_GPIO_Port, joint6_Pin, 1650);
+	// while (1)
+	// {
+	// 	Motor_Action(joint6_GPIO_Port, joint6_Pin, step);
+	// 	if (Read_KEY(K6_GPIO_Port, K6_Pin) == GPIO_PIN_RESET)
+	// 	{
+	// 		joint6.isreset = Reset;
+	// 		break;
+	// 	}
+	// }
+	// joint6.dir = Reverse;
+	// Dir_Set(DIR6_GPIO_Port, DIR6_Pin, (GPIO_PinState)joint6.dir);
+	// Motor_Action(joint6_GPIO_Port, joint6_Pin, 1650);
+	// Motor_Action(joint6_GPIO_Port, joint6_Pin, 7700 / 2);
 
 	/*
 	@this is a servo debug ,so we should know how to control the servo
@@ -330,12 +334,55 @@ void Motor_Dir(void)
 // 上层运动控制
 u8 Motor_Move(int *step)
 {
-	Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
-	Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
-	Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
-	Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
-	Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
-	Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
+	int temp[6] = {0};
+	for (u8 i = 0; i < 6; i++)
+		temp[i] = step[i];
+	while (1)
+	{
+		if (temp[0] >= 0)
+		{
+			Toggle(joint1_GPIO_Port, joint1_Pin);
+			temp[0]--;
+		}
+		if (temp[1] >= 0)
+		{
+			Toggle(joint2_GPIO_Port, joint2_Pin);
+			temp[1]--;
+		}
+		if (temp[2] >= 0)
+		{
+			Toggle(joint3_GPIO_Port, joint3_Pin);
+			temp[2]--;
+		}
+		if (temp[3] >= 0)
+		{
+			Toggle(joint4_GPIO_Port, joint4_Pin);
+			temp[3]--;
+		}
+
+		if (temp[4] >= 0)
+		{
+			Toggle(joint5_GPIO_Port, joint5_Pin);
+			temp[4]--;
+		}
+		if (temp[5] >= 0)
+		{
+			Toggle(joint6_GPIO_Port, joint6_Pin);
+			temp[5]--;
+		}
+		for_delay_us(150);
+		if(temp[0] < 0 && temp[1] < 0 && temp[2] < 0 &&
+			temp[3] < 0 && temp[4] < 0 && temp[5] < 0)
+		{
+			break; // 所有关节都完成了运动
+		}
+	}
+	// Motor_Action(joint1_GPIO_Port, joint1_Pin, *(step + 0));
+	// Motor_Action(joint2_GPIO_Port, joint2_Pin, *(step + 1));
+	// Motor_Action(joint3_GPIO_Port, joint3_Pin, *(step + 2));
+	// Motor_Action(joint4_GPIO_Port, joint4_Pin, *(step + 3));
+	// Motor_Action(joint5_GPIO_Port, joint5_Pin, *(step + 4));
+	// Motor_Action(joint6_GPIO_Port, joint6_Pin, *(step + 5));
 	if (hand.action == ON)
 	{
 		// 打开夹爪

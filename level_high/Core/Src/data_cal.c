@@ -59,7 +59,7 @@ union receiveData
 入口参数：传入的数据
 返回  值：无特殊意义
 **************************************************************************/
-int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
+int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart,float * angleset)
 {
 
 	unsigned char USART_Receiver = 0;		   // 接收数据
@@ -110,13 +110,13 @@ int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
 				joint6Set.data[k] = receiveBuff[k + 13];
 			}
 
-			AngleSet[0] = ((float)joint1Set.d / 1000.0);
-			AngleSet[1] = -((float)joint2Set.d / 1000.0);
-			AngleSet[2] = ((float)joint3Set.d / 1000.0);
-			AngleSet[3] = ((float)joint4Set.d / 1000.0);
-			AngleSet[4] = ((float)joint5Set.d / 1000.0);
-			AngleSet[5] = ((float)joint6Set.d / 1000.0);
-			AngleSet[6] = (float)receiveBuff[15];
+			angleset[0] = -(((float)joint1Set.d) / 1000.0);
+			angleset[1] = (((float)joint2Set.d) / 1000.0);
+			angleset[2] = (((float)joint3Set.d) / 1000.0);
+			angleset[3] = (((float)joint4Set.d) / 1000.0);
+			angleset[4] = (((float)joint5Set.d) / 1000.0);
+			angleset[5] = (((float)joint6Set.d) / 1000.0);
+			angleset[6] = ((float)receiveBuff[15]);
 			//-----------------------------------------------------------------
 			// 完成一个数据包的接收，相关变量清零，等待下一字节数据
 			USARTBufferIndex = 0;
@@ -144,7 +144,6 @@ int usartReceiveOneData(u8 *receiveBuff, UART_HandleTypeDef *huart)
 		}
 	}
 
-	
 	return 0;
 }
 /**************************************************************************
