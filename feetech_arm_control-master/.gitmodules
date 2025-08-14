@@ -1,3 +1,0 @@
-[submodule "config_6dof_arm"]
-	path = config_6dof_arm
-	url = https://github.com/iltlo/config_6dof_arm.git
