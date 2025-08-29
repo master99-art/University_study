@@ -24,6 +24,9 @@
         "pid.h": "c",
         "gpio.h": "c",
         "calculate.h": "c",
-        "cmsis_os.h": "c"
+        "cmsis_os.h": "c",
+        "adc.h": "c",
+        "oledfont.h": "c",
+        "stm32f1xx_hal.h": "c"
     }
 }
