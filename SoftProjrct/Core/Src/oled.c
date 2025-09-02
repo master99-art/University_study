@@ -1,7 +1,7 @@
 #include "main.h"
 #include "oledfont.h"
 #include "oled.h"
-
+#include "myiic.h"
 // /*引脚配置*/
 #define OLED_W_SCL(x) HAL_GPIO_WritePin(OLED_SCL_GPIO_Port, OLED_SCL_Pin, (GPIO_PinState)(x))
 #define OLED_W_SDA(x) HAL_GPIO_WritePin(OLED_SDA_GPIO_Port, OLED_SDA_Pin, (GPIO_PinState)(x))
@@ -56,11 +56,11 @@ void OLED_I2C_SendByte(uint8_t Byte)
  */
 void OLED_WriteCommand(uint8_t Command)
 {
-    OLED_I2C_Start();
-    OLED_I2C_SendByte(0x78); // 从机地址
-    OLED_I2C_SendByte(0x00); // 写命令
-    OLED_I2C_SendByte(Command);
-    OLED_I2C_Stop();
+    uint8_t data[2] = {0};
+    data[0] = 0x00;
+    data[1] = Command;
+    IIC_Send(0x78, data, 2);
+
 }
 
 /**
@@ -70,11 +70,10 @@ void OLED_WriteCommand(uint8_t Command)
  */
 void OLED_WriteData(uint8_t Data)
 {
-    OLED_I2C_Start();
-    OLED_I2C_SendByte(0x78); // 从机地址
-    OLED_I2C_SendByte(0x40); // 写数据
-    OLED_I2C_SendByte(Data);
-    OLED_I2C_Stop();
+    uint8_t data[2];
+    data[0] = 0x40;
+    data[1] = Data;
+    IIC_Send(0x78, data,2);    // 从机地址
 }
 
 /**

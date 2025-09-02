@@ -1,0 +1,170 @@
+ARM GAS  D:\software\msy64\tmp\ccHfoiHN.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"myiic.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/myiic.c"
+  18              		.section	.text.IIC_Send,"ax",%progbits
+  19              		.align	1
+  20              		.global	IIC_Send
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	IIC_Send:
+  26              	.LVL0:
+  27              	.LFB65:
+   1:Core/Src/myiic.c **** #include "myiic.h"
+   2:Core/Src/myiic.c **** #include "main.h"
+   3:Core/Src/myiic.c **** #include "i2c.h"
+   4:Core/Src/myiic.c **** 
+   5:Core/Src/myiic.c **** /**
+   6:Core/Src/myiic.c ****  * @author guoch
+   7:Core/Src/myiic.c ****  * @brief IIC_Send
+   8:Core/Src/myiic.c ****  */
+   9:Core/Src/myiic.c **** void IIC_Send(uint16_t DevAddress, uint8_t *pData, uint16_t Size)
+  10:Core/Src/myiic.c **** {
+  28              		.loc 1 10 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 10 1 is_stmt 0 view .LVU1
+  33 0000 00B5     		push	{lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 14, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 1346     		mov	r3, r2
+  11:Core/Src/myiic.c ****     HAL_I2C_Master_Transmit(&hi2c1,DevAddress,pData,Size,0xf);
+  41              		.loc 1 11 5 is_stmt 1 view .LVU2
+  42 0006 0F22     		movs	r2, #15
+  43              	.LVL1:
+  44              		.loc 1 11 5 is_stmt 0 view .LVU3
+  45 0008 0092     		str	r2, [sp]
+  46 000a 0A46     		mov	r2, r1
+  47 000c 0146     		mov	r1, r0
+ARM GAS  D:\software\msy64\tmp\ccHfoiHN.s 			page 2
+
+
+  48              	.LVL2:
+  49              		.loc 1 11 5 view .LVU4
+  50 000e 0348     		ldr	r0, .L3
+  51              	.LVL3:
+  52              		.loc 1 11 5 view .LVU5
+  53 0010 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+  54              	.LVL4:
+  12:Core/Src/myiic.c **** }
+  55              		.loc 1 12 1 view .LVU6
+  56 0014 03B0     		add	sp, sp, #12
+  57              	.LCFI2:
+  58              		.cfi_def_cfa_offset 4
+  59              		@ sp needed
+  60 0016 5DF804FB 		ldr	pc, [sp], #4
+  61              	.L4:
+  62 001a 00BF     		.align	2
+  63              	.L3:
+  64 001c 00000000 		.word	hi2c1
+  65              		.cfi_endproc
+  66              	.LFE65:
+  68              		.section	.text.IIC_Read,"ax",%progbits
+  69              		.align	1
+  70              		.global	IIC_Read
+  71              		.syntax unified
+  72              		.thumb
+  73              		.thumb_func
+  75              	IIC_Read:
+  76              	.LVL5:
+  77              	.LFB66:
+  13:Core/Src/myiic.c **** /**
+  14:Core/Src/myiic.c ****  * @author guoch
+  15:Core/Src/myiic.c ****  * @brief IIC_Read
+  16:Core/Src/myiic.c ****  * @param DevAddress 从机地址
+  17:Core/Src/myiic.c ****  * @param pData 接收数据储存地
+  18:Core/Src/myiic.c ****  * @param Size 接收数据字节长度
+  19:Core/Src/myiic.c ****  */
+  20:Core/Src/myiic.c **** void IIC_Read(uint16_t DevAddress, uint8_t *pData, uint16_t Size)
+  21:Core/Src/myiic.c **** {
+  78              		.loc 1 21 1 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		.loc 1 21 1 is_stmt 0 view .LVU8
+  83 0000 00B5     		push	{lr}
+  84              	.LCFI3:
+  85              		.cfi_def_cfa_offset 4
+  86              		.cfi_offset 14, -4
+  87 0002 83B0     		sub	sp, sp, #12
+  88              	.LCFI4:
+  89              		.cfi_def_cfa_offset 16
+  90 0004 1346     		mov	r3, r2
+  22:Core/Src/myiic.c ****     HAL_I2C_Master_Receive(&hi2c1,  DevAddress,  pData,  Size,  0xf);
+  91              		.loc 1 22 5 is_stmt 1 view .LVU9
+  92 0006 0F22     		movs	r2, #15
+  93              	.LVL6:
+  94              		.loc 1 22 5 is_stmt 0 view .LVU10
+  95 0008 0092     		str	r2, [sp]
+ARM GAS  D:\software\msy64\tmp\ccHfoiHN.s 			page 3
+
+
+  96 000a 0A46     		mov	r2, r1
+  97 000c 0146     		mov	r1, r0
+  98              	.LVL7:
+  99              		.loc 1 22 5 view .LVU11
+ 100 000e 0348     		ldr	r0, .L7
+ 101              	.LVL8:
+ 102              		.loc 1 22 5 view .LVU12
+ 103 0010 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 104              	.LVL9:
+  23:Core/Src/myiic.c **** }...
+ 105              		.loc 1 23 1 view .LVU13
+ 106 0014 03B0     		add	sp, sp, #12
+ 107              	.LCFI5:
+ 108              		.cfi_def_cfa_offset 4
+ 109              		@ sp needed
+ 110 0016 5DF804FB 		ldr	pc, [sp], #4
+ 111              	.L8:
+ 112 001a 00BF     		.align	2
+ 113              	.L7:
+ 114 001c 00000000 		.word	hi2c1
+ 115              		.cfi_endproc
+ 116              	.LFE66:
+ 118              		.text
+ 119              	.Letext0:
+ 120              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 121              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 122              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 123              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 124              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 125              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 126              		.file 8 "Core/Inc/i2c.h"
+ARM GAS  D:\software\msy64\tmp\ccHfoiHN.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 myiic.c
+D:\software\msy64\tmp\ccHfoiHN.s:19     .text.IIC_Send:00000000 $t
+D:\software\msy64\tmp\ccHfoiHN.s:25     .text.IIC_Send:00000000 IIC_Send
+D:\software\msy64\tmp\ccHfoiHN.s:64     .text.IIC_Send:0000001c $d
+D:\software\msy64\tmp\ccHfoiHN.s:69     .text.IIC_Read:00000000 $t
+D:\software\msy64\tmp\ccHfoiHN.s:75     .text.IIC_Read:00000000 IIC_Read
+D:\software\msy64\tmp\ccHfoiHN.s:114    .text.IIC_Read:0000001c $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+hi2c1
+HAL_I2C_Master_Receive
