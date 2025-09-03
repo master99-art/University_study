@@ -2,52 +2,9 @@
 #include "oledfont.h"
 #include "oled.h"
 #include "myiic.h"
-// /*引脚配置*/
-#define OLED_W_SCL(x) HAL_GPIO_WritePin(OLED_SCL_GPIO_Port, OLED_SCL_Pin, (GPIO_PinState)(x))
-#define OLED_W_SDA(x) HAL_GPIO_WritePin(OLED_SDA_GPIO_Port, OLED_SDA_Pin, (GPIO_PinState)(x))
 
-/**
- * @brief  I2C开始
- * @param  无
- * @retval 无
- */
-void OLED_I2C_Start(void)
-{
-    OLED_W_SDA(1);
-    OLED_W_SCL(1);
-    OLED_W_SDA(0);
-    OLED_W_SCL(0);
-}
 
-/**
- * @brief  I2C停止
- * @param  无
- * @retval 无
- */
-void OLED_I2C_Stop(void)
-{
-    OLED_W_SDA(0);
-    OLED_W_SCL(1);
-    OLED_W_SDA(1);
-}
 
-/**
- * @brief  I2C发送一个字节
- * @param  Byte 要发送的一个字节
- * @retval 无
- */
-void OLED_I2C_SendByte(uint8_t Byte)
-{
-    uint8_t i;
-    for (i = 0; i < 8; i++)
-    {
-        OLED_W_SDA(!!(Byte & (0x80 >> i)));
-        OLED_W_SCL(1);
-        OLED_W_SCL(0);
-    }
-    OLED_W_SCL(1); // 额外的一个时钟，不处理应答信号
-    OLED_W_SCL(0);
-}
 
 /**
  * @brief  OLED写命令

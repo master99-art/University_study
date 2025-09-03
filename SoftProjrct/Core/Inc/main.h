@@ -67,18 +67,10 @@ void Error_Handler(void);
 #define PWM4_GPIO_Port GPIOB
 #define LED_Pin GPIO_PIN_10
 #define LED_GPIO_Port GPIOB
-#define T_SCL_Pin GPIO_PIN_4
-#define T_SCL_GPIO_Port GPIOB
-#define T_SDA_Pin GPIO_PIN_5
-#define T_SDA_GPIO_Port GPIOB
 #define C_SCL_Pin GPIO_PIN_6
 #define C_SCL_GPIO_Port GPIOB
 #define C_SDA_Pin GPIO_PIN_7
 #define C_SDA_GPIO_Port GPIOB
-#define OLED_SCL_Pin GPIO_PIN_8
-#define OLED_SCL_GPIO_Port GPIOB
-#define OLED_SDA_Pin GPIO_PIN_9
-#define OLED_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

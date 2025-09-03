@@ -9,7 +9,7 @@
  * @note 这个部分是温度传感器的寄存器的值
  * @note
  */
-*/
+
 #define TEMPER_Dev 0X4C
 #define TEMPER_Local_H 0x00 // 本地温度高
 #define TEMPER_Local_L 0x15 // 本地温度低

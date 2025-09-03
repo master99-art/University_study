@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
   30:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****  * Portions Copyright (c) 2013 ARM LIMITED
   31:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****  * All rights reserved.
   32:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****  * Redistribution and use in source and binary forms, with or without
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 2
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 2
 
 
   33:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****  * modification, are permitted provided that the following conditions are met:
@@ -118,7 +118,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
   87:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   #ifndef   __ASM
   88:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     #define __ASM                     __asm
   89:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   #endif
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 3
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 3
 
 
   90:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   #ifndef   __INLINE
@@ -178,7 +178,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
   58              		.thumb_func
   60              	makeCmsisPriority:
   61              	.LVL4:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 4
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 4
 
 
   62              	.LFB50:
@@ -238,7 +238,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  129:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /* Determine whether we are in thread mode or handler mode. */
  130:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** static int inHandlerMode (void)
  131:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** {
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 5
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 5
 
 
  101              		.loc 1 131 1 is_stmt 1 view -0
@@ -298,7 +298,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
   45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 6
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 6
 
 
   48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -358,7 +358,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 7
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 7
 
 
  105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
@@ -418,7 +418,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  159:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  160:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  161:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 8
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 8
 
 
  162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
@@ -478,7 +478,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  116 0000 EFF30580 		MRS r0, ipsr
  117              	@ 0 "" 2
  118              	.LVL9:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 9
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 9
 
 
  210:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
@@ -538,7 +538,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  153:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
  154:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return osOK;
  154              		.loc 1 154 3 view .LVU31
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 10
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 10
 
 
  155:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
@@ -598,7 +598,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  190 000c 08BD     		pop	{r3, pc}
  191              	.L14:
  169:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return 0;
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 11
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 11
 
 
  192              		.loc 1 169 12 view .LVU39
@@ -658,7 +658,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  230              		.loc 1 190 5 is_stmt 1 view .LVU47
  190:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
  231              		.loc 1 190 12 is_stmt 0 view .LVU48
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 12
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 12
 
 
  232 000e FFF7FEFF 		bl	xTaskGetTickCount
@@ -718,7 +718,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  273              		.loc 1 207 49 discriminator 1 view .LVU55
  274 000c 8569     		ldr	r5, [r0, #24]
  275              		.loc 1 207 35 discriminator 1 view .LVU56
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 13
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 13
 
 
  276 000e B5B1     		cbz	r5, .L20
@@ -778,7 +778,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  231:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
  232:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return handle;
  303              		.loc 1 232 3 is_stmt 1 view .LVU65
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 14
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 14
 
 
  304              		.loc 1 232 10 is_stmt 0 view .LVU66
@@ -838,7 +838,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  348              	.LFE55:
  350              		.section	.text.osThreadGetId,"ax",%progbits
  351              		.align	1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 15
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 15
 
 
  352              		.global	osThreadGetId
@@ -898,7 +898,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  256:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** {
  387              		.loc 1 256 1 is_stmt 1 view -0
  388              		.cfi_startproc
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 16
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 16
 
 
  389              		@ args = 0, pretend = 0, frame = 0
@@ -958,7 +958,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  429              	@ 0 "" 2
  430              		.loc 1 272 3 view .LVU89
  431              	@ 272 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c" 1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 17
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 17
 
 
  432 0010 BFF36F8F 		isb
@@ -1018,7 +1018,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  473              		.loc 1 287 3 discriminator 1 view .LVU98
  474 000c 2046     		mov	r0, r4
  475 000e FFF7FEFF 		bl	vTaskPrioritySet
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 18
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 18
 
 
  476              	.LVL29:
@@ -1078,7 +1078,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  514 000a 2046     		mov	r0, r4
  515 000c FFF7FEFF 		bl	uxTaskPriorityGetFromISR
  516              	.LVL32:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 19
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 19
 
 
  517              		.loc 1 305 12 discriminator 1 view .LVU109
@@ -1138,7 +1138,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  551              		@ frame_needed = 0, uses_anonymous_args = 0
  552              		.loc 1 323 1 is_stmt 0 view .LVU116
  553 0000 08B5     		push	{r3, lr}
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 20
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 20
 
 
  554              	.LCFI11:
@@ -1198,7 +1198,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  348:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /***********************  Timer Management Functions ***************************/
  349:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /**
  350:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @brief  Create a timer.
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 21
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 21
 
 
  351:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  timer_def     timer object referenced with \ref osTimer.
@@ -1258,7 +1258,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  595              		.loc 1 395 1 view .LVU126
  596 0002 7047     		bx	lr
  597              		.cfi_endproc
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 22
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 22
 
 
  598              	.LFE62:
@@ -1318,7 +1318,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  433:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #endif
  434:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return result;
  617              		.loc 1 434 3 view .LVU130
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 23
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 23
 
 
  435:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
@@ -1378,7 +1378,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  644              		.loc 1 464 1 is_stmt 0 view .LVU137
  645 0000 FF20     		movs	r0, #255
  646              	.LVL46:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 24
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 24
 
 
  647              		.loc 1 464 1 view .LVU138
@@ -1438,7 +1438,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  675              		.cfi_endproc
  676              	.LFE65:
  678              		.section	.text.osSignalSet,"ax",%progbits
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 25
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 25
 
 
  679              		.align	1
@@ -1498,7 +1498,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  510:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     if(xTaskGenericNotifyFromISR( thread_id , (uint32_t)signal, eSetBits, &ulPreviousNotificationVa
  717              		.loc 1 510 5 is_stmt 1 view .LVU154
  718              		.loc 1 510 8 is_stmt 0 view .LVU155
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 26
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 26
 
 
  719 0014 03AB     		add	r3, sp, #12
@@ -1558,7 +1558,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  765              	.L44:
  519:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #else
  520:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   (void) thread_id;
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 27
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 27
 
 
  521:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   (void) signal;
@@ -1618,7 +1618,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  544:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** {
  797              		.loc 1 544 1 is_stmt 1 view -0
  798              		.cfi_startproc
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 28
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 28
 
 
  799              		@ args = 0, pretend = 0, frame = 16
@@ -1678,7 +1678,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  832              		.loc 1 565 16 is_stmt 0 view .LVU182
  833 0014 8223     		movs	r3, #130
  834 0016 0193     		str	r3, [sp, #4]
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 29
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 29
 
 
  835              	.L53:
@@ -1738,7 +1738,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  863 0036 06D0     		beq	.L54
  571:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       else  ret.status = osEventTimeout;
  864              		.loc 1 571 7 is_stmt 1 view .LVU189
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 30
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 30
 
 
  571:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       else  ret.status = osEventTimeout;
@@ -1798,7 +1798,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  589:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** 
  590:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /****************************  Mutex Management ********************************/
  591:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /**
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 31
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 31
 
 
  592:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @brief  Create and Initialize a Mutex object
@@ -1858,7 +1858,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  936              		.loc 1 607 5 is_stmt 1 view .LVU211
  607:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
  937              		.loc 1 607 12 is_stmt 0 view .LVU212
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 32
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 32
 
 
  938 000e 0120     		movs	r0, #1
@@ -1918,7 +1918,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  978 0008 10B3     		cbz	r0, .L66
  979 000a 0C46     		mov	r4, r1
  980 000c 0546     		mov	r5, r0
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 33
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 33
 
 
  633:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return osErrorParameter;
@@ -1978,7 +1978,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1016              	@ 0 "" 2
  652:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   } 
  653:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   else if (xSemaphoreTake(mutex_id, ticks) != pdTRUE) {
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 34
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 34
 
 
  654:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return osErrorOS;
@@ -2038,7 +2038,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1059 0058 0020     		movs	r0, #0
  1060 005a F7E7     		b	.L63
  1061              	.L69:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 35
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 35
 
 
  654:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
@@ -2098,7 +2098,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  672:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     if (xSemaphoreGiveFromISR(mutex_id, &taskWoken) != pdTRUE) {
  1104              		.loc 1 672 5 is_stmt 1 view .LVU253
  1105              		.loc 1 672 9 is_stmt 0 view .LVU254
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 36
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 36
 
 
  1106 0010 01A9     		add	r1, sp, #4
@@ -2158,7 +2158,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  682:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
  1150              		.loc 1 682 1 view .LVU265
  1151 004a 02B0     		add	sp, sp, #8
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 37
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 37
 
 
  1152              	.LCFI27:
@@ -2218,7 +2218,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  692:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   if (inHandlerMode()) {
  1196              		.loc 1 692 3 is_stmt 1 view .LVU271
  1197              		.loc 1 692 7 is_stmt 0 view .LVU272
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 38
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 38
 
 
  1198 0004 FFF7FEFF 		bl	inHandlerMode
@@ -2278,7 +2278,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1232              		@ args = 0, pretend = 0, frame = 0
  1233              		@ frame_needed = 0, uses_anonymous_args = 0
  1234              		.loc 1 713 1 is_stmt 0 view .LVU280
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 39
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 39
 
 
  1235 0000 10B5     		push	{r4, lr}
@@ -2338,7 +2338,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  746:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
  747:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   else
  748:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   {
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 40
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 40
 
 
  749:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #if (configUSE_COUNTING_SEMAPHORES == 1 )
@@ -2398,7 +2398,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1285              	.LVL91:
  1286              	.L84:
  731:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       vSemaphoreCreateBinary(sema);
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 41
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 41
 
 
  1287              		.loc 1 731 5 is_stmt 1 view .LVU293
@@ -2458,7 +2458,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  777:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @note   MUST REMAIN UNCHANGED: \b osSemaphoreWait shall be consistent in every CMSIS-RTOS.
  778:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** */
  779:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** int32_t osSemaphoreWait (osSemaphoreId semaphore_id, uint32_t millisec)
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 42
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 42
 
 
  780:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** {
@@ -2518,7 +2518,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1361              		.loc 1 800 6 discriminator 1 view .LVU315
  1362 0012 0546     		mov	r5, r0
  1363 0014 A0B1     		cbz	r0, .L92
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 43
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 43
 
 
  801:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     if (xSemaphoreTakeFromISR(semaphore_id, &taskWoken) != pdTRUE) {
@@ -2578,7 +2578,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1405              	.LVL101:
  1406              	.L90:
  811:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 44
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 44
 
 
  1407              		.loc 1 811 1 view .LVU327
@@ -2638,7 +2638,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1451              		.cfi_def_cfa_offset 8
  1452              		.cfi_offset 4, -8
  1453              		.cfi_offset 14, -4
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 45
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 45
 
 
  1454 0002 82B0     		sub	sp, sp, #8
@@ -2698,7 +2698,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1498 0034 0020     		movs	r0, #0
  1499 0036 08E0     		b	.L98
  1500              	.L99:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 46
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 46
 
 
  830:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
@@ -2758,7 +2758,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1544              		.syntax unified
  1545              		.thumb
  1546              		.thumb_func
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 47
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 47
 
 
  1548              	osSemaphoreDelete:
@@ -2818,7 +2818,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1584              	.LFE75:
  1586              		.section	.text.osPoolCreate,"ax",%progbits
  1587              		.align	1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 48
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 48
 
 
  1588              		.global	osPoolCreate
@@ -2878,7 +2878,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  887:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   int itemSize = 4 * ((pool_def->item_sz + 3) / 4);
  1612              		.loc 1 887 3 view .LVU368
  1613              		.loc 1 887 32 is_stmt 0 view .LVU369
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 49
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 49
 
 
  1614 0004 4368     		ldr	r3, [r0, #4]
@@ -2938,7 +2938,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1653              		.loc 1 902 5 is_stmt 1 view .LVU388
  1654              		.loc 1 902 8 is_stmt 0 view .LVU389
  1655 002a D0B1     		cbz	r0, .L112
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 50
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 50
 
 
  903:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       /* Now allocate the pool itself. */
@@ -2998,7 +2998,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  916:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     }
  917:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     else {
  918:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       vPortFree(thePool);
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 51
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 51
 
 
  919:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****       thePool = NULL;
@@ -3058,7 +3058,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1729              		.syntax unified
  1730              		.thumb
  1731              		.thumb_func
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 52
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 52
 
 
  1733              	osPoolAlloc:
@@ -3118,7 +3118,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
    8:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
    9:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  * the Software, and to permit persons to whom the Software is furnished to do so,
   10:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  * subject to the following conditions:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 53
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 53
 
 
   11:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h ****  *
@@ -3178,7 +3178,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
   65:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
   66:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	/* 32-bit tick type on a 32-bit architecture, so reads of the tick count do
   67:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	not need to be guarded with a critical section. */
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 54
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 54
 
 
   68:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	#define portTICK_TYPE_IS_ATOMIC 1
@@ -3238,7 +3238,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  122:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** /* Architecture specific optimisations. */
  123:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #ifndef configUSE_PORT_OPTIMISED_TASK_SELECTION
  124:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	#define configUSE_PORT_OPTIMISED_TASK_SELECTION 1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 55
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 55
 
 
  125:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** #endif
@@ -3298,7 +3298,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  179:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	if( ulCurrentInterrupt == 0 )
  180:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	{
  181:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 		xReturn = pdFALSE;
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 56
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 56
 
 
  182:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	}
@@ -3358,7 +3358,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  222:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 
  223:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	/* This return will not be reached but is necessary to prevent compiler
  224:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	warnings. */
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 57
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 57
 
 
  225:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	return ulOriginalBASEPRI;
@@ -3418,7 +3418,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1821 003e 6268     		ldr	r2, [r4, #4]
  1822              		.loc 1 953 25 view .LVU444
  1823 0040 D05C     		ldrb	r0, [r2, r3]	@ zero_extendqisi2
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 58
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 58
 
 
  1824              		.loc 1 953 8 view .LVU445
@@ -3478,7 +3478,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  230:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** {
  231:Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h **** 	__asm volatile
  1864              		.loc 3 231 2 view .LVU462
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 59
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 59
 
 
  1865              		.syntax unified
@@ -3538,7 +3538,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1902              		@ args = 0, pretend = 0, frame = 0
  1903              		@ frame_needed = 0, uses_anonymous_args = 0
  1904              		.loc 1 978 1 is_stmt 0 view .LVU469
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 60
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 60
 
 
  1905 0000 08B5     		push	{r3, lr}
@@ -3598,7 +3598,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  998:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   uint32_t index;
  1942              		.loc 1 998 3 view .LVU478
  999:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 61
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 61
 
 
 1000:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   if (pool_id == NULL) {
@@ -3658,7 +3658,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  1979 0022 0BD9     		bls	.L140
 1018:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return osErrorParameter;
 1019:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 62
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 62
 
 
 1020:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
@@ -3718,7 +3718,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2021              		.cfi_endproc
  2022              	.LFE79:
  2024              		.section	.text.osMessageCreate,"ax",%progbits
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 63
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 63
 
 
  2025              		.align	1
@@ -3778,7 +3778,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2057              		.loc 1 1047 12 is_stmt 0 view .LVU521
  2058 000c 0021     		movs	r1, #0
  2059              	.LVL165:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 64
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 64
 
 
  2060              		.loc 1 1047 12 view .LVU522
@@ -3838,7 +3838,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1062:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  info      message information.
 1063:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  millisec  timeout value or 0 in case of no time-out.
 1064:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @retval status code that indicates the execution status of the function.
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 65
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 65
 
 
 1065:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @note   MUST REMAIN UNCHANGED: \b osMessagePut shall be consistent in every CMSIS-RTOS.
@@ -3898,7 +3898,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2142 001a 03AA     		add	r2, sp, #12
  2143 001c 01A9     		add	r1, sp, #4
  2144 001e 2046     		mov	r0, r4
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 66
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 66
 
 
  2145 0020 FFF7FEFF 		bl	xQueueGenericSendFromISR
@@ -3958,7 +3958,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2185              	.L145:
 1090:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
  2186              		.loc 1 1090 1 view .LVU553
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 67
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 67
 
 
  2187 0056 05B0     		add	sp, sp, #20
@@ -4018,7 +4018,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2230              		.cfi_offset 5, -12
  2231              		.cfi_offset 6, -8
  2232              		.cfi_offset 14, -4
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 68
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 68
 
 
  2233 0002 84B0     		sub	sp, sp, #16
@@ -4078,7 +4078,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2261              		.loc 1 1126 7 is_stmt 0 view .LVU574
  2262 0016 FFF7FEFF 		bl	inHandlerMode
  2263              	.LVL181:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 69
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 69
 
 
  2264              		.loc 1 1126 6 discriminator 1 view .LVU575
@@ -4138,7 +4138,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1110:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
  2307              		.loc 1 1110 12 is_stmt 0 view .LVU588
  2308 004c 6B46     		mov	r3, sp
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 70
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 70
 
 
  2309 004e 93E80700 		ldm	r3, {r0, r1, r2}
@@ -4198,7 +4198,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2348              	.L154:
 1147:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
  2349              		.loc 1 1147 1 view .LVU601
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 71
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 71
 
 
  2350 007c 2046     		mov	r0, r4
@@ -4258,7 +4258,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2382              		@ frame_needed = 0, uses_anonymous_args = 0
  2383              		.loc 1 1169 1 is_stmt 0 view .LVU605
  2384 0000 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 72
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 72
 
 
  2385              	.LCFI57:
@@ -4318,7 +4318,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2426              		.loc 1 1182 33 is_stmt 0 view .LVU622
  2427 0022 2C60     		str	r4, [r5]
 1183:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 73
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 73
 
 
 1184:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   /* Create a queue in FreeRTOS */
@@ -4378,7 +4378,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1198:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return NULL;
 1199:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
 1200:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 74
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 74
 
 
 1201:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return *(queue_def->cb);
@@ -4438,7 +4438,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1209:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  queue_id      mail queue ID obtained with \ref osMailCreate.
 1210:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  millisec      timeout value or 0 in case of no time-out.
 1211:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @retval pointer to memory block that can be filled with mail or NULL in case error.
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 75
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 75
 
 
 1212:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @note   MUST REMAIN UNCHANGED: \b osMailAlloc shall be consistent in every CMSIS-RTOS.
@@ -4498,7 +4498,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1229:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /**
 1230:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @brief Allocate a memory block from a mail and set memory block to zero
 1231:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  queue_id      mail queue ID obtained with \ref osMailCreate.
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 76
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 76
 
 
 1232:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param  millisec      timeout value or 0 in case of no time-out.
@@ -4558,7 +4558,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1242:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     for (i = 0; i < queue_id->queue_def->item_sz; i++) {
  2587              		.loc 1 1242 19 discriminator 1 view .LVU673
  2588 001a 9A42     		cmp	r2, r3
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 77
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 77
 
 
  2589 001c F8D8     		bhi	.L181
@@ -4618,7 +4618,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2626              		.loc 1 1262 3 view .LVU680
  2627              		.loc 1 1262 6 is_stmt 0 view .LVU681
  2628 0006 30B3     		cbz	r0, .L187
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 78
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 78
 
 
  2629 0008 0446     		mov	r4, r0
@@ -4678,7 +4678,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1279:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
 1280:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return osOK;
  2667              		.loc 1 1280 10 is_stmt 0 view .LVU694
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 79
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 79
 
 
  2668              		.thumb
@@ -4738,7 +4738,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1276:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     }
  2714              		.loc 1 1276 14 view .LVU704
  2715 0062 FF20     		movs	r0, #255
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 80
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 80
 
 
  2716 0064 F5E7     		b	.L184
@@ -4798,7 +4798,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2755 000a 0D46     		mov	r5, r1
  2756 000c 1646     		mov	r6, r2
 1299:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     event.status = osErrorParameter;
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 81
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 81
 
 
 1300:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return event;
@@ -4858,7 +4858,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2786              		.loc 1 1324 5 is_stmt 1 view .LVU727
  2787 002a 039B     		ldr	r3, [sp, #12]
  2788 002c FBB1     		cbz	r3, .L198
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 82
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 82
 
 
  2789              		.loc 1 1324 5 discriminator 1 view .LVU728
@@ -4918,7 +4918,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2833              	.LVL224:
  2834              		.loc 1 1327 8 discriminator 1 view .LVU740
  2835 0064 0128     		cmp	r0, #1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 83
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 83
 
 
  2836 0066 0AD0     		beq	.L205
@@ -4978,7 +4978,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2879              		.thumb_func
  2881              	osMailFree:
  2882              	.LVL228:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 84
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 84
 
 
  2883              	.LFB88:
@@ -5038,7 +5038,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2920              		.section	.text.osSystickHandler,"ax",%progbits
  2921              		.align	1
  2922              		.global	osSystickHandler
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 85
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 85
 
 
  2923              		.syntax unified
@@ -5098,7 +5098,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2958              		.align	1
  2959              		.global	osThreadSuspend
  2960              		.syntax unified
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 86
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 86
 
 
  2961              		.thumb
@@ -5158,7 +5158,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1423:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   else
 1424:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     return osErrorOS;
 1425:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 87
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 87
 
 
 1426:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #endif /* INCLUDE_eTaskGetState */
@@ -5218,7 +5218,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  2999              		@ args = 0, pretend = 0, frame = 0
  3000              		@ frame_needed = 0, uses_anonymous_args = 0
  3001              		.loc 1 1449 1 is_stmt 0 view .LVU773
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 88
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 88
 
 
  3002 0000 10B5     		push	{r4, lr}
@@ -5278,7 +5278,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1461:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
 1462:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return osOK;
  3045              		.loc 1 1462 3 view .LVU785
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 89
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 89
 
 
 1463:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #else
@@ -5338,7 +5338,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3089              	.LFB93:
 1478:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** 
 1479:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** /**
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 90
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 90
 
 
 1480:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @brief  Resume execution of a all suspended threads.
@@ -5398,7 +5398,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1497:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @param   millisec    time delay value
 1498:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** * @retval  status code that indicates the execution status of the function.
 1499:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** */
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 91
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 91
 
 
 1500:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** osStatus osDelayUntil (uint32_t *PreviousWakeTime, uint32_t millisec)
@@ -5458,7 +5458,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1525:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   
 1526:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return osOK;
 1527:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #else
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 92
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 92
 
 
 1528:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   (void) thread_id;
@@ -5518,7 +5518,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3196              		.syntax unified
  3197              		.thumb
  3198              		.thumb_func
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 93
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 93
 
 
  3200              	osMessagePeek:
@@ -5578,7 +5578,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1569:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****     ticks = portMAX_DELAY;
 1570:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   }
 1571:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   else if (millisec != 0) {
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 94
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 94
 
 
  3233              		.loc 1 1571 8 view .LVU825
@@ -5638,7 +5638,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3269              	.LVL256:
  3270              	.L241:
  3271              	.LCFI81:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 95
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 95
 
 
  3272              		.cfi_restore_state
@@ -5698,7 +5698,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3313              		.cfi_offset 4, -8
  3314              		.cfi_offset 14, -4
  3315 0002 0446     		mov	r4, r0
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 96
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 96
 
 
 1598:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   if (inHandlerMode()) {
@@ -5758,7 +5758,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3354              		@ frame_needed = 0, uses_anonymous_args = 0
  3355              		.loc 1 1613 1 is_stmt 0 view .LVU855
  3356 0000 08B5     		push	{r3, lr}
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 97
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 97
 
 
  3357              	.LCFI83:
@@ -5818,7 +5818,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3398 000a 2046     		mov	r0, r4
  3399 000c FFF7FEFF 		bl	vQueueDelete
  3400              	.LVL268:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 98
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 98
 
 
 1629:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** 
@@ -5878,7 +5878,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
 1655:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c ****   return NULL;
  3430              		.loc 1 1655 3 view .LVU870
 1656:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** #endif	
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 99
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 99
 
 
 1657:Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c **** }
@@ -5938,7 +5938,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3467              		.thumb
  3468              		.thumb_func
  3470              	osRecursiveMutexWait:
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 100
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 100
 
 
  3471              	.LVL274:
@@ -5998,7 +5998,7 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3485              	.LFE103:
  3487              		.section	.text.osSemaphoreGetCount,"ax",%progbits
  3488              		.align	1
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 101
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 101
 
 
  3489              		.global	osSemaphoreGetCount
@@ -6050,127 +6050,127 @@ ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 1
  3527              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
  3528              		.file 14 "D:/software/msy64/mingw64/arm-none-eabi/include/string.h"
  3529              		.file 15 "Middlewares/Third_Party/FreeRTOS/Source/include/portable.h"
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 102
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 102
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 cmsis_os.c
-D:\software\msy64\tmp\cchHC6P8.s:19     .text.makeFreeRtosPriority:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:24     .text.makeFreeRtosPriority:00000000 makeFreeRtosPriority
-D:\software\msy64\tmp\cchHC6P8.s:55     .text.makeCmsisPriority:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:60     .text.makeCmsisPriority:00000000 makeCmsisPriority
-D:\software\msy64\tmp\cchHC6P8.s:94     .text.inHandlerMode:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:99     .text.inHandlerMode:00000000 inHandlerMode
-D:\software\msy64\tmp\cchHC6P8.s:134    .text.osKernelStart:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:140    .text.osKernelStart:00000000 osKernelStart
-D:\software\msy64\tmp\cchHC6P8.s:162    .text.osKernelRunning:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:168    .text.osKernelRunning:00000000 osKernelRunning
-D:\software\msy64\tmp\cchHC6P8.s:199    .text.osKernelSysTick:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:205    .text.osKernelSysTick:00000000 osKernelSysTick
-D:\software\msy64\tmp\cchHC6P8.s:239    .text.osThreadCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:245    .text.osThreadCreate:00000000 osThreadCreate
-D:\software\msy64\tmp\cchHC6P8.s:351    .text.osThreadGetId:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:357    .text.osThreadGetId:00000000 osThreadGetId
-D:\software\msy64\tmp\cchHC6P8.s:378    .text.osThreadTerminate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:384    .text.osThreadTerminate:00000000 osThreadTerminate
-D:\software\msy64\tmp\cchHC6P8.s:408    .text.osThreadYield:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:414    .text.osThreadYield:00000000 osThreadYield
-D:\software\msy64\tmp\cchHC6P8.s:445    .text.osThreadSetPriority:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:451    .text.osThreadSetPriority:00000000 osThreadSetPriority
-D:\software\msy64\tmp\cchHC6P8.s:486    .text.osThreadGetPriority:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:492    .text.osThreadGetPriority:00000000 osThreadGetPriority
-D:\software\msy64\tmp\cchHC6P8.s:539    .text.osDelay:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:545    .text.osDelay:00000000 osDelay
-D:\software\msy64\tmp\cchHC6P8.s:577    .text.osTimerCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:583    .text.osTimerCreate:00000000 osTimerCreate
-D:\software\msy64\tmp\cchHC6P8.s:601    .text.osTimerStart:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:607    .text.osTimerStart:00000000 osTimerStart
-D:\software\msy64\tmp\cchHC6P8.s:627    .text.osTimerStop:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:633    .text.osTimerStop:00000000 osTimerStop
-D:\software\msy64\tmp\cchHC6P8.s:653    .text.osTimerDelete:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:659    .text.osTimerDelete:00000000 osTimerDelete
-D:\software\msy64\tmp\cchHC6P8.s:679    .text.osSignalSet:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:685    .text.osSignalSet:00000000 osSignalSet
-D:\software\msy64\tmp\cchHC6P8.s:788    .text.osSignalWait:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:794    .text.osSignalWait:00000000 osSignalWait
-D:\software\msy64\tmp\cchHC6P8.s:900    .text.osMutexCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:906    .text.osMutexCreate:00000000 osMutexCreate
-D:\software\msy64\tmp\cchHC6P8.s:948    .text.osMutexWait:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:954    .text.osMutexWait:00000000 osMutexWait
-D:\software\msy64\tmp\cchHC6P8.s:1069   .text.osMutexRelease:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1075   .text.osMutexRelease:00000000 osMutexRelease
-D:\software\msy64\tmp\cchHC6P8.s:1176   .text.osMutexDelete:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1182   .text.osMutexDelete:00000000 osMutexDelete
-D:\software\msy64\tmp\cchHC6P8.s:1221   .text.osSemaphoreCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1227   .text.osSemaphoreCreate:00000000 osSemaphoreCreate
-D:\software\msy64\tmp\cchHC6P8.s:1319   .text.osSemaphoreWait:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1325   .text.osSemaphoreWait:00000000 osSemaphoreWait
-D:\software\msy64\tmp\cchHC6P8.s:1435   .text.osSemaphoreRelease:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1441   .text.osSemaphoreRelease:00000000 osSemaphoreRelease
-D:\software\msy64\tmp\cchHC6P8.s:1542   .text.osSemaphoreDelete:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1548   .text.osSemaphoreDelete:00000000 osSemaphoreDelete
-D:\software\msy64\tmp\cchHC6P8.s:1587   .text.osPoolCreate:00000000 $t
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 103
+D:\software\msy64\tmp\ccF7Bgct.s:19     .text.makeFreeRtosPriority:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:24     .text.makeFreeRtosPriority:00000000 makeFreeRtosPriority
+D:\software\msy64\tmp\ccF7Bgct.s:55     .text.makeCmsisPriority:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:60     .text.makeCmsisPriority:00000000 makeCmsisPriority
+D:\software\msy64\tmp\ccF7Bgct.s:94     .text.inHandlerMode:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:99     .text.inHandlerMode:00000000 inHandlerMode
+D:\software\msy64\tmp\ccF7Bgct.s:134    .text.osKernelStart:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:140    .text.osKernelStart:00000000 osKernelStart
+D:\software\msy64\tmp\ccF7Bgct.s:162    .text.osKernelRunning:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:168    .text.osKernelRunning:00000000 osKernelRunning
+D:\software\msy64\tmp\ccF7Bgct.s:199    .text.osKernelSysTick:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:205    .text.osKernelSysTick:00000000 osKernelSysTick
+D:\software\msy64\tmp\ccF7Bgct.s:239    .text.osThreadCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:245    .text.osThreadCreate:00000000 osThreadCreate
+D:\software\msy64\tmp\ccF7Bgct.s:351    .text.osThreadGetId:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:357    .text.osThreadGetId:00000000 osThreadGetId
+D:\software\msy64\tmp\ccF7Bgct.s:378    .text.osThreadTerminate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:384    .text.osThreadTerminate:00000000 osThreadTerminate
+D:\software\msy64\tmp\ccF7Bgct.s:408    .text.osThreadYield:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:414    .text.osThreadYield:00000000 osThreadYield
+D:\software\msy64\tmp\ccF7Bgct.s:445    .text.osThreadSetPriority:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:451    .text.osThreadSetPriority:00000000 osThreadSetPriority
+D:\software\msy64\tmp\ccF7Bgct.s:486    .text.osThreadGetPriority:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:492    .text.osThreadGetPriority:00000000 osThreadGetPriority
+D:\software\msy64\tmp\ccF7Bgct.s:539    .text.osDelay:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:545    .text.osDelay:00000000 osDelay
+D:\software\msy64\tmp\ccF7Bgct.s:577    .text.osTimerCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:583    .text.osTimerCreate:00000000 osTimerCreate
+D:\software\msy64\tmp\ccF7Bgct.s:601    .text.osTimerStart:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:607    .text.osTimerStart:00000000 osTimerStart
+D:\software\msy64\tmp\ccF7Bgct.s:627    .text.osTimerStop:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:633    .text.osTimerStop:00000000 osTimerStop
+D:\software\msy64\tmp\ccF7Bgct.s:653    .text.osTimerDelete:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:659    .text.osTimerDelete:00000000 osTimerDelete
+D:\software\msy64\tmp\ccF7Bgct.s:679    .text.osSignalSet:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:685    .text.osSignalSet:00000000 osSignalSet
+D:\software\msy64\tmp\ccF7Bgct.s:788    .text.osSignalWait:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:794    .text.osSignalWait:00000000 osSignalWait
+D:\software\msy64\tmp\ccF7Bgct.s:900    .text.osMutexCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:906    .text.osMutexCreate:00000000 osMutexCreate
+D:\software\msy64\tmp\ccF7Bgct.s:948    .text.osMutexWait:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:954    .text.osMutexWait:00000000 osMutexWait
+D:\software\msy64\tmp\ccF7Bgct.s:1069   .text.osMutexRelease:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1075   .text.osMutexRelease:00000000 osMutexRelease
+D:\software\msy64\tmp\ccF7Bgct.s:1176   .text.osMutexDelete:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1182   .text.osMutexDelete:00000000 osMutexDelete
+D:\software\msy64\tmp\ccF7Bgct.s:1221   .text.osSemaphoreCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1227   .text.osSemaphoreCreate:00000000 osSemaphoreCreate
+D:\software\msy64\tmp\ccF7Bgct.s:1319   .text.osSemaphoreWait:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1325   .text.osSemaphoreWait:00000000 osSemaphoreWait
+D:\software\msy64\tmp\ccF7Bgct.s:1435   .text.osSemaphoreRelease:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1441   .text.osSemaphoreRelease:00000000 osSemaphoreRelease
+D:\software\msy64\tmp\ccF7Bgct.s:1542   .text.osSemaphoreDelete:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1548   .text.osSemaphoreDelete:00000000 osSemaphoreDelete
+D:\software\msy64\tmp\ccF7Bgct.s:1587   .text.osPoolCreate:00000000 $t
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 103
 
 
-D:\software\msy64\tmp\cchHC6P8.s:1593   .text.osPoolCreate:00000000 osPoolCreate
-D:\software\msy64\tmp\cchHC6P8.s:1727   .text.osPoolAlloc:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1733   .text.osPoolAlloc:00000000 osPoolAlloc
-D:\software\msy64\tmp\cchHC6P8.s:1891   .text.osPoolCAlloc:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1897   .text.osPoolCAlloc:00000000 osPoolCAlloc
-D:\software\msy64\tmp\cchHC6P8.s:1928   .text.osPoolFree:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:1934   .text.osPoolFree:00000000 osPoolFree
-D:\software\msy64\tmp\cchHC6P8.s:2025   .text.osMessageCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2031   .text.osMessageCreate:00000000 osMessageCreate
-D:\software\msy64\tmp\cchHC6P8.s:2093   .text.osMessagePut:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2099   .text.osMessagePut:00000000 osMessagePut
-D:\software\msy64\tmp\cchHC6P8.s:2212   .text.osMessageGet:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2218   .text.osMessageGet:00000000 osMessageGet
-D:\software\msy64\tmp\cchHC6P8.s:2370   .text.osMailCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2376   .text.osMailCreate:00000000 osMailCreate
-D:\software\msy64\tmp\cchHC6P8.s:2501   .text.osMailAlloc:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2507   .text.osMailAlloc:00000000 osMailAlloc
-D:\software\msy64\tmp\cchHC6P8.s:2540   .text.osMailCAlloc:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2546   .text.osMailCAlloc:00000000 osMailCAlloc
-D:\software\msy64\tmp\cchHC6P8.s:2602   .text.osMailPut:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2608   .text.osMailPut:00000000 osMailPut
-D:\software\msy64\tmp\cchHC6P8.s:2721   .text.osMailGet:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2727   .text.osMailGet:00000000 osMailGet
-D:\software\msy64\tmp\cchHC6P8.s:2875   .text.osMailFree:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2881   .text.osMailFree:00000000 osMailFree
-D:\software\msy64\tmp\cchHC6P8.s:2921   .text.osSystickHandler:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2927   .text.osSystickHandler:00000000 osSystickHandler
-D:\software\msy64\tmp\cchHC6P8.s:2958   .text.osThreadSuspend:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2964   .text.osThreadSuspend:00000000 osThreadSuspend
-D:\software\msy64\tmp\cchHC6P8.s:2988   .text.osThreadResume:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:2994   .text.osThreadResume:00000000 osThreadResume
-D:\software\msy64\tmp\cchHC6P8.s:3054   .text.osThreadSuspendAll:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3060   .text.osThreadSuspendAll:00000000 osThreadSuspendAll
-D:\software\msy64\tmp\cchHC6P8.s:3082   .text.osThreadResumeAll:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3088   .text.osThreadResumeAll:00000000 osThreadResumeAll
-D:\software\msy64\tmp\cchHC6P8.s:3119   .text.osDelayUntil:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3125   .text.osDelayUntil:00000000 osDelayUntil
-D:\software\msy64\tmp\cchHC6P8.s:3145   .text.osAbortDelay:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3151   .text.osAbortDelay:00000000 osAbortDelay
-D:\software\msy64\tmp\cchHC6P8.s:3170   .text.osThreadList:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3176   .text.osThreadList:00000000 osThreadList
-D:\software\msy64\tmp\cchHC6P8.s:3194   .text.osMessagePeek:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3200   .text.osMessagePeek:00000000 osMessagePeek
-D:\software\msy64\tmp\cchHC6P8.s:3296   .text.osMessageWaiting:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3302   .text.osMessageWaiting:00000000 osMessageWaiting
-D:\software\msy64\tmp\cchHC6P8.s:3342   .text.osMessageAvailableSpace:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3348   .text.osMessageAvailableSpace:00000000 osMessageAvailableSpace
-D:\software\msy64\tmp\cchHC6P8.s:3371   .text.osMessageDelete:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3377   .text.osMessageDelete:00000000 osMessageDelete
-D:\software\msy64\tmp\cchHC6P8.s:3416   .text.osRecursiveMutexCreate:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3422   .text.osRecursiveMutexCreate:00000000 osRecursiveMutexCreate
-D:\software\msy64\tmp\cchHC6P8.s:3440   .text.osRecursiveMutexRelease:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3446   .text.osRecursiveMutexRelease:00000000 osRecursiveMutexRelease
-D:\software\msy64\tmp\cchHC6P8.s:3464   .text.osRecursiveMutexWait:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3470   .text.osRecursiveMutexWait:00000000 osRecursiveMutexWait
-D:\software\msy64\tmp\cchHC6P8.s:3488   .text.osSemaphoreGetCount:00000000 $t
-D:\software\msy64\tmp\cchHC6P8.s:3494   .text.osSemaphoreGetCount:00000000 osSemaphoreGetCount
-ARM GAS  D:\software\msy64\tmp\cchHC6P8.s 			page 104
+D:\software\msy64\tmp\ccF7Bgct.s:1593   .text.osPoolCreate:00000000 osPoolCreate
+D:\software\msy64\tmp\ccF7Bgct.s:1727   .text.osPoolAlloc:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1733   .text.osPoolAlloc:00000000 osPoolAlloc
+D:\software\msy64\tmp\ccF7Bgct.s:1891   .text.osPoolCAlloc:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1897   .text.osPoolCAlloc:00000000 osPoolCAlloc
+D:\software\msy64\tmp\ccF7Bgct.s:1928   .text.osPoolFree:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:1934   .text.osPoolFree:00000000 osPoolFree
+D:\software\msy64\tmp\ccF7Bgct.s:2025   .text.osMessageCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2031   .text.osMessageCreate:00000000 osMessageCreate
+D:\software\msy64\tmp\ccF7Bgct.s:2093   .text.osMessagePut:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2099   .text.osMessagePut:00000000 osMessagePut
+D:\software\msy64\tmp\ccF7Bgct.s:2212   .text.osMessageGet:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2218   .text.osMessageGet:00000000 osMessageGet
+D:\software\msy64\tmp\ccF7Bgct.s:2370   .text.osMailCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2376   .text.osMailCreate:00000000 osMailCreate
+D:\software\msy64\tmp\ccF7Bgct.s:2501   .text.osMailAlloc:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2507   .text.osMailAlloc:00000000 osMailAlloc
+D:\software\msy64\tmp\ccF7Bgct.s:2540   .text.osMailCAlloc:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2546   .text.osMailCAlloc:00000000 osMailCAlloc
+D:\software\msy64\tmp\ccF7Bgct.s:2602   .text.osMailPut:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2608   .text.osMailPut:00000000 osMailPut
+D:\software\msy64\tmp\ccF7Bgct.s:2721   .text.osMailGet:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2727   .text.osMailGet:00000000 osMailGet
+D:\software\msy64\tmp\ccF7Bgct.s:2875   .text.osMailFree:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2881   .text.osMailFree:00000000 osMailFree
+D:\software\msy64\tmp\ccF7Bgct.s:2921   .text.osSystickHandler:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2927   .text.osSystickHandler:00000000 osSystickHandler
+D:\software\msy64\tmp\ccF7Bgct.s:2958   .text.osThreadSuspend:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2964   .text.osThreadSuspend:00000000 osThreadSuspend
+D:\software\msy64\tmp\ccF7Bgct.s:2988   .text.osThreadResume:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:2994   .text.osThreadResume:00000000 osThreadResume
+D:\software\msy64\tmp\ccF7Bgct.s:3054   .text.osThreadSuspendAll:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3060   .text.osThreadSuspendAll:00000000 osThreadSuspendAll
+D:\software\msy64\tmp\ccF7Bgct.s:3082   .text.osThreadResumeAll:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3088   .text.osThreadResumeAll:00000000 osThreadResumeAll
+D:\software\msy64\tmp\ccF7Bgct.s:3119   .text.osDelayUntil:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3125   .text.osDelayUntil:00000000 osDelayUntil
+D:\software\msy64\tmp\ccF7Bgct.s:3145   .text.osAbortDelay:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3151   .text.osAbortDelay:00000000 osAbortDelay
+D:\software\msy64\tmp\ccF7Bgct.s:3170   .text.osThreadList:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3176   .text.osThreadList:00000000 osThreadList
+D:\software\msy64\tmp\ccF7Bgct.s:3194   .text.osMessagePeek:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3200   .text.osMessagePeek:00000000 osMessagePeek
+D:\software\msy64\tmp\ccF7Bgct.s:3296   .text.osMessageWaiting:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3302   .text.osMessageWaiting:00000000 osMessageWaiting
+D:\software\msy64\tmp\ccF7Bgct.s:3342   .text.osMessageAvailableSpace:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3348   .text.osMessageAvailableSpace:00000000 osMessageAvailableSpace
+D:\software\msy64\tmp\ccF7Bgct.s:3371   .text.osMessageDelete:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3377   .text.osMessageDelete:00000000 osMessageDelete
+D:\software\msy64\tmp\ccF7Bgct.s:3416   .text.osRecursiveMutexCreate:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3422   .text.osRecursiveMutexCreate:00000000 osRecursiveMutexCreate
+D:\software\msy64\tmp\ccF7Bgct.s:3440   .text.osRecursiveMutexRelease:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3446   .text.osRecursiveMutexRelease:00000000 osRecursiveMutexRelease
+D:\software\msy64\tmp\ccF7Bgct.s:3464   .text.osRecursiveMutexWait:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3470   .text.osRecursiveMutexWait:00000000 osRecursiveMutexWait
+D:\software\msy64\tmp\ccF7Bgct.s:3488   .text.osSemaphoreGetCount:00000000 $t
+D:\software\msy64\tmp\ccF7Bgct.s:3494   .text.osSemaphoreGetCount:00000000 osSemaphoreGetCount
+ARM GAS  D:\software\msy64\tmp\ccF7Bgct.s 			page 104
 
 
 

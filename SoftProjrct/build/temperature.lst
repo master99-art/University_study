@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\ccF4vaK2.s 			page 1
+ARM GAS  D:\software\msy64\tmp\cc59Rcqh.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -18,11 +18,41 @@ ARM GAS  D:\software\msy64\tmp\ccF4vaK2.s 			page 1
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
   17              		.file 1 "Core/Src/temperature.c"
-  18              	.Letext0:
-ARM GAS  D:\software\msy64\tmp\ccF4vaK2.s 			page 2
+  18              		.section	.text.Temperture_Init,"ax",%progbits
+  19              		.align	1
+  20              		.global	Temperture_Init
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	Temperture_Init:
+  26              	.LFB65:
+   1:Core/Src/temperature.c **** #include "main.h"
+   2:Core/Src/temperature.c **** #include "temperature.h"
+   3:Core/Src/temperature.c **** #include "iic_reg.h"
+   4:Core/Src/temperature.c **** #include "myiic.h"
+   5:Core/Src/temperature.c **** 
+   6:Core/Src/temperature.c **** 
+   7:Core/Src/temperature.c **** void Temperture_Init(void)
+   8:Core/Src/temperature.c **** {
+  27              		.loc 1 8 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+   9:Core/Src/temperature.c **** 
+  10:Core/Src/temperature.c **** }
+  32              		.loc 1 10 1 view .LVU1
+  33 0000 7047     		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE65:
+  37              		.text
+  38              	.Letext0:
+ARM GAS  D:\software\msy64\tmp\cc59Rcqh.s 			page 2
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 temperature.c
+D:\software\msy64\tmp\cc59Rcqh.s:19     .text.Temperture_Init:00000000 $t
+D:\software\msy64\tmp\cc59Rcqh.s:25     .text.Temperture_Init:00000000 Temperture_Init
 
 NO UNDEFINED SYMBOLS
