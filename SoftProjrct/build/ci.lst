@@ -1,0 +1,156 @@
+ARM GAS  D:\software\msy64\tmp\ccYIqGri.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ci.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/ci.c"
+  18              		.global	__aeabi_ul2f
+  19              		.global	__aeabi_fmul
+  20              		.section	.text.Get_Angle,"ax",%progbits
+  21              		.align	1
+  22              		.global	Get_Angle
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Get_Angle:
+  28              	.LFB65:
+   1:Core/Src/ci.c **** #include "ci.h"
+   2:Core/Src/ci.c **** #include  "main.h"
+   3:Core/Src/ci.c **** #include "myiic.h"
+   4:Core/Src/ci.c **** #include "iic_reg.h"
+   5:Core/Src/ci.c **** 
+   6:Core/Src/ci.c **** float Get_Angle(void)
+   7:Core/Src/ci.c **** {
+  29              		.loc 1 7 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 00B5     		push	{lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 14, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+   8:Core/Src/ci.c ****     uint8_t data[2]={0};
+  40              		.loc 1 8 5 view .LVU1
+  41              		.loc 1 8 13 is_stmt 0 view .LVU2
+  42 0004 0023     		movs	r3, #0
+  43 0006 ADF80430 		strh	r3, [sp, #4]	@ movhi
+   9:Core/Src/ci.c ****     uint64_t angle_h = 0;
+  44              		.loc 1 9 5 is_stmt 1 view .LVU3
+  45              	.LVL0:
+  10:Core/Src/ci.c ****     uint64_t angle_l = 0;
+  46              		.loc 1 10 5 view .LVU4
+  11:Core/Src/ci.c ****     uint64_t angle = 0;
+  47              		.loc 1 11 5 view .LVU5
+ARM GAS  D:\software\msy64\tmp\ccYIqGri.s 			page 2
+
+
+  12:Core/Src/ci.c ****     float res = 0;
+  48              		.loc 1 12 5 view .LVU6
+  13:Core/Src/ci.c ****     IIC_Read(CI_Dev, CI_Angle_H, &data[0], 1);
+  49              		.loc 1 13 5 view .LVU7
+  50 000a 0123     		movs	r3, #1
+  51 000c 01AA     		add	r2, sp, #4
+  52 000e 0321     		movs	r1, #3
+  53 0010 0620     		movs	r0, #6
+  54 0012 FFF7FEFF 		bl	IIC_Read
+  55              	.LVL1:
+  14:Core/Src/ci.c ****     IIC_Read(CI_Dev, CI_Angle_L, &data[1], 1);
+  56              		.loc 1 14 5 view .LVU8
+  57 0016 0123     		movs	r3, #1
+  58 0018 0DF10502 		add	r2, sp, #5
+  59 001c 0421     		movs	r1, #4
+  60 001e 0620     		movs	r0, #6
+  61 0020 FFF7FEFF 		bl	IIC_Read
+  62              	.LVL2:
+  15:Core/Src/ci.c ****     data[1] = data[1] >> 2;
+  63              		.loc 1 15 5 view .LVU9
+  64              		.loc 1 15 19 is_stmt 0 view .LVU10
+  65 0024 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+  66              		.loc 1 15 13 view .LVU11
+  67 0028 9B08     		lsrs	r3, r3, #2
+  68 002a 8DF80530 		strb	r3, [sp, #5]
+  16:Core/Src/ci.c ****     angle_h=data[0]<<6;
+  69              		.loc 1 16 5 is_stmt 1 view .LVU12
+  70              		.loc 1 16 17 is_stmt 0 view .LVU13
+  71 002e 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+  72              		.loc 1 16 20 view .LVU14
+  73 0032 8001     		lsls	r0, r0, #6
+  74              	.LVL3:
+  17:Core/Src/ci.c ****     angle_l = data[1];
+  75              		.loc 1 17 5 is_stmt 1 view .LVU15
+  18:Core/Src/ci.c ****     angle = angle_h + angle_l;
+  76              		.loc 1 18 5 view .LVU16
+  77              		.loc 1 18 11 is_stmt 0 view .LVU17
+  78 0034 C018     		adds	r0, r0, r3
+  79              	.LVL4:
+  80              		.loc 1 18 11 view .LVU18
+  81 0036 2CBF     		ite	cs
+  82 0038 0121     		movcs	r1, #1
+  83 003a 0021     		movcc	r1, #0
+  84              	.LVL5:
+  19:Core/Src/ci.c ****     res = angle / 16384.f * 360.f;
+  85              		.loc 1 19 5 is_stmt 1 view .LVU19
+  86              		.loc 1 19 17 is_stmt 0 view .LVU20
+  87 003c FFF7FEFF 		bl	__aeabi_ul2f
+  88              	.LVL6:
+  89              		.loc 1 19 17 view .LVU21
+  90 0040 4FF06251 		mov	r1, #947912704
+  91 0044 FFF7FEFF 		bl	__aeabi_fmul
+  92              	.LVL7:
+  93              		.loc 1 19 9 view .LVU22
+  94 0048 0249     		ldr	r1, .L3
+  95 004a FFF7FEFF 		bl	__aeabi_fmul
+  96              	.LVL8:
+ARM GAS  D:\software\msy64\tmp\ccYIqGri.s 			page 3
+
+
+  20:Core/Src/ci.c ****     return res;
+  97              		.loc 1 20 5 is_stmt 1 view .LVU23
+  21:Core/Src/ci.c **** }...
+  98              		.loc 1 21 1 is_stmt 0 view .LVU24
+  99 004e 03B0     		add	sp, sp, #12
+ 100              	.LCFI2:
+ 101              		.cfi_def_cfa_offset 4
+ 102              		@ sp needed
+ 103 0050 5DF804FB 		ldr	pc, [sp], #4
+ 104              	.L4:
+ 105              		.align	2
+ 106              	.L3:
+ 107 0054 0000B443 		.word	1135869952
+ 108              		.cfi_endproc
+ 109              	.LFE65:
+ 111              		.text
+ 112              	.Letext0:
+ 113              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 114              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 115              		.file 4 "Core/Inc/myiic.h"
+ARM GAS  D:\software\msy64\tmp\ccYIqGri.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ci.c
+D:\software\msy64\tmp\ccYIqGri.s:21     .text.Get_Angle:00000000 $t
+D:\software\msy64\tmp\ccYIqGri.s:27     .text.Get_Angle:00000000 Get_Angle
+D:\software\msy64\tmp\ccYIqGri.s:107    .text.Get_Angle:00000054 $d
+
+UNDEFINED SYMBOLS
+__aeabi_ul2f
+__aeabi_fmul
+IIC_Read

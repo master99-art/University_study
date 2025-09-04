@@ -1,4 +1,4 @@
-ARM GAS  D:\software\msy64\tmp\cc59Rcqh.s 			page 1
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -18,41 +18,314 @@ ARM GAS  D:\software\msy64\tmp\cc59Rcqh.s 			page 1
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
   17              		.file 1 "Core/Src/temperature.c"
-  18              		.section	.text.Temperture_Init,"ax",%progbits
-  19              		.align	1
-  20              		.global	Temperture_Init
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	Temperture_Init:
-  26              	.LFB65:
+  18              		.global	__aeabi_ui2f
+  19              		.global	__aeabi_fdiv
+  20              		.global	__aeabi_fmul
+  21              		.global	__aeabi_fadd
+  22              		.section	.text.TempertureReadLocal,"ax",%progbits
+  23              		.align	1
+  24              		.global	TempertureReadLocal
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  29              	TempertureReadLocal:
+  30              	.LFB65:
    1:Core/Src/temperature.c **** #include "main.h"
    2:Core/Src/temperature.c **** #include "temperature.h"
    3:Core/Src/temperature.c **** #include "iic_reg.h"
    4:Core/Src/temperature.c **** #include "myiic.h"
    5:Core/Src/temperature.c **** 
-   6:Core/Src/temperature.c **** 
-   7:Core/Src/temperature.c **** void Temperture_Init(void)
-   8:Core/Src/temperature.c **** {
-  27              		.loc 1 8 1 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-   9:Core/Src/temperature.c **** 
-  10:Core/Src/temperature.c **** }
-  32              		.loc 1 10 1 view .LVU1
-  33 0000 7047     		bx	lr
-  34              		.cfi_endproc
-  35              	.LFE65:
-  37              		.text
-  38              	.Letext0:
-ARM GAS  D:\software\msy64\tmp\cc59Rcqh.s 			page 2
+   6:Core/Src/temperature.c **** float TempertureReadLocal(void)
+   7:Core/Src/temperature.c **** {
+  31              		.loc 1 7 1 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 8
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35 0000 10B5     		push	{r4, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 4, -8
+  39              		.cfi_offset 14, -4
+  40 0002 82B0     		sub	sp, sp, #8
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 16
+   8:Core/Src/temperature.c ****     float temp = 0;
+  43              		.loc 1 8 5 view .LVU1
+  44              	.LVL0:
+   9:Core/Src/temperature.c ****     uint8_t data[2] = {0};
+  45              		.loc 1 9 5 view .LVU2
+  46              		.loc 1 9 13 is_stmt 0 view .LVU3
+  47 0004 0021     		movs	r1, #0
+  48 0006 ADF80410 		strh	r1, [sp, #4]	@ movhi
+  10:Core/Src/temperature.c ****     uint8_t reg[2] = {TEMPER_Local_H, TEMPER_Local_L};
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 2
+
+
+  49              		.loc 1 10 5 is_stmt 1 view .LVU4
+  50              		.loc 1 10 13 is_stmt 0 view .LVU5
+  51 000a 4FF4A853 		mov	r3, #5376
+  52 000e ADF80030 		strh	r3, [sp]	@ movhi
+  11:Core/Src/temperature.c ****     float point = 0;
+  53              		.loc 1 11 5 is_stmt 1 view .LVU6
+  54              	.LVL1:
+  12:Core/Src/temperature.c ****     // 读取高位
+  13:Core/Src/temperature.c ****     IIC_Read(TEMPER_Dev, reg[0], &data[0], 1);
+  55              		.loc 1 13 5 view .LVU7
+  56 0012 0123     		movs	r3, #1
+  57 0014 01AA     		add	r2, sp, #4
+  58 0016 4C20     		movs	r0, #76
+  59 0018 FFF7FEFF 		bl	IIC_Read
+  60              	.LVL2:
+  14:Core/Src/temperature.c ****     // 读取低位
+  15:Core/Src/temperature.c ****     IIC_Read(TEMPER_Dev, reg[1], &data[1], 1);
+  61              		.loc 1 15 5 view .LVU8
+  62 001c 0123     		movs	r3, #1
+  63 001e 0DF10502 		add	r2, sp, #5
+  64 0022 1521     		movs	r1, #21
+  65 0024 4C20     		movs	r0, #76
+  66 0026 FFF7FEFF 		bl	IIC_Read
+  67              	.LVL3:
+  16:Core/Src/temperature.c ****     temp = (float)data[0];
+  68              		.loc 1 16 5 view .LVU9
+  69              		.loc 1 16 10 is_stmt 0 view .LVU10
+  70 002a 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+  71 002e FFF7FEFF 		bl	__aeabi_ui2f
+  72              	.LVL4:
+  73 0032 0446     		mov	r4, r0
+  74              	.LVL5:
+  17:Core/Src/temperature.c ****     point = (float)data[1] / 360.f * 0.9375;
+  75              		.loc 1 17 5 is_stmt 1 view .LVU11
+  76              		.loc 1 17 13 is_stmt 0 view .LVU12
+  77 0034 9DF80500 		ldrb	r0, [sp, #5]	@ zero_extendqisi2
+  78              	.LVL6:
+  79              		.loc 1 17 13 view .LVU13
+  80 0038 FFF7FEFF 		bl	__aeabi_ui2f
+  81              	.LVL7:
+  82              		.loc 1 17 28 view .LVU14
+  83 003c 0549     		ldr	r1, .L3
+  84 003e FFF7FEFF 		bl	__aeabi_fdiv
+  85              	.LVL8:
+  86              		.loc 1 17 11 view .LVU15
+  87 0042 0549     		ldr	r1, .L3+4
+  88 0044 FFF7FEFF 		bl	__aeabi_fmul
+  89              	.LVL9:
+  90 0048 0146     		mov	r1, r0
+  91              	.LVL10:
+  18:Core/Src/temperature.c ****     temp = temp + point;
+  92              		.loc 1 18 5 is_stmt 1 view .LVU16
+  93              		.loc 1 18 10 is_stmt 0 view .LVU17
+  94 004a 2046     		mov	r0, r4
+  95              	.LVL11:
+  96              		.loc 1 18 10 view .LVU18
+  97 004c FFF7FEFF 		bl	__aeabi_fadd
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 3
+
+
+  98              	.LVL12:
+  19:Core/Src/temperature.c ****     return temp;
+  99              		.loc 1 19 5 is_stmt 1 view .LVU19
+  20:Core/Src/temperature.c **** }
+ 100              		.loc 1 20 1 is_stmt 0 view .LVU20
+ 101 0050 02B0     		add	sp, sp, #8
+ 102              	.LCFI2:
+ 103              		.cfi_def_cfa_offset 8
+ 104              		@ sp needed
+ 105 0052 10BD     		pop	{r4, pc}
+ 106              	.L4:
+ 107              		.align	2
+ 108              	.L3:
+ 109 0054 0000B443 		.word	1135869952
+ 110 0058 0000703F 		.word	1064304640
+ 111              		.cfi_endproc
+ 112              	.LFE65:
+ 114              		.section	.text.TempertureReadRemote,"ax",%progbits
+ 115              		.align	1
+ 116              		.global	TempertureReadRemote
+ 117              		.syntax unified
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	TempertureReadRemote:
+ 122              	.LFB66:
+  21:Core/Src/temperature.c **** 
+  22:Core/Src/temperature.c **** float  TempertureReadRemote(void)
+  23:Core/Src/temperature.c **** {
+ 123              		.loc 1 23 1 is_stmt 1 view -0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 8
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 0000 10B5     		push	{r4, lr}
+ 128              	.LCFI3:
+ 129              		.cfi_def_cfa_offset 8
+ 130              		.cfi_offset 4, -8
+ 131              		.cfi_offset 14, -4
+ 132 0002 82B0     		sub	sp, sp, #8
+ 133              	.LCFI4:
+ 134              		.cfi_def_cfa_offset 16
+  24:Core/Src/temperature.c ****     float temp = 0;
+ 135              		.loc 1 24 5 view .LVU22
+ 136              	.LVL13:
+  25:Core/Src/temperature.c ****     uint8_t data[2] = {0};
+ 137              		.loc 1 25 5 view .LVU23
+ 138              		.loc 1 25 13 is_stmt 0 view .LVU24
+ 139 0004 0023     		movs	r3, #0
+ 140 0006 ADF80430 		strh	r3, [sp, #4]	@ movhi
+  26:Core/Src/temperature.c ****     uint8_t reg[2] = {TEMPER_Remote_H, TEMPER_Remote_L};
+ 141              		.loc 1 26 5 is_stmt 1 view .LVU25
+ 142              		.loc 1 26 13 is_stmt 0 view .LVU26
+ 143 000a 41F20103 		movw	r3, #4097
+ 144 000e ADF80030 		strh	r3, [sp]	@ movhi
+  27:Core/Src/temperature.c ****     float point = 0;
+ 145              		.loc 1 27 5 is_stmt 1 view .LVU27
+ 146              	.LVL14:
+  28:Core/Src/temperature.c ****     // 读取高位
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 4
+
+
+  29:Core/Src/temperature.c ****     IIC_Read(TEMPER_Dev, reg[0], &data[0], 1);
+ 147              		.loc 1 29 5 view .LVU28
+ 148 0012 0123     		movs	r3, #1
+ 149 0014 01AA     		add	r2, sp, #4
+ 150 0016 1946     		mov	r1, r3
+ 151 0018 4C20     		movs	r0, #76
+ 152 001a FFF7FEFF 		bl	IIC_Read
+ 153              	.LVL15:
+  30:Core/Src/temperature.c ****     // 读取低位
+  31:Core/Src/temperature.c ****     IIC_Read(TEMPER_Dev, reg[1], &data[1], 1);
+ 154              		.loc 1 31 5 view .LVU29
+ 155 001e 0123     		movs	r3, #1
+ 156 0020 0DF10502 		add	r2, sp, #5
+ 157 0024 1021     		movs	r1, #16
+ 158 0026 4C20     		movs	r0, #76
+ 159 0028 FFF7FEFF 		bl	IIC_Read
+ 160              	.LVL16:
+  32:Core/Src/temperature.c ****     temp = (float)data[0];
+ 161              		.loc 1 32 5 view .LVU30
+ 162              		.loc 1 32 10 is_stmt 0 view .LVU31
+ 163 002c 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+ 164 0030 FFF7FEFF 		bl	__aeabi_ui2f
+ 165              	.LVL17:
+ 166 0034 0446     		mov	r4, r0
+ 167              	.LVL18:
+  33:Core/Src/temperature.c ****     point = (float)data[1] / 360.f * 0.9375;
+ 168              		.loc 1 33 5 is_stmt 1 view .LVU32
+ 169              		.loc 1 33 13 is_stmt 0 view .LVU33
+ 170 0036 9DF80500 		ldrb	r0, [sp, #5]	@ zero_extendqisi2
+ 171              	.LVL19:
+ 172              		.loc 1 33 13 view .LVU34
+ 173 003a FFF7FEFF 		bl	__aeabi_ui2f
+ 174              	.LVL20:
+ 175              		.loc 1 33 28 view .LVU35
+ 176 003e 0649     		ldr	r1, .L7
+ 177 0040 FFF7FEFF 		bl	__aeabi_fdiv
+ 178              	.LVL21:
+ 179              		.loc 1 33 11 view .LVU36
+ 180 0044 0549     		ldr	r1, .L7+4
+ 181 0046 FFF7FEFF 		bl	__aeabi_fmul
+ 182              	.LVL22:
+ 183 004a 0146     		mov	r1, r0
+ 184              	.LVL23:
+  34:Core/Src/temperature.c ****     temp = temp + point;
+ 185              		.loc 1 34 5 is_stmt 1 view .LVU37
+ 186              		.loc 1 34 10 is_stmt 0 view .LVU38
+ 187 004c 2046     		mov	r0, r4
+ 188              	.LVL24:
+ 189              		.loc 1 34 10 view .LVU39
+ 190 004e FFF7FEFF 		bl	__aeabi_fadd
+ 191              	.LVL25:
+  35:Core/Src/temperature.c ****     return temp;
+ 192              		.loc 1 35 5 is_stmt 1 view .LVU40
+  36:Core/Src/temperature.c **** }
+ 193              		.loc 1 36 1 is_stmt 0 view .LVU41
+ 194 0052 02B0     		add	sp, sp, #8
+ 195              	.LCFI5:
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 5
+
+
+ 196              		.cfi_def_cfa_offset 8
+ 197              		@ sp needed
+ 198 0054 10BD     		pop	{r4, pc}
+ 199              	.L8:
+ 200 0056 00BF     		.align	2
+ 201              	.L7:
+ 202 0058 0000B443 		.word	1135869952
+ 203 005c 0000703F 		.word	1064304640
+ 204              		.cfi_endproc
+ 205              	.LFE66:
+ 207              		.section	.text.TempertureInit,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	TempertureInit
+ 210              		.syntax unified
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	TempertureInit:
+ 215              	.LFB67:
+  37:Core/Src/temperature.c **** void TempertureInit(void)
+  38:Core/Src/temperature.c **** {
+ 216              		.loc 1 38 1 is_stmt 1 view -0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 8
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220 0000 00B5     		push	{lr}
+ 221              	.LCFI6:
+ 222              		.cfi_def_cfa_offset 4
+ 223              		.cfi_offset 14, -4
+ 224 0002 83B0     		sub	sp, sp, #12
+ 225              	.LCFI7:
+ 226              		.cfi_def_cfa_offset 16
+  39:Core/Src/temperature.c ****     uint8_t data[2];
+ 227              		.loc 1 39 5 view .LVU43
+  40:Core/Src/temperature.c ****     data[0] = TEMPER_PixAddress_WR;
+ 228              		.loc 1 40 5 view .LVU44
+ 229              		.loc 1 40 13 is_stmt 0 view .LVU45
+ 230 0004 1A23     		movs	r3, #26
+ 231 0006 8DF80430 		strb	r3, [sp, #4]
+  41:Core/Src/temperature.c ****     data[1] = TEMPER_Pix_00625;
+ 232              		.loc 1 41 5 is_stmt 1 view .LVU46
+ 233              		.loc 1 41 13 is_stmt 0 view .LVU47
+ 234 000a 1F23     		movs	r3, #31
+ 235 000c 8DF80530 		strb	r3, [sp, #5]
+  42:Core/Src/temperature.c ****     IIC_Send(TEMPER_Dev, data, 2);
+ 236              		.loc 1 42 5 is_stmt 1 view .LVU48
+ 237 0010 0222     		movs	r2, #2
+ 238 0012 01A9     		add	r1, sp, #4
+ 239 0014 4C20     		movs	r0, #76
+ 240 0016 FFF7FEFF 		bl	IIC_Send
+ 241              	.LVL26:
+  43:Core/Src/temperature.c **** }...
+ 242              		.loc 1 43 1 is_stmt 0 view .LVU49
+ 243 001a 03B0     		add	sp, sp, #12
+ 244              	.LCFI8:
+ 245              		.cfi_def_cfa_offset 4
+ 246              		@ sp needed
+ 247 001c 5DF804FB 		ldr	pc, [sp], #4
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 6
+
+
+ 248              		.cfi_endproc
+ 249              	.LFE67:
+ 251              		.text
+ 252              	.Letext0:
+ 253              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 254              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 255              		.file 4 "Core/Inc/myiic.h"
+ARM GAS  D:\software\msy64\tmp\ccU4nb1g.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 temperature.c
-D:\software\msy64\tmp\cc59Rcqh.s:19     .text.Temperture_Init:00000000 $t
-D:\software\msy64\tmp\cc59Rcqh.s:25     .text.Temperture_Init:00000000 Temperture_Init
+D:\software\msy64\tmp\ccU4nb1g.s:23     .text.TempertureReadLocal:00000000 $t
+D:\software\msy64\tmp\ccU4nb1g.s:29     .text.TempertureReadLocal:00000000 TempertureReadLocal
+D:\software\msy64\tmp\ccU4nb1g.s:109    .text.TempertureReadLocal:00000054 $d
+D:\software\msy64\tmp\ccU4nb1g.s:115    .text.TempertureReadRemote:00000000 $t
+D:\software\msy64\tmp\ccU4nb1g.s:121    .text.TempertureReadRemote:00000000 TempertureReadRemote
+D:\software\msy64\tmp\ccU4nb1g.s:202    .text.TempertureReadRemote:00000058 $d
+D:\software\msy64\tmp\ccU4nb1g.s:208    .text.TempertureInit:00000000 $t
+D:\software\msy64\tmp\ccU4nb1g.s:214    .text.TempertureInit:00000000 TempertureInit
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+__aeabi_ui2f
+__aeabi_fdiv
+__aeabi_fmul
+__aeabi_fadd
+IIC_Read
+IIC_Send

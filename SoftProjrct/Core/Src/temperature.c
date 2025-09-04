@@ -10,9 +10,9 @@ float TempertureReadLocal(void)
     uint8_t reg[2] = {TEMPER_Local_H, TEMPER_Local_L};
     float point = 0;
     // 读取高位
-    IIC_Read(TEMPER_Devdata, reg[0], &data[0], 1);
+    IIC_Read(TEMPER_Dev, reg[0], &data[0], 1);
     // 读取低位
-    IIC_Read(TEMPER_Devdata, reg[1], &data[1], 1);
+    IIC_Read(TEMPER_Dev, reg[1], &data[1], 1);
     temp = (float)data[0];
     point = (float)data[1] / 360.f * 0.9375;
     temp = temp + point;
@@ -26,9 +26,9 @@ float  TempertureReadRemote(void)
     uint8_t reg[2] = {TEMPER_Remote_H, TEMPER_Remote_L};
     float point = 0;
     // 读取高位
-    IIC_Read(TEMPER_Devdata, reg[0], &data[0], 1);
+    IIC_Read(TEMPER_Dev, reg[0], &data[0], 1);
     // 读取低位
-    IIC_Read(TEMPER_Devdata, reg[1], &data[1], 1);
+    IIC_Read(TEMPER_Dev, reg[1], &data[1], 1);
     temp = (float)data[0];
     point = (float)data[1] / 360.f * 0.9375;
     temp = temp + point;

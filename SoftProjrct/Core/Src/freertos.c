@@ -47,14 +47,16 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-osThreadId defaultTaskHandle;
+osThreadId LEDTaskHandle;
+osThreadId SPEEDCALTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void const * argument);
+void LedTask(void const * argument);
+void SpeedCalTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -101,9 +103,13 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  /* definition and creation of LEDTask */
+  osThreadDef(LEDTask, LedTask, osPriorityNormal, 0, 128);
+  LEDTaskHandle = osThreadCreate(osThread(LEDTask), NULL);
+
+  /* definition and creation of SPEEDCALTask */
+  osThreadDef(SPEEDCALTask, SpeedCalTask, osPriorityHigh, 0, 128);
+  SPEEDCALTaskHandle = osThreadCreate(osThread(SPEEDCALTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -111,22 +117,41 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_LedTask */
 /**
-  * @brief  Function implementing the defaultTask thread.
+  * @brief  Function implementing the LEDTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+/* USER CODE END Header_LedTask */
+void LedTask(void const * argument)
 {
-  /* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN LedTask */
+  /* Infinite loop */
+  for(;;)
+  {
+    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    osDelay(500);
+  }
+  /* USER CODE END LedTask */
+}
+
+/* USER CODE BEGIN Header_SpeedCalTask */
+/**
+* @brief Function implementing the SPEEDCALTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_SpeedCalTask */
+void SpeedCalTask(void const * argument)
+{
+  /* USER CODE BEGIN SpeedCalTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartDefaultTask */
+  /* USER CODE END SpeedCalTask */
 }
 
 /* Private application code --------------------------------------------------*/
