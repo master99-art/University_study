@@ -25,6 +25,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "calculate.h"
+#include "oled.h"
+#include "myiic.h"
+#include "ci.h"
+#include "temperature.h"
 
 /* USER CODE END Includes */
 
@@ -45,7 +50,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+float AngleSpeed=0;
+float Angle=0;
+float LastAngle=0;
 /* USER CODE END Variables */
 osThreadId LEDTaskHandle;
 osThreadId SPEEDCALTaskHandle;
@@ -149,7 +156,8 @@ void SpeedCalTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    AngleDataUpdate(&AngleData);
+    osDelay(10);
   }
   /* USER CODE END SpeedCalTask */
 }

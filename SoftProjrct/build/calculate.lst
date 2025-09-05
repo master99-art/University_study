@@ -1,0 +1,426 @@
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"calculate.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/calculate.c"
+  18              		.section	.text.AngleDataInit,"ax",%progbits
+  19              		.align	1
+  20              		.global	AngleDataInit
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	AngleDataInit:
+  26              	.LFB70:
+   1:Core/Src/calculate.c **** #include "calculate.h"
+   2:Core/Src/calculate.c **** #include "freertos.h"
+   3:Core/Src/calculate.c **** #include "ci.h"
+   4:Core/Src/calculate.c **** #include "main.h"
+   5:Core/Src/calculate.c **** 
+   6:Core/Src/calculate.c **** ANGLEDATA AngleData;
+   7:Core/Src/calculate.c **** 
+   8:Core/Src/calculate.c **** void AngleDataInit(void)
+   9:Core/Src/calculate.c **** {
+  27              		.loc 1 9 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  10:Core/Src/calculate.c ****     AngleData.speed = 0;
+  32              		.loc 1 10 5 view .LVU1
+  33              		.loc 1 10 21 is_stmt 0 view .LVU2
+  34 0000 054B     		ldr	r3, .L2
+  35 0002 0022     		movs	r2, #0
+  36 0004 1A60     		str	r2, [r3]	@ float
+  11:Core/Src/calculate.c ****     AngleData.angle = 0;
+  37              		.loc 1 11 5 is_stmt 1 view .LVU3
+  38              		.loc 1 11 21 is_stmt 0 view .LVU4
+  39 0006 5A60     		str	r2, [r3, #4]	@ float
+  12:Core/Src/calculate.c ****     AngleData.last_angle = 0;
+  40              		.loc 1 12 5 is_stmt 1 view .LVU5
+  41              		.loc 1 12 26 is_stmt 0 view .LVU6
+  42 0008 9A60     		str	r2, [r3, #8]	@ float
+  13:Core/Src/calculate.c ****     AngleData.error_angle = 0;
+  43              		.loc 1 13 5 is_stmt 1 view .LVU7
+  44              		.loc 1 13 27 is_stmt 0 view .LVU8
+  45 000a DA60     		str	r2, [r3, #12]	@ float
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 2
+
+
+  14:Core/Src/calculate.c ****     AngleData.all_angle = 0;
+  46              		.loc 1 14 5 is_stmt 1 view .LVU9
+  47              		.loc 1 14 25 is_stmt 0 view .LVU10
+  48 000c 1A61     		str	r2, [r3, #16]	@ float
+  15:Core/Src/calculate.c ****     AngleData.circle = 0;
+  49              		.loc 1 15 5 is_stmt 1 view .LVU11
+  50              		.loc 1 15 22 is_stmt 0 view .LVU12
+  51 000e 0022     		movs	r2, #0
+  52 0010 5A61     		str	r2, [r3, #20]
+  16:Core/Src/calculate.c ****     AngleData.temp_circle = 0;
+  53              		.loc 1 16 5 is_stmt 1 view .LVU13
+  54              		.loc 1 16 27 is_stmt 0 view .LVU14
+  55 0012 9A61     		str	r2, [r3, #24]
+  17:Core/Src/calculate.c ****     AngleData.circle_flag = 0;
+  56              		.loc 1 17 5 is_stmt 1 view .LVU15
+  57              		.loc 1 17 27 is_stmt 0 view .LVU16
+  58 0014 1A77     		strb	r2, [r3, #28]
+  18:Core/Src/calculate.c **** }
+  59              		.loc 1 18 1 view .LVU17
+  60 0016 7047     		bx	lr
+  61              	.L3:
+  62              		.align	2
+  63              	.L2:
+  64 0018 00000000 		.word	AngleData
+  65              		.cfi_endproc
+  66              	.LFE70:
+  68              		.global	__aeabi_fsub
+  69              		.global	__aeabi_fcmpge
+  70              		.global	__aeabi_fcmple
+  71              		.global	__aeabi_fadd
+  72              		.global	__aeabi_fcmplt
+  73              		.global	__aeabi_fdiv
+  74              		.section	.text.AngleDataUpdate,"ax",%progbits
+  75              		.align	1
+  76              		.global	AngleDataUpdate
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  81              	AngleDataUpdate:
+  82              	.LVL0:
+  83              	.LFB71:
+  19:Core/Src/calculate.c **** 
+  20:Core/Src/calculate.c **** void AngleDataUpdate(ANGLEDATA *AngleData)
+  21:Core/Src/calculate.c **** {
+  84              		.loc 1 21 1 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		.loc 1 21 1 is_stmt 0 view .LVU19
+  89 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  90              	.LCFI0:
+  91              		.cfi_def_cfa_offset 24
+  92              		.cfi_offset 3, -24
+  93              		.cfi_offset 4, -20
+  94              		.cfi_offset 5, -16
+  95              		.cfi_offset 6, -12
+  96              		.cfi_offset 7, -8
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 3
+
+
+  97              		.cfi_offset 14, -4
+  98 0002 0446     		mov	r4, r0
+  22:Core/Src/calculate.c ****     float last_all_angle = 0;
+  99              		.loc 1 22 5 is_stmt 1 view .LVU20
+ 100              	.LVL1:
+  23:Core/Src/calculate.c ****     AngleData->angle = Get_Angle();
+ 101              		.loc 1 23 5 view .LVU21
+ 102              		.loc 1 23 24 is_stmt 0 view .LVU22
+ 103 0004 FFF7FEFF 		bl	Get_Angle
+ 104              	.LVL2:
+ 105              		.loc 1 23 24 view .LVU23
+ 106 0008 0646     		mov	r6, r0
+ 107              		.loc 1 23 22 discriminator 1 view .LVU24
+ 108 000a 6060     		str	r0, [r4, #4]	@ float
+  24:Core/Src/calculate.c ****     last_all_angle = AngleData->all_angle;
+ 109              		.loc 1 24 5 is_stmt 1 view .LVU25
+ 110              		.loc 1 24 20 is_stmt 0 view .LVU26
+ 111 000c 2769     		ldr	r7, [r4, #16]	@ float
+ 112              	.LVL3:
+  25:Core/Src/calculate.c ****     AngleData->error_angle = AngleData->angle - AngleData->last_angle;
+ 113              		.loc 1 25 5 is_stmt 1 view .LVU27
+ 114              		.loc 1 25 47 is_stmt 0 view .LVU28
+ 115 000e A168     		ldr	r1, [r4, #8]	@ float
+ 116 0010 FFF7FEFF 		bl	__aeabi_fsub
+ 117              	.LVL4:
+ 118 0014 0546     		mov	r5, r0
+ 119              		.loc 1 25 28 view .LVU29
+ 120 0016 E060     		str	r0, [r4, #12]	@ float
+  26:Core/Src/calculate.c **** 
+  27:Core/Src/calculate.c ****     if (AngleData->error_angle >= 300)
+ 121              		.loc 1 27 5 is_stmt 1 view .LVU30
+ 122              		.loc 1 27 8 is_stmt 0 view .LVU31
+ 123 0018 2949     		ldr	r1, .L25
+ 124 001a FFF7FEFF 		bl	__aeabi_fcmpge
+ 125              	.LVL5:
+ 126 001e D8B1     		cbz	r0, .L21
+  28:Core/Src/calculate.c ****     {
+  29:Core/Src/calculate.c ****         // 这种就是向反方向刷新圈数
+  30:Core/Src/calculate.c ****         AngleData->circle_flag = 1;
+ 127              		.loc 1 30 9 is_stmt 1 view .LVU32
+ 128              		.loc 1 30 32 is_stmt 0 view .LVU33
+ 129 0020 0123     		movs	r3, #1
+ 130 0022 2377     		strb	r3, [r4, #28]
+  31:Core/Src/calculate.c ****         AngleData->temp_circle -= 1;
+ 131              		.loc 1 31 9 is_stmt 1 view .LVU34
+ 132              		.loc 1 31 18 is_stmt 0 view .LVU35
+ 133 0024 A369     		ldr	r3, [r4, #24]
+ 134              		.loc 1 31 32 view .LVU36
+ 135 0026 013B     		subs	r3, r3, #1
+ 136 0028 A361     		str	r3, [r4, #24]
+ 137              	.L7:
+  32:Core/Src/calculate.c ****     }
+  33:Core/Src/calculate.c ****     else if (AngleData->error_angle <= -300)
+  34:Core/Src/calculate.c ****     {
+  35:Core/Src/calculate.c ****         // 这种就是向正方向刷新圈数
+  36:Core/Src/calculate.c ****         AngleData->circle_flag = 1;
+  37:Core/Src/calculate.c ****         AngleData->temp_circle += 1;
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 4
+
+
+  38:Core/Src/calculate.c ****     }
+  39:Core/Src/calculate.c **** 
+  40:Core/Src/calculate.c ****     if (AngleData->temp_circle < 0)
+ 138              		.loc 1 40 5 is_stmt 1 view .LVU37
+ 139              		.loc 1 40 18 is_stmt 0 view .LVU38
+ 140 002a A369     		ldr	r3, [r4, #24]
+ 141              		.loc 1 40 8 view .LVU39
+ 142 002c 002B     		cmp	r3, #0
+ 143 002e 1FDB     		blt	.L24
+  41:Core/Src/calculate.c ****         AngleData->circle = AngleData->temp_circle + 1;
+  42:Core/Src/calculate.c ****     else if (AngleData->temp_circle >= 0)
+ 144              		.loc 1 42 10 is_stmt 1 view .LVU40
+  43:Core/Src/calculate.c ****         AngleData->circle = AngleData->temp_circle;
+ 145              		.loc 1 43 9 view .LVU41
+ 146              		.loc 1 43 27 is_stmt 0 view .LVU42
+ 147 0030 6361     		str	r3, [r4, #20]
+ 148              	.L10:
+  44:Core/Src/calculate.c **** 
+  45:Core/Src/calculate.c ****     if (AngleData->circle_flag == 0)
+ 149              		.loc 1 45 5 is_stmt 1 view .LVU43
+ 150              		.loc 1 45 18 is_stmt 0 view .LVU44
+ 151 0032 237F     		ldrb	r3, [r4, #28]	@ zero_extendqisi2
+ 152              		.loc 1 45 8 view .LVU45
+ 153 0034 FBB9     		cbnz	r3, .L11
+  46:Core/Src/calculate.c ****     {
+  47:Core/Src/calculate.c ****         AngleData->all_angle += AngleData->error_angle;
+ 154              		.loc 1 47 9 is_stmt 1 view .LVU46
+ 155              		.loc 1 47 30 is_stmt 0 view .LVU47
+ 156 0036 3946     		mov	r1, r7
+ 157 0038 2846     		mov	r0, r5
+ 158 003a FFF7FEFF 		bl	__aeabi_fadd
+ 159              	.LVL6:
+ 160 003e 2061     		str	r0, [r4, #16]	@ float
+  48:Core/Src/calculate.c ****         AngleData->circle_flag = 0;
+ 161              		.loc 1 48 9 is_stmt 1 view .LVU48
+ 162              		.loc 1 48 32 is_stmt 0 view .LVU49
+ 163 0040 0023     		movs	r3, #0
+ 164 0042 2377     		strb	r3, [r4, #28]
+ 165              	.L12:
+  49:Core/Src/calculate.c ****     }
+  50:Core/Src/calculate.c ****     else if (AngleData->circle_flag == 1)
+  51:Core/Src/calculate.c ****     {
+  52:Core/Src/calculate.c ****         // 反方向
+  53:Core/Src/calculate.c ****         if (AngleData->error_angle >= 0)
+  54:Core/Src/calculate.c ****         {
+  55:Core/Src/calculate.c ****             AngleData->error_angle = 360 - AngleData->error_angle;
+  56:Core/Src/calculate.c ****             AngleData->all_angle -= AngleData->error_angle;
+  57:Core/Src/calculate.c ****         }
+  58:Core/Src/calculate.c ****         else if (AngleData->error_angle < 0)
+  59:Core/Src/calculate.c ****         {
+  60:Core/Src/calculate.c ****             AngleData->error_angle = 360 + AngleData->error_angle;
+  61:Core/Src/calculate.c ****             AngleData->all_angle += AngleData->error_angle;
+  62:Core/Src/calculate.c ****         }
+  63:Core/Src/calculate.c ****         AngleData->circle_flag = 0;
+  64:Core/Src/calculate.c ****     }
+  65:Core/Src/calculate.c ****     AngleData->last_angle = AngleData->angle;
+ 166              		.loc 1 65 5 is_stmt 1 view .LVU50
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 5
+
+
+ 167              		.loc 1 65 27 is_stmt 0 view .LVU51
+ 168 0044 A660     		str	r6, [r4, #8]	@ float
+  66:Core/Src/calculate.c ****     AngleData->speed = (AngleData->all_angle - last_all_angle) / 0.01f; // 10ms采样一次
+ 169              		.loc 1 66 5 is_stmt 1 view .LVU52
+ 170              		.loc 1 66 46 is_stmt 0 view .LVU53
+ 171 0046 3946     		mov	r1, r7
+ 172 0048 2069     		ldr	r0, [r4, #16]	@ float
+ 173 004a FFF7FEFF 		bl	__aeabi_fsub
+ 174              	.LVL7:
+ 175              		.loc 1 66 64 view .LVU54
+ 176 004e 1D49     		ldr	r1, .L25+4
+ 177 0050 FFF7FEFF 		bl	__aeabi_fdiv
+ 178              	.LVL8:
+ 179              		.loc 1 66 22 view .LVU55
+ 180 0054 2060     		str	r0, [r4]	@ float
+  67:Core/Src/calculate.c **** }...
+ 181              		.loc 1 67 1 view .LVU56
+ 182 0056 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 183              	.LVL9:
+ 184              	.L21:
+  33:Core/Src/calculate.c ****     else if (AngleData->error_angle <= -300)
+ 185              		.loc 1 33 10 is_stmt 1 view .LVU57
+  33:Core/Src/calculate.c ****     else if (AngleData->error_angle <= -300)
+ 186              		.loc 1 33 13 is_stmt 0 view .LVU58
+ 187 0058 1B49     		ldr	r1, .L25+8
+ 188 005a 2846     		mov	r0, r5
+ 189 005c FFF7FEFF 		bl	__aeabi_fcmple
+ 190              	.LVL10:
+ 191 0060 0028     		cmp	r0, #0
+ 192 0062 E2D0     		beq	.L7
+  36:Core/Src/calculate.c ****         AngleData->circle_flag = 1;
+ 193              		.loc 1 36 9 is_stmt 1 view .LVU59
+  36:Core/Src/calculate.c ****         AngleData->circle_flag = 1;
+ 194              		.loc 1 36 32 is_stmt 0 view .LVU60
+ 195 0064 0123     		movs	r3, #1
+ 196 0066 2377     		strb	r3, [r4, #28]
+  37:Core/Src/calculate.c ****         AngleData->temp_circle += 1;
+ 197              		.loc 1 37 9 is_stmt 1 view .LVU61
+  37:Core/Src/calculate.c ****         AngleData->temp_circle += 1;
+ 198              		.loc 1 37 18 is_stmt 0 view .LVU62
+ 199 0068 A369     		ldr	r3, [r4, #24]
+  37:Core/Src/calculate.c ****         AngleData->temp_circle += 1;
+ 200              		.loc 1 37 32 view .LVU63
+ 201 006a 0133     		adds	r3, r3, #1
+ 202 006c A361     		str	r3, [r4, #24]
+ 203 006e DCE7     		b	.L7
+ 204              	.L24:
+  41:Core/Src/calculate.c ****         AngleData->circle = AngleData->temp_circle + 1;
+ 205              		.loc 1 41 9 is_stmt 1 view .LVU64
+  41:Core/Src/calculate.c ****         AngleData->circle = AngleData->temp_circle + 1;
+ 206              		.loc 1 41 52 is_stmt 0 view .LVU65
+ 207 0070 0133     		adds	r3, r3, #1
+  41:Core/Src/calculate.c ****         AngleData->circle = AngleData->temp_circle + 1;
+ 208              		.loc 1 41 27 view .LVU66
+ 209 0072 6361     		str	r3, [r4, #20]
+ 210 0074 DDE7     		b	.L10
+ 211              	.L11:
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 6
+
+
+  50:Core/Src/calculate.c ****     else if (AngleData->circle_flag == 1)
+ 212              		.loc 1 50 10 is_stmt 1 view .LVU67
+  50:Core/Src/calculate.c ****     else if (AngleData->circle_flag == 1)
+ 213              		.loc 1 50 13 is_stmt 0 view .LVU68
+ 214 0076 012B     		cmp	r3, #1
+ 215 0078 E4D1     		bne	.L12
+  53:Core/Src/calculate.c ****         if (AngleData->error_angle >= 0)
+ 216              		.loc 1 53 9 is_stmt 1 view .LVU69
+  53:Core/Src/calculate.c ****         if (AngleData->error_angle >= 0)
+ 217              		.loc 1 53 12 is_stmt 0 view .LVU70
+ 218 007a 0021     		movs	r1, #0
+ 219 007c 2846     		mov	r0, r5
+ 220 007e FFF7FEFF 		bl	__aeabi_fcmpge
+ 221              	.LVL11:
+ 222 0082 60B1     		cbz	r0, .L22
+  55:Core/Src/calculate.c ****             AngleData->error_angle = 360 - AngleData->error_angle;
+ 223              		.loc 1 55 13 is_stmt 1 view .LVU71
+  55:Core/Src/calculate.c ****             AngleData->error_angle = 360 - AngleData->error_angle;
+ 224              		.loc 1 55 42 is_stmt 0 view .LVU72
+ 225 0084 2946     		mov	r1, r5
+ 226 0086 1148     		ldr	r0, .L25+12
+ 227 0088 FFF7FEFF 		bl	__aeabi_fsub
+ 228              	.LVL12:
+ 229 008c 0146     		mov	r1, r0
+  55:Core/Src/calculate.c ****             AngleData->error_angle = 360 - AngleData->error_angle;
+ 230              		.loc 1 55 36 view .LVU73
+ 231 008e E060     		str	r0, [r4, #12]	@ float
+  56:Core/Src/calculate.c ****             AngleData->all_angle -= AngleData->error_angle;
+ 232              		.loc 1 56 13 is_stmt 1 view .LVU74
+  56:Core/Src/calculate.c ****             AngleData->all_angle -= AngleData->error_angle;
+ 233              		.loc 1 56 34 is_stmt 0 view .LVU75
+ 234 0090 3846     		mov	r0, r7
+ 235 0092 FFF7FEFF 		bl	__aeabi_fsub
+ 236              	.LVL13:
+ 237 0096 2061     		str	r0, [r4, #16]	@ float
+ 238              	.L15:
+  63:Core/Src/calculate.c ****         AngleData->circle_flag = 0;
+ 239              		.loc 1 63 9 is_stmt 1 view .LVU76
+  63:Core/Src/calculate.c ****         AngleData->circle_flag = 0;
+ 240              		.loc 1 63 32 is_stmt 0 view .LVU77
+ 241 0098 0023     		movs	r3, #0
+ 242 009a 2377     		strb	r3, [r4, #28]
+ 243 009c D2E7     		b	.L12
+ 244              	.L22:
+  58:Core/Src/calculate.c ****         else if (AngleData->error_angle < 0)
+ 245              		.loc 1 58 14 is_stmt 1 view .LVU78
+  58:Core/Src/calculate.c ****         else if (AngleData->error_angle < 0)
+ 246              		.loc 1 58 17 is_stmt 0 view .LVU79
+ 247 009e 0021     		movs	r1, #0
+ 248 00a0 2846     		mov	r0, r5
+ 249 00a2 FFF7FEFF 		bl	__aeabi_fcmplt
+ 250              	.LVL14:
+ 251 00a6 0028     		cmp	r0, #0
+ 252 00a8 F6D0     		beq	.L15
+  60:Core/Src/calculate.c ****             AngleData->error_angle = 360 + AngleData->error_angle;
+ 253              		.loc 1 60 13 is_stmt 1 view .LVU80
+  60:Core/Src/calculate.c ****             AngleData->error_angle = 360 + AngleData->error_angle;
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 7
+
+
+ 254              		.loc 1 60 42 is_stmt 0 view .LVU81
+ 255 00aa 0849     		ldr	r1, .L25+12
+ 256 00ac 2846     		mov	r0, r5
+ 257 00ae FFF7FEFF 		bl	__aeabi_fadd
+ 258              	.LVL15:
+  60:Core/Src/calculate.c ****             AngleData->error_angle = 360 + AngleData->error_angle;
+ 259              		.loc 1 60 36 view .LVU82
+ 260 00b2 E060     		str	r0, [r4, #12]	@ float
+  61:Core/Src/calculate.c ****             AngleData->all_angle += AngleData->error_angle;
+ 261              		.loc 1 61 13 is_stmt 1 view .LVU83
+  61:Core/Src/calculate.c ****             AngleData->all_angle += AngleData->error_angle;
+ 262              		.loc 1 61 34 is_stmt 0 view .LVU84
+ 263 00b4 3946     		mov	r1, r7
+ 264 00b6 FFF7FEFF 		bl	__aeabi_fadd
+ 265              	.LVL16:
+ 266 00ba 2061     		str	r0, [r4, #16]	@ float
+ 267 00bc ECE7     		b	.L15
+ 268              	.L26:
+ 269 00be 00BF     		.align	2
+ 270              	.L25:
+ 271 00c0 00009643 		.word	1133903872
+ 272 00c4 0AD7233C 		.word	1008981770
+ 273 00c8 000096C3 		.word	-1013579776
+ 274 00cc 0000B443 		.word	1135869952
+ 275              		.cfi_endproc
+ 276              	.LFE71:
+ 278              		.global	AngleData
+ 279              		.section	.bss.AngleData,"aw",%nobits
+ 280              		.align	2
+ 283              	AngleData:
+ 284 0000 00000000 		.space	32
+ 284      00000000 
+ 284      00000000 
+ 284      00000000 
+ 284      00000000 
+ 285              		.text
+ 286              	.Letext0:
+ 287              		.file 2 "D:/software/msy64/mingw64/arm-none-eabi/include/machine/_default_types.h"
+ 288              		.file 3 "D:/software/msy64/mingw64/arm-none-eabi/include/sys/_stdint.h"
+ 289              		.file 4 "Core/Inc/calculate.h"
+ 290              		.file 5 "Core/Inc/ci.h"
+ARM GAS  D:\software\msy64\tmp\ccO3ORob.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 calculate.c
+D:\software\msy64\tmp\ccO3ORob.s:19     .text.AngleDataInit:00000000 $t
+D:\software\msy64\tmp\ccO3ORob.s:25     .text.AngleDataInit:00000000 AngleDataInit
+D:\software\msy64\tmp\ccO3ORob.s:64     .text.AngleDataInit:00000018 $d
+D:\software\msy64\tmp\ccO3ORob.s:283    .bss.AngleData:00000000 AngleData
+D:\software\msy64\tmp\ccO3ORob.s:75     .text.AngleDataUpdate:00000000 $t
+D:\software\msy64\tmp\ccO3ORob.s:81     .text.AngleDataUpdate:00000000 AngleDataUpdate
+D:\software\msy64\tmp\ccO3ORob.s:271    .text.AngleDataUpdate:000000c0 $d
+D:\software\msy64\tmp\ccO3ORob.s:280    .bss.AngleData:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_fsub
+__aeabi_fcmpge
+__aeabi_fcmple
+__aeabi_fadd
+__aeabi_fcmplt
+__aeabi_fdiv
+Get_Angle
